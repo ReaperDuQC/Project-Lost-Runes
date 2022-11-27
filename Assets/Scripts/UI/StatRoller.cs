@@ -165,7 +165,7 @@ namespace RPG
         }
         void DisableContinue()
         {
-            _playerControls.MainMenu.Select.performed = null; 
+            //_playerControls.MainMenu.Select.performed = null; 
             _playerControls.MainMenu.Select.performed -= i => _sceneTransition.HidePrompt();
             _playerControls.MainMenu.Select.performed -= i => _sceneTransition.StartOutTransition();
         }
