@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-namespace RPG.Menu
+namespace LostRunes.Menu
 {
     public class CharacterCreator : MonoBehaviour
     {

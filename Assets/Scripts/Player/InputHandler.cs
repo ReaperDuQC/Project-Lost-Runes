@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 using UnityEngine;
-namespace RPG
+
+namespace LostRunes
 {
     public class InputHandler : MonoBehaviour
     {

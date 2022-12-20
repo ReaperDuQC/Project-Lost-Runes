@@ -1,0 +1,390 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3340083010585490323
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8194734338548436658}
+  m_Layer: 0
+  m_Name: Visuals
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8194734338548436658
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3340083010585490323}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2015547176452383168}
+  - {fileID: 769201335401851797}
+  - {fileID: 4334505728197727610}
+  m_Father: {fileID: 5918490699229255373}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7212377169851610281
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5918490699229255373}
+  m_Layer: 0
+  m_Name: MCastle_Turret_EntranceSteps_01
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5918490699229255373
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7212377169851610281}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 8194734338548436658}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &5099995454135024430
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8194734338548436658}
+    m_Modifications:
+    - target: {fileID: 1662224963510627291, guid: 5a6bfd801e1673940aa16a375fa5bad1,
+        type: 3}
+      propertyPath: m_Name
+      value: MCastle_Walkway_Straight_02 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506233638660935867, guid: 5a6bfd801e1673940aa16a375fa5bad1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 12.570232
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506233638660935867, guid: 5a6bfd801e1673940aa16a375fa5bad1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.4680004
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506233638660935867, guid: 5a6bfd801e1673940aa16a375fa5bad1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.630698
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506233638660935867, guid: 5a6bfd801e1673940aa16a375fa5bad1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506233638660935867, guid: 5a6bfd801e1673940aa16a375fa5bad1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.00000041723246
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506233638660935867, guid: 5a6bfd801e1673940aa16a375fa5bad1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506233638660935867, guid: 5a6bfd801e1673940aa16a375fa5bad1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506233638660935867, guid: 5a6bfd801e1673940aa16a375fa5bad1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506233638660935867, guid: 5a6bfd801e1673940aa16a375fa5bad1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506233638660935867, guid: 5a6bfd801e1673940aa16a375fa5bad1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 45.000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506233638660935867, guid: 5a6bfd801e1673940aa16a375fa5bad1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506233638660935867, guid: 5a6bfd801e1673940aa16a375fa5bad1,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2851809457712973095, guid: 5a6bfd801e1673940aa16a375fa5bad1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 2851809457712973095, guid: 5a6bfd801e1673940aa16a375fa5bad1,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.043
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5a6bfd801e1673940aa16a375fa5bad1, type: 3}
+--- !u!4 &769201335401851797 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5506233638660935867, guid: 5a6bfd801e1673940aa16a375fa5bad1,
+    type: 3}
+  m_PrefabInstance: {fileID: 5099995454135024430}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5099995454549400573
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8194734338548436658}
+    m_Modifications:
+    - target: {fileID: 6140307967112188524, guid: 105497f9adbb85d4ca0766076b53f701,
+        type: 3}
+      propertyPath: m_Name
+      value: MCastle_Walkway_Corner_01 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8854520137271283335, guid: 105497f9adbb85d4ca0766076b53f701,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 17.350275
+      objectReference: {fileID: 0}
+    - target: {fileID: 8854520137271283335, guid: 105497f9adbb85d4ca0766076b53f701,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.448
+      objectReference: {fileID: 0}
+    - target: {fileID: 8854520137271283335, guid: 105497f9adbb85d4ca0766076b53f701,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -8.275278
+      objectReference: {fileID: 0}
+    - target: {fileID: 8854520137271283335, guid: 105497f9adbb85d4ca0766076b53f701,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8854520137271283335, guid: 105497f9adbb85d4ca0766076b53f701,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.70710695
+      objectReference: {fileID: 0}
+    - target: {fileID: 8854520137271283335, guid: 105497f9adbb85d4ca0766076b53f701,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8854520137271283335, guid: 105497f9adbb85d4ca0766076b53f701,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.70710665
+      objectReference: {fileID: 0}
+    - target: {fileID: 8854520137271283335, guid: 105497f9adbb85d4ca0766076b53f701,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8854520137271283335, guid: 105497f9adbb85d4ca0766076b53f701,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8854520137271283335, guid: 105497f9adbb85d4ca0766076b53f701,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -225
+      objectReference: {fileID: 0}
+    - target: {fileID: 8854520137271283335, guid: 105497f9adbb85d4ca0766076b53f701,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8854520137271283335, guid: 105497f9adbb85d4ca0766076b53f701,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.89020133
+      objectReference: {fileID: 0}
+    - target: {fileID: 5979786899279825343, guid: 105497f9adbb85d4ca0766076b53f701,
+        type: 3}
+      propertyPath: m_Name
+      value: MCastle_MasonryPillar_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 9079959112072681500, guid: 105497f9adbb85d4ca0766076b53f701,
+        type: 3}
+      propertyPath: m_Name
+      value: MCastle_MasonryPillar_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 6282250223432656581, guid: 105497f9adbb85d4ca0766076b53f701,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d661ad656f9caa740b6791f9984345db, type: 2}
+    - target: {fileID: 2216238593180476652, guid: 105497f9adbb85d4ca0766076b53f701,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d661ad656f9caa740b6791f9984345db, type: 2}
+    - target: {fileID: 2400508794886226152, guid: 105497f9adbb85d4ca0766076b53f701,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.392
+      objectReference: {fileID: 0}
+    - target: {fileID: 2400508794886226152, guid: 105497f9adbb85d4ca0766076b53f701,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.0034095
+      objectReference: {fileID: 0}
+    - target: {fileID: 8301577945326164665, guid: 105497f9adbb85d4ca0766076b53f701,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.13
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 105497f9adbb85d4ca0766076b53f701, type: 3}
+--- !u!4 &4334505728197727610 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8854520137271283335, guid: 105497f9adbb85d4ca0766076b53f701,
+    type: 3}
+  m_PrefabInstance: {fileID: 5099995454549400573}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5099995454731712853
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8194734338548436658}
+    m_Modifications:
+    - target: {fileID: 7712381405281176432, guid: 6ffe06c29d7c44c4599327b5bc6a7c5a,
+        type: 3}
+      propertyPath: m_Name
+      value: MCastle_Walkway_Staircase_Corner_02 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6718943630655985813, guid: 6ffe06c29d7c44c4599327b5bc6a7c5a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.6718507
+      objectReference: {fileID: 0}
+    - target: {fileID: 6718943630655985813, guid: 6ffe06c29d7c44c4599327b5bc6a7c5a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.2779999
+      objectReference: {fileID: 0}
+    - target: {fileID: 6718943630655985813, guid: 6ffe06c29d7c44c4599327b5bc6a7c5a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.0620294
+      objectReference: {fileID: 0}
+    - target: {fileID: 6718943630655985813, guid: 6ffe06c29d7c44c4599327b5bc6a7c5a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6718943630655985813, guid: 6ffe06c29d7c44c4599327b5bc6a7c5a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6718943630655985813, guid: 6ffe06c29d7c44c4599327b5bc6a7c5a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6718943630655985813, guid: 6ffe06c29d7c44c4599327b5bc6a7c5a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6718943630655985813, guid: 6ffe06c29d7c44c4599327b5bc6a7c5a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6718943630655985813, guid: 6ffe06c29d7c44c4599327b5bc6a7c5a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6718943630655985813, guid: 6ffe06c29d7c44c4599327b5bc6a7c5a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 45.000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 6718943630655985813, guid: 6ffe06c29d7c44c4599327b5bc6a7c5a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7539598198042503528, guid: 6ffe06c29d7c44c4599327b5bc6a7c5a,
+        type: 3}
+      propertyPath: m_Name
+      value: MCastle_MasonryPillar_01_Half
+      objectReference: {fileID: 0}
+    - target: {fileID: 8124127817196842452, guid: 6ffe06c29d7c44c4599327b5bc6a7c5a,
+        type: 3}
+      propertyPath: m_Name
+      value: MCastle_MasonryPillar_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 322981986010637640, guid: 6ffe06c29d7c44c4599327b5bc6a7c5a,
+        type: 3}
+      propertyPath: m_Name
+      value: MCastle_MasonryPillar_01_Half
+      objectReference: {fileID: 0}
+    - target: {fileID: 856090616749400348, guid: 6ffe06c29d7c44c4599327b5bc6a7c5a,
+        type: 3}
+      propertyPath: m_Name
+      value: MCastle_MasonryPillar_01_Half
+      objectReference: {fileID: 0}
+    - target: {fileID: 1387237899642658631, guid: 6ffe06c29d7c44c4599327b5bc6a7c5a,
+        type: 3}
+      propertyPath: m_Name
+      value: MCastle_MasonryPillar_02_Half
+      objectReference: {fileID: 0}
+    - target: {fileID: 3124836809560699633, guid: 6ffe06c29d7c44c4599327b5bc6a7c5a,
+        type: 3}
+      propertyPath: m_Name
+      value: MCastle_MasonryPillar_01_Half
+      objectReference: {fileID: 0}
+    - target: {fileID: 2918057923090907973, guid: 6ffe06c29d7c44c4599327b5bc6a7c5a,
+        type: 3}
+      propertyPath: m_Name
+      value: MCastle_MasonryPillar_01_Half
+      objectReference: {fileID: 0}
+    - target: {fileID: 4027927203943859215, guid: 6ffe06c29d7c44c4599327b5bc6a7c5a,
+        type: 3}
+      propertyPath: m_Name
+      value: MCastle_MasonryPillar_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 3926685059109161, guid: 6ffe06c29d7c44c4599327b5bc6a7c5a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d661ad656f9caa740b6791f9984345db, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6ffe06c29d7c44c4599327b5bc6a7c5a, type: 3}
+--- !u!4 &2015547176452383168 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6718943630655985813, guid: 6ffe06c29d7c44c4599327b5bc6a7c5a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5099995454731712853}
+  m_PrefabAsset: {fileID: 0}

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RPG.Menu
+namespace LostRunes.Menu
 {
     [System.Serializable]
     public class GraphicSettingsData

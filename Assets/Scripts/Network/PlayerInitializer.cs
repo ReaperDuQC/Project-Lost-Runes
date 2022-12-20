@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-namespace RPG
+namespace LostRunes.Multiplayer
 {
     public class PlayerInitializer : NetworkBehaviour
     {
@@ -15,8 +15,11 @@ namespace RPG
         
         CameraHandler _cameraHandler;
 
+        string _player = "Player ";
         public override void OnNetworkSpawn()
         {
+            gameObject.name = _player + GetComponent<NetworkObject>().OwnerClientId.ToString();
+
             _inputHandler = GetComponent<InputHandler>();
             _characterStats = GetComponent<CharacterStats>();
             _playerLocomotion = GetComponent<PlayerLocomotion>();

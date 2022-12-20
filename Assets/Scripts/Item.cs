@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace RPG
+namespace LostRunes
 {
     public enum Rarity { Common, Uncommon, Rare, Epic, Legendary}
     public class Item : ScriptableObject

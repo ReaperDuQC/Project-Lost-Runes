@@ -1,31 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using Unity.Netcode;
 
-namespace RPG
+namespace LostRunes.Multiplayer
 {
     public class NetworkManagerUI : MonoBehaviour
     {
-        [SerializeField] Button _hostButton;
-        [SerializeField] Button _clientButton;
-        [SerializeField] Button _serverButton;
-
-        private void Awake()
+        public void Host()
         {
-            _hostButton.onClick.AddListener(() =>
-            {
-                NetworkManager.Singleton.StartHost();
-            });
-            _clientButton.onClick.AddListener(() =>
-            {
-                NetworkManager.Singleton.StartClient();
-            });
-            _serverButton.onClick.AddListener(() =>
-            {
-                NetworkManager.Singleton.StartServer();
-            });
+            NetworkManager.Singleton.StartHost();
+        }
+        public void Join()
+        {
+            NetworkManager.Singleton.StartClient();
+        }
+        public void Disconnect()
+        {
+            NetworkManager.Singleton.Shutdown();
+        }
+        public int CheckAvailableGames()
+        {
+            return 0;// NetworkManager.Singleton.
         }
     }
 }

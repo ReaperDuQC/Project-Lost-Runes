@@ -1,33 +1,31 @@
-using RPG.Menu;
+using LostRunes.Menu;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using AudioSettings = RPG.Menu.AudioSettings;
+using AudioSettings = LostRunes.Menu.AudioSettings;
 using UnityEngine.SceneManagement;
 using System.ComponentModel.Design;
 
-namespace RPG
+namespace LostRunes
 {
     public class GameMenu : RPGMenu
     {
         [Header("Menu")]
         [SerializeField] Image _menuPanel;
+
         [Header("Equipment")]
         [SerializeField] Button _equipmentReturnButton;
         [SerializeField] Image _equipmentPanel;
+
         [Header("Inventory")]
         [SerializeField] Button _inventoryReturnButton;
         [SerializeField] Image _inventoryPanel;
-        [Header("Option")]
-        [SerializeField] Button _optionReturnButton;
-        [SerializeField] Image _optionPanel;
-        [SerializeField] Image _graphicOptionPanel;
-        [SerializeField] GraphicSettings _graphicSettings;
-        [SerializeField] Image _audioOptionPanel;
 
-        [SerializeField] Image _gameplayOptionPanel;
-        [SerializeField] GameplaySettings _gameplaySettings;
+        [Header("Option")]
+        [SerializeField] OptionMenuUI _optionMenu;
+        [SerializeField] Button _optionReturnButton;
+
         [Header("Quit")]
         [SerializeField] Button _quitReturnButton;
         [SerializeField] Image _quitPanel;
@@ -35,10 +33,6 @@ namespace RPG
         private void Awake()
         {
             LoadOptionData();
-        }
-        private void Start()
-        {
-            SubscribeAudioSources();
         }
         private void OnEnable()
         {
@@ -53,15 +47,9 @@ namespace RPG
         {
             _playerControls.Disable();
         }
-        protected override void SubscribeAudioSources()
+        void LoadOptionData()
         {
-            base.SubscribeAudioSources();
-        }
-        private void LoadOptionData()
-        {
-            AudioSettings.LoadAudioSettingsData();
-            _graphicSettings.LoadGraphicSettingsData();
-            _gameplaySettings.LoadGameplaySettingsData();
+
         }
         public void ToggleMenuPanel()
         {
@@ -71,27 +59,9 @@ namespace RPG
         }
         public void ToggleOptionPanel()
         {
-            if (_optionPanel == null) return;
+            if (_optionMenu == null) return;
 
-            _optionPanel.gameObject.SetActive(!_optionPanel.gameObject.activeSelf);
-        }
-        public void DisplayVideoOptionPanel()
-        {
-            _graphicOptionPanel.gameObject.SetActive(true);
-            _audioOptionPanel.gameObject.SetActive(false);
-            _gameplayOptionPanel.gameObject.SetActive(false);
-        }
-        public void DisplayAudioOptionPanel()
-        {
-            _graphicOptionPanel.gameObject.SetActive(false);
-            _audioOptionPanel.gameObject.SetActive(true);
-            _gameplayOptionPanel.gameObject.SetActive(false);
-        }
-        public void DisplayGameplayOptionPanel()
-        {
-            _graphicOptionPanel.gameObject.SetActive(false);
-            _audioOptionPanel.gameObject.SetActive(false);
-            _gameplayOptionPanel.gameObject.SetActive(true);
+            _optionMenu.gameObject.SetActive(!_optionMenu.gameObject.activeSelf);
         }
         public void ToggleEquipmentPanel()
         {
@@ -128,7 +98,7 @@ namespace RPG
                 ToggleEquipmentPanel();
                 ToggleMenuPanel();
             }
-            else if (_optionPanel.gameObject.activeSelf)
+            else if (_optionMenu.gameObject.activeSelf)
             {
                 ToggleOptionPanel();
                 ToggleMenuPanel();

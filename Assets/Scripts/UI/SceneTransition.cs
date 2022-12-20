@@ -5,18 +5,18 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
 
-namespace RPG.Menu
+namespace LostRunes.Menu
 { 
     public class SceneTransition : MonoBehaviour
     {
-        public delegate void OnTransitionInOver();
-        public delegate void OnTransitionOutOver();
-        public OnTransitionInOver _transitionInOver;
-        public OnTransitionOutOver _transitionOutOver;
+        public delegate void OnTransitionOver();
+        public OnTransitionOver _transitionInOver;
+        public OnTransitionOver _transitionOutOver;
 
         [SerializeField] Image _transitionPanel;
         [SerializeField] float _transitionDuration = 2f;
-        [SerializeField] TextMeshProUGUI _promptMessageText;
+
+        [SerializeField] GameObject _promptButtons;
 
         [SerializeField] TextMeshProUGUI _progressText;
 
@@ -32,6 +32,10 @@ namespace RPG.Menu
             _transitionOutOver += LoadScene;
             _transitionInOver += HideTransitionPanel;
         }
+        public GameObject GetPromptButton()
+        {
+            return _promptButtons;
+        } 
         public void StartInTransition()
         {
             StartCoroutine(StartTransition(true));
@@ -85,15 +89,15 @@ namespace RPG.Menu
         }
         public void DisplayPrompt()
         {
-            if (_promptMessageText == null) return;
+            if (_promptButtons == null) return;
 
-            _promptMessageText.gameObject.SetActive(true);
+            _promptButtons.SetActive(true);
         }
         public void HidePrompt()
         {
-            if (_promptMessageText == null) return;
+            if (_promptButtons == null) return;
 
-            _promptMessageText.gameObject.SetActive(false);
+            _promptButtons.SetActive(false);
         }
         public void SetSceneToLoad(string sceneToLoad)
         {
@@ -128,7 +132,7 @@ namespace RPG.Menu
                 yield return null;
             }
         }
-        void ResumeAsyncLoad()
+        public void ResumeAsyncLoad()
         {
             _isResumed = true;
         }

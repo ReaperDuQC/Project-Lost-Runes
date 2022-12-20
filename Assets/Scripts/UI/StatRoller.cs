@@ -1,17 +1,19 @@
-using RPG.Menu;
+using LostRunes.Menu;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
-namespace RPG
+namespace LostRunes
 {
     public class StatRoller : MonoBehaviour
     {
-        public delegate void OnAllStatRolled();
-        public OnAllStatRolled _allStatRolled;
+        public delegate void OnActionDone();
+        public OnActionDone _allStatRolled;
+        public OnActionDone _continuePressed;
+        public OnActionDone _rollAllStatsPressed;
 
         [SerializeField] TextMeshProUGUI[] _statsLevelText;
         [SerializeField] TextMeshProUGUI[] _statsText;
@@ -35,6 +37,8 @@ namespace RPG
         bool _autoRoll = false;
         List<int> _statLevels;
 
+        bool _rollEnabled;
+
         [SerializeField] CharacterCreator _characterCreator;
         SceneTransition _sceneTransition;
         private void Awake()
@@ -45,24 +49,32 @@ namespace RPG
         }
         private void Start()
         {
-            MainMenu.Instance.AudioSettings.SubscribeToSfxAudioSource(_audioSource);
+            MainMenuUI.Instance.OptionMenuUI.AudioSettings.SubscribeToSfxAudioSource(_audioSource);
         }
         private void OnEnable()
         {
             if (_playerControls == null)
             {
                 _playerControls = new PlayerControls();
-                _playerControls.MainMenu.Select.performed += i => SelectStat();
-                _playerControls.MainMenu.AutoRoll.performed += i => AutoRollAllStats();
+                _playerControls.MainMenu.Select.performed += i => _continuePressed();
+                _playerControls.MainMenu.AutoRoll.performed += i => _rollAllStatsPressed();
             }
             _playerControls.Enable();
 
+            _rollEnabled = false;
+
+            if (_continuePressed == null)
+            {
+                _continuePressed += SelectStat;
+            }
+            if(_rollAllStatsPressed == null)
+            {
+                _rollAllStatsPressed += AutoRollAllStats;
+            }
+
             if (_allStatRolled == null)
             {
-                _allStatRolled += DisableControlText;
-                _allStatRolled += _sceneTransition.DisplayPrompt;
-                _allStatRolled += EnableContinue;
-                _allStatRolled += SaveRolledStats;
+                _allStatRolled += OnAllStatsRolled;
             }
             UpdateCurrentStatText();
         }
@@ -76,6 +88,10 @@ namespace RPG
             {
                 RandomizeStatValue(i);
             }
+        }
+        public void EnableStatRoll(bool enable)
+        {
+            _rollEnabled = enable;
         }
         void InitializeStats()
         {
@@ -93,12 +109,14 @@ namespace RPG
         }
         void SelectStat()
         {
+            if (!_rollEnabled) return;
             if (_autoRoll) return;
             RollStat();
         }
         public void RollStat()
         {
             if (_currentStatIndex >= _statsText.Length) return;
+
             RandomizeStatValue(_currentStatIndex);
             StartCoroutine(UpdateColor(_currentStatIndex));
             PlaySound(_currentStatIndex);
@@ -107,7 +125,8 @@ namespace RPG
 
             if (_currentStatIndex >= _statsText.Length)
             {
-                _playerControls.MainMenu.Select.performed -= i => SelectStat();
+                _continuePressed -= SelectStat;
+
                 if (_allStatRolled != null)
                 {
                     _allStatRolled();
@@ -117,9 +136,12 @@ namespace RPG
         }
         public void AutoRollAllStats()
         {
+            if (!_rollEnabled) return;
+
             if (_autoRoll) return;
-            _playerControls.MainMenu.AutoRoll.performed -= i => AutoRollAllStats();
+            _rollAllStatsPressed -= AutoRollAllStats;
             _currentStatText.gameObject.SetActive(false);
+            _autoRollText.GetComponent<Button>().interactable = false;
             StartCoroutine(AutoRoll());
         }
         IEnumerator AutoRoll()
@@ -157,21 +179,34 @@ namespace RPG
                 _statsLevelText[currentStatIndex].color = Color.Lerp(initialColor, finalColor, ratio);
             }
         }
-        void EnableContinue()
+        public void EnableContinue()
         {
-            _playerControls.MainMenu.Select.performed += i => _sceneTransition.StartOutTransition();
-            _playerControls.MainMenu.Select.performed += i => _sceneTransition.HidePrompt();
-            _playerControls.MainMenu.Select.performed += i => DisableContinue();
+            _continuePressed = null;
+            _sceneTransition.GetPromptButton().GetComponent<Button>().onClick.AddListener(_sceneTransition.StartOutTransition);
+            _continuePressed += _sceneTransition.StartOutTransition;
+            _sceneTransition.GetPromptButton().GetComponent<Button>().onClick.AddListener(_sceneTransition.HidePrompt);
+            _continuePressed += _sceneTransition.HidePrompt;
+            _sceneTransition.GetPromptButton().GetComponent<Button>().onClick.AddListener(DisableContinue);
+            _continuePressed += DisableContinue;
         }
-        void DisableContinue()
+        public void DisableContinue()
         {
-            //_playerControls.MainMenu.Select.performed = null; 
-            _playerControls.MainMenu.Select.performed -= i => _sceneTransition.HidePrompt();
-            _playerControls.MainMenu.Select.performed -= i => _sceneTransition.StartOutTransition();
+            _continuePressed = null;
+            _continuePressed += _sceneTransition.ResumeAsyncLoad;
+        }
+        void OnAllStatsRolled()
+        {
+            DisableControlText();
+            _sceneTransition.DisplayPrompt();
+            _sceneTransition.GetPromptButton().GetComponent<Button>().onClick.AddListener(DisableContinue);
+            EnableContinue();
+            SaveRolledStats();
         }
         void PlaySound(int currentStatIndex)
         {
             if (_audioSource == null) return;
+            MainMenuUI.Instance.OptionMenuUI.AudioSettings.RandomizePitch(_audioSource);
+
             AudioClip audioClip = SelectAudioClip(currentStatIndex);
 
             if (audioClip == null) return;

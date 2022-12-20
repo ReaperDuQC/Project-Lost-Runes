@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
 
-namespace RPG.Menu
+namespace LostRunes.Menu
 {
     [System.Serializable]
     public class AudioSettingsData
@@ -36,7 +36,7 @@ namespace RPG.Menu
         [SerializeField] Slider _musicVolumeSlider;
         public float MusicVolume { get { return _musicVolume; } }
         float _musicVolume = 1f;
-       [SerializeField] Slider _sfxVolumeSlider;
+        [SerializeField] Slider _sfxVolumeSlider;
         public float SFXVolume { get { return _sfxVolume; } }
         float _sfxVolume = 1f;
         [SerializeField] Slider _voiceVolumeSlider;
@@ -86,19 +86,21 @@ namespace RPG.Menu
         {
             SaveSystem.SaveSystem.SaveAudioSettings(this);
         }
-        void UpdateSlider(Slider slider,float value, TextMeshProUGUI text)
+        void UpdateSlider(Slider slider, float value, TextMeshProUGUI text)
         {
             bool sameValue = value == slider.value;
             slider.value = value;
-            if (sameValue)
-            {
-                text.text = value.ToString("F2");
-            }
+
+            UpdateText(text, value);
         }
         public void UpdateVolume(float value, ref float current, TextMeshProUGUI text)
         {
             current = value;
-            text.text = current.ToString("F2");
+            UpdateText(text, current);
+        }
+        void UpdateText(TextMeshProUGUI text, float value)
+        {
+            text.text = ((int)(value * 100f)).ToString();
         }
         public void UpdateGlobalVolume(float value)
         {
@@ -137,30 +139,35 @@ namespace RPG.Menu
         void ApplySFXVolume()
         {
             float volume = _sfxVolume * _globalVolume;
-            foreach(AudioSource source in _sfxAudioSource)
-            {
-                if(source == null) continue;
-                source.volume = volume;
-            }
+
+            ApplyVolumeToAudioSources(_sfxAudioSource, volume);
         }
         void ApplyMusicVolume()
         {
             float volume = _musicVolume * _globalVolume;
-            foreach (AudioSource source in _musicAudioSource)
-            {
-                if (source == null) continue;
-                source.volume = volume;
-            }
+
+            ApplyVolumeToAudioSources(_musicAudioSource, volume);
         }
         void ApplyVoiceVolume()
         {
             float volume = _voiceVolume * _globalVolume;
-            foreach (AudioSource source in _voiceAudioSource)
+
+            ApplyVolumeToAudioSources(_voiceAudioSource, volume);
+        }
+        void ApplyVolumeToAudioSources(List<AudioSource> audioSources, float volume)
+        {
+            foreach (AudioSource source in audioSources)
             {
-                if (source == null) continue;
-                source.volume = volume;
+                ApplyVolumeToAudioSource(source, volume);
             }
         }
+        void ApplyVolumeToAudioSource(AudioSource source, float volume)
+        {
+            if (source == null) return;
+
+            source.volume = volume;
+        }
+
         public void RandomizePitch(AudioSource source)
         {
             if (source == null) return;

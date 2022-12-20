@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using RPG.Menu;
+using LostRunes.Menu;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine.Rendering;
 
-namespace RPG.SaveSystem
+namespace LostRunes.SaveSystem
 {
     public static class SaveSystem
     {

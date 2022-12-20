@@ -800,6 +800,96 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""CharacterShowRoom"",
+            ""id"": ""645784b8-5014-40f9-948a-9e60b0fd180d"",
+            ""actions"": [
+                {
+                    ""name"": ""Next"",
+                    ""type"": ""Button"",
+                    ""id"": ""df510894-adee-43e8-9a47-b53a6fa31342"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Previous"",
+                    ""type"": ""Button"",
+                    ""id"": ""a6beec50-1303-4bdb-814e-a49ee3239a87"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Offset"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""24bdb2fb-f171-4404-a8f1-e9d57d17cdd2"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""64d1130b-35c5-4e00-81aa-bec8f238d2a0"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse & Keyboard"",
+                    ""action"": ""Next"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7924a652-1aa7-41f5-aabb-0d150dbd5617"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Next"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ee83ab15-65a1-4f43-82bd-ae864e923172"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse & Keyboard"",
+                    ""action"": ""Previous"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b00306d3-464d-47f8-be5f-aac785ae2dd0"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Previous"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""33ae5dc6-b850-41c2-addb-6b06a89f4d3a"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse & Keyboard"",
+                    ""action"": ""Offset"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -863,6 +953,11 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_MainMenu_Select = m_MainMenu.FindAction("Select", throwIfNotFound: true);
         m_MainMenu_AutoRoll = m_MainMenu.FindAction("AutoRoll", throwIfNotFound: true);
         m_MainMenu_Back = m_MainMenu.FindAction("Back", throwIfNotFound: true);
+        // CharacterShowRoom
+        m_CharacterShowRoom = asset.FindActionMap("CharacterShowRoom", throwIfNotFound: true);
+        m_CharacterShowRoom_Next = m_CharacterShowRoom.FindAction("Next", throwIfNotFound: true);
+        m_CharacterShowRoom_Previous = m_CharacterShowRoom.FindAction("Previous", throwIfNotFound: true);
+        m_CharacterShowRoom_Offset = m_CharacterShowRoom.FindAction("Offset", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1202,6 +1297,55 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         }
     }
     public MainMenuActions @MainMenu => new MainMenuActions(this);
+
+    // CharacterShowRoom
+    private readonly InputActionMap m_CharacterShowRoom;
+    private ICharacterShowRoomActions m_CharacterShowRoomActionsCallbackInterface;
+    private readonly InputAction m_CharacterShowRoom_Next;
+    private readonly InputAction m_CharacterShowRoom_Previous;
+    private readonly InputAction m_CharacterShowRoom_Offset;
+    public struct CharacterShowRoomActions
+    {
+        private @PlayerControls m_Wrapper;
+        public CharacterShowRoomActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Next => m_Wrapper.m_CharacterShowRoom_Next;
+        public InputAction @Previous => m_Wrapper.m_CharacterShowRoom_Previous;
+        public InputAction @Offset => m_Wrapper.m_CharacterShowRoom_Offset;
+        public InputActionMap Get() { return m_Wrapper.m_CharacterShowRoom; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CharacterShowRoomActions set) { return set.Get(); }
+        public void SetCallbacks(ICharacterShowRoomActions instance)
+        {
+            if (m_Wrapper.m_CharacterShowRoomActionsCallbackInterface != null)
+            {
+                @Next.started -= m_Wrapper.m_CharacterShowRoomActionsCallbackInterface.OnNext;
+                @Next.performed -= m_Wrapper.m_CharacterShowRoomActionsCallbackInterface.OnNext;
+                @Next.canceled -= m_Wrapper.m_CharacterShowRoomActionsCallbackInterface.OnNext;
+                @Previous.started -= m_Wrapper.m_CharacterShowRoomActionsCallbackInterface.OnPrevious;
+                @Previous.performed -= m_Wrapper.m_CharacterShowRoomActionsCallbackInterface.OnPrevious;
+                @Previous.canceled -= m_Wrapper.m_CharacterShowRoomActionsCallbackInterface.OnPrevious;
+                @Offset.started -= m_Wrapper.m_CharacterShowRoomActionsCallbackInterface.OnOffset;
+                @Offset.performed -= m_Wrapper.m_CharacterShowRoomActionsCallbackInterface.OnOffset;
+                @Offset.canceled -= m_Wrapper.m_CharacterShowRoomActionsCallbackInterface.OnOffset;
+            }
+            m_Wrapper.m_CharacterShowRoomActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Next.started += instance.OnNext;
+                @Next.performed += instance.OnNext;
+                @Next.canceled += instance.OnNext;
+                @Previous.started += instance.OnPrevious;
+                @Previous.performed += instance.OnPrevious;
+                @Previous.canceled += instance.OnPrevious;
+                @Offset.started += instance.OnOffset;
+                @Offset.performed += instance.OnOffset;
+                @Offset.canceled += instance.OnOffset;
+            }
+        }
+    }
+    public CharacterShowRoomActions @CharacterShowRoom => new CharacterShowRoomActions(this);
     private int m_ControllerSchemeIndex = -1;
     public InputControlScheme ControllerScheme
     {
@@ -1254,5 +1398,11 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnSelect(InputAction.CallbackContext context);
         void OnAutoRoll(InputAction.CallbackContext context);
         void OnBack(InputAction.CallbackContext context);
+    }
+    public interface ICharacterShowRoomActions
+    {
+        void OnNext(InputAction.CallbackContext context);
+        void OnPrevious(InputAction.CallbackContext context);
+        void OnOffset(InputAction.CallbackContext context);
     }
 }

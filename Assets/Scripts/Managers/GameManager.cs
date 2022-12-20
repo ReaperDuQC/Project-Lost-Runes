@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using RPG.SaveSystem;
-using RPG.Menu;
+using LostRunes.SaveSystem;
+using LostRunes.Menu;
 using UnityEngine.SceneManagement;
+using Unity.Netcode;
 
-namespace RPG
+namespace LostRunes
 {
-    public class GameManager : MonoBehaviour
+    public class GameManager : NetworkBehaviour
     {
         [SerializeField] GameObject _characterPrefab;
         [SerializeField] Transform _spawnPosition;
@@ -66,8 +67,8 @@ namespace RPG
         }
         public void HideCursor(bool visible)
         {
-            Cursor.visible = visible;
-            Cursor.lockState = visible ? CursorLockMode.Confined : CursorLockMode.Locked;
+           // Cursor.visible = visible;
+           // Cursor.lockState = visible ? CursorLockMode.Confined : CursorLockMode.Locked;
         }
     }
 }
