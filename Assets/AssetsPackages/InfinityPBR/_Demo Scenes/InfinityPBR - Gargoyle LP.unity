@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &4
 LightmapSettings:
@@ -14763,6 +14763,8 @@ MonoBehaviour:
   showHelpBoxes: 1
   showFullInspector: 0
   showSetup: 1
+  lerp: 1
+  lerpSeconds: 2
 --- !u!114 &266941578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15473,6 +15475,7 @@ MonoBehaviour:
       otherValuesMatchThis: []
     showValues: 1
   userMatchRespectsLimits: 1
+  globalModifier: 1
   rangeFiles: []
   presetFiles: []
   blendShapePrimaryPrefix: SFB_BS_
