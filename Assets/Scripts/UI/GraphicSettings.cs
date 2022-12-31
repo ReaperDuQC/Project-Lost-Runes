@@ -75,6 +75,7 @@ namespace LostRunes.Menu
         void ApplySettings()
         {
             Screen.SetResolution(_screenResolutionX, _screenResolutionY, _windowed, _framerate);
+            Application.targetFrameRate = -1;
         }
     }
 }

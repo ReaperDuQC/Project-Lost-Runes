@@ -22,6 +22,7 @@ namespace LostRunes
         void Start()
         {
             _camera = Camera.main;
+
             foreach (Transform t in transform)
             {
                 _characters.Add(t);
