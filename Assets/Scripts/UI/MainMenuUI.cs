@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.Netcode;
+using UnityEngine.SceneManagement;
 
 namespace LostRunes.Menu
 {
@@ -18,15 +20,11 @@ namespace LostRunes.Menu
         [SerializeField] Button _startReturnButton;
         [SerializeField] Button _continueButton;
 
-        [Header("Browse Games")]
-        [SerializeField] Image _browseGamesPanel;
+        [Header("Join Games")]
+        [SerializeField] Image _joinGamesPanel;
 
         [Header("Host Games")]
         [SerializeField] Image _hostGamePanel;
-
-        [Header("Character Creation")]
-        [SerializeField] Image _characterCreationPanel;
-        [SerializeField] CharacterCreator _characterCreator;
 
         [Header("Option")]
         [SerializeField] OptionMenuUI _optionMenu;
@@ -50,6 +48,11 @@ namespace LostRunes.Menu
         [SerializeField] List<Button> _normalButtons;
         private void Awake()
         {
+            if(NetworkManager.Singleton == null)
+            {
+                SceneManager.LoadScene("Intro");
+            }
+
             if (_instance == null)
             {
                 _instance = this;
@@ -66,7 +69,6 @@ namespace LostRunes.Menu
             LoadOptionData();
             PlayBackgroundMusic();
         }
-
         private void LoadOptionData()
         {
             _optionMenu.LoadOptionData();
@@ -93,23 +95,17 @@ namespace LostRunes.Menu
                 }
             }
         }
-        public void ToggleCharacterCreationPanel()
-        {
-            if (_characterCreationPanel == null) { return; }
-
-            _characterCreationPanel.gameObject.SetActive(!_characterCreationPanel.gameObject.activeSelf);
-        }
         public void ToggleOptionPanel()
         {
             if (_optionMenu == null) { return; }
 
             _optionMenu.gameObject.SetActive(!_optionMenu.gameObject.activeSelf);
         }
-        public void ToggleBrowsePanel()
+        public void ToggleJoinPanel()
         {
-            if (_browseGamesPanel.gameObject == null) { return; }
+            if (_joinGamesPanel.gameObject == null) { return; }
 
-            _browseGamesPanel.gameObject.SetActive(!_browseGamesPanel.gameObject.activeSelf);
+            _joinGamesPanel.gameObject.SetActive(!_joinGamesPanel.gameObject.activeSelf);
         }
         public void ToggleHostPanel()
         {
@@ -152,16 +148,16 @@ namespace LostRunes.Menu
             _startReturnButton.onClick.RemoveListener(OnReturnButtonClickedFromHost);
             ToggleHostPanel();
         }
-        public void LinkBrowsePanelToReturnButton()
+        public void LinkJoinPanelToReturnButton()
         {
             if (_startReturnButton == null) return;
 
-            _startReturnButton.onClick.AddListener(OnReturnButtonClickedFromBrowse);
+            _startReturnButton.onClick.AddListener(OnReturnButtonClickedFromJoin);
         }
-        public void OnReturnButtonClickedFromBrowse()
+        public void OnReturnButtonClickedFromJoin()
         {
-            _startReturnButton.onClick.RemoveListener(OnReturnButtonClickedFromBrowse);
-            ToggleBrowsePanel();
+            _startReturnButton.onClick.RemoveListener(OnReturnButtonClickedFromJoin);
+            ToggleJoinPanel();
         }
         void LinkButtons()
         {

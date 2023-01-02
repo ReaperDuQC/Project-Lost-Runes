@@ -1,29 +1,33 @@
+using Google.Protobuf.WellKnownTypes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
-using UnityEngine.SceneManagement;
-using Unity.VisualScripting;
 
 namespace LostRunes.Intro
 {
     public class IntroPlayer : MonoBehaviour
     {
+        public Action OnIntroVideoEnded;
         [SerializeField] VideoClip _clip;
-        [SerializeField] string _sceneToLoad;
-        void Start()
+        public void PlayIntro()
         {
-
             float duration = _clip != null ? (float)_clip.length : 0f;
-
-            StartCoroutine(DelayedChangeScene(duration));
+            StartCoroutine(PlayIntroCoroutine(duration));
         }
-
-        IEnumerator DelayedChangeScene(float duration)
+        IEnumerator PlayIntroCoroutine(float duration)
         {
             yield return new WaitForSeconds(duration);
 
-            SceneManager.LoadScene(_sceneToLoad);
+            IntroVideoEnded();
+        }
+        void IntroVideoEnded()
+        {
+            if (OnIntroVideoEnded != null)
+            {
+                OnIntroVideoEnded();
+            }
         }
     }
 }
