@@ -60,7 +60,7 @@ namespace LostRunes
         }
         private void LobbyCreated(Result result, Lobby lobby)
         {
-            if(result == Result.OK)
+            if (result == Result.OK)
             {
                 lobby.SetPublic();
                 lobby.SetJoinable(true);
@@ -75,18 +75,32 @@ namespace LostRunes
         public async void JoinLobbyWithID()
         {
             ulong Id;
-            if(!ulong.TryParse(_lobbyIDInputField.text,out Id)) 
+            if (!ulong.TryParse(_lobbyIDInputField.text, out Id))
                 return;
             Lobby[] lobbies = await SteamMatchmaking.LobbyList.WithSlotsAvailable(1).RequestAsync();
 
-            foreach(Lobby lobby in lobbies)
+            foreach (Lobby lobby in lobbies)
             {
-                if(lobby.Id == Id) 
+                if (lobby.Id == Id)
                 {
                     await lobby.Join();
                     return;
                 }
             }
+        }
+        public void CopyLobbyId()
+        {
+            if (_lobbyId == null) return;
+
+            TextEditor textEditor = new TextEditor();
+            textEditor.text = _lobbyId.text;
+            textEditor.SelectAll();
+            textEditor.Copy();
+        }
+        public void LeaveLobby()
+        {
+            LobbySaver.Instance._currentLobby?.Leave();
+            LobbySaver.Instance._currentLobby = null;
         }
     }
 }

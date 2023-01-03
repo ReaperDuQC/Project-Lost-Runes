@@ -714,18 +714,18 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""AutoRoll"",
+                    ""name"": ""Back"",
                     ""type"": ""Button"",
-                    ""id"": ""76bcc16c-f62e-4038-b94d-a085a63972a1"",
+                    ""id"": ""22303bcb-b636-4830-b455-e0fae0e6e04b"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Back"",
+                    ""name"": ""Toggle Chat"",
                     ""type"": ""Button"",
-                    ""id"": ""22303bcb-b636-4830-b455-e0fae0e6e04b"",
+                    ""id"": ""b8cf6c50-e67a-4f4d-9f5b-ea2ddae87d6e"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -757,28 +757,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""13a39edb-f132-4d5c-9f1c-e5638d9b620e"",
-                    ""path"": ""<Gamepad>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""AutoRoll"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""0c3cf775-8266-43cb-99fe-84a3d8506a8e"",
-                    ""path"": ""<Keyboard>/enter"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Mouse & Keyboard"",
-                    ""action"": ""AutoRoll"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""515da05d-09f2-4ea5-97d3-382c440cee80"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
@@ -796,6 +774,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Controller"",
                     ""action"": ""Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""11487286-3adc-4b47-a3fc-e1c0c049fc18"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Toggle Chat"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""737d5c53-587c-48e7-a2ef-b15cb42c1d8c"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse & Keyboard"",
+                    ""action"": ""Toggle Chat"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -951,8 +951,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         // MainMenu
         m_MainMenu = asset.FindActionMap("MainMenu", throwIfNotFound: true);
         m_MainMenu_Select = m_MainMenu.FindAction("Select", throwIfNotFound: true);
-        m_MainMenu_AutoRoll = m_MainMenu.FindAction("AutoRoll", throwIfNotFound: true);
         m_MainMenu_Back = m_MainMenu.FindAction("Back", throwIfNotFound: true);
+        m_MainMenu_ToggleChat = m_MainMenu.FindAction("Toggle Chat", throwIfNotFound: true);
         // CharacterShowRoom
         m_CharacterShowRoom = asset.FindActionMap("CharacterShowRoom", throwIfNotFound: true);
         m_CharacterShowRoom_Next = m_CharacterShowRoom.FindAction("Next", throwIfNotFound: true);
@@ -1253,15 +1253,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_MainMenu;
     private IMainMenuActions m_MainMenuActionsCallbackInterface;
     private readonly InputAction m_MainMenu_Select;
-    private readonly InputAction m_MainMenu_AutoRoll;
     private readonly InputAction m_MainMenu_Back;
+    private readonly InputAction m_MainMenu_ToggleChat;
     public struct MainMenuActions
     {
         private @PlayerControls m_Wrapper;
         public MainMenuActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Select => m_Wrapper.m_MainMenu_Select;
-        public InputAction @AutoRoll => m_Wrapper.m_MainMenu_AutoRoll;
         public InputAction @Back => m_Wrapper.m_MainMenu_Back;
+        public InputAction @ToggleChat => m_Wrapper.m_MainMenu_ToggleChat;
         public InputActionMap Get() { return m_Wrapper.m_MainMenu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1274,12 +1274,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Select.started -= m_Wrapper.m_MainMenuActionsCallbackInterface.OnSelect;
                 @Select.performed -= m_Wrapper.m_MainMenuActionsCallbackInterface.OnSelect;
                 @Select.canceled -= m_Wrapper.m_MainMenuActionsCallbackInterface.OnSelect;
-                @AutoRoll.started -= m_Wrapper.m_MainMenuActionsCallbackInterface.OnAutoRoll;
-                @AutoRoll.performed -= m_Wrapper.m_MainMenuActionsCallbackInterface.OnAutoRoll;
-                @AutoRoll.canceled -= m_Wrapper.m_MainMenuActionsCallbackInterface.OnAutoRoll;
                 @Back.started -= m_Wrapper.m_MainMenuActionsCallbackInterface.OnBack;
                 @Back.performed -= m_Wrapper.m_MainMenuActionsCallbackInterface.OnBack;
                 @Back.canceled -= m_Wrapper.m_MainMenuActionsCallbackInterface.OnBack;
+                @ToggleChat.started -= m_Wrapper.m_MainMenuActionsCallbackInterface.OnToggleChat;
+                @ToggleChat.performed -= m_Wrapper.m_MainMenuActionsCallbackInterface.OnToggleChat;
+                @ToggleChat.canceled -= m_Wrapper.m_MainMenuActionsCallbackInterface.OnToggleChat;
             }
             m_Wrapper.m_MainMenuActionsCallbackInterface = instance;
             if (instance != null)
@@ -1287,12 +1287,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Select.started += instance.OnSelect;
                 @Select.performed += instance.OnSelect;
                 @Select.canceled += instance.OnSelect;
-                @AutoRoll.started += instance.OnAutoRoll;
-                @AutoRoll.performed += instance.OnAutoRoll;
-                @AutoRoll.canceled += instance.OnAutoRoll;
                 @Back.started += instance.OnBack;
                 @Back.performed += instance.OnBack;
                 @Back.canceled += instance.OnBack;
+                @ToggleChat.started += instance.OnToggleChat;
+                @ToggleChat.performed += instance.OnToggleChat;
+                @ToggleChat.canceled += instance.OnToggleChat;
             }
         }
     }
@@ -1396,8 +1396,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     public interface IMainMenuActions
     {
         void OnSelect(InputAction.CallbackContext context);
-        void OnAutoRoll(InputAction.CallbackContext context);
         void OnBack(InputAction.CallbackContext context);
+        void OnToggleChat(InputAction.CallbackContext context);
     }
     public interface ICharacterShowRoomActions
     {

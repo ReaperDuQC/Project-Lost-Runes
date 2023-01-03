@@ -692,18 +692,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "AutoRoll",
+                    "name": "Back",
                     "type": "Button",
-                    "id": "76bcc16c-f62e-4038-b94d-a085a63972a1",
+                    "id": "22303bcb-b636-4830-b455-e0fae0e6e04b",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Back",
+                    "name": "Toggle Chat",
                     "type": "Button",
-                    "id": "22303bcb-b636-4830-b455-e0fae0e6e04b",
+                    "id": "b8cf6c50-e67a-4f4d-9f5b-ea2ddae87d6e",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -735,28 +735,6 @@
                 },
                 {
                     "name": "",
-                    "id": "13a39edb-f132-4d5c-9f1c-e5638d9b620e",
-                    "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "AutoRoll",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "0c3cf775-8266-43cb-99fe-84a3d8506a8e",
-                    "path": "<Keyboard>/enter",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Mouse & Keyboard",
-                    "action": "AutoRoll",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "515da05d-09f2-4ea5-97d3-382c440cee80",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
@@ -774,6 +752,28 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "Back",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "11487286-3adc-4b47-a3fc-e1c0c049fc18",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Toggle Chat",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "737d5c53-587c-48e7-a2ef-b15cb42c1d8c",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse & Keyboard",
+                    "action": "Toggle Chat",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

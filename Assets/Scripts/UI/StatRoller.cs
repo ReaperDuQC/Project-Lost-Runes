@@ -57,7 +57,7 @@ namespace LostRunes
             {
                 _playerControls = new PlayerControls();
                 _playerControls.MainMenu.Select.performed += i => _continuePressed();
-                _playerControls.MainMenu.AutoRoll.performed += i => _rollAllStatsPressed();
+               // _playerControls.MainMenu.AutoRoll.performed += i => _rollAllStatsPressed();
             }
             _playerControls.Enable();
 

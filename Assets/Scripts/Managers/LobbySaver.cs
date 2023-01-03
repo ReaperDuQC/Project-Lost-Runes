@@ -7,7 +7,7 @@ namespace LostRunes
 {
     public class LobbySaver : MonoBehaviour
     {
-        public Lobby _currentLobby;
+        public Lobby? _currentLobby;
         public static LobbySaver Instance;
 
         private void Awake()
