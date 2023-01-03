@@ -6,6 +6,7 @@ using Steamworks.Data;
 using TMPro;
 using System;
 using Unity.Netcode;
+using Netcode.Transports.Facepunch;
 
 namespace LostRunes
 {
@@ -39,7 +40,22 @@ namespace LostRunes
             DisplayLobbyId(lobby);
             DisplayPlayerCount(lobby);
 
+            if (NetworkManager.Singleton.IsHost) return;
+            NetworkManager.Singleton.GetComponent<FacepunchTransport>().targetSteamId = lobby.Owner.Id;
+            NetworkManager.Singleton.StartClient();
             Debug.Log("Entered");
+        }
+        private void LobbyCreated(Result result, Lobby lobby)
+        {
+            if (result == Result.OK)
+            {
+                lobby.SetPublic();
+                lobby.SetJoinable(true);
+
+                NetworkManager.Singleton.StartHost();
+
+                Debug.Log("Created");
+            }
         }
         [ClientRpc]
         private void DisplayPlayerCount(Lobby lobby)
@@ -56,16 +72,6 @@ namespace LostRunes
             {
                 _lobbyId.gameObject.SetActive(true);
                 _lobbyId.text = lobby.Id.ToString();
-            }
-        }
-        private void LobbyCreated(Result result, Lobby lobby)
-        {
-            if (result == Result.OK)
-            {
-                lobby.SetPublic();
-                lobby.SetJoinable(true);
-
-                Debug.Log("Created");
             }
         }
         public async void HostLobby()
@@ -101,6 +107,7 @@ namespace LostRunes
         {
             LobbySaver.Instance._currentLobby?.Leave();
             LobbySaver.Instance._currentLobby = null;
+            NetworkManager.Singleton.Shutdown();
         }
     }
 }

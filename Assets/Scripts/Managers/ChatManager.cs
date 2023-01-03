@@ -5,6 +5,8 @@ using Steamworks;
 using Steamworks.Data;
 using UnityEngine.InputSystem;
 using System;
+using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 namespace LostRunes
 {
@@ -13,6 +15,7 @@ namespace LostRunes
         [SerializeField] TMP_InputField _messageInputField;
         [SerializeField] TextMeshProUGUI _messageTemplate;
         [SerializeField] GameObject _messagesContainer;
+        [SerializeField] ScrollRect _scrollRect;
 
         PlayerControls _input;
 
@@ -57,7 +60,16 @@ namespace LostRunes
         {
             GameObject message = Instantiate(_messageTemplate.gameObject, _messagesContainer.transform, false);
             message.GetComponent<TextMeshProUGUI>().text = msg;
+
+            ScrollToBotom();
         }
+
+        private void ScrollToBotom()
+        {
+            if (_scrollRect == null) return;
+            _scrollRect.verticalNormalizedPosition = 0f;
+        }
+
         void ToggleChatBox()
         {
             if (_messageInputField == null)  return;
