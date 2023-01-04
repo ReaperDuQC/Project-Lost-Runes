@@ -182,23 +182,23 @@ namespace LostRunes
         public void EnableContinue()
         {
             _continuePressed = null;
-            _sceneTransition.GetPromptButton().GetComponent<Button>().onClick.AddListener(_sceneTransition.StartOutTransition);
-            _continuePressed += _sceneTransition.StartOutTransition;
-            _sceneTransition.GetPromptButton().GetComponent<Button>().onClick.AddListener(_sceneTransition.HidePrompt);
-            _continuePressed += _sceneTransition.HidePrompt;
-            _sceneTransition.GetPromptButton().GetComponent<Button>().onClick.AddListener(DisableContinue);
-            _continuePressed += DisableContinue;
+            //_sceneTransition.GetPromptButton().GetComponent<Button>().onClick.AddListener(_sceneTransition.StartOutTransition);
+            //_continuePressed += _sceneTransition.StartOutTransition;
+            //_sceneTransition.GetPromptButton().GetComponent<Button>().onClick.AddListener(_sceneTransition.HidePrompt);
+            //_continuePressed += _sceneTransition.HidePrompt;
+            //_sceneTransition.GetPromptButton().GetComponent<Button>().onClick.AddListener(DisableContinue);
+            //_continuePressed += DisableContinue;
         }
         public void DisableContinue()
         {
             _continuePressed = null;
-            _continuePressed += _sceneTransition.ResumeAsyncLoad;
+            //_continuePressed += _sceneTransition.ResumeAsyncLoad;
         }
         void OnAllStatsRolled()
         {
             DisableControlText();
-            _sceneTransition.DisplayPrompt();
-            _sceneTransition.GetPromptButton().GetComponent<Button>().onClick.AddListener(DisableContinue);
+            //_sceneTransition.DisplayPrompt();
+            //_sceneTransition.GetPromptButton().GetComponent<Button>().onClick.AddListener(DisableContinue);
             EnableContinue();
             SaveRolledStats();
         }

@@ -23,7 +23,7 @@ namespace LostRunes
             if (_introPlayer == null) return;
             if (_sceneLoaderManager == null) return;
 
-            _introPlayer.OnIntroVideoEnded += _sceneLoaderManager.LoadNextScene;
+            _introPlayer.OnIntroVideoEnded += _sceneLoaderManager.LoadScene;
         }
 
         void WaitForNetworkManager()

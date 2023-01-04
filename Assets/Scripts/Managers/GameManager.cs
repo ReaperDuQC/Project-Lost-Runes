@@ -55,15 +55,8 @@ namespace LostRunes
         {
             if (_transition == null) return;
 
-            _transition.SetSceneToLoad("Menu");
+           // _transition.SetSceneToLoad("Menu");
             _transition.StartOutTransition();
-        }
-        public void QuitGame()
-        {
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#endif
-            Application.Quit();
         }
         public void HideCursor(bool visible)
         {
