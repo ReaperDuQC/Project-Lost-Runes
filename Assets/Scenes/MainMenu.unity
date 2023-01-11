@@ -5912,6 +5912,11 @@ PrefabInstance:
       propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5764614021089227676, guid: 883b2da9c46d63c4ca9d00ee89ea3723,
+        type: 3}
+      propertyPath: _sceneToLoad
+      value: Sandbox
+      objectReference: {fileID: 0}
     - target: {fileID: 5764614021089227677, guid: 883b2da9c46d63c4ca9d00ee89ea3723,
         type: 3}
       propertyPath: m_Pivot.x
@@ -6050,6 +6055,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1700954120}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1700954122 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5764614021089227672, guid: 883b2da9c46d63c4ca9d00ee89ea3723,
+    type: 3}
+  m_PrefabInstance: {fileID: 1700954120}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74c06f6d99faeb3489eb7b5402606132, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1771345399
 GameObject:
   m_ObjectHideFlags: 0
@@ -6242,13 +6259,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: RPG.Menu.MainMenu, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1700954122}
+        m_TargetAssemblyTypeName: LostRunes.Menu.SceneTransition, Assembly-CSharp
+        m_MethodName: StartOutTransition
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
