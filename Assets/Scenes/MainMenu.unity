@@ -367,18 +367,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &167891714 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 907303144517591640, guid: f9eedaa83d1476548baa85fc3996fa6f,
-    type: 3}
-  m_PrefabInstance: {fileID: 907303144685384026}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &169478974
 GameObject:
   m_ObjectHideFlags: 0
@@ -2745,18 +2733,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &940027133 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 907303144283086247, guid: f9eedaa83d1476548baa85fc3996fa6f,
-    type: 3}
-  m_PrefabInstance: {fileID: 907303144685384026}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &940027134 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 907303144283086246, guid: f9eedaa83d1476548baa85fc3996fa6f,
@@ -3398,13 +3374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdb346839c523d8438e8b4d38c8d3667, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainPanel: {fileID: 2010861488}
-  _lobbyPanel: {fileID: 2009274598}
-  _lobbyReturnButton: {fileID: 785350052}
-  _joinGamesPanel: {fileID: 1798003934}
-  _hostGamePanel: {fileID: 169478976}
   _optionMenu: {fileID: 2019272716}
-  _creditsPanel: {fileID: 1572635111}
   _backgroundMusicPlayer: {fileID: 1054733840}
   _menuNavigationSound: {fileID: 1054733839}
   _returnButtons:
@@ -3431,7 +3401,13 @@ MonoBehaviour:
   - {fileID: 1079289845}
   - {fileID: 1205078924}
   - {fileID: 1929682046}
-  _needOnline: 0
+  _mainPanel: {fileID: 2010861486}
+  _lobbyPanel: {fileID: 2009274596}
+  _lobbyReturnButton: {fileID: 785350052}
+  _joinGamesPanel: {fileID: 1798003932}
+  _hostGamePanel: {fileID: 169478974}
+  _creditsPanel: {fileID: 1572635109}
+  _needOnline: 1
 --- !u!114 &1054733839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3445,10 +3421,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 1054733837}
-  _forwardNavigationSoundClip: {fileID: 8300000, guid: 4864bb8bc3c4263479a6f59f2c49fa95,
-    type: 3}
-  _backwardNavigationSoundClip: {fileID: 8300000, guid: 9a6f302469a2c644e8c59fc9d49fbc60,
-    type: 3}
+  _onButtonClickedSoundClip: {fileID: 0}
+  _OnReturnClickedSoundClip: {fileID: 0}
   _onButtonHighlightSoundClip: {fileID: 0}
 --- !u!114 &1054733840
 MonoBehaviour:
@@ -6668,18 +6642,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1947070194}
   m_CullTransparentMesh: 1
---- !u!114 &1968045277 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 907303145579531655, guid: f9eedaa83d1476548baa85fc3996fa6f,
-    type: 3}
-  m_PrefabInstance: {fileID: 907303144685384026}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1992961026
 GameObject:
   m_ObjectHideFlags: 0
@@ -7228,18 +7190,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2017962308}
   m_CullTransparentMesh: 1
---- !u!114 &2019272708 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 907303145360234846, guid: f9eedaa83d1476548baa85fc3996fa6f,
-    type: 3}
-  m_PrefabInstance: {fileID: 907303144685384026}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1828564839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &2019272710 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 907303145360234844, guid: f9eedaa83d1476548baa85fc3996fa6f,
@@ -7294,12 +7244,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b498386d4da2936418e904b250156533, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _optionPanel: {fileID: 2019272708}
-  _graphicOptionPanel: {fileID: 940027133}
+  _optionPanel: {fileID: 0}
+  _graphicOptionPanel: {fileID: 0}
   _graphicSettings: {fileID: 2019272712}
-  _audioOptionPanel: {fileID: 167891714}
+  _audioOptionPanel: {fileID: 0}
   _audioSettings: {fileID: 2019272714}
-  _gameplayOptionPanel: {fileID: 1968045277}
+  _gameplayOptionPanel: {fileID: 0}
   _gameplaySettings: {fileID: 2019272713}
 --- !u!1 &2063313724
 GameObject:
