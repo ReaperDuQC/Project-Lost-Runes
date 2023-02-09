@@ -8,49 +8,37 @@ using UnityEngine.SceneManagement;
 
 namespace LostRunes.Menu
 {
-
-    // Get rid of the word Browse -> use Join Instead (Dylan)
-    public class MainMenuUI : MonoBehaviour
+    public class MainMenuUI : RPGMenu
     {
         [Header("Main")]
-        [SerializeField] Image _mainPanel;
+        [SerializeField] GameObject _mainPanel;
 
         [Header("Start")]
-        [SerializeField] Image _startPanel;
-        [SerializeField] Button _startReturnButton;
-        [SerializeField] Button _continueButton;
+        [SerializeField] GameObject _lobbyPanel;
+        [SerializeField] Button _lobbyReturnButton;
 
         [Header("Join Games")]
-        [SerializeField] Image _joinGamesPanel;
+        [SerializeField] GameObject _joinGamesPanel;
 
         [Header("Host Games")]
-        [SerializeField] Image _hostGamePanel;
-
-        [Header("Option")]
-        [SerializeField] OptionMenuUI _optionMenu;
-        public OptionMenuUI OptionMenuUI { get { return _optionMenu; } }
+        [SerializeField] GameObject _hostGamePanel;
 
         [Header("Credits")]
-        [SerializeField] Image _creditsPanel;
-
-        [Header("Scene Transition")]
-        [SerializeField] SceneTransition _sceneTransition;
-
-        [Header("Audio Components")]
-        [SerializeField] BackgroundMusicPlayer _backgroundMusicPlayer;
-        [SerializeField] MenuNavigationSound _menuNavigationSound;
+        [SerializeField] GameObject _creditsPanel;
 
         static MainMenuUI _instance;
         public static MainMenuUI Instance { get { return _instance; } }
 
-        [Header("UI Buttons")]
-        [SerializeField] List<Button> _returnButtons;
-        [SerializeField] List<Button> _normalButtons;
+        [SerializeField] bool _needOnline;
         private void Awake()
         {
-            if(NetworkManager.Singleton == null)
+            if (_needOnline)
             {
-                SceneManager.LoadScene("Intro");
+                if (NetworkManager.Singleton == null)
+                {
+                    SceneManager.LoadScene("Intro");
+                    return;
+                }
             }
 
             if (_instance == null)
@@ -64,118 +52,64 @@ namespace LostRunes.Menu
         }
         private void Start()
         {
-            SubscribeAudioSources();
-            LinkButtons();
-            LoadOptionData();
-            PlayBackgroundMusic();
+            Initialize();
         }
-        private void LoadOptionData()
+        public override void Initialize()
         {
-            _optionMenu.LoadOptionData();
+            base.Initialize();
         }
         public void ToggleMainPanel()
         {
             if (_mainPanel == null) { return; }
 
-            _mainPanel.gameObject.SetActive(!_mainPanel.gameObject.activeSelf);
+            _mainPanel.SetActive(!_mainPanel.activeSelf);
         }
         public void ToggleStartPanel()
         {
-            if (_startPanel == null) { return; }
+            if (_lobbyPanel == null) { return; }
 
-            _startPanel.gameObject.SetActive(!_startPanel.gameObject.activeSelf);
-
-            if (_startPanel.gameObject.activeSelf)
-            {
-                if (_continueButton != null)
-                {
-                    bool isContinue = SaveSystem.SaveSystem.LoadContinueData();
-                    _continueButton.interactable = isContinue;
-                    _continueButton.gameObject.SetActive(isContinue);
-                }
-            }
-        }
-        public void ToggleOptionPanel()
-        {
-            if (_optionMenu == null) { return; }
-
-            _optionMenu.gameObject.SetActive(!_optionMenu.gameObject.activeSelf);
+            _lobbyPanel.SetActive(!_lobbyPanel.activeSelf);
         }
         public void ToggleJoinPanel()
         {
             if (_joinGamesPanel.gameObject == null) { return; }
 
-            _joinGamesPanel.gameObject.SetActive(!_joinGamesPanel.gameObject.activeSelf);
+            _joinGamesPanel.SetActive(!_joinGamesPanel.activeSelf);
         }
         public void ToggleHostPanel()
         {
             if (_hostGamePanel.gameObject == null) { return; }
 
-            _hostGamePanel.gameObject.SetActive(!_hostGamePanel.gameObject.activeSelf);
+            _hostGamePanel.SetActive(!_hostGamePanel.activeSelf);
         }
         public void ToggleCreditsPanel()
         {
             if (_creditsPanel.gameObject == null) { return; }
 
-            _creditsPanel.gameObject.SetActive(!_creditsPanel.gameObject.activeSelf);
+            _creditsPanel.SetActive(!_creditsPanel.activeSelf);
         }
-        void PlayBackgroundMusic()
-        {
-            if (_backgroundMusicPlayer == null) return;
-
-            _backgroundMusicPlayer.InitializeAudioSource();
-        }
-        void SubscribeAudioSources()
-        {
-            if (_backgroundMusicPlayer != null) 
-            { 
-                _backgroundMusicPlayer.SubscribeAudioSource();
-            }
-
-            if (_menuNavigationSound != null)
-            {
-                _menuNavigationSound.SubscribeAudioSource();
-            }
-        }
+       
         public void LinkHostPanelToReturnButton()
         {
-            if(_startReturnButton == null) return;
+            if(_lobbyReturnButton == null) return;
 
-            _startReturnButton.onClick.AddListener(OnReturnButtonClickedFromHost);
+            _lobbyReturnButton.onClick.AddListener(OnReturnButtonClickedFromHost);
         }
         public void OnReturnButtonClickedFromHost()
         {
-            _startReturnButton.onClick.RemoveListener(OnReturnButtonClickedFromHost);
+            _lobbyReturnButton.onClick.RemoveListener(OnReturnButtonClickedFromHost);
             ToggleHostPanel();
         }
         public void LinkJoinPanelToReturnButton()
         {
-            if (_startReturnButton == null) return;
+            if (_lobbyReturnButton == null) return;
 
-            _startReturnButton.onClick.AddListener(OnReturnButtonClickedFromJoin);
+            _lobbyReturnButton.onClick.AddListener(OnReturnButtonClickedFromJoin);
         }
         public void OnReturnButtonClickedFromJoin()
         {
-            _startReturnButton.onClick.RemoveListener(OnReturnButtonClickedFromJoin);
+            _lobbyReturnButton.onClick.RemoveListener(OnReturnButtonClickedFromJoin);
             ToggleJoinPanel();
-        }
-        void LinkButtons()
-        {
-            foreach(Button b in _normalButtons)
-            {
-                b.onClick.AddListener(_menuNavigationSound.PlayForwardNavigationSound);
-            }
-            foreach (Button b in _returnButtons)
-            {
-                b.onClick.AddListener(_menuNavigationSound.PlayBackwardNavigationSound);
-            }
-        }
-        public void QuitGame()
-        {
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#endif
-            Application.Quit();
         }
     }
 }

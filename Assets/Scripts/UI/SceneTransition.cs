@@ -16,6 +16,10 @@ namespace LostRunes.Menu
         [SerializeField] float _transitionDuration = 2f;
         private void Awake()
         {
+            
+        }
+        private void Start()
+        {
             StartInTransition();
         }
         public void StartInTransition()
@@ -30,6 +34,7 @@ namespace LostRunes.Menu
         {
             if (_transitionPanel != null)
             {
+                SetPanelMask(true);
                 _transitionPanel.gameObject.SetActive(true);
 
                 float currentDuration = 0;
@@ -50,6 +55,7 @@ namespace LostRunes.Menu
                 {
                     _transitionInOver();
                 }
+                SetPanelMask(false);
             }
             else
             {
@@ -65,5 +71,9 @@ namespace LostRunes.Menu
             color.a = opacityValue;
             _transitionPanel.color = color;
         }
+        void SetPanelMask(bool maskValue)
+        {
+            _transitionPanel.raycastTarget = maskValue;
+        } 
     }
 }

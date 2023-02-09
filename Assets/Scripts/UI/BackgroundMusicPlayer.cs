@@ -1,5 +1,6 @@
 using LostRunes.Menu;
 using UnityEngine;
+using AudioSettings = LostRunes.Menu.AudioSettings;
 
 namespace LostRunes
 {
@@ -7,9 +8,11 @@ namespace LostRunes
     {
         [SerializeField] AudioSource _audioSource;
         [SerializeField] AudioClip _backgroundMusicClip;
-        public void SubscribeAudioSource()
+
+        AudioSettings _audioSetting;
+        public void SubscribeAudioSource(AudioSettings audioSettings)
         {
-            MainMenuUI.Instance.OptionMenuUI.AudioSettings.SubscribeToMusicAudioSource(_audioSource);
+            audioSettings?.SubscribeToMusicAudioSource(_audioSource);
         }
         public void InitializeAudioSource()
         {

@@ -233,10 +233,10 @@ namespace LostRunes
         }
         void SaveRolledStats()
         {
-            string characterName = _characterCreator != null ? _characterCreator.CharacterName : "";
-            bool isMale = _characterCreator != null ? _characterCreator.IsMale :true;
-            SaveSystem.SaveSystem.SaveCharacter(new CharacterStatsData(characterName, isMale, _statLevels));
-            SaveSystem.SaveSystem.SaveContinueData(false);
+            //string characterName = _characterCreator != null ? _characterCreator.CharacterName : "";
+            //bool isMale = _characterCreator != null ? _characterCreator.IsMale :true;
+            //SaveSystem.SaveSystem.SaveCharacter(new CharacterStatsData(characterName, isMale, _statLevels));
+            //SaveSystem.SaveSystem.SaveContinueData(false);
         }
     }
 }

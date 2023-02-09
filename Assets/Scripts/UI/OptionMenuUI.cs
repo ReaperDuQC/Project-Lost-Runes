@@ -10,17 +10,17 @@ namespace LostRunes
     public class OptionMenuUI : MonoBehaviour
     {
         [Header("Option")]
-        [SerializeField] Image _optionPanel;
+        [SerializeField] GameObject _optionPanel;
 
-        [SerializeField] Image _graphicOptionPanel;
+        [SerializeField] GameObject _graphicOptionPanel;
         public GraphicSettings GraphicSettings { get { return _graphicSettings; } }
         [SerializeField] GraphicSettings _graphicSettings;
 
-        [SerializeField] Image _audioOptionPanel;
+        [SerializeField] GameObject _audioOptionPanel;
         public AudioSettings AudioSettings { get { return _audioSettings; } }
         [SerializeField] AudioSettings _audioSettings;
 
-        [SerializeField] Image _gameplayOptionPanel;
+        [SerializeField] GameObject _gameplayOptionPanel;
         public GameplaySettings GameplaySettings { get { return _gameplaySettings; } }
         [SerializeField] GameplaySettings _gameplaySettings;
 
@@ -42,7 +42,6 @@ namespace LostRunes
             _audioOptionPanel.gameObject.SetActive(false);
             _gameplayOptionPanel.gameObject.SetActive(true);
         }
-
         public void LoadOptionData()
         {
             _audioSettings.LoadAudioSettingsData();

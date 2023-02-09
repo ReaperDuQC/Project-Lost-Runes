@@ -110,17 +110,5 @@ namespace LostRunes
                 _interactableUI.ShowText(false);
             }
         }
-        void LoadPlayerStats()
-        {
-            if (SaveSystem.SaveSystem.LoadContinueData())
-            {
-
-            }
-            else
-            {
-                _characterStats.InitializeCharacter(SaveSystem.SaveSystem.LoadCharacter());
-                SaveSystem.SaveSystem.SaveContinueData(true);
-            }
-        }
     }
 }

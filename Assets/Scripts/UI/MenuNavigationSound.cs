@@ -2,28 +2,29 @@ using LostRunes.Menu;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using AudioSettings = LostRunes.Menu.AudioSettings;
 
 namespace LostRunes
 {
     public class MenuNavigationSound : MonoBehaviour
     {
         [SerializeField] AudioSource _audioSource;
-        [SerializeField] AudioClip _forwardNavigationSoundClip;
-        [SerializeField] AudioClip _backwardNavigationSoundClip;
+        [SerializeField] AudioClip _onButtonClickedSoundClip;
+        [SerializeField] AudioClip _OnReturnClickedSoundClip;
         [SerializeField] AudioClip _onButtonHighlightSoundClip;
 
         // TODO Add Logic On button selected
-        public void SubscribeAudioSource()
+        public void SubscribeAudioSource(AudioSettings audioSettings)
         {
-            MainMenuUI.Instance.OptionMenuUI.AudioSettings.SubscribeToSfxAudioSource(_audioSource);
+            audioSettings?.SubscribeToSfxAudioSource(_audioSource);
         }
         public void PlayForwardNavigationSound()
         {
-            PlayNavigationMenuSound(_forwardNavigationSoundClip);
+            PlayNavigationMenuSound(_onButtonClickedSoundClip);
         }
         public void PlayBackwardNavigationSound()
         {
-            PlayNavigationMenuSound(_backwardNavigationSoundClip);
+            PlayNavigationMenuSound(_OnReturnClickedSoundClip);
         }
         public void PlayOnButtonHighlightNavigationSound()
         {

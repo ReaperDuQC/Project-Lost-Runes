@@ -10,6 +10,9 @@ namespace LostRunes.SaveSystem
 {
     public static class SaveSystem
     {
+        #region Option Settings
+
+        #region Audio Settings
         public static void SaveAudioSettings(Menu.AudioSettings audioSettings)
         {
             BinaryFormatter formatter = new BinaryFormatter();
@@ -42,6 +45,9 @@ namespace LostRunes.SaveSystem
                 return new AudioSettingsData();
             }
         }
+        #endregion
+
+        #region Gameplay Settings
         public static void SaveGameplaySettings(GameplaySettings gameplaySettings)
         {
             BinaryFormatter formatter = new BinaryFormatter();
@@ -73,6 +79,9 @@ namespace LostRunes.SaveSystem
                 return new GameplaySettingsData();
             }
         }
+        #endregion
+
+        #region Graphic Settings
         public static void SaveGraphicSettings(GraphicSettings graphicSettings)
         {
             BinaryFormatter formatter = new BinaryFormatter();
@@ -104,37 +113,11 @@ namespace LostRunes.SaveSystem
                 return new GraphicSettingsData();
             }
         }
-        public static void SaveContinueData(bool isContinue)
-        {
-            BinaryFormatter formatter = new BinaryFormatter();
-            string path = Application.persistentDataPath + "/Game.Continue";
-            FileStream stream = new FileStream(path, FileMode.Create);
+        #endregion
 
-            bool data = isContinue;
+        #endregion
 
-            formatter.Serialize(stream, data);
-            stream.Close();
-        }
-        public static bool LoadContinueData()
-        {
-            string path = Application.persistentDataPath + "/Game.Continue";
-
-            if (File.Exists(path))
-            {
-                BinaryFormatter formatter = new BinaryFormatter();
-                FileStream stream = new FileStream(path, FileMode.Open);
-
-                bool data = (bool)formatter.Deserialize(stream);
-                stream.Close();
-
-                return data;
-            }
-            else
-            {
-                //Debug.Log("Save file not found in " + path);
-                return false;
-            }
-        }
+        #region Character
         public static void SaveCharacter(CharacterStatsData stats)
         {
             BinaryFormatter formatter = new BinaryFormatter();
@@ -166,5 +149,38 @@ namespace LostRunes.SaveSystem
                 return null;
             }
         }
+        #endregion
+
+        //public static void SaveContinueData(bool isContinue)
+        //{
+        //    BinaryFormatter formatter = new BinaryFormatter();
+        //    string path = Application.persistentDataPath + "/Game.Continue";
+        //    FileStream stream = new FileStream(path, FileMode.Create);
+
+        //    bool data = isContinue;
+
+        //    formatter.Serialize(stream, data);
+        //    stream.Close();
+        //}
+        //public static bool LoadContinueData()
+        //{
+        //    string path = Application.persistentDataPath + "/Game.Continue";
+
+        //    if (File.Exists(path))
+        //    {
+        //        BinaryFormatter formatter = new BinaryFormatter();
+        //        FileStream stream = new FileStream(path, FileMode.Open);
+
+        //        bool data = (bool)formatter.Deserialize(stream);
+        //        stream.Close();
+
+        //        return data;
+        //    }
+        //    else
+        //    {
+        //        //Debug.Log("Save file not found in " + path);
+        //        return false;
+        //    }
+        //}
     }
 }

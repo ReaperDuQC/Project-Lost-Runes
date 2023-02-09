@@ -1,6 +1,7 @@
 ﻿// character randomizer version 1.30
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace PsychoticLab
 {
@@ -154,17 +155,17 @@ namespace PsychoticLab
         {
             if (camHolder)
             {
-                if (Input.GetKey(KeyCode.Mouse1))
+                if (Mouse.current.rightButton.isPressed)
                 {
-                    x += 1 * Input.GetAxis("Mouse X");
-                    y -= 1 * Input.GetAxis("Mouse Y");
+                    //x += 1 * Input.GetAxis("Mouse X");
+                    //y -= 1 * Input.GetAxis("Mouse Y");
                     Cursor.lockState = CursorLockMode.Locked;
                     Cursor.visible = false;
                 }
                 else
                 {
-                    x -= 1 * Input.GetAxis("Horizontal");
-                    y -= 1 * Input.GetAxis("Vertical");
+                    //x -= 1 * Input.GetAxis("Horizontal");
+                    //y -= 1 * Input.GetAxis("Vertical");
                     Cursor.lockState = CursorLockMode.None;
                     Cursor.visible = true;
                 }

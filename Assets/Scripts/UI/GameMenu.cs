@@ -12,27 +12,22 @@ namespace LostRunes
     public class GameMenu : RPGMenu
     {
         [Header("Menu")]
-        [SerializeField] Image _menuPanel;
+        [SerializeField] GameObject _menuPanel;
 
         [Header("Equipment")]
-        [SerializeField] Button _equipmentReturnButton;
-        [SerializeField] Image _equipmentPanel;
+        [SerializeField] GameObject _equipmentPanel;
 
         [Header("Inventory")]
-        [SerializeField] Button _inventoryReturnButton;
-        [SerializeField] Image _inventoryPanel;
-
-        [Header("Option")]
-        [SerializeField] OptionMenuUI _optionMenu;
-        [SerializeField] Button _optionReturnButton;
+        [SerializeField] GameObject _inventoryPanel;
 
         [Header("Quit")]
-        [SerializeField] Button _quitReturnButton;
-        [SerializeField] Image _quitPanel;
+        [SerializeField] GameObject _quitPanel;
+
         PlayerControls _playerControls;
-        private void Awake()
+
+        private void Start()
         {
-            LoadOptionData();
+            Initialize();
         }
         private void OnEnable()
         {
@@ -47,63 +42,57 @@ namespace LostRunes
         {
             _playerControls.Disable();
         }
-        void LoadOptionData()
+        public override void Initialize()
         {
-
+            base.Initialize();
         }
         public void ToggleMenuPanel()
         {
             if (_menuPanel == null) return;
 
-            _menuPanel.gameObject.SetActive(!_menuPanel.gameObject.activeSelf);
-        }
-        public void ToggleOptionPanel()
-        {
-            if (_optionMenu == null) return;
-
-            _optionMenu.gameObject.SetActive(!_optionMenu.gameObject.activeSelf);
+            _menuPanel.SetActive(!_menuPanel.activeSelf);
         }
         public void ToggleEquipmentPanel()
         {
             if (_equipmentPanel == null) return;
 
-            _equipmentPanel.gameObject.SetActive(!_equipmentPanel.gameObject.activeSelf);
+            _equipmentPanel.SetActive(!_equipmentPanel.activeSelf);
         }
         public void ToggleInventoryPanel()
         {
             if (_inventoryPanel == null) return;
 
-            _inventoryPanel.gameObject.SetActive(!_inventoryPanel.gameObject.activeSelf);
+            _inventoryPanel.SetActive(!_inventoryPanel.activeSelf);
         }
         public void ToggleQuitPanel()
         {
             if (_quitPanel == null) return;
 
-            _quitPanel.gameObject.SetActive(!_quitPanel.gameObject.activeSelf);
+            _quitPanel.SetActive(!_quitPanel.activeSelf);
         }
         private void CloseMenu()
         {
-            if (_quitPanel.gameObject.activeSelf)
+            if (_quitPanel.activeSelf)
             {
                 ToggleQuitPanel();
                 ToggleMenuPanel();
             }
-            else if (_inventoryPanel.gameObject.activeSelf)
+            else if (_inventoryPanel.activeSelf)
             {
                 ToggleInventoryPanel();
                 ToggleMenuPanel();
             }
-            else if (_equipmentPanel.gameObject.activeSelf)
+            else if (_equipmentPanel.activeSelf)
             {
                 ToggleEquipmentPanel();
                 ToggleMenuPanel();
             }
-            else if (_optionMenu.gameObject.activeSelf)
+            else if (OptionMenuUI.gameObject.activeSelf)
             {
                 ToggleOptionPanel();
                 ToggleMenuPanel();
             }
-            else if (_menuPanel.gameObject.activeSelf)
+            else if (_menuPanel.activeSelf)
             {
                 ToggleMenuPanel();
                 ToggleCursorVisibility(false);
@@ -116,11 +105,11 @@ namespace LostRunes
         }
         private void ToggleCursorVisibility(bool visible)
         {
-            GameManager instance = GameManager.Instance;
-            if (instance != null)
-            {
-                instance.HideCursor(visible);
-            }
+            //GameManager instance = GameManager.Instance;
+            //if (instance != null)
+            //{
+            //    instance.HideCursor(visible);
+            //}
         }
     }
 }

@@ -26,7 +26,15 @@ namespace LostRunes
         bool _asyncProgressResumed = false;
         bool _transitionInOver = false;
         bool _transitionOutOver = false;
+
+        [SerializeField] bool _requireReadyToLoad;
+        // Need to be set to true in order to go to the next scene  ReadyToLoad();
         bool _readyToLoad = false;
+
+        private void Awake()
+        {
+            _readyToLoad = !_requireReadyToLoad;
+        }
         private void Start()
         {
             if(_sceneTransition != null)
@@ -115,13 +123,11 @@ namespace LostRunes
                 }
             }
         }
-
         private void HideProgressAndDisplayPrompt()
         {
             DisplayProgress(false);
             DisplayPrompt(true);
         }
-
         private void UpdateProgressText(float progress)
         {
             if (_progressText != null)
@@ -129,7 +135,6 @@ namespace LostRunes
                 _progressText.text = ((int)(progress * 100f)).ToString();
             }
         }
-
         private void LoadSceneToLoad()
         {
             SceneManager.LoadScene(_sceneToLoad);
@@ -172,10 +177,14 @@ namespace LostRunes
             _requirePrompt = false;
             _displayProgress = false;
 
+            Debug.Log("Need to handle the exit of the server");
+
             LoadScene();
         }
         public void QuitGame()
         {
+            Debug.Log("Need to handle the exit of the server");
+
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
 #endif
