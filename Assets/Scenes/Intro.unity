@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -642,7 +642,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1055214936}
   m_Enabled: 1
-  m_VideoClip: {fileID: 0}
+  m_VideoClip: {fileID: 32900000, guid: fbe2b468f7a39dc43a2582b7677bcfb6, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 2080114045}
@@ -917,6 +917,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5764614021089227677, guid: 883b2da9c46d63c4ca9d00ee89ea3723,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764614021089227677, guid: 883b2da9c46d63c4ca9d00ee89ea3723,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764614021089227677, guid: 883b2da9c46d63c4ca9d00ee89ea3723,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764614021089227677, guid: 883b2da9c46d63c4ca9d00ee89ea3723,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -973,6 +988,11 @@ PrefabInstance:
     - target: {fileID: 5764614021089227677, guid: 883b2da9c46d63c4ca9d00ee89ea3723,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764614021089227677, guid: 883b2da9c46d63c4ca9d00ee89ea3723,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5764614021089227678, guid: 883b2da9c46d63c4ca9d00ee89ea3723,
