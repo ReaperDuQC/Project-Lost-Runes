@@ -4,18 +4,27 @@ using UnityEngine;
 
 namespace MalbersAnimations.Controller
 {
+
+    /// <summary> Struct to Apply a Multiplier to anything whenever the Animal is on a State  </summary>
+    [System.Serializable]
+    public class StateMultiplier
+    {
+        public StateID ID;
+        public float Multiplier;
+    }
+
     [CreateAssetMenu(menuName = "Malbers Animations/Modifier/Mode/Directional Dodge")]
     public class ModifierForce : ModeModifier
     {
         [HelpBox]
-        public string Desc ="Applies a Force to the Animal when the Mode starts. Remove the force when the mode ends";
-        
+        public string Desc = "Applies a Force to the Animal when the Mode starts. Remove the force when the mode ends";
+
         [Tooltip("Direction of the Force")]
         public Vector3Reference Direction = new Vector3Reference(Vector3.forward);
 
         [Tooltip("Use the Raw Input Axis Instead of the Direction Value")]
         public BoolReference UseInputAxis = new BoolReference();
-       
+
         [Tooltip("Amount of force to apply to the Animal")]
         public FloatReference Force = new FloatReference(2);
         [Tooltip("Time the Force will be applied to the Animal. if is set to Zero then it will be applied during the whole Animation")]
@@ -28,7 +37,7 @@ namespace MalbersAnimations.Controller
         public BoolReference ResetGravity = new BoolReference(true);
 
         [Header("Check States")]
-     
+
         [Tooltip("Increase the Force applied depending which state the Animal is playing")]
         public List<StateMultiplier> stateMultipliers;
 
@@ -42,18 +51,18 @@ namespace MalbersAnimations.Controller
 
                 var stateM = stateMultipliers.Find(x => x.ID == ActiveState);
 
-                if (stateM != null)   multiplier = stateM.Multiplier;
-                 
+                if (stateM != null) multiplier = stateM.Multiplier;
+
             }
 
-            var Direction = UseInputAxis.Value ? mode.Animal.RawInputAxis :  this.Direction;
+            var Direction = UseInputAxis.Value ? mode.Animal.RawInputAxis : this.Direction;
 
             mode.Animal.Force_Add(mode.Animal.transform.TransformDirection(Direction), Force * multiplier, EnterAceleration, ResetGravity);
         }
 
         public override void OnModeMove(Mode mode, AnimatorStateInfo stateinfo, Animator anim, int Layer)
         {
-            if (m_Time > 0 && 
+            if (m_Time > 0 &&
                 m_Time < Time.time - mode.ActivationTime &&
                 mode.Animal.ExternalForce != Vector3.zero)
             {
@@ -62,6 +71,6 @@ namespace MalbersAnimations.Controller
         }
 
         public override void OnModeExit(Mode mode) => mode.Animal.Force_Remove(ExitAceleration);
-     
+
     }
 }

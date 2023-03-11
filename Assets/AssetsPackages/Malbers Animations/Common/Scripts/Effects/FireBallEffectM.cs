@@ -6,13 +6,15 @@ namespace MalbersAnimations.Utilities
     public class FireBallEffectM : EffectModifier
     {
         public float Power = 20;
-        Rigidbody rb; 
+
+        Rigidbody rb;
 
         public override void StartEffect(Effect effect)
         {
             var aim = effect.Owner.FindComponent<LookAt>();                //Check if the owner has lookAt
 
             effect.Instance.SendMessage("SetOwner", effect.Owner, SendMessageOptions.DontRequireReceiver);
+
 
             var Direction = (aim != null && aim.IsAiming) ? aim.AimDirection.normalized : effect.Owner.transform.forward;
 

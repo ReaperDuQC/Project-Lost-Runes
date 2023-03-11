@@ -5,6 +5,7 @@ using MalbersAnimations.Scriptables;
 using UnityEngine;
 using UnityEngine.Events;
 using System;
+using System.Collections.Generic;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -27,7 +28,7 @@ namespace MalbersAnimations
         [Tooltip("Stats component to apply the Damage")]
         public Stats stats;
 
-        [Tooltip("Multiplier for the Stat modifier Value")]
+        [Tooltip("Multiplier for the Stat modifier Value. Use this to increase or decrease the final value of the Stat")]
         public FloatReference multiplier = new FloatReference(1);
 
         [Tooltip("When Enabled the animal will rotate towards the Damage direction"),UnityEngine.Serialization.FormerlySerializedAs("AlingToDamage")]
@@ -47,32 +48,63 @@ namespace MalbersAnimations
 
         public DamageData LastDamage;
 
+        [Tooltip("Elements that affect the MDamageable")]
+        public List<ElementMultiplier> elements = new List<ElementMultiplier>();    
+
 
         [HideInInspector] public int Editor_Tabs1;
 
         private void Start()
         {
-            if (character == null) character = stats.GetComponent(reaction.ReactionType()); //Find the character where the Stats are
+            if (character == null && reaction != null) 
+                character = stats.GetComponent(reaction.ReactionType()); //Find the character where the Stats are
         }
 
-        public virtual void ReceiveDamage(Vector3 Direction, GameObject Damager, StatModifier modifier,
-            bool isCritical, bool react, MReaction customReaction, bool pureDamage)
+        public virtual void ReceiveDamage(Vector3 Direction, GameObject Damager, StatModifier damage,
+           bool isCritical, bool react, MReaction customReaction, bool pureDamage) =>
+            ReceiveDamage(Direction, Damager, damage, isCritical, react, customReaction, pureDamage, null);
+
+
+        public virtual void ReceiveDamage(Vector3 Direction, GameObject Damager, StatModifier damage,
+            bool isCritical, bool react, MReaction customReaction, bool pureDamage, StatElement element)
         {
             if (!enabled) return;       //This makes the Animal Immortal.
             HitDirection = Direction;   //IMPORTANT!!! to React
 
-            if (customReaction) customReaction.React(character);        //Custom reaction
-            else if (react && reaction)
+            if (customReaction)
             {
-                reaction.React(character);     //Lets React 
+                customReaction.React(character);        //Custom reaction if the Attacker sends one
+            }
+            else if (react)
+            {
+                reaction?.React(character);     //Lets React 
             }
 
+         
 
-            var stat = stats.Stat_Get(modifier.ID);
-            if (stat == null || !stat.Active ||  stat.IsEmpty) return; //Do nothing if the stat is empty
+            var stat = stats.Stat_Get(damage.ID);
+            if (stat == null || !stat.Active ||  stat.IsEmpty || stat.IsInmune) return; //Do nothing if the stat is empty, null or disabled
+
+            ElementMultiplier statElement = new ElementMultiplier(element,1);
+
+
+            //Apply the Element Multiplier
+            if (element != null && elements.Count > 0)
+            {
+                statElement = elements.Find(x => element.ID == x.element.ID);
+                damage.Value *= statElement.multiplier;
+                events.OnElementDamage.Invoke(statElement.element.ID);
+                Root?.events.OnElementDamage.Invoke(statElement.element.ID);
+            }
 
             SetDamageable(Direction, Damager);
             Root?.SetDamageable(Direction, Damager);                     //Send the Direction and Damager to the Root 
+
+
+            //Store the last damage applied to the Damageable
+            LastDamage = new DamageData(Damager, gameObject, damage, isCritical, statElement);
+            if (Root) Root.LastDamage = LastDamage;
+
 
             if (isCritical)
             {
@@ -80,24 +112,21 @@ namespace MalbersAnimations
                 Root?.events.OnCriticalDamage.Invoke();
             }
 
-            if (!pureDamage) modifier.Value *= multiplier;               //Apply to the Stat modifier a new Modification
+            if (!pureDamage) 
+                damage.Value *= multiplier;               //Apply to the Stat modifier a new Modification
 
-            events.OnReceivingDamage.Invoke(modifier.Value);
+
+
+            events.OnReceivingDamage.Invoke(damage.Value);
             events.OnDamager.Invoke(Damager);
 
            
 
-            if (Root != this)
-            {
-                Root?.events.OnReceivingDamage.Invoke(modifier.Value);
-                Root?.events.OnDamager.Invoke(Damager);
-            }
-
-            LastDamage = new DamageData(Damager,gameObject ,modifier);
-            if (Root) Root.LastDamage = LastDamage;
-
-
-            modifier.ModifyStat(stats.Stat_Get(modifier.ID));
+            //Send the Events on the Root
+            Root?.events.OnReceivingDamage.Invoke(damage.Value);
+            Root?.events.OnDamager.Invoke(Damager);
+           
+            damage.ModifyStat(stat);
 
             if (AlignToDamage.Value)
             {
@@ -116,7 +145,7 @@ namespace MalbersAnimations
         public virtual void ReceiveDamage(StatID stat, float amount)
         {
             var modifier = new StatModifier(){ ID = stat, modify = StatOption.SubstractValue, Value  = amount};
-            ReceiveDamage(Vector3.forward, null, modifier, false, true, null, false);
+            ReceiveDamage(Vector3.forward, null, modifier, false, true, null, false, null);
         }
 
 
@@ -127,7 +156,7 @@ namespace MalbersAnimations
         public virtual void ReceiveDamage(StatID stat, float amount, StatOption modifyStat = StatOption.SubstractValue)
         {
             var modifier = new StatModifier() { ID = stat, modify = modifyStat, Value = amount };
-            ReceiveDamage(Vector3.forward, null, modifier, false, true, null, false);
+            ReceiveDamage(Vector3.forward, null, modifier, false, true, null, false, null);
         }
 
 
@@ -143,10 +172,10 @@ namespace MalbersAnimations
         /// <param name="stat"> What stat will be modified</param>
         /// <param name="amount"> value to substact to the stat</param>
         public virtual void ReceiveDamage(Vector3 Direction, GameObject Damager, StatID stat, float amount, StatOption modifyStat = StatOption.SubstractValue,
-             bool isCritical = false, bool react = true, MReaction customReaction = null, bool pureDamage = false)
+             bool isCritical = false, bool react = true, MReaction customReaction = null, bool pureDamage = false, StatElement element = null)
         {
             var modifier = new StatModifier() { ID = stat, modify = modifyStat, Value = amount };
-            ReceiveDamage(Direction, Damager, modifier, isCritical, react, customReaction, pureDamage);
+            ReceiveDamage(Direction, Damager, modifier, isCritical, react, customReaction, pureDamage, element);
         }
 
 
@@ -163,7 +192,7 @@ namespace MalbersAnimations
             float amount, bool isCritical = false, bool react = true, MReaction customReaction = null, bool pureDamage = false)
         {
             var modifier = new StatModifier() { ID = stat, modify = StatOption.SubstractValue, Value = amount };
-            ReceiveDamage(Direction, Damager, modifier, isCritical, react, customReaction, pureDamage);
+            ReceiveDamage(Direction, Damager, modifier, isCritical, react, customReaction, pureDamage, null);
         } 
 
         internal void SetDamageable(Vector3 Direction, GameObject Damager)
@@ -178,6 +207,7 @@ namespace MalbersAnimations
             public FloatEvent OnReceivingDamage = new FloatEvent();
             public UnityEvent OnCriticalDamage = new UnityEvent();
             public GameObjectEvent OnDamager = new GameObjectEvent();
+            public IntEvent OnElementDamage = new IntEvent();
         }
 
         public struct DamageData
@@ -189,14 +219,24 @@ namespace MalbersAnimations
             public GameObject Damagee;
             /// <summary>  Final Stat Modifier ? </summary>
             public StatModifier stat;
+
+
             /// <summary> Final value who modified the Stat</summary>
             public float Damage => stat.modify != StatOption.None ? stat.Value.Value : 0f;
 
-            public DamageData(GameObject damager, GameObject damagee, StatModifier stat)
+            /// <summary>Store if the Damage was Critical</summary>
+            public bool WasCritical;
+
+            /// <summary>Store if the damage was  </summary>
+            public ElementMultiplier Element;
+
+            public DamageData(GameObject damager, GameObject damagee, StatModifier stat, bool wasCritical, ElementMultiplier element)
             {
                 Damager = damager;
                 Damagee = damagee;
                 this.stat = new StatModifier(stat);
+                WasCritical = wasCritical;
+                Element = element;
             }
         }
 
@@ -209,10 +249,10 @@ namespace MalbersAnimations
             Root = transform.root.GetComponent<MDamageable>();     //Check if there's a Damageable on the Root
             if (Root == this) Root = null;
 
-            if (stats == null)
-            {
-                stats = gameObject.AddComponent<Stats>();  
-            }
+
+            //Add Stats if it not exist
+            if (stats == null) stats = gameObject.AddComponent<Stats>();  
+           
         }
 #endif
     }
@@ -221,7 +261,7 @@ namespace MalbersAnimations
     [CustomEditor(typeof(MDamageable))]
     public class MDamageableEditor : Editor
     {
-        SerializedProperty reaction, stats, multiplier, events, Root, AlignTime, AlignCurve, AlignToDamage, Editor_Tabs1;
+        SerializedProperty reaction, stats, multiplier, events, Root, AlignTime, AlignCurve, AlignToDamage, Editor_Tabs1, elements;
         MDamageable M;
 
         protected string[] Tabs1 = new string[] { "General", "Events" };
@@ -240,6 +280,7 @@ namespace MalbersAnimations
             AlignCurve = serializedObject.FindProperty("AlignCurve");
             AlignTime = serializedObject.FindProperty("AlignTime");
             Editor_Tabs1 = serializedObject.FindProperty("Editor_Tabs1");
+            elements = serializedObject.FindProperty("elements");
         }
 
         public override void OnInspectorGUI()
@@ -279,6 +320,9 @@ namespace MalbersAnimations
             {
                 EditorGUILayout.PropertyField(stats);
                 EditorGUILayout.PropertyField(multiplier);
+                EditorGUI.indentLevel++;
+                EditorGUILayout.PropertyField(elements);
+                EditorGUI.indentLevel--;
             }
 
             using (new GUILayout.VerticalScope(EditorStyles.helpBox))

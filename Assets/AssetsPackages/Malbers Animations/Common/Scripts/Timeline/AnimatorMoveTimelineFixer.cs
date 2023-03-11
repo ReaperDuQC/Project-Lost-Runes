@@ -25,8 +25,7 @@ namespace MalbersAnimations.Controller
                 anim.ApplyBuiltinRootMotion(); 
         }
 
-        private void Reset()
-        { anim = GetComponent<Animator>(); }
+        private void Reset()   { anim = GetComponent<Animator>(); }
     }
 
 
@@ -36,7 +35,8 @@ namespace MalbersAnimations.Controller
     {
         public override void OnInspectorGUI()
         {
-            MalbersEditor.DrawDescription("This script fixes a bug with the Timeline when its play in the Editor, with Scripts that use the  OnAnimatorMove() callback, like AC ");
+            MalbersEditor.DrawDescription("This script fixes a bug with the Timeline when is playing in the Editor. " +
+                "It happen with scripts that use OnAnimatorMove(), like AC ");
         }
     }
 #endif

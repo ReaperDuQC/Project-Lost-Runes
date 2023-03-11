@@ -158,7 +158,7 @@ namespace MalbersAnimations.Controller
 
         void OnDrawGizmos()
         {
-            DrawTriggers(transform, Trigger, DebugColor, false);
+           DrawTriggers(transform, Trigger, DebugColor, false);
         }
 
         void OnDrawGizmosSelected()
@@ -224,13 +224,19 @@ namespace MalbersAnimations.Controller
 
         protected override void DrawStatModifier(bool drawbox =true)
         {
-            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
-            EditorGUILayout.LabelField("Modify Stat", EditorStyles.boldLabel);
-            EditorGUILayout.PropertyField(statModifier, new GUIContent("Enemy Stat Enter"), true);
-            EditorGUILayout.PropertyField(EnemyStatExit, true);
-            EditorGUILayout.PropertyField(pureDamage);
-            EditorGUILayout.EndVertical();
+            using (new GUILayout.VerticalScope(EditorStyles.helpBox)) 
+            {
+                EditorGUILayout.LabelField("Modify Stat", EditorStyles.boldLabel);
+                EditorGUILayout.PropertyField(statModifier, new GUIContent("Enemy Stat Enter"), true);
+                EditorGUILayout.PropertyField(EnemyStatExit, true);
+                EditorGUILayout.PropertyField(pureDamage);
+                DrawElement();
+            }
+            
         }
+
+      
+
 
         public override void OnInspectorGUI()
         {
@@ -252,16 +258,15 @@ namespace MalbersAnimations.Controller
 
         protected override void DrawGeneral(bool drawbox = true)
         {
-            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+            using (new GUILayout.VerticalScope(EditorStyles.helpBox))
             {
-                EditorGUILayout.BeginHorizontal();
+                using (new GUILayout.HorizontalScope( ))
                 {
                     EditorGUILayout.PropertyField(Trigger);
                     EditorGUILayout.PropertyField(DebugColor, GUIContent.none, GUILayout.Width(55));
                 }
-                EditorGUILayout.EndHorizontal();
             }
-            EditorGUILayout.EndVertical();
+           
             base.DrawGeneral(true);
         }
 

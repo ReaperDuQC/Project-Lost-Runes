@@ -39,7 +39,6 @@ namespace MalbersAnimations.Controller
 
         private bool Respawned;
 
-
         void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
         { 
             FindMainAnimal();

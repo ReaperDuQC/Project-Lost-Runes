@@ -54,6 +54,12 @@ namespace MalbersAnimations
                 Debuggin(value);
             }
         }
+        public virtual void Invoke(int value) => Invoke(value != 0);
+        public virtual void Invoke(float value) => Invoke(value != 0);
+        public virtual void Invoke(string value) => Invoke(string.IsNullOrEmpty(value));
+        public virtual void InvokeVectorX(Vector3 value) => Invoke(value.x != 0);
+        public virtual void InvokeVectorY(Vector3 value) => Invoke(value.y != 0);
+        public virtual void InvokeVectorZ(Vector3 value) => Invoke(value.z != 0);
 
         private void Debuggin(bool value)
         {

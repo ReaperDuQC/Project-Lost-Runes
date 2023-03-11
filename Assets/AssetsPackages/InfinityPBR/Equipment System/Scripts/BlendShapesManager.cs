@@ -17,8 +17,6 @@ namespace InfinityPBR
     {
         public List<BlendShapeGameObject> blendShapeGameObjects = new List<BlendShapeGameObject>();
         public bool userMatchRespectsLimits = true; // If true, controlled shapes will respect their set min/max limits, and end up a percentage of the parent shape value
-        [Range(0.0f, 1f)]
-        public float globalModifier = 1f;
 
         public List<BlendShapePresetFile> rangeFiles = new List<BlendShapePresetFile>(); // Blend Shape range files
         public List<BlendShapePresetFile> presetFiles = new List<BlendShapePresetFile>(); // Blend shape preset files
@@ -55,7 +53,7 @@ namespace InfinityPBR
 
             var targetShapeIndex = obj.smr.sharedMesh.GetBlendShapeIndex(value.fullName);
             if (targetShapeIndex == -1) return;
-            obj.smr.SetBlendShapeWeight(targetShapeIndex, GlobalModifiedValue(value.value));
+            obj.smr.SetBlendShapeWeight(targetShapeIndex, value.value);
             /*
              * DID YOU GET AN ERROR ON THE FOLLOWING LINE??
              *
@@ -77,8 +75,6 @@ namespace InfinityPBR
             if (triggerUserMatches)
                 TriggerUserMatches(obj, value);
         }
-
-        private float GlobalModifiedValue(float value) => value * globalModifier;
 
         public void TriggerAutoMatches(string triggerName, float value)
         {

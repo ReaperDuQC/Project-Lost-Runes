@@ -79,7 +79,17 @@ namespace MalbersAnimations
                     DrawRewired();
                 }
 
-                DrawListAnEvents();
+                DrawList();
+
+
+                using (new GUILayout.VerticalScope(EditorStyles.helpBox))
+                {
+                    if (MalbersEditor.Foldout(showInputEvents, "Events"))
+                    {
+                        EditorGUILayout.PropertyField(OnInputEnabled);
+                        EditorGUILayout.PropertyField(OnInputDisabled);
+                    }
+                }
             }
             serializedObject.ApplyModifiedProperties();
         }
@@ -116,7 +126,7 @@ namespace MalbersAnimations
             }
         }
 
-        protected void DrawListAnEvents()
+        protected void DrawList()
         {
             CheckActionMaps();
 
@@ -226,14 +236,7 @@ namespace MalbersAnimations
                 }
             }
 
-            using (new GUILayout.VerticalScope(EditorStyles.helpBox))
-            {
-                if (MalbersEditor.Foldout(showInputEvents, "[Enable/Disable] Events"))
-                {
-                    EditorGUILayout.PropertyField(OnInputEnabled);
-                    EditorGUILayout.PropertyField(OnInputDisabled);
-                }
-            }
+          
         }
 
         private void DrawActionMapList(SerializedProperty selectedMap, int inputIndex)

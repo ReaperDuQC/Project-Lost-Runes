@@ -13,15 +13,17 @@ namespace LostRunes.Menu
         [Header("Main")]
         [SerializeField] GameObject _mainPanel;
 
-        [Header("Start")]
-        [SerializeField] GameObject _lobbyPanel;
-        [SerializeField] Button _lobbyReturnButton;
+        [Header("Multiplayer")]
+        [SerializeField] GameObject _multiplayerPanel;
 
-        [Header("Join Games")]
-        [SerializeField] GameObject _joinGamesPanel;
+        [Header("World Selection")]
+        [SerializeField] GameObject _worldSelectionPanel;
 
-        [Header("Host Games")]
-        [SerializeField] GameObject _hostGamePanel;
+        [Header("World Name")]
+        [SerializeField] GameObject _worldNamePanel;
+
+        [Header("Achievements")]
+        [SerializeField] GameObject _achievementsPanel;
 
         [Header("Credits")]
         [SerializeField] GameObject _creditsPanel;
@@ -53,63 +55,36 @@ namespace LostRunes.Menu
         private void Start()
         {
             Initialize();
+            _activePanel = _mainPanel;
+            _basePanel = _activePanel;
         }
         public override void Initialize()
         {
             base.Initialize();
         }
-        public void ToggleMainPanel()
+        public void SetMainPanelActive(bool active)
         {
-            if (_mainPanel == null) { return; }
-
-            _mainPanel.SetActive(!_mainPanel.activeSelf);
+            SetPanelActive(_mainPanel, active);
         }
-        public void ToggleStartPanel()
+        public void SetMultiplayerPanelActive(bool active)
         {
-            if (_lobbyPanel == null) { return; }
-
-            _lobbyPanel.SetActive(!_lobbyPanel.activeSelf);
+            SetPanelActive(_multiplayerPanel, active);
         }
-        public void ToggleJoinPanel()
+        public void SetWorldSelectionPanelActive(bool active)
         {
-            if (_joinGamesPanel.gameObject == null) { return; }
-
-            _joinGamesPanel.SetActive(!_joinGamesPanel.activeSelf);
+            SetPanelActive(_worldSelectionPanel, active);
         }
-        public void ToggleHostPanel()
+        public void SetWorldNamePanelActive(bool active)
         {
-            if (_hostGamePanel.gameObject == null) { return; }
-
-            _hostGamePanel.SetActive(!_hostGamePanel.activeSelf);
+            SetPanelActive(_worldNamePanel, active);
         }
-        public void ToggleCreditsPanel()
+        public void SetAchievementsPanelActive(bool active)
         {
-            if (_creditsPanel.gameObject == null) { return; }
-
-            _creditsPanel.SetActive(!_creditsPanel.activeSelf);
+            SetPanelActive(_achievementsPanel, active);
         }
-       
-        public void LinkHostPanelToReturnButton()
+        public void SetCreditsPanelActive(bool active)
         {
-            if(_lobbyReturnButton == null) return;
-
-            _lobbyReturnButton.onClick.AddListener(OnReturnButtonClickedFromHost);
-        }
-        public void OnReturnButtonClickedFromHost()
-        {
-            _lobbyReturnButton.onClick.RemoveListener(OnReturnButtonClickedFromHost);
-            ToggleHostPanel();
-        }
-        public void LinkJoinPanelToReturnButton()
-        {
-            if (_lobbyReturnButton == null) return;
-
-            _lobbyReturnButton.onClick.AddListener(OnReturnButtonClickedFromJoin);
-        }
-        public void OnReturnButtonClickedFromJoin()
-        {
-            _lobbyReturnButton.onClick.RemoveListener(OnReturnButtonClickedFromJoin);
-            ToggleJoinPanel();
+            SetPanelActive(_creditsPanel, active);
         }
     }
 }

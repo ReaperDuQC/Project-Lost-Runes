@@ -13,6 +13,8 @@ namespace MalbersAnimations.Controller
         public bool DisableAllComponents = true;
         public bool RemoveAllColliders = false;
         public bool RemoveAllTriggers = true;
+        public bool IsKinematic = true;
+        public bool DisableModes = true;
         public int DelayFrames = 2;
         public float RigidbodyDrag = 5;
         public float RigidbodyAngularDrag = 15;
@@ -25,19 +27,19 @@ namespace MalbersAnimations.Controller
 
 
 
-        public override void Activate()
-        {
-            animal.Mode_Stop(); //Interrupt all modes.
-            base.Activate();
-        }
-
         public override void EnterCoreAnimation()
         {
             animal.Mode_Interrupt();
-            //animal.Mode_Disable_All();
+            if (IsKinematic)
+            {
+                animal.RB.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative; //For Kinematic!!
+                animal.RB.isKinematic = true;
+            }
             animal.StopMoving();
+            animal.InputSource?.Enable(false);
             animal.Mode_Stop();
-            animal.Delay_Action(DelayFrames, ()=> DisableAll()); //Wait 2 frames
+            animal.Delay_Action(DelayFrames, () => DisableAll()); //Wait 2 frames
+            if (DisableModes) animal.Mode_Disable_All();
         }
 
         void DisableAll()
@@ -63,7 +65,6 @@ namespace MalbersAnimations.Controller
                     Destroy(trig);
                 }
             }
-
 
             animal.SetCustomSpeed(new MSpeed("Death"));
 

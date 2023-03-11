@@ -36,6 +36,8 @@ namespace MalbersAnimations
         //public bool pushTarget = true;
         public Color debugColor = new Color(1, 0.5f, 0, 0.2f);
 
+        public bool debug;
+
         void Awake()
         {
             if (animal == null)
@@ -60,8 +62,8 @@ namespace MalbersAnimations
 
             if (modes == null || modes.Count == 0 || modes.Exists(x => x.ID == ModeID))
             {
-                 
-               if (!     AlignAnimalsOnly()) //Search first Animals ... if did not find anyone then search for colliders
+
+                if (!AlignAnimalsOnly()) //Search first Animals ... if did not find anyone then search for colliders
                     AlignCollider();
             }
         }
@@ -76,8 +78,11 @@ namespace MalbersAnimations
                 if (a == animal ||                                              //We are the same animal
                     a.ActiveStateID.ID == StateEnum.Death                       //The Animal is death
                     || a.Sleep                                                  //The Animal is sleep (Not working)
+                    || !a.enabled                                               //The Animal Component is disabled    
                     || !MTools.Layer_in_LayerMask(a.gameObject.layer, Layer)    //Is not using the correct layer
-                    ) continue; //Don't Find yourself or don't find death animals
+                    ||! a.gameObject.activeInHierarchy 
+                    )
+                    continue; //Don't Find yourself or don't find death animals
 
                 if (animal.transform.IsGrandchild(a.transform)) continue; //Meaning that the animal is mounting the other animal.
 
@@ -97,6 +102,7 @@ namespace MalbersAnimations
 
                 if (TargetMultiplier == 0) ClosestAI = null;
                 StartAligning(ClosestAnimal.Center, ClosestAI);
+                if (debug) Debug.Log($"[{name}], Alinging to [{ClosestAnimal.name}]", ClosestAnimal);
 
                 return true;
             }
@@ -116,8 +122,11 @@ namespace MalbersAnimations
             foreach (var col in AllColliders)
             {
                 if (col.transform.root == animal.transform.root) continue; //Don't Find yourself
+                if (!col.gameObject.activeInHierarchy) continue;  //Don't Find invisible colliders
+                if (col.gameObject.isStatic) continue; //Don't Find Static colliders
+                if (!col.enabled) continue; //Don't disable colliders
 
-                var Iai = col.FindInterface<IAITarget>();
+                //var Iai = col.FindInterface<IAITarget>();
 
                 var DistCol = Vector3.Distance(transform.position, col.bounds.center);
 
@@ -132,13 +141,15 @@ namespace MalbersAnimations
             {
                 if (TargetMultiplier == 0) ClosestAI = null;
                 StartAligning(ClosestCollider.bounds.center, ClosestAI);
+
+                if (debug) Debug.Log($"[{name}], Alinging to [{ClosestCollider.transform.name}]", ClosestCollider);
             }
         }
 
         private void StartAligning(Vector3 TargetCenter, IAITarget isAI)
         {
             TargetCenter.y = animal.transform.position.y;
-            Debug.DrawLine(transform.position, TargetCenter, Color.red, 3f);
+            if (debug) Debug.DrawLine(transform.position, TargetCenter, Color.red, 3f);
             StartCoroutine(MTools.AlignLookAtTransform(animal.transform, TargetCenter, LookAtTime));
 
             var Dis = Distance * animal.ScaleFactor;
@@ -177,7 +188,7 @@ namespace MalbersAnimations
 
         void OnDrawGizmosSelected()
         {
-            if (animal)
+            if (animal && debug)
             {
                 UnityEditor.Handles.color = debugColor;
                 UnityEditor.Handles.DrawSolidDisc(transform.position, Vector3.up, SearchRadius);
@@ -198,7 +209,7 @@ namespace MalbersAnimations
     [CustomEditor(typeof(MModeAlign)), CanEditMultipleObjects]
     public class MModeAlignEditor : Editor
     {
-        SerializedProperty animal, modes, AnimalsOnly, Layer, LookRadius, DistanceRadius, AlignTime, LookAtTime, TargetMultiplier, debugColor/*, pushTarget*/;
+        SerializedProperty animal, modes, AnimalsOnly, Layer, debug, LookRadius, DistanceRadius, AlignTime, LookAtTime, TargetMultiplier, debugColor/*, pushTarget*/;
         private void OnEnable()
         {
             animal = serializedObject.FindProperty("animal");
@@ -211,6 +222,7 @@ namespace MalbersAnimations
             LookAtTime = serializedObject.FindProperty("LookAtTime");
             debugColor = serializedObject.FindProperty("debugColor");
             TargetMultiplier = serializedObject.FindProperty("TargetMultiplier");
+            debug = serializedObject.FindProperty("debug");
             
         }
 
@@ -226,7 +238,10 @@ namespace MalbersAnimations
                 using (new GUILayout.HorizontalScope())
                 {
                     EditorGUILayout.PropertyField(animal);
+                    if (debug.boolValue)
                     EditorGUILayout.PropertyField(debugColor, GUIContent.none, GUILayout.Width(36));
+
+                    MalbersEditor.DrawDebugIcon(debug);
                 }
 
 

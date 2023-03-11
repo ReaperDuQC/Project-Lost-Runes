@@ -35,6 +35,7 @@ namespace MalbersAnimations
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
+            
             // If this is not used on an eunum, show an error
             if (property.type != "Enum")
             {

@@ -359,6 +359,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df04eaf81ae924d43860aad85a13e146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Time: 0
+  showTime: 0
   when: 0
   OnEnter: 3
 --- !u!114 &-8593330314648726849
@@ -644,11 +646,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6333bc2efec3f9c468b2d8e6837f27af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DynamicManagers: 0
   effects:
   - name: Play Effect [4]  -  [OnTime] (0.24)
+    showExecute: 1
     ID: 4
     action: 0
     Time: 0.243
+    ExecuteOnExit: 1
 --- !u!1101 &-7874453621941408819
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1493,11 +1498,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6333bc2efec3f9c468b2d8e6837f27af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DynamicManagers: 0
   effects:
   - name: Play Effect [3]  -  [OnTime] (0.24)
+    showExecute: 1
     ID: 3
     action: 0
     Time: 0.243
+    ExecuteOnExit: 1
 --- !u!206 &-6924355943903221435
 BlendTree:
   m_ObjectHideFlags: 1
@@ -2387,7 +2395,7 @@ AnimatorStateMachine:
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 60, y: 60, z: 0}
+  m_AnyStatePosition: {x: 60, y: 20, z: 0}
   m_EntryPosition: {x: 60, y: 110, z: 0}
   m_ExitPosition: {x: 270, y: -30, z: 0}
   m_ParentStateMachinePosition: {x: 250, y: 10, z: 0}
@@ -2499,6 +2507,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df04eaf81ae924d43860aad85a13e146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Time: 0
+  showTime: 0
   when: 0
   OnEnter: 1
 --- !u!1101 &-5350575275970008051
@@ -2538,11 +2548,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6333bc2efec3f9c468b2d8e6837f27af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DynamicManagers: 0
   effects:
   - name: Play Effect [5]  -  [OnTime] (0.24)
+    showExecute: 1
     ID: 5
     action: 0
     Time: 0.243
+    ExecuteOnExit: 1
 --- !u!1101 &-5282190564705086569
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -2577,6 +2590,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df04eaf81ae924d43860aad85a13e146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Time: 0
+  showTime: 0
   when: 0
   OnEnter: 2
 --- !u!1101 &-5193763043255992235
@@ -2993,6 +3008,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df04eaf81ae924d43860aad85a13e146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Time: 0
+  showTime: 0
   when: 0
   OnEnter: 2
 --- !u!1101 &-4369175270817705376
@@ -3757,6 +3774,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df04eaf81ae924d43860aad85a13e146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Time: 0
+  showTime: 0
   when: 0
   OnEnter: 1
 --- !u!1101 &-2747583064020406738
@@ -3914,6 +3933,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df04eaf81ae924d43860aad85a13e146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Time: 0
+  showTime: 0
   when: 0
   OnEnter: 2
 --- !u!1101 &-2357603801814930869
@@ -3967,6 +3988,7 @@ MonoBehaviour:
   volume:
     minValue: 0.8
     maxValue: 1
+  MaxDistance: 10
 --- !u!1109 &-2285032571119697271
 AnimatorTransition:
   m_ObjectHideFlags: 1
@@ -4071,6 +4093,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df04eaf81ae924d43860aad85a13e146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Time: 0
+  showTime: 0
   when: 0
   OnEnter: 2
 --- !u!1101 &-2019974260280781258
@@ -4241,6 +4265,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df04eaf81ae924d43860aad85a13e146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Time: 0
+  showTime: 0
   when: 0
   OnEnter: 1
 --- !u!114 &-1535465785386168855
@@ -4352,6 +4378,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df04eaf81ae924d43860aad85a13e146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Time: 0
+  showTime: 0
   when: 0
   OnEnter: 2
 --- !u!114 &-1363047933425754396
@@ -4383,6 +4411,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df04eaf81ae924d43860aad85a13e146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Time: 0
+  showTime: 0
   when: 0
   OnEnter: 2
 --- !u!1101 &-1090197797734530290
@@ -4450,6 +4480,7 @@ MonoBehaviour:
   volume:
     minValue: 1
     maxValue: 1
+  MaxDistance: 10
 --- !u!1102 &-979239392565111038
 AnimatorState:
   serializedVersion: 6
@@ -4708,6 +4739,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df04eaf81ae924d43860aad85a13e146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Time: 0
+  showTime: 0
   when: 0
   OnEnter: 2
 --- !u!1101 &-508143245108525619
@@ -5194,6 +5227,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df04eaf81ae924d43860aad85a13e146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Time: 0
+  showTime: 0
   when: 0
   OnEnter: 2
 --- !u!114 &43702131303451354
@@ -6225,6 +6260,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df04eaf81ae924d43860aad85a13e146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Time: 0
+  showTime: 0
   when: 0
   OnEnter: 2
 --- !u!1101 &267012254631137959
@@ -6380,6 +6417,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df04eaf81ae924d43860aad85a13e146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Time: 0
+  showTime: 0
   when: 0
   OnEnter: 2
 --- !u!1101 &517846616231373037
@@ -6623,6 +6662,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df04eaf81ae924d43860aad85a13e146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Time: 0
+  showTime: 0
   when: 0
   OnEnter: 2
 --- !u!114 &1063439201419915342
@@ -6637,15 +6678,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6333bc2efec3f9c468b2d8e6837f27af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DynamicManagers: 0
   effects:
   - name: Play Effect [1]  -  [On Enter]
+    showExecute: 0
     ID: 1
     action: 0
     Time: 0
+    ExecuteOnExit: 1
   - name: Stop Effect [1]  -  [On Exit]
+    showExecute: 0
     ID: 1
     action: 1
     Time: 1
+    ExecuteOnExit: 1
 --- !u!1102 &1079346449513330935
 AnimatorState:
   serializedVersion: 6
@@ -9320,14 +9366,14 @@ AnimatorStateMachine:
   - first: {fileID: 1107807617028768648}
     second:
     - {fileID: -8848382553123819313}
-  - first: {fileID: 1201663828551851045}
-    second:
-    - {fileID: 3885503217030158591}
   - first: {fileID: 1107666169614390224}
     second:
     - {fileID: 7115648228421872447}
   - first: {fileID: 1107882793727674936}
     second: []
+  - first: {fileID: 1201663828551851045}
+    second:
+    - {fileID: 3885503217030158591}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 300, y: -84, z: 0}
   m_EntryPosition: {x: 280, y: 170, z: 0}
@@ -9494,13 +9540,13 @@ AnimatorStateMachine:
   - {fileID: -7129284504216335868}
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: 1107070459965775536}
-    second: []
-  - first: {fileID: 1107231746298051510}
-    second: []
   - first: {fileID: 1107469501483250876}
     second: []
   - first: {fileID: 1107235611564023184}
+    second: []
+  - first: {fileID: 1107070459965775536}
+    second: []
+  - first: {fileID: 1107231746298051510}
     second: []
   - first: {fileID: 1107725768359318366}
     second: []
@@ -10247,6 +10293,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df04eaf81ae924d43860aad85a13e146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Time: 0
+  showTime: 0
   when: 0
   OnEnter: 3
 --- !u!1102 &1443179907524561359
@@ -10610,7 +10658,7 @@ AnimatorStateMachine:
   - {fileID: -6327107774949548285}
   m_AnyStatePosition: {x: 90, y: 100, z: 0}
   m_EntryPosition: {x: 100, y: 150, z: 0}
-  m_ExitPosition: {x: 550, y: 170, z: 0}
+  m_ExitPosition: {x: 610, y: 150, z: 0}
   m_ParentStateMachinePosition: {x: 310, y: 40, z: 0}
   m_DefaultState: {fileID: 1093605531881729578}
 --- !u!1102 &1693853291407661451
@@ -10656,6 +10704,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df04eaf81ae924d43860aad85a13e146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Time: 0
+  showTime: 0
   when: 0
   OnEnter: 2
 --- !u!1101 &1763216619252483507
@@ -10839,6 +10889,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df04eaf81ae924d43860aad85a13e146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Time: 0
+  showTime: 0
   when: 0
   OnEnter: 2
 --- !u!1109 &2141939005880220275
@@ -11208,6 +11260,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df04eaf81ae924d43860aad85a13e146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Time: 0
+  showTime: 0
   when: 0
   OnEnter: 2
 --- !u!1101 &2925227068222844187
@@ -11343,6 +11397,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df04eaf81ae924d43860aad85a13e146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Time: 0
+  showTime: 0
   when: 0
   OnEnter: 2
 --- !u!1102 &3299251963388912231
@@ -11477,6 +11533,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df04eaf81ae924d43860aad85a13e146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Time: 0
+  showTime: 0
   when: 0
   OnEnter: 2
 --- !u!1101 &3606929737839459723
@@ -11974,6 +12032,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df04eaf81ae924d43860aad85a13e146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Time: 0
+  showTime: 0
   when: 0
   OnEnter: 2
 --- !u!1109 &4370234774113430411
@@ -12141,6 +12201,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df04eaf81ae924d43860aad85a13e146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Time: 0
+  showTime: 0
   when: 0
   OnEnter: 2
 --- !u!1102 &4633181488367857742
@@ -12329,6 +12391,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df04eaf81ae924d43860aad85a13e146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Time: 0
+  showTime: 0
   when: 0
   OnEnter: 1
 --- !u!1101 &5226358487076640951
@@ -12675,11 +12739,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6333bc2efec3f9c468b2d8e6837f27af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DynamicManagers: 0
   effects:
   - name: Play Effect [2]  -  [OnTime] (0.28)
+    showExecute: 1
     ID: 2
     action: 0
     Time: 0.28
+    ExecuteOnExit: 1
 --- !u!1102 &5637737349439171069
 AnimatorState:
   serializedVersion: 6
@@ -13293,6 +13360,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df04eaf81ae924d43860aad85a13e146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Time: 0
+  showTime: 0
   when: 0
   OnEnter: 2
 --- !u!114 &6933332107486468804
@@ -13578,6 +13647,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df04eaf81ae924d43860aad85a13e146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Time: 0
+  showTime: 0
   when: 0
   OnEnter: 2
 --- !u!114 &7679313020466538042
@@ -14204,6 +14275,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df04eaf81ae924d43860aad85a13e146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Time: 0
+  showTime: 0
   when: 0
   OnEnter: 2
 --- !u!114 &8750225469966556955

@@ -58,6 +58,7 @@ namespace MalbersAnimations
     /// <summary>Redundant functions to be used all over the assets</summary>
     public static class MTools
     {
+        #region Math
 
         public static float SmoothStep(float min, float max, float value)
         {
@@ -65,6 +66,21 @@ namespace MalbersAnimations
             p = Mathf.Clamp01(p);
             return p * p * (3 - 2 * p);
         }
+
+        /// <summary> Takes a number and stores the digits on an array. E.g: 6542 = [6,5,4,2] </summary>
+        public static int[] GetDigits(int num)
+        {
+            List<int> listOfInts = new List<int>();
+            while (num > 0)
+            {
+                listOfInts.Add(num % 10);
+                num /= 10;
+            }
+            listOfInts.Reverse();
+            return listOfInts.ToArray();
+        }
+
+        #endregion
 
         /// <summary>Check if x Seconds have elapsed since the Started Time </summary>
         public static bool ElapsedTime(float StartTime, float intervalTime) => (Time.time - StartTime) >= intervalTime;
@@ -167,6 +183,32 @@ namespace MalbersAnimations
         #endregion
 
         #region Layers
+
+        /// <summary>
+        /// Returns the Parent Object of a transform if they belong to the same layer
+        /// </summary>
+        public static GameObject FindRealParentByLayer(Transform other)
+        {
+            if (other.transform.parent == null)
+            {
+                return other.gameObject;
+            }
+            else
+            {
+                if (other.gameObject.layer == other.parent.gameObject.layer)    //Check the Parent
+                {
+                    //If the Parent is also on the Layer; Keep searching Upwards
+                    return FindRealParentByLayer(other.parent);
+                }
+                else
+                {
+                    return other.gameObject;                                            //If the Parent is not on the same Layer ... return the Child
+                }
+            }
+        }
+
+
+
         /// <summary>True if the colliders layer is on the layer mask</summary>
         public static bool CollidersLayer(Collider collider, LayerMask layerMask) => layerMask == (layerMask | (1 << collider.gameObject.layer));
 
@@ -890,6 +932,60 @@ namespace MalbersAnimations
         }
 
 
+        /// <summary>
+        /// Starts the recursive function for the closest transform to the specified point
+        /// </summary>
+        /// <param name="rPosition">Reference point for for the closest transform</param>
+        /// <param name="rCollider">Transform that represents the collision</param>
+        /// <returns></returns>
+        public static Transform GetClosestTransform(Vector3 rPosition, Transform rCollider, LayerMask mask)
+        {
+            // Find the anchor's root transform
+            Transform lActorTransform = rCollider;
+
+            // Grab the closest body transform
+            float lMinDistance = float.MaxValue;
+            Transform lMinTransform = lActorTransform;
+            GetClosestTransform(rPosition, lActorTransform, ref lMinDistance, ref lMinTransform, mask);
+
+            // Return it
+            return lMinTransform;
+        }
+
+        /// <summary>
+        /// Find the closes transform to the hit position. This is what we'll attach the projectile to
+        /// </summary>
+        /// <param name="rPosition">Hit position</param>
+        /// <param name="rTransform">Transform to be tested</param>
+        /// <param name="rMinDistance">Current min distance between the hit position and closest transform</param>
+        /// <param name="rMinTransform">Closest transform</param>
+        public static void GetClosestTransform(Vector3 rPosition, Transform rTransform, ref float rMinDistance, ref Transform rMinTransform, LayerMask mask)
+        {
+            // Limit what we'll connect to
+            if (!rTransform.gameObject.activeInHierarchy) { return; }
+            if (!Layer_in_LayerMask(rTransform.gameObject.layer,mask)) { return; }
+
+           // if (rTransform.name.Contains(" connector", StringComparison.OrdinalIgnoreCase)) { return; }
+           // if (rTransform.gameObject.GetComponent<IWeaponCore>() != null) { return; }
+
+            // If this transform is closer to the hit position, use it
+            float lDistance = Vector3.Distance(rPosition, rTransform.position);
+            if (lDistance < rMinDistance)
+            {
+                rMinDistance = lDistance;
+                rMinTransform = rTransform;
+            }
+
+            // Check if any child transform is closer to the hit position
+            for (int i = 0; i < rTransform.childCount; i++)
+            {
+                GetClosestTransform(rPosition, rTransform.GetChild(i), ref rMinDistance, ref rMinTransform, mask);
+            }
+        }
+
+
+
+
         public static void DrawBounds(Bounds b, Color color,float delay = 0)
         {
             // bottom
@@ -1060,6 +1156,61 @@ namespace MalbersAnimations
 #endif
         }
 
+
+        //internal static void DebugCapsule(Vector3 baseSphere, Vector3 endSphere, Color color, float radius = 1,
+        //  bool colorizeBase = true, float drawDuration = 0,  bool drawDepth = false)
+        
+        //{
+        //    Vector3 up = (endSphere - baseSphere).normalized * radius;
+        //    if (up == Vector3.zero)
+        //        up = Vector3.up;
+        //    Vector3 forward = Vector3.Slerp(up, -up, 0.5f);
+        //    Vector3 right = Vector3.Cross(up, forward).normalized * radius;
+
+        //    //Radial circles
+        //    DrawCircle(baseSphere, up, colorizeBase ? color : Color.red, radius, drawDuration, preview, drawDepth);
+        //    DrawCircle(endSphere, -up, color, radius, drawDuration, preview, drawDepth);
+
+        //    bool drawEditor = false;
+        //    bool drawGame = false;
+
+            
+
+        //    if (drawEditor)
+        //    {
+        //        //Side lines
+        //        Debug.DrawLine(baseSphere + right, endSphere + right, color, drawDuration, drawDepth);
+        //        Debug.DrawLine(baseSphere - right, endSphere - right, color, drawDuration, drawDepth);
+
+        //        Debug.DrawLine(baseSphere + forward, endSphere + forward, color, drawDuration, drawDepth);
+        //        Debug.DrawLine(baseSphere - forward, endSphere - forward, color, drawDuration, drawDepth);
+
+        //        //Draw end caps
+        //        for (int i = 1; i < 26; i++)
+        //        {
+        //            //End endcap
+        //            Debug.DrawLine(Vector3.Slerp(right, up, i / 25.0f) + endSphere, Vector3.Slerp(right, up, (i - 1) / 25.0f) + endSphere, color, drawDuration,
+        //                drawDepth);
+        //            Debug.DrawLine(Vector3.Slerp(-right, up, i / 25.0f) + endSphere, Vector3.Slerp(-right, up, (i - 1) / 25.0f) + endSphere, color,
+        //                drawDuration, drawDepth);
+        //            Debug.DrawLine(Vector3.Slerp(forward, up, i / 25.0f) + endSphere, Vector3.Slerp(forward, up, (i - 1) / 25.0f) + endSphere, color,
+        //                drawDuration, drawDepth);
+        //            Debug.DrawLine(Vector3.Slerp(-forward, up, i / 25.0f) + endSphere, Vector3.Slerp(-forward, up, (i - 1) / 25.0f) + endSphere, color,
+        //                drawDuration, drawDepth);
+
+        //            //Start endcap
+        //            Debug.DrawLine(Vector3.Slerp(right, -up, i / 25.0f) + baseSphere, Vector3.Slerp(right, -up, (i - 1) / 25.0f) + baseSphere,
+        //                colorizeBase ? color : Color.red, drawDuration, drawDepth);
+        //            Debug.DrawLine(Vector3.Slerp(-right, -up, i / 25.0f) + baseSphere, Vector3.Slerp(-right, -up, (i - 1) / 25.0f) + baseSphere,
+        //                colorizeBase ? color : Color.red, drawDuration, drawDepth);
+        //            Debug.DrawLine(Vector3.Slerp(forward, -up, i / 25.0f) + baseSphere, Vector3.Slerp(forward, -up, (i - 1) / 25.0f) + baseSphere,
+        //                colorizeBase ? color : Color.red, drawDuration, drawDepth);
+        //            Debug.DrawLine(Vector3.Slerp(-forward, -up, i / 25.0f) + baseSphere, Vector3.Slerp(-forward, -up, (i - 1) / 25.0f) + baseSphere,
+        //                colorizeBase ? color : Color.red, drawDuration, drawDepth);
+        //        }
+        //    }
+        //}
+
         public static void DrawCone(Vector3 position, Quaternion rotation, float FOV, float length, Color color,  float scale = 1, int Steps = 4)
         {
 #if UNITY_EDITOR
@@ -1191,7 +1342,7 @@ namespace MalbersAnimations
 #endif
         }
 
-        public static void DrawRay(Vector3 p1, Vector3 dir, float width = 2f)
+        public static void GizmoRay(Vector3 p1, Vector3 dir, float width = 2f)
         {
 #if UNITY_EDITOR
             var p2 = p1 + dir;
@@ -1226,8 +1377,6 @@ namespace MalbersAnimations
 #endif
         }
 
-
-
         public static void DrawLine(Vector3 p1, Vector3 p2, float width = 2f)
         {
 #if UNITY_EDITOR
@@ -1261,7 +1410,6 @@ namespace MalbersAnimations
             }
 #endif
         }
-
         #endregion
 
 

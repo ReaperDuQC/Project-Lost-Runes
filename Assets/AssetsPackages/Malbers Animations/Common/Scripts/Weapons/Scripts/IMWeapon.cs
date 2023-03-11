@@ -122,13 +122,13 @@ namespace MalbersAnimations.Weapons
         /// <summary>Equiped/Active Weapon on the Character</summary>
         MWeapon Weapon { get; }
 
-        Transform RightShoulder {get;}
-        Transform LeftShoulder {get;}
-        Transform Chest {get;}
-        Transform RightHand {get;}
-        Transform LeftHand {get;}
+        //Transform RightShoulder {get;}
+        //Transform LeftShoulder {get;}
+        //Transform Chest {get;}
+        Transform RightHand { get; }
+        Transform LeftHand { get; }
 
-        Transform Head { get;}
+        //Transform Head { get;}
 
         /// <summary>External Transform to be use so the Rider does not hurt the Mount</summary>
         Transform IgnoreTransform { get; set; }

@@ -18,7 +18,13 @@ MonoBehaviour:
     UseConstant: 1
     ConstantValue: 
     Variable: {fileID: 0}
+  m_StateProfile:
+    UseConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
   Priority: 7
+  ResetInputOnFailed: 1
+  ResetLastState: 0
   General:
     modify: -1
     RootMotion: 1
@@ -62,7 +68,6 @@ MonoBehaviour:
     UseConstant: 1
     ConstantValue: 
     Variable: {fileID: 0}
-  ExitFrame: 1
   ExitOnMain: 1
   EnterCooldown:
     UseConstant: 1
@@ -91,9 +96,10 @@ MonoBehaviour:
     Variable: {fileID: 0}
   Kinematic:
     UseConstant: 1
-    ConstantValue: 1
+    ConstantValue: 0
     Variable: {fileID: 0}
   wallDistance: 0.7
+  MinTerrainAngle: 45
   ForwardLength: 1.5
   WallChecker: 0.15
   AlignSmoothness: 10
@@ -102,8 +108,8 @@ MonoBehaviour:
     EnterStatus: 0
     MaxVSpeed: 0
     ForwardMultiplier: 1
-    Height: 1.55
-    LedgeExitDistance: 0.65
+    Height: 1.04
+    LedgeExitDistance: 0.41
     ExitTime: 0.9
     AlingOffset: {x: 0, y: -1.15}
     Orient: 1

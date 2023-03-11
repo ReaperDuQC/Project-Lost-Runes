@@ -68,7 +68,7 @@ namespace MalbersAnimations.Utilities
         /// <summary>Is the target been aimed by the Aim Ray of the Aim Script</summary>
         public void IsBeenAimed(bool enter, GameObject AimedBy)
         {
-           if (debug) Debug.Log($"Is Being Aimed by [{AimedBy.name}]",this);
+           if (debug) Debug.Log($"[{name}] Is Being Aimed by [{AimedBy.name}]",this);
 
             IsBeingAimed = enter;
 

@@ -47,7 +47,13 @@ public static class MalbersAnimationsExtensions
 
     public static bool InRange(this float current, float min, float max) => current >= min && current <= max;
     public static bool InRange(this int current, float min, float max) => current >= min && current <= max;
-    
+
+    /// <summary> Use this to check if a Unity Object is null or not. Usage:  [ a=b.Ref() ?? c; ] </summary>
+    public static T Ref<T>(this T o) where T : UnityEngine.Object
+    {
+        return o == null ? null : o;
+    }
+
 
     #endregion
 
@@ -79,7 +85,11 @@ public static class MalbersAnimationsExtensions
             Mathf.Round(vector3.z * multiplier) / multiplier);
     }
 
-    
+
+    /// <summary>Set a vector 3 = to Vector3.Zero</summary>
+    public static void Clear(this Vector3 vector3) => vector3 = Vector3.zero;
+
+
     /// <summary> Calculate the Direction from an Origin to a Target or Destination  </summary>
     public static Vector3 DirectionTo(this Vector3 origin, Vector3 destination) => Vector3.Normalize(destination - origin);
 
@@ -230,13 +240,13 @@ public static class MalbersAnimationsExtensions
     /// <summary>Parent a transform to another Transform, and Solves the Scale problem in case the Parent has a deformed scale  </summary>
     /// <param name="parent">Transform to be the parent</param>
     /// <param name="Position">Relative position to the Parent (World Position)</param>
-    public static void SetParentScaleFixer(this Transform transform, Transform parent, Vector3 Position)
+    public static Transform SetParentScaleFixer(this Transform transform, Transform parent, Vector3 Position)
     {
         if (parent.lossyScale.x == parent.lossyScale.y && parent.lossyScale.x == parent.lossyScale.z) //Check if the Scale is Uniform
         {
             transform.SetParent(parent, true);
             transform.position = Position;
-            return;
+            return null;
         }
 
         Vector3 NewScale = parent.transform.lossyScale;
@@ -246,6 +256,8 @@ public static class MalbersAnimationsExtensions
 
         GameObject Hlper = new GameObject { name = transform.name + "Link" };
 
+      //  Debug.Log("Hlper = " + Hlper);
+
         Hlper.transform.SetParent(parent);
         Hlper.transform.localScale = NewScale;
         Hlper.transform.position = Position;
@@ -253,6 +265,7 @@ public static class MalbersAnimationsExtensions
 
         transform.SetParent(Hlper.transform);
         transform.localPosition = Vector3.zero;
+        return Hlper.transform;
     }
 
     #endregion

@@ -17,44 +17,28 @@ namespace LostRunes
         [SerializeField] BackgroundMusicPlayer _backgroundMusicPlayer;
         [SerializeField] MenuNavigationSound _menuNavigationSound;
 
-        // List of buttons in the scene to be linked with the sound making script for menu naviagation
-        [Header("UI Buttons")]
+        protected GameObject _basePanel;
+        [SerializeField] protected GameObject _activePanel;
+        [SerializeField] protected GameObject _previousPanel;
 
-        [SerializeField] List<Button> _returnButtons;
-        [SerializeField] List<Button> _normalButtons;
-
-        private void Awake()
-        {
-            //_returnButtons = null; 
-            //_normalButtons = null;
-
-            //Button[] allButtons = FindObjectsOfType<Button>();
-
-            //foreach (var button in allButtons)
-            //{
-            //    if (button.gameObject.name.StartsWith("Return"))
-            //    {
-            //        _returnButtons.Add(button);
-            //    }
-            //    else
-            //    {
-            //        _normalButtons.Add(button);
-            //    }
-            //}
-        }
         public virtual void Initialize()
         {
             SubscribeAudioSources();
-            LinkButtons();
             LoadOptionData();
             PlayBackgroundMusic();
         }
 
-        public void ToggleOptionPanel()
+        public void SetOptionPanelActive(bool active)
         {
-            if (_optionMenu == null) { return; }
-
-            _optionMenu.gameObject.SetActive(!_optionMenu.gameObject.activeSelf);
+            if (active)
+            {
+                _optionMenu.DisplayAudioOptionPanel();
+            }
+            else
+            {
+                _optionMenu.SaveSettings();
+            }
+            SetPanelActive(_optionMenu.gameObject, active);
         }
         void PlayBackgroundMusic()
         {
@@ -74,20 +58,27 @@ namespace LostRunes
                 _menuNavigationSound.SubscribeAudioSource(_optionMenu.AudioSettings);
             }
         }
-        void LinkButtons()
-        {
-            foreach (Button b in _normalButtons)
-            {
-                b.onClick.AddListener(_menuNavigationSound.PlayForwardNavigationSound);
-            }
-            foreach (Button b in _returnButtons)
-            {
-                b.onClick.AddListener(_menuNavigationSound.PlayBackwardNavigationSound);
-            }
-        }
         private void LoadOptionData()
         {
             _optionMenu.LoadOptionData();
+        }
+        protected void SetPanelActive(GameObject panel, bool active)
+        {
+            if (panel == null) { return; }
+
+            if (active)
+            {
+                _previousPanel = _activePanel;
+                _previousPanel.SetActive(false);
+                _activePanel = panel;
+            }
+            else
+            {
+                _activePanel = (_activePanel == _previousPanel) ? _basePanel : _previousPanel;
+                _activePanel.SetActive(true);
+            }
+
+            panel.SetActive(active);
         }
     }      
 }

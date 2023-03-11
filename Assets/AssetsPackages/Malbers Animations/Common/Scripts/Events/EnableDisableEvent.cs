@@ -7,8 +7,8 @@ namespace MalbersAnimations.Events
     [AddComponentMenu("Malbers/Events/On [Enable-Disable] Event")]
     public class EnableDisableEvent : MonoBehaviour
     {
-        public UnityEvent OnDeactive;
         public UnityEvent OnActive;
+        public UnityEvent OnDeactive;
 
         public void OnEnable() => OnActive.Invoke();
         public void OnDisable() => OnDeactive.Invoke();

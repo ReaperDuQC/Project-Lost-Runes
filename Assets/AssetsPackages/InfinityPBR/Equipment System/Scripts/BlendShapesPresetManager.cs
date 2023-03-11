@@ -39,6 +39,7 @@ namespace InfinityPBR
 
         public void StartTransitionToPreset(BlendShapePreset preset)
         {
+            Debug.Log($"Start Transition to Preset {preset.name}");
             SetToAndFromValues(preset); // save the current value and the "to" value on this preset
             _lerpValue = 0f; // reset this
             _lerpTime = 0f; // reset this

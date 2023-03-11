@@ -25,6 +25,9 @@ namespace MalbersAnimations
 
         /// <summary>Disconnect an input to a Bool Method</summary>
         void DisconnectInput(string name, UnityAction<bool> action);
+
+        /// <summary> Reset the Input Value and Toggle value to false </summary> 
+        void ResetInput(string name);
     }
 
     public interface IInputAction

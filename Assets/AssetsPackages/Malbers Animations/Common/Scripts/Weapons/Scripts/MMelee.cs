@@ -112,6 +112,7 @@ namespace MalbersAnimations.Weapons
 
             if (CanAttack)
             {
+               // Debug.Log("asdas");
                 WeaponAction.Invoke((int)Weapon_Action.Attack);
             }
         }
@@ -130,9 +131,13 @@ namespace MalbersAnimations.Weapons
 
         void AttackTriggerEnter(GameObject root, Collider other)
         {
+            //Debug.Log("AttackTriggerEnter = " + other);
+
             if (IsInvalid(other)) return;                                               //Check Layers and Don't hit yourself
             if (other.transform.root == IgnoreTransform) return;                        //Check an Extra transform that you cannot hit...e.g your mount
             if (ignoreStaticObjects && other.transform.gameObject.isStatic) return;     //Ignore Static Objects
+
+
 
             var damagee = other.GetComponentInParent<IMDamage>();                      //Get the Animal on the Other collider
 

@@ -421,9 +421,7 @@ namespace MalbersAnimations
                                 foreach (var ASM in m_StateMachines)
                                 {
                                     if (isLayerRoot(ASM)) continue; //Do not do the Root Layer
-
-
-                                    Debug.Log("ASM = " + ASM.name);
+                                 
                                     var Parent = FindAnyState(ASM);
                                     var Any_ToState = Parent.AddAnyStateTransition(ASM); //Add Any
                                     Create_AnyToState(Any_ToState);

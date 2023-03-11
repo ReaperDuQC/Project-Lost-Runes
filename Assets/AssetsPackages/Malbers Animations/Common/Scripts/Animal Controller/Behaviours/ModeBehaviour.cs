@@ -44,7 +44,11 @@ namespace MalbersAnimations.Controller
 
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            if (!animal) { Destroy(this); return; } //Remove the behaviour if there's no Animal
+            if (animal == null)
+            {
+                Destroy(this); //This is for Invector .. when there's no Animal Involved remove this Behaviour
+                return;
+            }
 
             if (ModeID == null)  { Debug.LogError("Mode behaviour needs an ID"); return; }
             if (ModeOwner == null) { Debug.LogError($"There's no [{ModeID.name}] mode on your character"); return; }

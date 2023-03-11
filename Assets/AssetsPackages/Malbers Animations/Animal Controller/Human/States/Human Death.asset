@@ -18,7 +18,12 @@ MonoBehaviour:
     UseConstant: 1
     ConstantValue: 
     Variable: {fileID: 0}
-  Priority: 11
+  m_StateProfile:
+    UseConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
+  Priority: 12
+  ResetInputOnFailed: 1
   General:
     modify: -1
     RootMotion: 1
@@ -64,7 +69,6 @@ MonoBehaviour:
     UseConstant: 1
     ConstantValue: 
     Variable: {fileID: 0}
-  ExitFrame: 1
   ExitOnMain: 1
   EnterCooldown:
     UseConstant: 1
@@ -84,6 +88,8 @@ MonoBehaviour:
   DisableAllComponents: 0
   RemoveAllColliders: 0
   RemoveAllTriggers: 0
+  IsKinematic: 1
+  DisableModes: 0
   DelayFrames: 2
   RigidbodyDrag: 5
   RigidbodyAngularDrag: 15

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using Steamworks.Ugc;
-using PsychoticLab;
+//using PsychoticLab;
 
 namespace LostRunes.Menu
 {
@@ -79,7 +79,7 @@ namespace LostRunes.Menu
         int[] _equipped;
         int _maxParts = 0;
         List<GameObject>[,] _allObjects;
-
+        private string _characterName;
 
         public int FaceCount { get { return _allObjects[(int)_gender, (int)BodyParts.HeadAllElements].Count; } }
         public int HairCount { get { return _allObjects[(int)_gender, (int)BodyParts.All_Hair].Count; } }
@@ -490,6 +490,16 @@ namespace LostRunes.Menu
             }
 
             return _gender == Gender.Male;
+        }
+
+        internal void SetCharacterName(string characterName)
+        {
+           _characterName = characterName;
+        }
+
+        internal Material GetCharacterMaterial()
+        {
+            return _mat;
         }
         #endregion
     }

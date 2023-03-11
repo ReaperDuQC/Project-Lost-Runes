@@ -33,7 +33,7 @@ namespace MalbersAnimations.Controller
                 {
                     isOn = true;
 
-                    animal.State_AllowExit(ExitState != null ? ExitState.ID : -1);
+                    animal.State_Allow_Exit(ExitState != null ? ExitState.ID : -1);
                 }
             }
         }

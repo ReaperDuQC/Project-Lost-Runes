@@ -45,6 +45,8 @@ namespace MalbersAnimations
                 {
                     Instance = Tracks; 
                 }
+
+                Instance.transform.localScale = Scale;
             }
         }
 
@@ -81,7 +83,6 @@ namespace MalbersAnimations
                     Dust.Emit(DustParticles);
                 }
 
-
                 if (Instance)
                 {
                     ParticleSystem.EmitParams ptrack = new ParticleSystem.EmitParams
@@ -106,16 +107,12 @@ namespace MalbersAnimations
                             //newtrack.Emit(ptrack, 1);
                             //this.Delay_Action(() => newtrack.isPlaying, ()=> Destroy(newtrack));
                         }
-
-
                     }
                     else
                     {
                         Instance.Emit(ptrack, 1);
                     }
                 }
-
-                
             }
         }
 

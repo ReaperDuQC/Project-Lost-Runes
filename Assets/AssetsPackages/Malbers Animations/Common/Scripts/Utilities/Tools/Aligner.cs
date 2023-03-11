@@ -93,6 +93,9 @@ namespace MalbersAnimations.Utilities
                             StartCoroutine(MTools.AlignTransform_Rotation(MainPoint, Side1, AlignTime, AlignCurve));
                     }
                 }
+
+
+               // transform.root.SendMessage("ResetDeltaRootMotion", SendMessageOptions.DontRequireReceiver); //Nasty but it works
             }
         }
 
@@ -100,6 +103,9 @@ namespace MalbersAnimations.Utilities
         {
             if (Active && MainPoint && TargetToAlign != null)
             {
+
+                TargetToAlign.SendMessage("ResetDeltaRootMotion", SendMessageOptions.DontRequireReceiver); //Nasty but it works
+
                 if (AlignLookAt)
                 {
                     StartCoroutine(AlignLookAtTransform(TargetToAlign, mainPoint, AlignTime, AlignCurve));  //Align Look At the Zone
@@ -190,6 +196,9 @@ namespace MalbersAnimations.Utilities
                 yield return Wait;
             }
             t1.rotation = FinalRot;
+
+            t1.SendMessage("ResetDeltaRootMotion", SendMessageOptions.DontRequireReceiver); //Nasty but it works
+
         }
 
 

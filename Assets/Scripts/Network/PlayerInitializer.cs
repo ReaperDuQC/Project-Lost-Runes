@@ -18,6 +18,7 @@ namespace LostRunes.Multiplayer
         string _player = "Player ";
         public override void OnNetworkSpawn()
         {
+            bool isOwner = true;//IsOwner;
             gameObject.name = _player + GetComponent<NetworkObject>().OwnerClientId.ToString();
 
             _inputHandler = GetComponent<InputHandler>();
@@ -28,14 +29,15 @@ namespace LostRunes.Multiplayer
 
             _cameraHandler = FindObjectOfType<CameraHandler>();
 
-            if (IsOwner)
+            if (isOwner)
             {
                 _cameraHandler.Initialize(_playerManager, _inputHandler);
             }
+            this.enabled = true;
 
-            _playerManager.Initialize(IsOwner, _cameraHandler, _inputHandler, _characterStats, _playerLocomotion, _animator);
-            _playerLocomotion.Initialize(IsOwner, _cameraHandler, _inputHandler, _playerManager);
-            _inputHandler.Initialize(IsOwner);
+            _playerManager.Initialize(isOwner, _cameraHandler, _inputHandler, _characterStats, _playerLocomotion, _animator);
+            _playerLocomotion.Initialize(isOwner, _cameraHandler, _inputHandler, _playerManager);
+            _inputHandler.Initialize(isOwner);
 
             Destroy(this);
         }

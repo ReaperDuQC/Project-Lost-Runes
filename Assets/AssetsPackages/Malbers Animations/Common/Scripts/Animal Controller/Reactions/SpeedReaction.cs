@@ -43,7 +43,7 @@ namespace MalbersAnimations.Controller.Reactions
                     animal.SpeedUp();
                     break;
                 case Speed_Reaction.Decrease:
-                    animal.SpeedUp();
+                    animal.SpeedDown();
                     break;
                 case Speed_Reaction.Activate:
                     animal.SpeedSet_Set_Active(SpeedSet, Index);

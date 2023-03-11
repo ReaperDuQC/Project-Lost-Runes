@@ -23,9 +23,12 @@ namespace MalbersAnimations
      //   protected IAIControl AI;  //Referece for AI Input Sources
 
 
-        private float horizontal;        //Horizontal Right & Left   Axis X
-        private float vertical;          //Vertical   Forward & Back Axis Z
-        private float upDown;
+        public float horizontal;        //Horizontal Right & Left   Axis X
+        public float vertical;          //Vertical   Forward & Back Axis Z
+        public float upDown;            //Up Down value    
+          
+        public Vector3Event MovementEvent = new Vector3Event();
+            
         #endregion
 
         protected Vector3 m_InputAxis;
@@ -106,7 +109,10 @@ namespace MalbersAnimations
             upDown = input ? 1 : 0;
         }
 
-        public virtual void DownAxis(bool input) => upDown = input ? -1 : 0;
+        public virtual void DownAxis(bool input)
+        {
+            upDown = input ? -1 : 0;
+        }
 
         void Update() => SetInput();
 
@@ -114,11 +120,16 @@ namespace MalbersAnimations
         /// <summary>Send all the Inputs and Axis to the Animal</summary>
         protected override void SetInput()
         {
+            if (IgnoreOnPause.Value && Time.timeScale == 0) return;
+
             horizontal = Horizontal.GetAxis;
             vertical = Vertical.GetAxis;
             upDown = UpDown.GetAxis;
 
             m_InputAxis = new Vector3(horizontal, upDown, vertical);
+
+            MovementEvent.Invoke(m_InputAxis); //Invoke the Event for the Movement AXis
+            
 
             if (mCharacterMove != null)
             {

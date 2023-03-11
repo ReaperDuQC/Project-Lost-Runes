@@ -76,7 +76,6 @@ namespace MalbersAnimations.Controller
            // IsPersistent = true;                 //IMPORTANT!!!!! DO NOT ELIMINATE!!!!!
 
             animal.currentSpeedModifier.animator = 1;
-            General.CustomRotation = true;
             CanJumpAgain = false;
         }
 
@@ -162,7 +161,7 @@ namespace MalbersAnimations.Controller
             animal.SetCustomSpeed(JumpSpeed);       //Set the Current Speed to the Jump Speed Modifier
             JumpStartDirection = animal.Forward;
 
-            if (animal.TerrainSlope > 0)    //Means we are jumping uphill HACK
+            if (animal.TerrainSlope > 0 && animal.MovementDetected)    //Means we are jumping uphill HACK
                 animal.UseCustomAlign = true;
         }
 
@@ -170,11 +169,13 @@ namespace MalbersAnimations.Controller
         {
             activeJump = jumpProfiles != null ? jumpProfiles[0] : new JumpProfile();
 
+            var HasLastState = false;
+
             foreach (var jump in jumpProfiles)                          //Save/Search the Current Jump Profile by the Lowest Speed available
             {
                 if (jump.LastState == null)
                 {
-                    if (jump.VerticalSpeed <= animal.VerticalSmooth)
+                    if (jump.VerticalSpeed <= animal.VerticalSmooth && !HasLastState)
                     {
                         activeJump = jump;
                     }
@@ -184,6 +185,7 @@ namespace MalbersAnimations.Controller
                     if (jump.VerticalSpeed <= animal.VerticalSmooth && jump.LastState == animal.LastState.ID)
                     {
                         activeJump = jump;
+                        HasLastState = true;
                     }
                 }
             }
@@ -224,16 +226,16 @@ namespace MalbersAnimations.Controller
                 {
                     Vector3 RootMotionUP = Vector3.Project(Anim.deltaPosition, animal.UpVector);         //Get the Up vector of the Root Motion Animation
 
-                    bool isGoingUp = Vector3.Dot(RootMotionUP, animal.Up) > 0;  //Check if the Jump Root Animation is going  UP;
+                //    bool isGoingUp = Vector3.Dot(RootMotionUP, animal.Up) > 0;  //Check if the Jump Root Animation is going  UP;
 
-                    if (isGoingUp)
+                  //  if (isGoingUp)
                     {
                         //Remove the default Root Motion Jump
                         animal.AdditivePosition -= RootMotionUP;                                    
                         
                         //Add the New Root Motion Jump scaled by the Height Multiplier 
                         animal.AdditivePosition +=
-                            (RootMotionUP * activeJump.HeightMultiplier * JumpPressHeight_Value);   
+                            (RootMotionUP * activeJump.HeightMultiplier * JumpPressHeight_Value);
                     }
 
                     // Vector3 RootMotionForward = Vector3.ProjectOnPlane(Anim.deltaPosition, animal.Up);
@@ -410,7 +412,7 @@ namespace MalbersAnimations.Controller
                 modify = (modifier)(-1),
             };
 
-            ExitFrame = false;
+          //  ExitFrame = false;
 
             jumpProfiles = new List<JumpProfile>()
             { new JumpProfile()

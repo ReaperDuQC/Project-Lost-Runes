@@ -31,12 +31,12 @@ public class BatsDemo_LP : MonoBehaviour
         {
             Randomize();
         }
-
+        
         if (Input.GetKeyDown(KeyCode.C))
         {
             ToggleCanvas();
         }
-
+        
         if (isDying) {																								// If we are dying
             t += Time.deltaTime / deathAnimationTime;																// add computed deltaTime to the counter t
             if (t < 1.0) {																							// If we havne't reached the end yet

@@ -29,9 +29,7 @@ namespace MalbersAnimations.Controller
 
         [Tooltip("Ray to the Front to check if the Animal has touched a Front Ground")]
         public float FrontRayLength = 1;
-
-
-
+         
         public bool PivotAboveWater { get; private set; }
 
         /// <summary>Has the animal found Water</summary>
@@ -69,6 +67,8 @@ namespace MalbersAnimations.Controller
             //    return false; //If we are underwater and we are sprinting Upwards ... dont enter this state.. go to fall directly
 
             CheckWater();
+
+           // Debug.Log($"{animal.name} > IsInWater = " + {animal.name} > IsInWater);
 
             if (IsInWater)
             {
@@ -113,7 +113,7 @@ namespace MalbersAnimations.Controller
 
         public override void TryExitState(float DeltaTime)
         {
-            if (!InExitAnimation && MTools.ElapsedTime(EnterWaterTime, TryExitTime)) //do not try to exit if the animal just enter the water
+            if (MTools.ElapsedTime(EnterWaterTime, TryExitTime)) //do not try to exit if the animal just enter the water
             {
                 CheckWater();
                 if (!IsInWater)
@@ -143,7 +143,7 @@ namespace MalbersAnimations.Controller
 
         public override void OnStateMove(float deltatime)
         {
-            if (IsInWater && !InExitAnimation)
+            if (IsInWater)
             {
                 if (KeepInertia) animal.AddInertia(ref HorizontalInertia, 3);
                 if (Bounce > 0) animal.AddInertia(ref UpImpulse, Bounce);

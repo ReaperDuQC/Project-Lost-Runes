@@ -51,14 +51,14 @@ public class SFB_DemoControl_v2 : MonoBehaviour {
 
 	public void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.C))
-		{
-			canvas.SetActive(!canvas.activeSelf);
-		}
+		//if (Input.GetKeyDown(KeyCode.C))
+		//{
+		//	canvas.SetActive(!canvas.activeSelf);
+		//}
 		
-		if (Input.GetKeyDown(KeyCode.R))
-		{
-			superRandomButton.onClick.Invoke();
-		}
+		//if (Input.GetKeyDown(KeyCode.R))
+		//{
+		//	superRandomButton.onClick.Invoke();
+		//}
 	}
 }

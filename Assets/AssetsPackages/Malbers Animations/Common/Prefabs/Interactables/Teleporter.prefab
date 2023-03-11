@@ -27,7 +27,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.06, y: 0, z: 16.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4399129077531406}
   m_RootOrder: 3
@@ -78,7 +77,6 @@ Transform:
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.0264, z: 0}
   m_LocalScale: {x: 1.9949151, y: 0.02643, z: 2.0641973}
-  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4399129077531406}
   m_RootOrder: 2
@@ -102,12 +100,10 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -132,7 +128,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1536661511432238
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,7 +156,6 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
-  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4399129077531406}
   m_RootOrder: 0
@@ -185,12 +179,10 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -215,7 +207,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1695820651494838
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,7 +234,6 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 224338348833710018}
   m_Father: {fileID: 4399129077531406}
@@ -303,7 +293,6 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.0097385235, y: 0.009738528, z: 0.009738528}
-  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 224136982207204678}
   m_RootOrder: 0
@@ -336,7 +325,6 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -386,7 +374,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.62, y: -0, z: -5.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4447472903317022}
   - {fileID: 224136982207204678}
@@ -409,8 +396,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: "When an animal Enter the Trigger it will Teleport using the Messages: \nTeleport
     or TeleportRot (Aligns the rotation )\n"
-  reference: {fileID: 0}
-  ShowDescription: 0
 --- !u!65 &65873576989057810
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -475,7 +460,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114210482855357536}
-        m_TargetAssemblyTypeName: 
         m_MethodName: SendMessage
         m_Mode: 0
         m_Arguments:
@@ -498,7 +482,7 @@ MonoBehaviour:
     ConstantValue: 0
     Variable: {fileID: 0}
   trigger: {fileID: 0}
-  Editor_Tabs1: 0
+  ShowEvents: 1
 --- !u!114 &114210482855357536
 MonoBehaviour:
   m_ObjectHideFlags: 0

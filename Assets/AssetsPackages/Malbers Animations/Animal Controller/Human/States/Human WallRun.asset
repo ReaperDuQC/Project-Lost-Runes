@@ -18,7 +18,12 @@ MonoBehaviour:
     UseConstant: 1
     ConstantValue: Crouch
     Variable: {fileID: 0}
-  Priority: 4
+  m_StateProfile:
+    UseConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
+  Priority: 5
+  ResetInputOnFailed: 1
   General:
     modify: -1
     RootMotion: 1
@@ -68,7 +73,6 @@ MonoBehaviour:
     UseConstant: 1
     ConstantValue: 
     Variable: {fileID: 0}
-  ExitFrame: 1
   ExitOnMain: 1
   EnterCooldown:
     UseConstant: 1

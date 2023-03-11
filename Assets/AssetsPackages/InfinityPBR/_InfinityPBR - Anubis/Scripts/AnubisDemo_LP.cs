@@ -19,15 +19,15 @@ public class AnubisDemo_LP : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Randomize();
-        }
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
+        //    Randomize();
+        //}
         
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            ToggleCanvas();
-        }
+        //if (Input.GetKeyDown(KeyCode.C))
+        //{
+        //    ToggleCanvas();
+        //}
     }
     
     public void Locomotion(float newValue){

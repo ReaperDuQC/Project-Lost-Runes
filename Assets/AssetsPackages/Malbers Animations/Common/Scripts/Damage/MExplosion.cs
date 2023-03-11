@@ -34,34 +34,58 @@ namespace MalbersAnimations
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position, radius, Layer, triggerInteraction);             //Ignore Colliders
 
-            foreach (var nearbyObj in colliders)
+            List<GameObject> Real_Roots = new List<GameObject>();
+
+
+            foreach (var other in colliders)
             {
-                if (dontHitOwner && Owner && nearbyObj.transform.IsChildOf(Owner.transform)) continue;                              //Don't hit yourself
+                if (dontHitOwner && Owner && other.transform.IsChildOf(Owner.transform)) continue;   //Don't hit yourself
 
-                var rb = nearbyObj.attachedRigidbody;
+                var rb = other.attachedRigidbody;
 
-                if (rb != null && rb.useGravity)
+               
+
+                GameObject realRoot = other.transform.root.gameObject;         //Get the gameObject on the entering collider
+                
+                //Means the Root is not on the real root since its not on the search layer
+                if (realRoot.layer != other.gameObject.layer)
+                    realRoot = MTools.FindRealParentByLayer(other.transform);
+
+                if (!Real_Roots.Contains(realRoot))
                 {
-                    nearbyObj.attachedRigidbody.AddExplosionForce(Force, transform.position, radius, upwardsModifier, forceMode);
-                }
+                    //Debug.Log("realRoot = " + realRoot);
 
-                //Distance of the collider and the Explosion
-                var Distance = Vector3.Distance(transform.position, nearbyObj.bounds.center);     
+                    //Distance of the collider and the Explosion
+                    var Distance = Vector3.Distance(transform.position, other.bounds.center);
+                    var ExplotionRange = 1 - (Distance / radius); //Calculate the explostion range 
 
-                if (statModifier.ID != null)
-                {
-                    var modif = new StatModifier(statModifier)
+                    if (rb != null && rb.useGravity)
                     {
-                        Value = statModifier.Value * (1 - (Distance / radius))     //Do Damage depending the distance from the explosion
-                    };
+                        other.attachedRigidbody.AddExplosionForce(Force * ExplotionRange, transform.position, radius, upwardsModifier, forceMode);
+                    }
 
-                    TryDamage(nearbyObj.gameObject, modif);
-                    TryInteract(nearbyObj.gameObject);
 
-                    //Use the Damageable comonent instead!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                    modif.ModifyStat(nearbyObj.GetComponentInParent<Stats>());                   
+                    Debugging("Apply Explosion",other);
+
+                    Real_Roots.Add(realRoot); //Affect Only One 
+
+
+                    if (statModifier.ID != null)
+                    {
+                        var modif = new StatModifier(statModifier)
+                        {
+                            Value = statModifier.Value * ExplotionRange    //Do Damage depending the distance from the explosion
+                        };
+
+                        TryDamage(other.gameObject, modif);
+                        TryInteract(other.gameObject);
+
+                        ////Use the Damageable comonent instead!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                        //modif.ModifyStat(other.GetComponentInParent<Stats>());
+                    }
                 }
             }
+           // Debug.Log("-----------------------");
             Destroy(gameObject, life);
         }
 

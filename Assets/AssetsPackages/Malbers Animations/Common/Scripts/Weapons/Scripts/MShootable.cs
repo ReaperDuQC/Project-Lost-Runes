@@ -399,7 +399,7 @@ namespace MalbersAnimations.Weapons
                 var newDamage = new StatModifier(statModifier)
                 { Value = Mathf.Lerp(MinDamage, MaxDamage, ChargedNormalized) };
 
-                I_Projectile.PrepareDamage(newDamage, CriticalChance, CriticalMultiplier);
+                I_Projectile.PrepareDamage(newDamage, CriticalChance, CriticalMultiplier, element);
 
                 Debugging($"◘ [Projectile Released] [{ProjectileInstance.name}]", ProjectileInstance);
                 I_Projectile.Fire();   
@@ -456,12 +456,8 @@ namespace MalbersAnimations.Weapons
                 {
                     PlaySound(WSound.Reload);
               
-                    this.Delay_Action(() =>
-                    {
                     WeaponAction.Invoke((int)Weapon_Action.Reload);
-                        IsReloading = true;
-                    }
-                    );
+                  //  IsReloading = true;
 
                     return true;
                 }

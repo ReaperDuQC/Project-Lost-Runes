@@ -7,7 +7,7 @@ namespace MalbersAnimations
     [CustomEditor(typeof(MalbersInput))/*, CanEditMultipleObjects*/]
     public class MalbersInputEditor : MInputEditor
     {
-        protected SerializedProperty Horizontal, Vertical, UpDown;
+        protected SerializedProperty Horizontal, Vertical, UpDown, MovementEvent;
      //   private MalbersInput M;
 
         protected override void OnEnable()
@@ -17,6 +17,7 @@ namespace MalbersAnimations
             Horizontal = serializedObject.FindProperty("Horizontal");
             Vertical = serializedObject.FindProperty("Vertical");
             UpDown = serializedObject.FindProperty("UpDown");
+            MovementEvent = serializedObject.FindProperty("MovementEvent");
 
            // M = ((MalbersInput)target);
         }
@@ -58,7 +59,17 @@ namespace MalbersAnimations
                     }
                 }
 
-                DrawListAnEvents();
+                DrawList();
+
+                using (new GUILayout.VerticalScope(EditorStyles.helpBox))
+                {
+                    if (MalbersEditor.Foldout(showInputEvents, "[Events]"))
+                    {
+                        EditorGUILayout.PropertyField(OnInputEnabled);
+                        EditorGUILayout.PropertyField(OnInputDisabled);
+                        EditorGUILayout.PropertyField(MovementEvent);
+                    }
+                }
             }
             serializedObject.ApplyModifiedProperties();
         }

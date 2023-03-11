@@ -657,7 +657,8 @@ namespace MalbersAnimations.Utilities
 
 
                 if (IAimTarg != LastAimTarget)
-                {
+                { 
+                    LastAimTarget?.IsBeenAimed(false, gameObject); //Make sure is no longer being aimed
                     LastAimTarget = IAimTarg;
                     LastAimTarget.IsBeenAimed(true, gameObject);
                 }

@@ -55,6 +55,7 @@ namespace LostRunes
 
             _animatorHandler = GetComponentInChildren<PlayerAnimatorHandler>();
             _rigidbody = GetComponent<Rigidbody>();
+            _rigidbody.isKinematic = false;
 
             _cameraObject = Camera.main.transform;
             _transform = transform;

@@ -15,7 +15,7 @@ namespace MalbersAnimations
 {
     /// <summary> Component managing Stat Logic</summary>
     [AddComponentMenu("Malbers/Stats/Stats")]
-    public class Stats : MonoBehaviour, IAnimatorListener
+    public class Stats : MonoBehaviour, IAnimatorListener, IRestart
     {
         //[Tooltip("Track these Stats in a Runtime Set")]
         //[CreateScriptableAsset] public RuntimeStats Set;
@@ -43,16 +43,7 @@ namespace MalbersAnimations
                     Debug.LogError("One of the Stats has an Empty ID", gameObject);
                     break;
                 }
-                stat.InitializeStat(this);
-
-                if (!stats_D.ContainsKey(stat.ID)) //Added by SkillManiacs 2020/10
-                {
-                    stats_D.Add(stat.ID, stat); //Convert them to Dictionary
-                }
-                else
-                {
-                    stats_D[stat.ID] = stat; //Replace it
-                }
+                stats_D[stat.ID] = stat; //Replace it
             }
         }
 
@@ -74,6 +65,20 @@ namespace MalbersAnimations
                 stat.Value.InitializeStat(this);
             }
         }
+
+
+        /// <summary>Restart all Stat parameters IRestart interface</summary>
+        public virtual void Restart()
+        {
+            StopAllCoroutines();
+
+            foreach (var s in stats_D)
+            {
+                s.Value.Active = true;
+                s.Value.Reset();
+            }
+        }
+
 
         private void OnDisable() => StopAllCoroutines();
 
@@ -224,6 +229,7 @@ namespace MalbersAnimations
 
 
 
+       
 
 
 
@@ -369,6 +375,8 @@ namespace MalbersAnimations
             CreateHealth();
             MTools.SetDirty(this);
         }
+
+       
 #endif
     }
 
@@ -478,6 +486,10 @@ namespace MalbersAnimations
         }
 
         public bool IsFull => Value == MaxValue;
+
+        /// <summary>
+        /// Check if the Stat is equal to the minimum value
+        /// </summary>
         public bool IsEmpty => Value == MinValue;
 
         /// <summary> Current Multiplier of the Stat</summary>
@@ -580,9 +592,9 @@ namespace MalbersAnimations
             {
                 StartRegeneration();
                 StartDegeneration();
-            }
 
-            holder.Delay_Action(3,() => ValueEvents());
+                holder.Delay_Action(2, () => ValueEvents());
+            }
         }
 
         internal void SetMultiplier(float value) => multiplier.Value = value;
@@ -590,6 +602,8 @@ namespace MalbersAnimations
 
         internal void ValueEvents()
         {
+            if (!Active) return; //Do not Invoke Events if the Stat is Disabled!!!!
+
             OnValueChangeNormalized.Invoke(NormalizedValue);
             OnValueChange.Invoke(value);
 

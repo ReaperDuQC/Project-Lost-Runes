@@ -18,7 +18,11 @@ MonoBehaviour:
     UseConstant: 1
     ConstantValue: 
     Variable: {fileID: 0}
-  Priority: 9
+  m_StateProfile:
+    UseConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
+  Priority: 10
   ResetInputOnFailed: 0
   General:
     modify: -1
@@ -64,7 +68,6 @@ MonoBehaviour:
     UseConstant: 1
     ConstantValue: 
     Variable: {fileID: 0}
-  ExitFrame: 0
   ExitOnMain: 1
   EnterCooldown:
     UseConstant: 1
@@ -79,7 +82,7 @@ MonoBehaviour:
   MovementStrafe: 1
   IdleStrafe: 1
   debug: 1
-  Editor_Tabs1: 2
+  Editor_Tabs1: 3
   ID: {fileID: 11400000, guid: 3fbb696c31f7ed846b7ec9b2f76fd0e5, type: 2}
   LedgeLayer:
     UseConstant: 1
@@ -96,6 +99,7 @@ MonoBehaviour:
     ConstantValue: 0
     Variable: {fileID: 0}
   wallDistance: 0.3
+  MinTerrainAngle: 45
   ForwardLength: 0.75
   WallChecker: 0
   AlignSmoothness: 10
@@ -203,7 +207,7 @@ MonoBehaviour:
     Height: 1.8
     LedgeExitDistance: 0.35
     ExitTime: 0.9
-    AlingOffset: {x: 0, y: -1.39}
+    AlingOffset: {x: 0, y: -1.42}
     Orient: 1
     AdditivePosition: 0
     HeightSpeed: 0.5

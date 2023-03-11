@@ -66,6 +66,8 @@ namespace MalbersAnimations
             }
         }
 
+        public void SetValue(int value) => Value.Value = value;
+
         public AdvancedIntegerEvent()
         {
             active = true;
@@ -112,6 +114,8 @@ namespace MalbersAnimations
                 }
             }
         }
+
+        public void SetValue(float value) => Value.Value = value;
     }
 
     [System.Serializable]
@@ -142,6 +146,9 @@ namespace MalbersAnimations
                 }
             }
         }
+
+        public void SetValue(bool value) => Value.Value = value;
+
     }
 
     [System.Serializable]
@@ -176,6 +183,9 @@ namespace MalbersAnimations
                 }
             }
         }
+
+        public void SetValue(string value) => Value.Value = value;
+
     }
 
 

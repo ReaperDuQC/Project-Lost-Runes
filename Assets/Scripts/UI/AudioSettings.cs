@@ -168,7 +168,7 @@ namespace LostRunes.Menu
             source.volume = volume;
         }
 
-        public void RandomizePitch(AudioSource source)
+        public static void RandomizePitch(AudioSource source)
         {
             if (source == null) return;
 

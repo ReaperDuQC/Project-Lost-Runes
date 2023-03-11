@@ -5,7 +5,7 @@ using System.Collections;
 
 namespace MalbersAnimations
 {
-    [AddComponentMenu("Malbers/Variables/Float Listener")]
+    [AddComponentMenu("Malbers/Variables/Float Listener (Local Float)")]
     [HelpURL("https://malbersanimations.gitbook.io/animal-controller/secondary-components/variable-listeners-and-comparers")]
     public class FloatVarListener : VarListener
     {
@@ -33,12 +33,26 @@ namespace MalbersAnimations
             if (value.Variable != null && Auto) value.Variable.OnValueChanged -= Invoke;
         }
 
-        public virtual void Invoke(float value)
-        { if (Enable) Raise.Invoke(value); }
-
-        public virtual void InvokeFloat(float value) => Invoke(value);
-
+        public virtual void Invoke(float value) { if (Enable) Raise.Invoke(value); }
+        public virtual void Invoke(int value) => Invoke((float) value);
+        public virtual void Invoke(IDs value) => Invoke((float)value.ID);
+        public virtual void Invoke(IntVar value) => Invoke((float)value.Value);
+        public virtual void Invoke(FloatVar value) => Invoke(value.Value);
+        public virtual void Invoke(bool value) => Invoke((float)(value ? 1 : 0));
         public virtual void Invoke() => Invoke(Value);
+
+        public virtual void SetValue(int value) => Value = value;
+        public virtual void SetValue(float value) => Value = (int)value;
+        public virtual void SetValue(IDs value) => Value = value.ID;
+        public virtual void SetValue(IntVar value) => Value = value.Value;
+        public virtual void SetValue(FloatVar value) => Value = value.Value;
+        public virtual void SetValue(bool value) => Value = value ? 1 : 0;
+
+        public virtual void SetValueVectorX(Vector3 value) => Value = value.x;
+        public virtual void SetValueVectorY(Vector3 value) => Value = value.y;
+        public virtual void SetValueVectorZ(Vector3 value) => Value = value.z;
+
+
 
 
         /// <summary> Set the Value to Zero in x Seconds </summary>

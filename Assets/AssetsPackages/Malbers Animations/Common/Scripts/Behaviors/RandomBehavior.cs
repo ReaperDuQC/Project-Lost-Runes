@@ -13,12 +13,24 @@ namespace MalbersAnimations
 
         IRandomizer randomizer;
 
+        static int RandomHash = Animator.StringToHash("Random");
+        
+
         override public void OnStateMachineEnter(Animator animator, int stateMachinePathHash)
         {
             if (randomizer == null) 
-                randomizer = animator.FindInterface<IRandomizer>();
+                randomizer = animator.GetComponent<IRandomizer>();
 
-            randomizer?.SetRandom(Random.Range(1, Range + 1), Priority.Value);
+            var value = Random.Range(1, Range + 1);
+           
+            if (randomizer != null)
+            { 
+                randomizer.SetRandom(value, Priority.Value);
+            }
+            else
+            {
+                animator.SetInteger(RandomHash,value);
+            }
         }
 
         public override void OnStateMachineExit(Animator animator, int stateMachinePathHash)

@@ -89,8 +89,21 @@ MonoBehaviour:
   OnGameObjectEnter:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 11400000, guid: 0c94a2d69f6a3034fad6cf3bd291925b, type: 2}
+        m_TargetAssemblyTypeName: MalbersAnimations.Scriptables.RuntimeDamageableSet,
+          Assembly-CSharp
+        m_MethodName: Item_Add
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 11400000, guid: 32b226c57183dd54abecf07f077ab460, type: 2}
-        m_TargetAssemblyTypeName: 
+        m_TargetAssemblyTypeName: MalbersAnimations.Scriptables.RuntimeStats, Assembly-CSharp
         m_MethodName: Item_Add
         m_Mode: 0
         m_Arguments:
@@ -104,8 +117,21 @@ MonoBehaviour:
   OnGameObjectExit:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 11400000, guid: 0c94a2d69f6a3034fad6cf3bd291925b, type: 2}
+        m_TargetAssemblyTypeName: MalbersAnimations.Scriptables.RuntimeDamageableSet,
+          Assembly-CSharp
+        m_MethodName: Item_Remove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 11400000, guid: 32b226c57183dd54abecf07f077ab460, type: 2}
-        m_TargetAssemblyTypeName: 
+        m_TargetAssemblyTypeName: MalbersAnimations.Scriptables.RuntimeStats, Assembly-CSharp
         m_MethodName: Item_Remove
         m_Mode: 0
         m_Arguments:
@@ -125,6 +151,7 @@ MonoBehaviour:
     ConstantValue: 0
     Variable: {fileID: 0}
   trigger: {fileID: 0}
+  Editor_Tabs1: 1
 --- !u!135 &8446881886278876522
 SphereCollider:
   m_ObjectHideFlags: 0

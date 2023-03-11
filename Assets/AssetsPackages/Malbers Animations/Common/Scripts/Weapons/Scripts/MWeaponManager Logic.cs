@@ -33,17 +33,28 @@ namespace MalbersAnimations
 
             GetHashIDs();
 
-            Head = Anim.GetBoneTransform(HumanBodyBones.Head);                     //Get the Rider Head transform
-            Chest = Anim.GetBoneTransform(HumanBodyBones.Chest);                   //Get the Rider Head transform
+            if (anim.avatar.isHuman)
+            {
+                RightHand = Anim.GetBoneTransform(HumanBodyBones.RightHand);           //Get the Rider Right Hand transform
+                LeftHand = Anim.GetBoneTransform(HumanBodyBones.LeftHand);             //Get the Rider Left  Hand transform
+               
+                //Head = Anim.GetBoneTransform(HumanBodyBones.Head);                     //Get the Rider Head transform
+                //Chest = Anim.GetBoneTransform(HumanBodyBones.Chest);                   //Get the Rider Head transform
 
-            RightHand = Anim.GetBoneTransform(HumanBodyBones.RightHand);           //Get the Rider Right Hand transform
-            LeftHand = Anim.GetBoneTransform(HumanBodyBones.LeftHand);             //Get the Rider Left  Hand transform
 
-            RightShoulder = Anim.GetBoneTransform(HumanBodyBones.RightUpperArm);   //Get the Rider Right Shoulder transform
-            LeftShoulder = Anim.GetBoneTransform(HumanBodyBones.LeftUpperArm);     //Get the Rider Left  Shoulder transform }
-
+                //RightShoulder = Anim.GetBoneTransform(HumanBodyBones.RightUpperArm);   //Get the Rider Right Shoulder transform
+                //LeftShoulder = Anim.GetBoneTransform(HumanBodyBones.LeftUpperArm);     //Get the Rider Left  Shoulder transform }
+            }
             if (UseHolsters) ActiveHolster = holsters[0]; //Set the Default Holster to be the first one.
         }
+
+
+        public virtual void Restart()
+        {
+            OnDisable();
+            OnEnable();
+        }
+
         private void OnEnable()
         {
             //Connect to the animator
@@ -69,11 +80,8 @@ namespace MalbersAnimations
         }
         private void OnDisable()
         {
-            if (CombatMode)
-            {
-                UnEquip_Fast();
-                animal.Mode_Interrupt();
-            }
+            if (CombatMode)  UnEquip_Fast();
+            
 
             if (HasAnimal)
             {
@@ -81,6 +89,7 @@ namespace MalbersAnimations
                 animal.OnModeEnd.RemoveListener(AnimalModeEnd);
                 animal.OnStateActivate.RemoveListener(AnimalStateActivate);
                 animal.OnStrafe.RemoveListener(CheckStrafing);
+               // if (CombatMode) animal.Mode_Interrupt();
             }
 
 
@@ -92,8 +101,6 @@ namespace MalbersAnimations
             SetIntParameter -= SetAnimParameter;
             SetFloatParameter -= SetAnimParameter;
             SetTriggerParameter -= SetAnimParameter;
-
-
         }
 
 
@@ -112,7 +119,7 @@ namespace MalbersAnimations
             Debugging($"Reset Combat");
         }
 
-        private void ResetWeaponManager()
+        public virtual void ResetWeaponManager()
         {
             PrepareAnimalController();
 
@@ -351,6 +358,7 @@ namespace MalbersAnimations
             {
                 if (!WeaponIsActive) return; //Do nothing if the weapon is not active
                 if (!Weapon.CanAim) return;  //Do nothing if the weapon cannot aim
+                if (WeaponAction == Weapon_Action.Store) return;  //Do nothing if the weapon is being stored
 
                 if (aim != value)
                 {
@@ -359,7 +367,7 @@ namespace MalbersAnimations
                     //Let know the Rider is Aiming. So if is using Straigth Spine, it stops. (REVIEW)!!!!!!!!!***
                     if (Rider != null) Rider.IsAiming = value;
 
-                    Debugging($"Aim → [{aim.Value}]", "gray");
+                   // Debugging($"Aim → [{aim.Value}]", "gray");
 
                     Weapon.IsAiming = value;    //Update the Aim Value on the Weapon to the active weapon  that the Rider is/isn't aiming
 
@@ -392,11 +400,7 @@ namespace MalbersAnimations
                     {
                         animal.Strafe = true;
                         WasStrafing = false;
-                    }
-
-
-
-
+                    } 
                 }
 
                 //DO NOT AIM IF THE ANIMAL IS DODGING or doing a high priority mode
@@ -425,11 +429,13 @@ namespace MalbersAnimations
         /// <summary>This will recieve the messages Animator Behaviors the moment the rider make an action on the weapon</summary>
         public virtual void CheckAim()
         {
+            if (WeaponAction == Weapon_Action.Reload) return; //Do not go to aim if the weapon is reloading???
+
             WeaponAction = Aim ? (Weapon_Action.Aim) : CombatMode ? Weapon_Action.Idle : Weapon_Action.None;
         }
 
         /// <summary>Exit the Aiming Logic </summary>
-        public void ExitAim()
+        public virtual void ExitAim()
         {
             //Disable Straffing
             if (HasAnimal && Weapon && Weapon.StrafeOnAim && !WasStrafing) animal.Strafe = false;
@@ -447,9 +453,9 @@ namespace MalbersAnimations
         /// <summary>  DO NOT Interrupt Higher Priority Modes (Check if the Animal is Playing a Higher Priority Mode)  </summary>  
         protected virtual bool HigherPriorityMode => WeaponMode != null && animal.IsPlayingMode && animal.ActiveMode.Priority > WeaponMode.Priority;
 
-
+        private bool JustChangedAction;
         /// <summary>Which Action is currently using the RiderCombat. See WeaponActions Enum for more detail</summary>
-        public Weapon_Action WeaponAction
+        public virtual Weapon_Action WeaponAction
         {
             get => weaponAction;
             set
@@ -457,9 +463,10 @@ namespace MalbersAnimations
                 // if (weaponAction != value) //Do it only when the value is different (Maybe there's) a problem with the attacks I think?
                 {
                     // lastWeaponAction = weaponAction; //Store the last weapon action
-
+                    //if (JustChangedAction) return; //THIS WILL BREAK ASSASIN CREED STYLE (EQUIP AND ATTACK AT THE SAME TIME)
                     weaponAction = value;
                     Debugging($"[Weapon Action] -> [{value}] - [{(int)value}]", "green");
+
 
                     JustChangedAction = true;
                     this.Delay_Action(() => JustChangedAction = false); //reset it the next frame
@@ -548,8 +555,11 @@ namespace MalbersAnimations
             {
                 if (HasAnimal)
                 {
-                    WeaponMode.ForceActivate((int)Weapon_Action.Reload);
-                    // Debug.Log("FORCE RELOAD ANIMATION" + WeaponMode.Name);
+                    if (WeaponMode.ForceActivate((int)Weapon_Action.Reload))  
+                    {
+                        //Debug.Log("FORCE RELOAD ANIMATION" + WeaponMode.Name);
+                        Weapon.IsReloading = true;
+                    }
                 }
                 else
                 {
@@ -806,18 +816,17 @@ namespace MalbersAnimations
 
             Debugging($"EQUIP → [{Weapon.name}] T:{Time.time:F2}", "orange");
 
-            ExitAim();
+           // ExitAim();
 
             Equip_Weapon_Data_Ground_Riding();
             EquipWeapon_AnimalController();
 
-            CheckAim();
-
-            //WeaponAction = Weapon_Action.Idle;                          //Set the Action to Equip
             CombatMode = true;
+
             Weapon.Equip(this);
             OnEquipWeapon.Invoke(Weapon.gameObject);                    //Let everybody know that the weapon is equipped
 
+            CheckAim();
             OnCanAim.Invoke(Weapon.CanAim);
 
             Weapon.PlaySound(WSound.Equip);                             //Play Equip Sound
@@ -909,11 +918,41 @@ namespace MalbersAnimations
             }
         }
 
+        public virtual void UnequipWeapon_AnimalController()
+        {
+            if (HasAnimal)
+            {
+                if (Weapon.stance != null && !IsRiding)
+                {
+                    animal.Stance_RestoreDefault(); //Reset the Default Stance (Remove the Combat)
+                    animal.Stance_Reset(); //Reset Stance if the animal was using a stance for the weapon
+                }
+                if (comboManager)  //Set to unarmed Combo ID
+                    comboManager.SetActiveCombo(UnarmedModeID);
+
+
+                //Enable Back all the modes included on the Disable Mode list
+                EnableModesAC(true);
+
+                foreach (var m in DisableModes)
+                {
+                    animal.Mode_Enable(m);
+                }
+
+                WeaponMode?.SetActive(false); //Disable Weapon Mode
+                WeaponMode = null;
+            }
+        }
+
         private void SetWeaponStance()
         {
             if (Weapon.stance)
+            {
                 animal?.Stance_Set(Weapon.stance);           //Set the Stance to use on the Animal Controller
+                animal.Stance_SetDefault(Weapon.stance);
+            }
         }
+        
 
         private void EnableModesAC(bool enable)
         {
@@ -926,7 +965,7 @@ namespace MalbersAnimations
             }
         }
 
-        private bool JustChangedAction;
+      
         /// <summary>Unequip Weapon from holster or from Inventory (Called by the Animator)</summary>
         public virtual void Unequip_Weapon()
         {
@@ -976,28 +1015,7 @@ namespace MalbersAnimations
         }
 
 
-        public virtual void UnequipWeapon_AnimalController()
-        {
-            if (HasAnimal)
-            {
-                if (Weapon.stance != null && !IsRiding) animal.Stance_Reset(); //Reset Stance if the animal was using a stance for the weapon
-
-                if (comboManager)  //Set to unarmed Combo ID
-                    comboManager.SetActiveCombo(UnarmedModeID);
-
-
-                //Enable Back all the modes included on the Disable Mode list
-                EnableModesAC(true);
-
-                foreach (var m in DisableModes)
-                {
-                    animal.Mode_Enable(m);
-                }
-
-                WeaponMode?.SetActive(false); //Disable Weapon Mode
-                WeaponMode = null;
-            }
-        }
+       
 
 
         /// <summary> Parents the Weapon to the Correct Hand</summary>
@@ -1069,21 +1087,19 @@ namespace MalbersAnimations
             Debugging($"[Store → {(Weapon.IsRightHanded ? "Right Hand" : "Left Hand")}] → [{Weapon.Holster.name}] → [{Weapon.name}]", "cyan");  //Debug
         }
 
-
-        public void ActivateDamager(int value, float multiplier)
+        /// <summary> Activate the Damager of a Weapon. E.g. the Attack Trigger of a Melee Weapon    </summary>
+        public virtual void ActivateDamager(int value, float multiplier)
         {
             if (Weapon) Weapon.ActivateDamager(value, multiplier);
         }
-
-
-
+         
         private int LastAttackTriggerHash;
-        public void DamagerAnimationStart(int hash)
+        public virtual void DamagerAnimationStart(int hash)
         {
             LastAttackTriggerHash = hash;
         }
 
-        public void DamagerAnimationEnd(int hash)
+        public virtual void DamagerAnimationEnd(int hash)
         {
             //Go to Idle because we are finishing in the same animations. if not is doing another attack before finishing the one that we have
             if (!HasAnimal && LastAttackTriggerHash == hash)
@@ -1109,10 +1125,7 @@ namespace MalbersAnimations
             Holster_SetActive(HolstertoSwap);
             Draw_Weapon();                                  //Set the parameters so draw a weapon
             yield return null;
-        }
-
-
-
+        } 
         #endregion
     }
 }

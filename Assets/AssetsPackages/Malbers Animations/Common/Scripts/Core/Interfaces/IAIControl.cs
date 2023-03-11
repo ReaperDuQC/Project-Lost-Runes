@@ -11,6 +11,9 @@ namespace MalbersAnimations
         /// <summary>Target Assigned to the AI Control</summary>  
         Transform Target { get; set; }
 
+        /// <summary>Target Assigned to the AI Control</summary>  
+        Transform NextTarget { get; set; }
+
         /// <summary>Destination Position to use on Agent.SetDestination()</summary>
         Vector3 DestinationPosition { get; set; }
 

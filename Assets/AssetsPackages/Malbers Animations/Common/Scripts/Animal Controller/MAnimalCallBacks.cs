@@ -153,6 +153,12 @@ namespace MalbersAnimations.Controller
 
         public void Stance_Set(StanceID id) => Stance = id;
 
+        /// <summary>  Change the Default Stance to another ID  </summary>
+        public void Stance_SetDefault(StanceID id) => DefaultStanceID = id;
+
+        /// <summary> Restore the Default Stance to the Starting Stance</summary>
+        public void Stance_RestoreDefault() => DefaultStanceID = StartingStance;
+
         public Stance Pin_Stance { get; set; }
         public Stance Stance_Get(StanceID id) => Pin_Stance = Stances.Find(x => x.ID == id);
 
@@ -166,12 +172,13 @@ namespace MalbersAnimations.Controller
         public void Stance_Disable(StanceID id) => Stance_Get(id)?.Enable(false);
         public void Stance_Enable(StanceID id,bool val) => Stance_Get(id)?.Enable(val);
 
-        public void Stance_Enable_Temporal(StanceID id) => Stance_Get(id)?.Enable_Temp();
+        public void Stance_Enable_Temporal(StanceID id) => Stance_Get(id)?.Disable_Temp_Restore();
         public void Stance_Disable_Temporal(StanceID id) => Stance_Get(id)?.Disable_Temp();
 
         public void Stance_Persistent(StanceID id,bool val) => Stance_Get(id)?.SetPersistent(val);
 
         public void Stance_PersistentOn(StanceID id) => Stance_Persistent(id,true);
+       
         public void Stance_Activate_Persistent(StanceID id)
         {
             Stance_Get(id);
@@ -189,12 +196,19 @@ namespace MalbersAnimations.Controller
         }
 
 
-        /// <summary>Changes the Last State on the Animator</summary>
+        /// <summary>Changes the Last Stance on the Animator</summary>
         public void Stance_SetLast(int id)
         {
             LastStanceID = id;
             TryAnimParameter(hash_LastStance, LastStanceID);        //Set on the Animator the Last Stance
         }
+
+        /// <summary>Changes the Last State on the Animator</summary>
+        public virtual void LastState_Reset()
+        {
+            TryAnimParameter(hash_LastState, -1);   //Sent to the Animator the previews Active State
+        }
+
 
         public void Stance_Reset() => Stance = defaultStance;
 
@@ -338,7 +352,6 @@ namespace MalbersAnimations.Controller
         /// <summary>Set the State Status on the Animator</summary>
         public virtual void State_SetStatus(int status)
         {
-           // Debug.Log("status = " + status);
             SetIntParameter(hash_StateEnterStatus, status);
         }
 
@@ -378,15 +391,7 @@ namespace MalbersAnimations.Controller
         }
 
         /// <summary>  Allow Lower States to be activated  </summary>
-        public virtual void State_AllowExit(StateID ID) => State_AllowExit(ID.ID);
-
-        /// <summary>  Allow Lower States to be activated  </summary>
-        public virtual void State_AllowExit(int ID)
-        {
-            State state = State_Get(ID);
-            if (state && state != ActiveState) return; //Do not Exit if we are not the Active State
-            state?.AllowExit();
-        }
+        public virtual void State_Allow_Exit(StateID ID) => State_Allow_Exit(ID.ID);
 
         public virtual void State_Allow_Exit(int nextState)
         {
@@ -607,6 +612,25 @@ namespace MalbersAnimations.Controller
         }
 
 
+
+        /// <summary>Force Activate a mode on the Animal combining the Mode and Ability e.g 4002</summary>
+        public virtual void Mode_ForceActivate(int ModeID)
+        {
+            if (ModeID == 0) return;
+
+            var id = Mathf.Abs(ModeID / 1000);
+
+            if (id == 0)
+            {
+                Mode_ForceActivate(ModeID, 0);
+            }
+            else
+            {
+                Mode_ForceActivate(id, ModeID % 100);
+            }
+        }
+
+
         /// <summary>  Returns True and Activate  the mode in case ir can be Activated, if not it will return false</summary>
         public bool Mode_TryActivate(int ModeID, int AbilityIndex = -99)
         {
@@ -664,10 +688,14 @@ namespace MalbersAnimations.Controller
         public virtual void Mode_Interrupt()
         {
             IsPreparingMode = false;
-            SetModeStatus(Int_ID.Interrupted);
+          
             ModeAbility = 0;
+            SetModeStatus(Int_ID.Interrupted);
+
             if (hash_ModeOn != 0) Anim.ResetTrigger(hash_ModeOn); //Reset the MODE ON Parameter
         }
+ 
+
 
         /// <summary>Deactivate all modes</summary>
         public virtual void Mode_Disable_All()
@@ -930,6 +958,15 @@ namespace MalbersAnimations.Controller
             DeltaAngle = 0;
         }
 
+        /// <summary>Stop the animal from moving,Cleans all movement values</summary>
+        public virtual void StopMoving_Zero()
+        {
+            StopMoving();
+            MovementAxisSmoothed = Vector3.zero;
+            InertiaPositionSpeed = Vector3.zero;
+            TargetSpeed = Vector3.zero;
+        }
+
         /// <summary>Add Inertia to the Movement</summary>d
         public virtual void AddInertia(ref Vector3 Inertia, float speed = 1f)
         {
@@ -1079,15 +1116,13 @@ namespace MalbersAnimations.Controller
         #region Extras
 
 
-        /// <summary>
-        /// Adds a Custom Force to the Animal
-        /// </summary>
+        /// <summary> Adds a Custom Force to the Animal </summary>
         /// <param name="Direction">Direction of the Force Applied to the Animal</param>
         /// <param name="Force"> Amount of Force aplied to the Direction</param>
         /// <param name="Aceleration">Smoothens value to apply the force. Higher values faster the force is appled</param>
         /// <param name="ResetGravity">Every time a force is applied, the Gravity Aceleration will be reseted</param>
-        /// <param name="ForceAirControl"></param>
-        /// <param name="LimitForce"></param>
+        /// <param name="ForceAirControl">The animal can move while is been pushed by the force if this parameter is true. </param>
+        /// <param name="LimitForce">Limits the magnitude of the Force to a value </param>
         public virtual void Force_Add(
             Vector3 Direction, float Force, float Aceleration,
             bool ResetGravity, bool ForceAirControl = true,  float LimitForce = 0)
@@ -1112,12 +1147,15 @@ namespace MalbersAnimations.Controller
             ExternalForceAirControl = ForceAirControl;
         }
 
+        /// <summary> Removes the current active force applied to the animal  </summary>
+        /// <param name="Aceleration"> Current aceleration to remove the force. When set to Zero then the force will be removed instantly</param>
         public virtual void Force_Remove(float Aceleration = 0)
         {
             ExternalForceAcel = Aceleration;
             ExternalForce = Vector3.zero;
         }
 
+        /// <summary> Removes every force applied to the animal </summary>
         internal void Force_Reset()
         {
             CurrentExternalForce = Vector3.zero;
@@ -1127,7 +1165,6 @@ namespace MalbersAnimations.Controller
 
         /// <summary> Disable the animal Compoent after a time  </summary>
         public virtual void DisableSelf(float time) => this.Delay_Action(time, () => enabled = false);
-
 
 
         /// <summary> If the Animal has touched the ground then Grounded will be set to true  </summary>
@@ -1143,20 +1180,18 @@ namespace MalbersAnimations.Controller
             return false;
         }
 
-        /// <summary>
-        /// Use the height for aligning to the ground not the Pivots 
-        /// </summary>
+        /// <summary> Use the height for aligning to the ground not the Pivots  </summary>
         public bool CheckIfGrounded_Height()
         {
             AlignIfGrounded();
+
             if (MainRay && FrontRay && !DeepSlope)
             {
-                hit_Hip.distance = Height * 2f; //?!??!?
+                //hit_Hip.distance = Height * 2f; //?!??!?
                 return Grounded = true;   //Activate the Grounded Parameter so the Idle and the Locomotion State can be activated
             }
             return false;
         }
-
 
         public void Always_Forward(bool value) => AlwaysForward = value;
 
@@ -1181,7 +1216,6 @@ namespace MalbersAnimations.Controller
                     foreach (var dam in Att_T) dam.DoDamage(true, multiplier);
             }
         }
-
         public void DamagerAnimationStart(int hash) { }
         public void DamagerAnimationEnd(int hash) { }
 
@@ -1223,9 +1257,14 @@ namespace MalbersAnimations.Controller
         public void SetTimeline(bool isonTimeline)
         {
             Sleep = isonTimeline;
-            
-            //Unparent the Rotator since breaks the Cinemachine Logic
-            if (Rotator != null)   RootBone.parent = isonTimeline ? null : Rotator;
+
+            RB.isKinematic = isonTimeline; //Make Sure the Animal is set to Kinematic
+
+            ////Unparent the Rotator since breaks the Cinemachine Logic
+            //if (Rotator != null)
+            //{
+            //  //  RootBone.parent = isonTimeline ? transform : Rotator;
+            //}
         }
 
 

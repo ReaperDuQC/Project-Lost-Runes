@@ -11,23 +11,31 @@ namespace MalbersAnimations.Utilities
     [AddComponentMenu("Malbers/Effects")]
     public class EffectBehaviour : StateMachineBehaviour
     {
+        [Tooltip("Re-check If there any new Effect Manager on the Character (Use this when the Weapons are added or Removed and you want to add effect to them")]
+        public bool DynamicManagers = false;
         public List<EffectItem> effects = new List<EffectItem>();
-        private EffectManager effectManager;
-
+        private  EffectManager[] effectManagers = null;
+        private bool HasEfM = false;
 
         override public void OnStateEnter(Animator anim, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            if (effectManager == null) effectManager = anim.GetComponentInChildren<EffectManager>();
-
-            if (effectManager)
+            if (effectManagers == null || DynamicManagers)
             {
-                foreach (var item in effects) item.sent = false;
+                HasEfM = false;
+                effectManagers = anim.GetComponentsInChildren<EffectManager>();
+
+                if (effectManagers != null && effectManagers.Length > 0) HasEfM = true;
             }
+
+            //Reset that the messages were sent. Always on State Enter
+            if (HasEfM) 
+                foreach (var item in effects) item.sent = false;
+           
         }
 
         override public void OnStateUpdate(Animator anim, AnimatorStateInfo state, int layer)
         {
-            if (effectManager)
+            if (HasEfM)
             {
                 var time = state.normalizedTime % 1;
 
@@ -35,11 +43,14 @@ namespace MalbersAnimations.Utilities
                 {
                     if (!e.sent && (time >= e.Time))
                     {
-                        if (e.action == EffectOption.Play)
-                            effectManager.PlayEffect(e.ID);
-                        else
-                            effectManager.StopEffect(e.ID);
-                        e.sent = true;
+                        foreach (var EM in effectManagers)
+                        {
+                            if (e.action == EffectOption.Play)
+                                EM.PlayEffect(e.ID);
+                            else
+                                EM.StopEffect(e.ID);
+                            e.sent = true;
+                        }
                     }
                 }
             }
@@ -47,7 +58,7 @@ namespace MalbersAnimations.Utilities
 
         override public void OnStateExit(Animator anim, AnimatorStateInfo state, int layer)
         {
-            if (effectManager)
+            if (HasEfM)
             {
                 if (anim.GetCurrentAnimatorStateInfo(layer).fullPathHash == state.fullPathHash) return; //means is transitioning to it self
 
@@ -55,13 +66,16 @@ namespace MalbersAnimations.Utilities
                 {
                     if (e.Time == 1 || (e.ExecuteOnExit && !e.sent))
                     {
-                        if (e.action == EffectOption.Play)
+                        foreach (var EM in effectManagers)
                         {
-                            effectManager.PlayEffect(e.ID);
-                        }
-                        else
-                        {
-                            effectManager.StopEffect(e.ID);
+                            if (e.action == EffectOption.Play)
+                            {
+                                EM.PlayEffect(e.ID);
+                            }
+                            else
+                            {
+                                EM.StopEffect(e.ID);
+                            }
                         }
                     }
                     e.sent = true;

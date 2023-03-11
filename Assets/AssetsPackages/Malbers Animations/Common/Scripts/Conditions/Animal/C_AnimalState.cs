@@ -25,6 +25,8 @@ namespace MalbersAnimations.Conditions
         {
             if (Target)
             {
+                if (st == null) st = Target.State_Get(Value);
+
                 switch (Condition)
                 {
                     case StateCondition.ActiveState: return Target.ActiveStateID == Value;     //Check if the Active state is the one with this ID

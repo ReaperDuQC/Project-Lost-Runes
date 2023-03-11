@@ -12,7 +12,7 @@ namespace MalbersAnimations.Controller
     [CustomEditor(typeof(MAnimal))]
     public class MAnimalEditor : Editor
     {
-        public readonly string version = "Animal Controller [v1.4.0a]";
+        public readonly string version = "Animal Controller [v1.4.1]";
 
         public static GUIStyle StyleGray => MTools.Style(new Color(0.5f, 0.5f, 0.5f, 0.3f));
         public static GUIStyle StyleBlue => MTools.Style(new Color(0, 0.5f, 1f, 0.3f));
@@ -37,7 +37,7 @@ namespace MalbersAnimations.Controller
             OnEnterExitStances, OnEnterExitStates, OnEnterExitSpeeds,
             RB, Anim, NoParent,
             m_Vertical, m_Horizontal, m_StateFloat, m_ModeStatus, m_State, m_StateStatus, m_StateExitStatus, m_LastState, m_Mode, m_Grounded, m_Movement, m_Random, m_ModePower,
-            m_SpeedMultiplier, m_UpDown, m_DeltaUpDown, m_StateOn,  m_Sprint, m_ModeOn,// m_StanceOn,
+            m_SpeedMultiplier, m_UpDown, m_DeltaUpDown, m_StateOn, m_StateProfile, m_Sprint, m_ModeOn,// m_StanceOn,
             currentStance, defaultStance, Stances_List,
             m_Stance, m_LastStance, m_Slope, deepSlope, m_Type, m_StateTime, m_TargetAngle, m_StrafeAnim,
             lockInput, lockMovement, Rotator, AlignLoop, animalType, RayCastRadius, MainCamera, sleep, m_gravityTime, m_gravityTimeLimit, RootBone,
@@ -89,11 +89,6 @@ namespace MalbersAnimations.Controller
             SelectedStance = serializedObject.FindProperty("SelectedStance");
             ShowStateInInspector = serializedObject.FindProperty("ShowStateInInspector");
           
-            
-       
-
-           
-
             m_CanStrafe = serializedObject.FindProperty("m_CanStrafe");
             m_StrafeNormalize = serializedObject.FindProperty("m_StrafeNormalize");
             m_strafe = serializedObject.FindProperty("m_strafe");
@@ -150,6 +145,7 @@ namespace MalbersAnimations.Controller
             m_DeltaUpDown = serializedObject.FindProperty("m_DeltaUpDown");
 
             m_StateOn = serializedObject.FindProperty("m_StateOn");
+            m_StateProfile = serializedObject.FindProperty("m_StateProfile");
             //m_StanceOn = serializedObject.FindProperty("m_StanceOn");
             m_ModeOn = serializedObject.FindProperty("m_ModeOn");
             m_Sprint = serializedObject.FindProperty("m_Sprint");
@@ -278,7 +274,9 @@ namespace MalbersAnimations.Controller
 
             if (m.states != null && m.states.Count > 0 && m.states[0] != null && m.states[0].Priority == 0) //Means that the priorities are not set so check once just in case
                 OnReorderCallback_States(null);
-           
+
+
+            Reo_List_States.index = SelectedState.intValue;
         }
 
         private void CheckHelpBox()
@@ -360,8 +358,10 @@ namespace MalbersAnimations.Controller
                     rect.y += 2;
                     if (Stances_List.arraySize <= index) return;
 
-                    EditorGUI.BeginChangeCheck();
+                    using (var cc = new EditorGUI.ChangeCheckScope())
                     {
+                      
+                     
                         var ModeProperty = Stances_List.GetArrayElementAtIndex(index);
                         var ID = ModeProperty.FindPropertyRelative("ID");
 
@@ -412,6 +412,7 @@ namespace MalbersAnimations.Controller
                             else if (m.Stances[index].Persistent) GUI.contentColor = Color.red+Color.white;
                             else  if (m.Stances[index].DisableTemp) GUI.contentColor = Color.white;
                         }
+                         
 
                         var st_label = "";
 
@@ -425,9 +426,14 @@ namespace MalbersAnimations.Controller
                           if (stanceElement.DisableTemp)    st_label = "[Disabled]";
                         }
 
+
+                        var dC = GUI.contentColor;
+                       if (!Application.isPlaying)
+                            if (index == Reo_List_Stances.index) GUI.contentColor = new Color(3f, 0.7f,0.5f);
+
                         EditorGUI.PropertyField(IDRect, ID, GUIContent.none);
                         EditorGUI.LabelField(Rect_Label, st_label);
-                        GUI.contentColor = oldColor;
+                        GUI.contentColor = Application.isPlaying ?  oldColor : dC;
 
                         var style = new GUIStyle(EditorStyles.boldLabel)
                         { alignment = TextAnchor.UpperRight };
@@ -437,11 +443,12 @@ namespace MalbersAnimations.Controller
                             var IDVal = new Rect(rectan.width + 25, rectan.y + 3, 35, rectan.height);
                             EditorGUI.LabelField(IDVal, stanceElement.ID.ID.ToString(), style);
                         }
-                    }
-                    if (EditorGUI.EndChangeCheck())
-                    {
-                        Undo.RecordObject(target, "Inspector");
-                        EditorUtility.SetDirty(target);
+
+                        if (cc.changed)
+                        {
+                            Undo.RecordObject(target, "MAnimal Inspector");
+                            EditorUtility.SetDirty(target);
+                        }
                     }
                 },
 
@@ -472,15 +479,27 @@ namespace MalbersAnimations.Controller
                 Reo_List_Stances.index = SelectedStance.intValue;
 
                 Reo_List_Stances.DoLayoutList();
-                  
-                var SnceIndex = Reo_List_Stances.index; 
 
-                if (SnceIndex != -1 && Stances_List.arraySize > 0 && SnceIndex < Stances_List.arraySize)
-                { 
-                    EditorGUILayout.Space(-16);
-                    var SelectedStance = Stances_List.GetArrayElementAtIndex(SnceIndex);
+            }
+            var SnceIndex = Reo_List_Stances.index;
+            if (SnceIndex != -1 && Stances_List.arraySize > 0 && SnceIndex < Stances_List.arraySize)
+            {
 
-                    if (SelectedStance != null)
+
+                //EditorGUILayout.Space(-16);
+                var SelectedStance = Stances_List.GetArrayElementAtIndex(SnceIndex);
+
+                var ID = SelectedStance.FindPropertyRelative("ID").objectReferenceValue;
+                var n = ID != null ? ID.name : "";
+
+                using (new GUILayout.VerticalScope(EditorStyles.helpBox))
+
+                {
+                    EditorGUI.indentLevel++;
+                    EditorGUILayout.PropertyField(SelectedStance, new GUIContent($"Stance [{n}]"), false);
+                    EditorGUI.indentLevel--;
+
+                    if (SelectedStance != null && SelectedStance.isExpanded)
                     {
                         var Active = SelectedStance.FindPropertyRelative("enabled");
                         var Input = SelectedStance.FindPropertyRelative("Input");
@@ -505,7 +524,7 @@ namespace MalbersAnimations.Controller
                         var StanceName = stance.ID != null ? stance.ID.name : "-EMPTY-";
 
                         var inc = $"States the '{StanceName}' stance " + (Include.boolValue ? $"[can]" : "[cannot]") + " be activated.";
-                        var btn =   Include.boolValue ? "Include" : "Exclude";
+                        var btn = Include.boolValue ? "Include" : "Exclude";
                         if (!stance.HasStates) inc += " [All]";
 
 
@@ -517,7 +536,7 @@ namespace MalbersAnimations.Controller
                             {
                                 var dC = GUI.color;
                                 GUI.color = !Include.boolValue ? Color.red + Color.white : Color.white + Color.green;
-                                Include.boolValue = GUILayout.Toggle(Include.boolValue, 
+                                Include.boolValue = GUILayout.Toggle(Include.boolValue,
                                     new GUIContent(btn, "Includes/Excludes the States List for the stance activation"),
                                    EditorStyles.miniButton, GUILayout.Width(60));
                                 GUI.color = dC;
@@ -526,12 +545,12 @@ namespace MalbersAnimations.Controller
 
                         EditorGUI.indentLevel++;
                         EditorGUILayout.PropertyField(states, new GUIContent(inc), true);
-                        EditorGUI.indentLevel--; 
-                        
+                        EditorGUI.indentLevel--;
+
                         EditorGUI.indentLevel++;
                         EditorGUILayout.PropertyField(StateQueue, true);
                         EditorGUI.indentLevel--;
-                        
+
                         EditorGUI.indentLevel++;
                         EditorGUILayout.PropertyField(DisableStances, true);
                         EditorGUI.indentLevel--;
@@ -546,8 +565,8 @@ namespace MalbersAnimations.Controller
                         }
                     }
                 }
-
             }
+
         }
 
         public void DropAreaGUI()
@@ -743,6 +762,7 @@ namespace MalbersAnimations.Controller
                     MalbersEditor.DisplayParam(anim, m_Sprint, v_bool);
                     EditorGUILayout.Space();
 
+                    MalbersEditor.DisplayParam(anim, m_StateProfile, v_int);
                     MalbersEditor.DisplayParam(anim, m_StateExitStatus, v_int);
                     MalbersEditor.DisplayParam(anim, m_StateTime, v_float);
                     EditorGUILayout.Space();
@@ -885,7 +905,6 @@ namespace MalbersAnimations.Controller
             {
                 using (new EditorGUI.DisabledGroupScope(true))
                 {
-                    Repaint();
                     if (m.ActiveState)
                     {
                         using (new GUILayout.VerticalScope(EditorStyles.helpBox))
@@ -1399,10 +1418,8 @@ namespace MalbersAnimations.Controller
         }
         private void ShowStates()
         {
-            EditorGUI.indentLevel++;
-
-            Reo_List_States.index = SelectedState.intValue;
-
+           // EditorGUI.indentLevel++;
+            
             using (new GUILayout.VerticalScope(EditorStyles.helpBox))
             {
                 using (new GUILayout.HorizontalScope())
@@ -1410,7 +1427,7 @@ namespace MalbersAnimations.Controller
                     EditorGUILayout.PropertyField(OverrideStartState, G_OverrideStartState);
                     CloneStates.boolValue = GUILayout.Toggle(CloneStates.boolValue, G_CloneStates, EditorStyles.miniButton, GUILayout.Width(85));
                 }
-                EditorGUI.indentLevel--;
+              //  EditorGUI.indentLevel--;
 
                 if (!CloneStates.boolValue)
                 {
@@ -1460,123 +1477,136 @@ namespace MalbersAnimations.Controller
            // using (new GUILayout.VerticalScope())
             {
                 EditorGUILayout.HelpBox("For [In Place] animations <Not Root Motion>, Increse [Position] and [Rotation] values for each Speed Set", MessageType.Info);
-                Reo_List_Speeds.DoLayoutList();        //Paint the Reordable List speeds
-
+                Reo_List_Speeds.DoLayoutList();        //Paint the Reordable List speeds 
 
                 Reo_List_Speeds.index = SelectedSpeed;
 
-                if (Reo_List_Speeds.index != -1)
+                if (Reo_List_Speeds.index != -1 )
                 {
 
                     var SelectedSpeed = S_Speed_List.GetArrayElementAtIndex(Reo_List_Speeds.index);
-                    var Speeds = SelectedSpeed.FindPropertyRelative("Speeds");
-                    using (new GUILayout.VerticalScope(EditorStyles.helpBox))
+
+                    if (SelectedSpeed != null)
                     {
-                        EditorGUI.indentLevel++;
-                        EditorGUILayout.PropertyField(SelectedSpeed, false);
-                        EditorGUI.indentLevel--;
-
-                        if (SelectedSpeed.isExpanded)
+                        var Speeds = SelectedSpeed.FindPropertyRelative("Speeds");
+                        using (new GUILayout.VerticalScope(EditorStyles.helpBox))
                         {
-                            EditorGUILayout.LabelField("Speed Index Values", EditorStyles.boldLabel);
+                            EditorGUI.indentLevel++;
+                            EditorGUILayout.PropertyField(SelectedSpeed, false);
+                            EditorGUI.indentLevel--;
 
-
-                            var StarSpeed = m.speedSets[Reo_List_Speeds.index].StartVerticalIndex.Value;
-                            var GCC = GUI.contentColor;
-                             
-                            using (new GUILayout.VerticalScope(EditorStyles.helpBox))
-                            { 
-                                using (new EditorGUI.DisabledGroupScope(true))
-                                {
-                                    for (int i = 0; i < Speeds.arraySize; i++)
-                                    {
-
-                                        var speedN = Speeds.GetArrayElementAtIndex(i).FindPropertyRelative("name").stringValue;
-
-                                        if (StarSpeed - 1 == i)
-                                        {
-                                            GUI.contentColor = Color.yellow;
-                                            speedN += " [Start]";
-                                        }
-                                        EditorGUILayout.FloatField(speedN, 1 + i);
-                                        GUI.contentColor = GCC;
-                                    }
-                                } 
-                            }
-
-                            SpeedTabs = GUILayout.Toolbar(SpeedTabs, new string[2] { "General", "Speeds" });
-
-                            using (new GUILayout.VerticalScope(EditorStyles.helpBox))
+                            if (SelectedSpeed.isExpanded)
                             {
-                                if (SpeedTabs == 0)
+                                EditorGUILayout.LabelField("Speed Index Values", EditorStyles.boldLabel);
+
+
+                                var StarSpeed = m.speedSets[Reo_List_Speeds.index].StartVerticalIndex.Value;
+                                var GCC = GUI.contentColor;
+
+                                using (new GUILayout.VerticalScope(EditorStyles.helpBox))
                                 {
-
-                                    var states = SelectedSpeed.FindPropertyRelative("states");
-                                    var stances = SelectedSpeed.FindPropertyRelative("stances");
-                                    var StartVerticalSpeed = SelectedSpeed.FindPropertyRelative("StartVerticalIndex");
-                                    var TopIndex = SelectedSpeed.FindPropertyRelative("TopIndex");
-                                    var BackSpeedMult = SelectedSpeed.FindPropertyRelative("BackSpeedMult");
-
-
-                                    var PitchLerpOn = SelectedSpeed.FindPropertyRelative("PitchLerpOn");
-                                    var PitchLerpOff = SelectedSpeed.FindPropertyRelative("PitchLerpOff");
-                                    var BankLerp = SelectedSpeed.FindPropertyRelative("BankLerp");
-                                    var m_LockSpeed = SelectedSpeed.FindPropertyRelative("m_LockSpeed");
-                                    var m_SprintIndex = SelectedSpeed.FindPropertyRelative("m_SprintIndex");
-                                    var m_LockIndex = SelectedSpeed.FindPropertyRelative("m_LockIndex");
-
-
-
-                                    StartVerticalSpeed.isExpanded = MalbersEditor.Foldout(StartVerticalSpeed.isExpanded, "Indexes");
-                                    if (StartVerticalSpeed.isExpanded)
+                                    using (new EditorGUI.DisabledGroupScope(true))
                                     {
-                                        EditorGUILayout.PropertyField(StartVerticalSpeed, new GUIContent("Start Index", StartVerticalSpeed.tooltip));
-                                        EditorGUILayout.PropertyField(TopIndex);
-                                        EditorGUILayout.PropertyField(m_SprintIndex);
-                                        EditorGUILayout.PropertyField(BackSpeedMult, new GUIContent("Back Speed Mult", BackSpeedMult.tooltip));
+                                        for (int i = 0; i < Speeds.arraySize; i++)
+                                        {
+
+                                            var speedN = Speeds.GetArrayElementAtIndex(i).FindPropertyRelative("name").stringValue;
+
+                                            if (StarSpeed - 1 == i)
+                                            {
+                                                GUI.contentColor = Color.yellow;
+                                                speedN += " [Start]";
+                                            }
+                                            EditorGUILayout.FloatField(speedN, 1 + i);
+                                            GUI.contentColor = GCC;
+                                        }
                                     }
+                                }
 
+                                SpeedTabs = GUILayout.Toolbar(SpeedTabs, new string[2] { "General", "Speeds" });
 
-
-                                    m_LockSpeed.isExpanded = MalbersEditor.Foldout(m_LockSpeed.isExpanded, "Lock Speed");
-                                    if (m_LockSpeed.isExpanded)
+                                using (new GUILayout.VerticalScope(EditorStyles.helpBox))
+                                {
+                                    if (SpeedTabs == 0)
                                     {
-                                        EditorGUILayout.PropertyField(m_LockSpeed);
-                                        EditorGUILayout.PropertyField(m_LockIndex);
+
+                                        var states = SelectedSpeed.FindPropertyRelative("states");
+                                        var stances = SelectedSpeed.FindPropertyRelative("stances");
+                                        var StartVerticalSpeed = SelectedSpeed.FindPropertyRelative("StartVerticalIndex");
+                                        var TopIndex = SelectedSpeed.FindPropertyRelative("TopIndex");
+                                        var BackSpeedMult = SelectedSpeed.FindPropertyRelative("BackSpeedMult");
+
+
+                                        var PitchLerpOn = SelectedSpeed.FindPropertyRelative("PitchLerpOn");
+                                        var PitchLerpOff = SelectedSpeed.FindPropertyRelative("PitchLerpOff");
+                                        var BankLerp = SelectedSpeed.FindPropertyRelative("BankLerp");
+                                        var m_LockSpeed = SelectedSpeed.FindPropertyRelative("m_LockSpeed");
+                                        var m_SprintIndex = SelectedSpeed.FindPropertyRelative("m_SprintIndex");
+
+                                        var m_LockIndex = SelectedSpeed.FindPropertyRelative("m_LockIndex");
+                                        var m_RootMotionPos = SelectedSpeed.FindPropertyRelative("m_RootMotionPos");
+                                        var m_RootMotionRot = SelectedSpeed.FindPropertyRelative("m_RootMotionRot");
+
+
+
+                                        StartVerticalSpeed.isExpanded = MalbersEditor.Foldout(StartVerticalSpeed.isExpanded, "Indexes");
+                                        if (StartVerticalSpeed.isExpanded)
+                                        {
+                                            EditorGUILayout.PropertyField(StartVerticalSpeed, new GUIContent("Start Index", StartVerticalSpeed.tooltip));
+                                            EditorGUILayout.PropertyField(TopIndex);
+                                            EditorGUILayout.PropertyField(m_SprintIndex);
+                                            EditorGUILayout.PropertyField(BackSpeedMult, new GUIContent("Back Speed Mult", BackSpeedMult.tooltip));
+                                        }
+
+                                        m_RootMotionPos.isExpanded = MalbersEditor.Foldout(m_RootMotionPos.isExpanded, "RootMotion");
+                                        if (m_RootMotionPos.isExpanded)
+                                        {
+                                            EditorGUILayout.PropertyField(m_RootMotionPos);
+                                            EditorGUILayout.PropertyField(m_RootMotionRot);
+                                        }
+
+
+
+                                        m_LockSpeed.isExpanded = MalbersEditor.Foldout(m_LockSpeed.isExpanded, "Lock Speed");
+                                        if (m_LockSpeed.isExpanded)
+                                        {
+                                            EditorGUILayout.PropertyField(m_LockSpeed);
+                                            EditorGUILayout.PropertyField(m_LockIndex);
+                                        }
+
+
+                                        PitchLerpOn.isExpanded = MalbersEditor.Foldout(PitchLerpOn.isExpanded, "Free Movement Lerp Values");
+
+                                        if (PitchLerpOn.isExpanded)
+                                        {
+                                            EditorGUILayout.PropertyField(PitchLerpOn);
+                                            EditorGUILayout.PropertyField(PitchLerpOff);
+                                            EditorGUILayout.PropertyField(BankLerp);
+                                        }
+
+
+                                        BankLerp.isExpanded = MalbersEditor.Foldout(BankLerp.isExpanded, "Limits");
+
+                                        if (BankLerp.isExpanded)
+                                        {
+                                            // EditorGUILayout.Space();
+                                            EditorGUI.indentLevel++;
+                                            EditorGUI.indentLevel++;
+                                            EditorGUILayout.PropertyField(states, new GUIContent("States", "States that will activate these Speeds"), true);
+                                            EditorGUILayout.PropertyField(stances, new GUIContent("Stances", "Stances that will activate these Speeds"), true);
+                                            EditorGUI.indentLevel--;
+                                            EditorGUI.indentLevel--;
+                                        }
+
                                     }
-
-
-                                    PitchLerpOn.isExpanded = MalbersEditor.Foldout(PitchLerpOn.isExpanded, "Free Movement Lerp Values");
-
-                                    if (PitchLerpOn.isExpanded)
+                                    else
                                     {
-                                        EditorGUILayout.PropertyField(PitchLerpOn);
-                                        EditorGUILayout.PropertyField(PitchLerpOff);
-                                        EditorGUILayout.PropertyField(BankLerp);
-                                    }
 
-
-                                    BankLerp.isExpanded = MalbersEditor.Foldout(BankLerp.isExpanded, "Limits");
-
-                                    if (BankLerp.isExpanded)
-                                    {
                                         // EditorGUILayout.Space();
                                         EditorGUI.indentLevel++;
-                                        EditorGUI.indentLevel++;
-                                        EditorGUILayout.PropertyField(states, new GUIContent("States", "States that will activate these Speeds"), true);
-                                        EditorGUILayout.PropertyField(stances, new GUIContent("Stances", "Stances that will activate these Speeds"), true);
-                                        EditorGUI.indentLevel--;
+                                        EditorGUILayout.PropertyField(Speeds, new GUIContent("Speeds", "Speeds for this speed Set"), true);
                                         EditorGUI.indentLevel--;
                                     }
-
-                                }
-                                else
-                                {
-
-                                    // EditorGUILayout.Space();
-                                    EditorGUI.indentLevel++;
-                                    EditorGUILayout.PropertyField(Speeds, new GUIContent("Speeds", "Speeds for this speed Set"), true);
-                                    EditorGUI.indentLevel--;
                                 }
                             }
                         }
@@ -1746,6 +1776,7 @@ namespace MalbersAnimations.Controller
         {
             S_Speed_List.DeleteArrayElementAtIndex(list.index);
             list.index -= 1;
+            SelectedSpeed = -1;
 
             if (list.index == -1 && S_Speed_List.arraySize > 0)  //In Case you remove the first one
             {
@@ -1854,6 +1885,8 @@ namespace MalbersAnimations.Controller
                 return;
             }
 
+          
+
             state.Active = EditorGUI.Toggle(ActiveRect, GUIContent.none, state.Active);
 
             var st_label = "";
@@ -1875,7 +1908,10 @@ namespace MalbersAnimations.Controller
                 else if (state.OnHoldByReset) st_label = "[On Hold Reset]";
             }
 
+            var dC = GUI.contentColor;
+            if (index == Reo_List_States.index) GUI.contentColor = new Color(0.7f,0.7f,2f);
             EditorGUI.ObjectField(StateRect, stateProperty, GUIContent.none);
+            GUI.contentColor = dC;
 
             var style = new GUIStyle(EditorStyles.label) { fontSize = 12, alignment = TextAnchor.MiddleCenter };
 
@@ -2066,9 +2102,17 @@ namespace MalbersAnimations.Controller
 
                 var IDVal = new Rect(rectan.width + 9, rectan.y + 3, 35, rectan.height);
 
+                var dC = GUI.contentColor;
+                if (index == Reo_List_Modes.index) GUI.contentColor = Color.green;
+
                 active.boolValue = EditorGUI.Toggle(activeRect1, GUIContent.none, active.boolValue);
 
+             
+
                 EditorGUI.PropertyField(IDRect, ID, GUIContent.none);
+
+                GUI.contentColor = dC;
+
 
                 var style = new GUIStyle(EditorStyles.boldLabel)
                 { alignment = TextAnchor.UpperRight };
@@ -2188,20 +2232,25 @@ namespace MalbersAnimations.Controller
                 if (pivot.EditorModify)
                 {
                     Transform t = m.transform;
-                    EditorGUI.BeginChangeCheck();
 
-                    Vector3 piv = t.TransformPoint(pivot.position);
-                    Vector3 NewPivPosition = Handles.PositionHandle(piv, t.rotation);
-                    //   pivot.position = m.transform.InverseTransformPoint(NewPivPosition);
-
-                    float multiplier = Handles.ScaleSlider(pivot.multiplier, piv, pivot.WorldDir(t), Quaternion.identity, HandleUtility.GetHandleSize(piv), 0f);
-
-                    if (EditorGUI.EndChangeCheck())
+                    using (var cc = new EditorGUI.ChangeCheckScope())
                     {
-                        Undo.RecordObject(m, "Pivots");
-                        pivot.position = t.InverseTransformPoint(NewPivPosition);
-                        pivot.multiplier = multiplier;
+                        Vector3 piv = t.TransformPoint(pivot.position);
+                        Vector3 NewPivPosition = Handles.PositionHandle(piv, t.rotation);
+                        //   pivot.position = m.transform.InverseTransformPoint(NewPivPosition);
+
+                        float multiplier = 
+                            Handles.ScaleSlider(pivot.multiplier, piv, pivot.WorldDir(t), Quaternion.identity, HandleUtility.GetHandleSize(piv), 0f);
+
+                        if (cc.changed)
+                        {
+                            Undo.RecordObject(m, "Pivots");
+                            pivot.position = t.InverseTransformPoint(NewPivPosition);
+                            pivot.multiplier = multiplier;
+                            EditorUtility.SetDirty(target);
+                        }
                     }
+
                 }
             }
         }

@@ -12,11 +12,7 @@ namespace LostRunes
 {
     public class SteamManager : MonoBehaviour
     {
-        [SerializeField] TMP_InputField _lobbyIDInputField;
-        [SerializeField] TextMeshProUGUI _lobbyId;
-        [SerializeField] TextMeshProUGUI _lobbyPlayerCount;
-        [SerializeField] int _playerAmount = 4;
-
+        [SerializeField] int _playerAmount;
         private void OnEnable()
         {
             SteamMatchmaking.OnLobbyCreated += LobbyCreated;
@@ -37,9 +33,6 @@ namespace LostRunes
         {
             LobbySaver.Instance._currentLobby = lobby;
 
-            DisplayLobbyId(lobby);
-            DisplayPlayerCount(lobby);
-
             if (NetworkManager.Singleton.IsHost) return;
             NetworkManager.Singleton.GetComponent<FacepunchTransport>().targetSteamId = lobby.Owner.Id;
             NetworkManager.Singleton.StartClient();
@@ -57,49 +50,38 @@ namespace LostRunes
                 Debug.Log("Created");
             }
         }
-        [ClientRpc]
-        private void DisplayPlayerCount(Lobby lobby)
+        public void JoinViaSteam()
         {
-            if (_lobbyPlayerCount != null)
-            {
-                _lobbyPlayerCount.gameObject.SetActive(true);
-                _lobbyPlayerCount.text = lobby.MemberCount.ToString() + "/" + lobby.MaxMembers.ToString();
-            }
+            // Open the Steam overlay and show the friend list
+            SteamFriends.OpenOverlay("Friends");
         }
-        private void DisplayLobbyId(Lobby lobby)
-        {
-            if (_lobbyId != null)
-            {
-                _lobbyId.gameObject.SetActive(true);
-                _lobbyId.text = lobby.Id.ToString();
-            }
-        }
+
         public async void HostLobby()
         {
             await SteamMatchmaking.CreateLobbyAsync(_playerAmount);
         }
         public async void JoinLobbyWithID()
         {
-            ulong Id;
-            if (!ulong.TryParse(_lobbyIDInputField.text, out Id))
-                return;
-            Lobby[] lobbies = await SteamMatchmaking.LobbyList.WithSlotsAvailable(1).RequestAsync();
+            //ulong Id;
+            //if (!ulong.TryParse(_lobbyIDInputField.text, out Id))
+            //    return;
+            //Lobby[] lobbies = await SteamMatchmaking.LobbyList.WithSlotsAvailable(1).RequestAsync();
 
-            foreach (Lobby lobby in lobbies)
-            {
-                if (lobby.Id == Id)
-                {
-                    await lobby.Join();
-                    return;
-                }
-            }
+            //foreach (Lobby lobby in lobbies)
+            //{
+            //    if (lobby.Id == Id)
+            //    {
+            //        await lobby.Join();
+            //        return;
+            //    }
+            //}
         }
         public void CopyLobbyId()
         {
-            if (_lobbyId == null) return;
+            //if (_lobbyId == null) return;
 
             TextEditor textEditor = new TextEditor();
-            textEditor.text = _lobbyId.text;
+            //textEditor.text = _lobbyId.text;
             textEditor.SelectAll();
             textEditor.Copy();
         }

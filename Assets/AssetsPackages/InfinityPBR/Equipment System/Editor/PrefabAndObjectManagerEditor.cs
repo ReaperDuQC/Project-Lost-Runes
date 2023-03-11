@@ -25,16 +25,12 @@ namespace InfinityPBR
         private PrefabAndObjectManager Manager => GetManager();
         private PrefabAndObjectManager _prefabAndObjectManager;
         private List<string> GroupTypeNames => Manager.GetGroupTypeNames();
-        public List<PrefabObjectVariable> variables = new List<PrefabObjectVariable>();
 
         private PrefabGroup _activateGroup;
         private PrefabGroup _deactivateGroup;
 
         private bool _cachedEquipmentObjects = false;
         private List<GameObject> _equipmentObjects = new List<GameObject>();
-
-        private string newVariableName = "New Variable";
-        private int variableIndex = 0;
 
         private void CacheEquipmentObjects()
         {
@@ -250,10 +246,13 @@ namespace InfinityPBR
             SectionButtons();
             Space();
 
+            Line();
+            ShowActionButtons();
+            Line();
+            Space();
+            
             //Undo.RecordObject(Manager, "Undo Setup & Option Changes");
             SetupAndOptions();
-            
-            ShowVariables();
 
             //Undo.RecordObject(Manager, "Undo Object Delete");
             GroupTypes();
@@ -278,12 +277,10 @@ namespace InfinityPBR
 
         private void ShowActionButtons()
         {
-            StartRow();
             if (Button("Randomize All", 100))
             {
                 Manager.ActivateRandomAllGroups();
             }
-            EndRow();
         }
 
         /*
@@ -293,14 +290,12 @@ namespace InfinityPBR
         {
             // Cache values
             var tempGroups = EditorPrefs.GetBool("Prefab Manager Show Prefab Groups");
-            var tempVariables = EditorPrefs.GetBool("Prefab Manager Show Variables");
             var tempTypes = EditorPrefs.GetBool("Prefab Manager Show Group Types");
             var tempSetup = EditorPrefs.GetBool("Prefab Manager Show Setup And Options");
             
             // Show buttons
             EditorGUILayout.BeginHorizontal();
             SectionButton($"Prefab Groups ({Manager.prefabGroups.Count})", "Prefab Manager Show Prefab Groups");
-            SectionButton($"Variables ({Manager.variables.Count})", "Prefab Manager Show Variables");
             SectionButton($"Group Types ({GroupTypeNames.Count})", "Prefab Manager Show Group Types");
             SectionButton("Setup & Options", "Prefab Manager Show Setup And Options");
             EditorGUILayout.EndHorizontal();
@@ -310,132 +305,18 @@ namespace InfinityPBR
             {
                 EditorPrefs.SetBool("Prefab Manager Show Group Types", false);
                 EditorPrefs.SetBool("Prefab Manager Show Setup And Options", false);
-                EditorPrefs.SetBool("Prefab Manager Show Variables", false);
             }
             if (!tempTypes && EditorPrefs.GetBool("Prefab Manager Show Group Types"))
             {
                 EditorPrefs.SetBool("Prefab Manager Show Prefab Groups", false);
                 EditorPrefs.SetBool("Prefab Manager Show Setup And Options", false);
-                EditorPrefs.SetBool("Prefab Manager Show Variables", false);
             }
             if (!tempSetup && EditorPrefs.GetBool("Prefab Manager Show Setup And Options"))
             {
                 EditorPrefs.SetBool("Prefab Manager Show Group Types", false);
                 EditorPrefs.SetBool("Prefab Manager Show Prefab Groups", false);
-                EditorPrefs.SetBool("Prefab Manager Show Variables", false);
             }
-            if (!tempVariables && EditorPrefs.GetBool("Prefab Manager Show Variables"))
-            {
-                EditorPrefs.SetBool("Prefab Manager Show Group Types", false);
-                EditorPrefs.SetBool("Prefab Manager Show Prefab Groups", false);
-                EditorPrefs.SetBool("Prefab Manager Show Setup And Options", false);
-            }
-        }
-        
-        private void ShowVariables()
-        {
-            if (!EditorPrefs.GetBool("Prefab Manager Show Variables")) return;
-
-            HelpBoxMessage("Add variables which can be used to help determine which objects are turned on or " +
-                           "instantiated when a group is loaded.", MessageType.Info);
-
-            if (Manager.variables.Count > 0)
-                DisplayVariableHeader();
             
-            foreach (var variable in Manager.variables)
-                DisplayVariable(variable);
-
-            Space();
-            BackgroundColor(Color.yellow);
-            StartRow();
-            newVariableName = TextField(GetNewVariableName(), 150);
-            if (Button("Add New Variable", 150))
-                Manager.variables.Add(new PrefabObjectVariable(newVariableName));
-            EndRow();
-            ResetColor();
-        }
-
-        private void DisplayVariable(PrefabObjectVariable variable)
-        {
-            var tempName = variable.name;
-            var tempBool = variable.valueBool;
-            var tempFloat = variable.valueFloat;
-            var tempString = variable.valueString;
-            
-            StartRow();
-            variable.name = TextField(variable.name, 150);
-            variable.valueBool = Check(variable.valueBool, 50);
-            variable.valueFloat = Float(variable.valueFloat, 50);
-            variable.valueString = TextField(variable.valueString, 150);
-            BackgroundColor(Color.red);
-            if (Button(symbolX, 25))
-            {
-                RemoveGroupVariables(variable.name);
-                Manager.variables.RemoveAll(x => x.name == variable.name);
-                ExitGUI();
-            }
-            ResetColor();
-            EndRow();
-
-            if (variable.name != tempName)
-            {
-                if (Manager.variables.Count(x => x.name == variable.name) > 1)
-                {
-                    variable.name = tempName;
-                    Debug.LogWarning("Each variable name must be unique");
-                }
-                else
-                {
-                    UpdateGroupVariableNames(tempName, variable.name);
-                }
-            }
-
-            if (variable.valueBool != tempBool
-                || variable.valueFloat != tempFloat
-                || variable.valueString != tempString)
-            {
-                Manager.ReloadActiveGroups();
-            }
-        }
-
-        private void RemoveGroupVariables(string variableName)
-        {
-            foreach (var variable in Manager.prefabGroups.SelectMany(x => x.groupObjects)
-                .Where(x => x.variable.name == variableName).Select(x => x.variable))
-            {
-                variable.name = "";
-            }
-        }
-
-        private void UpdateGroupVariableNames(string oldName, string newName)
-        {
-            foreach (var obj in Manager.prefabGroups.SelectMany(x => x.groupObjects))
-            {
-                if (obj.variable.name != oldName) continue;
-                obj.variable.name = newName;
-            }
-        }
-
-        private void DisplayVariableHeader()
-        {
-            StartRow();
-            Label("Variable Name", 150, true);
-            Label("Bool", 50, true);
-            Label("Float", 50, true);
-            Label("String", 150, true);
-            EndRow();
-        }
-
-        private string GetNewVariableName()
-        {
-            if (String.IsNullOrEmpty(newVariableName)) return "New Variable";
-            if (Manager.variables.FirstOrDefault(x => x.name == newVariableName) == null) return newVariableName;
-
-            var i = 1;
-            while (Manager.variables.FirstOrDefault(x => x.name == $"New Variable {i}") != null)
-                i++;
-
-            return $"New Variable {i}";
         }
 
         private void GroupTypes()
@@ -509,19 +390,15 @@ namespace InfinityPBR
 
         private void ShowPrefabGroups()
         {
+            EditorGUILayout.BeginHorizontal();
             if (!EditorPrefs.GetBool("Prefab Manager Show Prefab Groups"))
             {
+                EditorGUILayout.EndHorizontal();
                 return;
             }
             
-            Line();
-            ShowActionButtons();
-            Line();
-            
-            EditorGUILayout.BeginHorizontal();
-            
             GUI.backgroundColor = Color.yellow;
-            if (GUILayout.Button("Create New Group (with no type)"))
+            if (GUILayout.Button("Create New Group"))
             {
                 Manager.CreateNewPrefabGroup();
                 DoCache();
@@ -1022,70 +899,10 @@ namespace InfinityPBR
             ShowObjectDelete(group, groupObject);
             ShowObjectRender(group, groupObject);
             ShowObjectFields(group, groupObject);
-            ShowVariable(group, groupObject);
 
             CheckOptionsAreSet(group, groupObject);
 
             EndRow();
-        }
-
-        
-        
-        private void ShowVariable(PrefabGroup group, GroupObject groupObject)
-        {
-            if (Manager.variables.Count == 0) return;
-            if (variableIndex >= Manager.variables.Count) variableIndex = Manager.variables.Count - 1;
-            
-            if (String.IsNullOrEmpty(groupObject.variable.name))
-            {
-                variableIndex = Popup(variableIndex, Manager.variables.Select(x => x.name).ToArray(), 150);
-                if (Button("Add Variable", 100))
-                {
-                    groupObject.variable = new PrefabObjectVariable(Manager.variables[variableIndex].name);
-                    ExitGUI();
-                }
-
-                return;
-            }
-
-            var variable = groupObject.variable;
-
-            if (Button($"{symbolRecycle}", 25))
-            {
-                variable.name = "";
-                ExitGUI();
-            }
-            
-            Label($"{variable.name}", 100);
-            variable.valueIndex = Popup(variable.valueIndex, variable.variableValueTypes, 50);
-
-            if (variable.valueIndex == 0)
-            {
-                variable.valueBool = Check(variable.valueBool);
-                return;
-            }
-            
-            if (variable.valueIndex == 1)
-            {
-                if (variable.valueFloatOptionIndex >= variable.valueFloatOptions.Length)
-                    variable.valueFloatOptionIndex = variable.valueFloatOptions.Length - 1;
-
-                variable.valueFloatOptionIndex = Popup(variable.valueFloatOptionIndex, variable.valueFloatOptions, 50);
-
-                variable.valueFloat = Float(variable.valueFloat, 50);
-                return;
-            }
-            
-            if (variable.valueIndex == 2)
-            {
-                if (variable.valueStringOptionIndex >= variable.valueStringOptions.Length)
-                    variable.valueStringOptionIndex = variable.valueStringOptions.Length - 1;
-
-                variable.valueStringOptionIndex = Popup(variable.valueStringOptionIndex, variable.valueStringOptions, 50);
-
-                variable.valueString = TextField(variable.valueString, 100);
-                return;
-            }
         }
 
         private void ShowObjectRender(PrefabGroup group, GroupObject groupObject)

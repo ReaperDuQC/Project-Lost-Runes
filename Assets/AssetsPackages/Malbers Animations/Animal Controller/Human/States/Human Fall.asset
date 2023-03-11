@@ -18,7 +18,12 @@ MonoBehaviour:
     UseConstant: 1
     ConstantValue: 
     Variable: {fileID: 0}
+  m_StateProfile:
+    UseConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
   Priority: 3
+  ResetInputOnFailed: 1
   General:
     modify: -1
     RootMotion: 0
@@ -97,7 +102,6 @@ MonoBehaviour:
     UseConstant: 1
     ConstantValue: 
     Variable: {fileID: 0}
-  ExitFrame: 0
   ExitOnMain: 0
   EnterCooldown:
     UseConstant: 1
@@ -144,7 +148,7 @@ MonoBehaviour:
     Variable: {fileID: 0}
   RayHits:
     UseConstant: 1
-    ConstantValue: 2
+    ConstantValue: 5
     Variable: {fileID: 0}
   UpDrag: 2
   BlendFall: 0

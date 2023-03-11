@@ -65,8 +65,6 @@ namespace MalbersAnimations.Controller
             var PivotColor = property.FindPropertyRelative("PivotColor");
             var EditorDisplay = property.FindPropertyRelative("EditorDisplay");
 
-
-
             //EditorGUI.HelpBox(buttonRect, "SD", MessageType.None);
 
             EditorDisplay.intValue = EditorGUI.Popup(buttonRect, EditorDisplay.intValue, popupOptions, popupStyle);

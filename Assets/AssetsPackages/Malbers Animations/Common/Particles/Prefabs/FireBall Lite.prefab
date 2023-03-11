@@ -14292,9 +14292,9 @@ MonoBehaviour:
     UseConstant: 1
     ConstantValue:
       serializedVersion: 2
-      m_Bits: 0
+      m_Bits: 4294967295
     Variable: {fileID: 11400000, guid: f489db1856e43dc47b175dd125135bdc, type: 2}
-  triggerInteraction: 0
+  triggerInteraction: 1
   owner: {fileID: 0}
   m_HitEffect:
     UseConstant: 1
@@ -14310,6 +14310,7 @@ MonoBehaviour:
     ConstantValue: 1
     Variable: {fileID: 0}
   CustomReaction: {fileID: 0}
+  element: {fileID: 11400000, guid: 951aaa6113759be4f86dbc0c288e7a04, type: 2}
   interact:
     UseConstant: 1
     ConstantValue: 1
@@ -14331,7 +14332,7 @@ MonoBehaviour:
       Variable: {fileID: 0}
   m_cChance:
     UseConstant: 1
-    ConstantValue: 0
+    ConstantValue: 0.33
     Variable: {fileID: 0}
   cMultiplier:
     UseConstant: 1

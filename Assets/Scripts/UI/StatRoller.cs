@@ -1,10 +1,10 @@
 using LostRunes.Menu;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using AudioSettings = LostRunes.Menu.AudioSettings;
 
 namespace LostRunes
 {
@@ -17,8 +17,10 @@ namespace LostRunes
 
         [SerializeField] TextMeshProUGUI[] _statsLevelText;
         [SerializeField] TextMeshProUGUI[] _statsText;
-        [SerializeField] TextMeshProUGUI _currentStatText;
-        [SerializeField] TextMeshProUGUI _autoRollText;
+
+        [SerializeField] CustomButton _currentStatButton;
+        [SerializeField] CustomButton _autoRollButton;
+        [SerializeField] CustomButton _startButton;
         [SerializeField] int _minStatValue = 1;
         [SerializeField] int _maxStatValue = 20;
 
@@ -37,19 +39,16 @@ namespace LostRunes
         bool _autoRoll = false;
         List<int> _statLevels;
 
-        bool _rollEnabled;
-
         [SerializeField] CharacterCreator _characterCreator;
-        SceneTransition _sceneTransition;
+        [SerializeField] GameMenu _gameMenu;
         private void Awake()
         {
             _audioSource = GetComponent<AudioSource>();
-            _sceneTransition = GetComponent<SceneTransition>();
             InitializeStats();
         }
         private void Start()
         {
-            MainMenuUI.Instance.OptionMenuUI.AudioSettings.SubscribeToSfxAudioSource(_audioSource);
+            _gameMenu.OptionMenuUI.AudioSettings.SubscribeToSfxAudioSource(_audioSource);
         }
         private void OnEnable()
         {
@@ -57,11 +56,9 @@ namespace LostRunes
             {
                 _playerControls = new PlayerControls();
                 _playerControls.MainMenu.Select.performed += i => _continuePressed();
-               // _playerControls.MainMenu.AutoRoll.performed += i => _rollAllStatsPressed();
+                //_playerControls.MainMenu.AutoRoll.performed += i => _rollAllStatsPressed();
             }
             _playerControls.Enable();
-
-            _rollEnabled = false;
 
             if (_continuePressed == null)
             {
@@ -89,10 +86,6 @@ namespace LostRunes
                 RandomizeStatValue(i);
             }
         }
-        public void EnableStatRoll(bool enable)
-        {
-            _rollEnabled = enable;
-        }
         void InitializeStats()
         {
             _statLevels = new List<int>();
@@ -109,7 +102,6 @@ namespace LostRunes
         }
         void SelectStat()
         {
-            if (!_rollEnabled) return;
             if (_autoRoll) return;
             RollStat();
         }
@@ -136,12 +128,10 @@ namespace LostRunes
         }
         public void AutoRollAllStats()
         {
-            if (!_rollEnabled) return;
-
             if (_autoRoll) return;
             _rollAllStatsPressed -= AutoRollAllStats;
-            _currentStatText.gameObject.SetActive(false);
-            _autoRollText.GetComponent<Button>().interactable = false;
+            _currentStatButton.gameObject.SetActive(false);
+            _autoRollButton.interactable = false;
             StartCoroutine(AutoRoll());
         }
         IEnumerator AutoRoll()
@@ -158,12 +148,12 @@ namespace LostRunes
             if (_currentStatIndex >= _statsText.Length) return;
             string statName = _statsText[_currentStatIndex].text.Replace(":", "");
 
-            _currentStatText.text = "Roll " + statName + "Level";
+            _currentStatButton.ButtonText.text = "Roll " + statName ;
         }
         void DisableControlText()
         {
-            _currentStatText.gameObject.SetActive(false);
-            _autoRollText.gameObject.SetActive(false);
+            _currentStatButton.gameObject.SetActive(false);
+            _autoRollButton.gameObject.SetActive(false);
         }
         IEnumerator UpdateColor(int currentStatIndex)
         {
@@ -179,33 +169,15 @@ namespace LostRunes
                 _statsLevelText[currentStatIndex].color = Color.Lerp(initialColor, finalColor, ratio);
             }
         }
-        public void EnableContinue()
-        {
-            _continuePressed = null;
-            //_sceneTransition.GetPromptButton().GetComponent<Button>().onClick.AddListener(_sceneTransition.StartOutTransition);
-            //_continuePressed += _sceneTransition.StartOutTransition;
-            //_sceneTransition.GetPromptButton().GetComponent<Button>().onClick.AddListener(_sceneTransition.HidePrompt);
-            //_continuePressed += _sceneTransition.HidePrompt;
-            //_sceneTransition.GetPromptButton().GetComponent<Button>().onClick.AddListener(DisableContinue);
-            //_continuePressed += DisableContinue;
-        }
-        public void DisableContinue()
-        {
-            _continuePressed = null;
-            //_continuePressed += _sceneTransition.ResumeAsyncLoad;
-        }
         void OnAllStatsRolled()
         {
             DisableControlText();
-            //_sceneTransition.DisplayPrompt();
-            //_sceneTransition.GetPromptButton().GetComponent<Button>().onClick.AddListener(DisableContinue);
-            EnableContinue();
-            SaveRolledStats();
+            _startButton.gameObject.SetActive(true);    
         }
         void PlaySound(int currentStatIndex)
         {
             if (_audioSource == null) return;
-            MainMenuUI.Instance.OptionMenuUI.AudioSettings.RandomizePitch(_audioSource);
+            AudioSettings.RandomizePitch(_audioSource);
 
             AudioClip audioClip = SelectAudioClip(currentStatIndex);
 
@@ -216,27 +188,15 @@ namespace LostRunes
         }
         AudioClip SelectAudioClip(int currentStatIndex)
         {
-            AudioClip audioClip = null;
-            if (_statLevels[currentStatIndex] == _minStatValue)
-            {
-                audioClip = _lowStatSound;
-            }
-            else if (_statLevels[currentStatIndex] == _maxStatValue)
-            {
-                audioClip = _highStatSound;
-            }
-            else
-            {
-                audioClip = _statSound;
-            }
-            return audioClip;
+            if (_statLevels[currentStatIndex] <= _minStatValue) return _lowStatSound;
+            
+            if (_statLevels[currentStatIndex] < _maxStatValue) return _statSound;
+
+            return _highStatSound;
         }
-        void SaveRolledStats()
+        public void SaveStats()
         {
-            //string characterName = _characterCreator != null ? _characterCreator.CharacterName : "";
-            //bool isMale = _characterCreator != null ? _characterCreator.IsMale :true;
-            //SaveSystem.SaveSystem.SaveCharacter(new CharacterStatsData(characterName, isMale, _statLevels));
-            //SaveSystem.SaveSystem.SaveContinueData(false);
+
         }
     }
 }

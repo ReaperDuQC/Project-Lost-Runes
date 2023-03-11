@@ -171,6 +171,8 @@ namespace MalbersAnimations.Controller
                     MDebug($"{ActiveCombo.Name} In CoolDown");
                     return false; //Do not Play a Combo if its in cooldown
                 }
+               // Debug.Log("ActiveCombo = " + ActiveCombo);
+
                 return ActiveCombo.Play(this);
             }
             return false;
@@ -247,6 +249,7 @@ namespace MalbersAnimations.Controller
         public bool Play(ComboManager M)
         {
             var animal = M.animal;
+            if (animal.IsPreparingMode) return false;
 
            //If the Animal is not Playing a Mode
             if (!animal.IsPlayingMode 
@@ -308,7 +311,7 @@ namespace MalbersAnimations.Controller
                 } 
             }
 
-          // Debug.Log("FAILED PLAY COMBO MODE!");
+          //  Debug.Log("FAILED PLAY COMBO MODE!");
            return false;
         }
 

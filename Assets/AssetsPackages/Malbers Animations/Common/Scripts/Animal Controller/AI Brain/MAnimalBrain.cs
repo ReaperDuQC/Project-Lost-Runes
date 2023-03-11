@@ -215,6 +215,7 @@ namespace MalbersAnimations.Controller.AI
 
         public void StartBrain()
         {
+            AIControl.AutoNextTarget = false;
             AIControl.SetActive(true);
 
             if (currentState)
@@ -238,8 +239,7 @@ namespace MalbersAnimations.Controller.AI
                 return;
             }
 
-            AIControl.AutoNextTarget = false;
-
+        
 
             LastWayPoint = null;
 
@@ -336,6 +336,11 @@ namespace MalbersAnimations.Controller.AI
 
         public bool IsTaskDone(int TaskIndex) => TasksDone[TaskIndex];
 
+        /// <summary>
+        /// Set if a Task is finished or not
+        /// </summary>
+        /// <param name="TaskIndex">Index of the task</param>
+        /// <param name="value">True[Default] if the Task is finished, False is not</param>
         public void TaskDone(int TaskIndex, bool value = true) //If the first task is done then go and do the next one
         {
             TasksDone[TaskIndex] = value;
@@ -637,90 +642,86 @@ namespace MalbersAnimations.Controller.AI
 
         private void DrawDebug()
         {
-            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+            using (new GUILayout.VerticalScope(EditorStyles.helpBox))
             {
                 EditorGUILayout.PropertyField(debugAIStates, new GUIContent("Debug On Screen"));
 
                 if (Application.isPlaying)
                 {
-                    EditorGUI.BeginDisabledGroup(true);
-                    Repaint();
-
-
-                    EditorGUILayout.ObjectField("Brain Target", M.Target, typeof(Transform), false);
-
-                    if (M.enabled && M.BrainInitialize && M.currentState != null)
+                    using (new EditorGUI.DisabledGroupScope(true))
                     {
-                        EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+
+                        EditorGUILayout.ObjectField("Brain Target", M.Target, typeof(Transform), false);
+
+                        if (M.enabled && M.BrainInitialize && M.currentState != null)
                         {
-                            EditorGUILayout.ObjectField("AI State", M.currentState, typeof(MAIState), false);
-
-
-                            EditorGUILayout.LabelField("Tasks", EditorStyles.boldLabel);
-
-                            for (int i = 0; i < M.currentState.tasks.Length; i++)
+                            using (new GUILayout.VerticalScope(EditorStyles.helpBox))
                             {
-                                EditorGUILayout.BeginHorizontal();
-                                EditorGUILayout.ObjectField(GUIContent.none, M.currentState.tasks[i], typeof(MTask), false, GUILayout.MinWidth(100));
-                                EditorGUILayout.LabelField($"  Started: {(M.TasksStarted[i] ? "☑" : "[  ]")}. Done: {(M.TasksDone[i] ? "☑" : "[  ]")}", GUILayout.MinWidth(100));
-                                EditorGUILayout.LabelField($"Start Time: {M.TasksStartTime[i]:F2}", GUILayout.MinWidth(50));
-                                EditorGUILayout.EndHorizontal();
-                            }
+                                EditorGUILayout.ObjectField("AI State", M.currentState, typeof(MAIState), false);
 
 
-                            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
-                            {
-                                EditorGUILayout.LabelField("Task Variables", EditorStyles.boldLabel);
+                                EditorGUILayout.LabelField("Tasks", EditorStyles.boldLabel);
+
                                 for (int i = 0; i < M.currentState.tasks.Length; i++)
                                 {
-                                    var TasksVars = serializedObject.FindProperty("TasksVars");
-                                     
-                                    if (TasksVars != null && TasksVars.arraySize > i)
+                                    using (new GUILayout.HorizontalScope())
                                     {
-                                        EditorGUI.indentLevel++;
-                                        EditorGUILayout.PropertyField(TasksVars.GetArrayElementAtIndex(i),
-                                            new GUIContent(M.currentState.tasks[i].name), true);
-                                        EditorGUI.indentLevel--;
+                                        EditorGUILayout.ObjectField(GUIContent.none, M.currentState.tasks[i], typeof(MTask), false, GUILayout.MinWidth(100));
+                                        EditorGUILayout.LabelField($"  Started: {(M.TasksStarted[i] ? "☑" : "[  ]")}. Done: {(M.TasksDone[i] ? "☑" : "[  ]")}", GUILayout.MinWidth(100));
+                                        EditorGUILayout.LabelField($"Start Time: {M.TasksStartTime[i]:F2}", GUILayout.MinWidth(50));
+                                    }
+                                }
+
+
+                                using (new GUILayout.VerticalScope(EditorStyles.helpBox))
+                                {
+                                    EditorGUILayout.LabelField("Task Variables", EditorStyles.boldLabel);
+                                    for (int i = 0; i < M.currentState.tasks.Length; i++)
+                                    {
+                                        var TasksVars = serializedObject.FindProperty("TasksVars");
+
+                                        if (TasksVars != null && TasksVars.arraySize > i)
+                                        {
+                                            EditorGUI.indentLevel++;
+                                            EditorGUILayout.PropertyField(TasksVars.GetArrayElementAtIndex(i),
+                                                new GUIContent(M.currentState.tasks[i].name), true);
+                                            EditorGUI.indentLevel--;
+                                        }
                                     }
                                 }
                             }
-                            EditorGUILayout.EndVertical();
-
+                           
                         }
-                        EditorGUILayout.EndVertical();
-                    }
-                    EditorGUILayout.Space();
+                        EditorGUILayout.Space();
 
-                    EditorGUILayout.BeginVertical(EditorStyles.helpBox);
-                    {
-                        EditorGUILayout.LabelField("Decision Variables", EditorStyles.boldLabel);
-                        for (int i = 0; i < M.currentState.transitions.Length; i++)
+                        using (new GUILayout.VerticalScope(EditorStyles.helpBox))
                         {
-                            var DecisionsVars = serializedObject.FindProperty("DecisionsVars");
-                            var Des = M.currentState.transitions[i].decision;
-
-                            var waiting = "";
-
-                            if (Des.WaitForAllTasks && !M.AllTasksDone()) waiting = "[WAIT T*]";
-                            if (Des.waitForTask != -1 && !M.IsTaskDone(Des.waitForTask)) waiting = "[WAIT T]";
-
-
-                            EditorGUILayout.ObjectField($"Decision [{i }] {waiting}", Des, typeof(MAIDecision), false, GUILayout.MinWidth(100));
-                            if (DecisionsVars != null && DecisionsVars.arraySize > i)
+                            EditorGUILayout.LabelField("Decision Variables", EditorStyles.boldLabel);
+                            for (int i = 0; i < M.currentState.transitions.Length; i++)
                             {
-                                EditorGUI.indentLevel++;
-                                EditorGUILayout.PropertyField(DecisionsVars.GetArrayElementAtIndex(i),
-                                    new GUIContent(M.currentState.transitions[i].decision.name), true);
-                                EditorGUI.indentLevel--;
-                            }
-                        }
-                    }
-                    EditorGUILayout.EndVertical();
+                                var DecisionsVars = serializedObject.FindProperty("DecisionsVars");
+                                var Des = M.currentState.transitions[i].decision;
 
-                    EditorGUI.EndDisabledGroup();
+                                var waiting = "";
+
+                                if (Des.WaitForAllTasks && !M.AllTasksDone()) waiting = "[WAIT T*]";
+                                if (Des.waitForTask != -1 && !M.IsTaskDone(Des.waitForTask)) waiting = "[WAIT T]";
+
+
+                                EditorGUILayout.ObjectField($"Decision [{i}] {waiting}", Des, typeof(MAIDecision), false, GUILayout.MinWidth(100));
+                                if (DecisionsVars != null && DecisionsVars.arraySize > i)
+                                {
+                                    EditorGUI.indentLevel++;
+                                    EditorGUILayout.PropertyField(DecisionsVars.GetArrayElementAtIndex(i),
+                                        new GUIContent(M.currentState.transitions[i].decision.name), true);
+                                    EditorGUI.indentLevel--;
+                                }
+                            }
+                        } 
+                        Repaint();
+                    }
                 }
             }
-            EditorGUILayout.EndVertical();
         }
 
         private void DrawGeneral()

@@ -56,6 +56,8 @@ namespace MalbersAnimations
             }
         }
 
+       // public virtual MWeapon GetWeapon() =>
+
         public void SetWeapon(GameObject weap) => Weapon = weap.GetComponent<MWeapon>();
 
 

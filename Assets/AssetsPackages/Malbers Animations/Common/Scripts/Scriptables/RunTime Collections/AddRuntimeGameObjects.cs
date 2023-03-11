@@ -22,10 +22,7 @@ namespace MalbersAnimations.Scriptables
         public static GUIStyle StyleBlue => MTools.Style(new Color(0, 0.5f, 1f, 0.3f));
         AddRuntimeGameObjects M;
 
-        private void OnEnable()
-        {
-            M = (AddRuntimeGameObjects)target;
-        }
+        private void OnEnable() => M = (AddRuntimeGameObjects)target;
 
         public override void OnInspectorGUI()
         {
@@ -34,9 +31,7 @@ namespace MalbersAnimations.Scriptables
             UnityEditor.EditorGUILayout.PropertyField(Collection);
 
             if (M.Collection && !string.IsNullOrEmpty(M.Collection.Description))
-            {
                 MalbersEditor.DrawDescription(M.Collection.Description);
-            }
 
             serializedObject.ApplyModifiedProperties();
         }

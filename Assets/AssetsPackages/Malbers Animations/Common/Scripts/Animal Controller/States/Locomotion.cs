@@ -63,25 +63,26 @@ namespace MalbersAnimations.Controller
         public override void Activate()
         {
             base.Activate();
-            var speed = (int)animal.CurrentSpeedModifier.Vertical.Value;
+            
            // if (animal.Sprint) speed++;
-            SetEnterStatus(speed); //When entering Locomotion the State set the Status the current Speed Modifier.
+            SetEnterStatus((int)animal.CurrentSpeedModifier.Vertical.Value); //When entering Locomotion the State set the Status the current Speed Modifier.
            // animal.AlignPosition(animal.DeltaTime);
         }
 
 
         public override void EnterCoreAnimation()
         {
-           // SetEnterStatus(0);//Use the Status on the Animator to show the Vertical Speed used on start of the state
              if (animal.LastState.ID == StateEnum.Climb) animal.ResetCameraInput(); //HACK
+            //Keep the Enter Speed on the State Enter Parameter.
+            SetEnterStatus((int)animal.CurrentSpeedModifier.Vertical.Value); 
 
             if (ResetIntertia.Value) animal.ResetInertiaSpeed();  //BUG THAT IT WAS MAKING GO FASTER WHEN ENTERING LOCOMOTION
-
+             
         }
 
         public override void EnterTagAnimation()
         {
-            if (CurrentAnimTag == EnterTagHash) //Using Enter Animation Tag
+            if (CurrentAnimTag == EnterTagHash) //Using Enter Animation Tag, set the vertical smooth to the velocity 
             {
                 animal.VerticalSmooth = animal.CurrentSpeedModifier.Vertical;
             }
@@ -91,6 +92,12 @@ namespace MalbersAnimations.Controller
         {
             Wall_Stop();
             Anti_Fall();
+        }
+
+        public override void SpeedModifierChanged(MSpeed speed, int SpeedIndex)
+        {
+            base.SpeedModifierChanged(speed, SpeedIndex);
+            SetEnterStatus((int)speed.Vertical.Value); //Use the Enter Status to check the speed
         }
 
         public override void OnStateMove(float deltatime)
@@ -106,6 +113,17 @@ namespace MalbersAnimations.Controller
                 }
                else if (!animal.FrontRay && !animal.MainRay)
                     animal.Grounded = false; 
+            }
+
+            if (InExitAnimation)
+            {
+                
+                //Keep Vertical speed here!!!!!!
+                if (Anim.IsInTransition(0) && !animal.MovementDetected)
+                {
+                    animal.MovementAxis.z = 1;
+                 //   Debug.Log("VerticalSmooth");
+                }
             }
         }
 
@@ -233,7 +251,7 @@ namespace MalbersAnimations.Controller
 
             if (WallStop)
             {
-                var MainPivotPoint = animal.Main_Pivot_Point;
+                var MainPivotPoint = Application.isPlaying ? animal.Main_Pivot_Point : animal.transform.position + new Vector3(0, animal.Height, 0);
                 Debug.DrawRay(MainPivotPoint, animal.Forward * WallRayLength, DebugColor);
             }
         }

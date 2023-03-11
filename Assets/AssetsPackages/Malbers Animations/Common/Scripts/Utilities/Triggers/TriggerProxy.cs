@@ -71,6 +71,7 @@ namespace MalbersAnimations.Utilities
             }
 
             if (trigger == null) return false; // you are 
+            if (other == null) return false; // you are CALLING A ELIMINATED ONE
             if (triggerInteraction == QueryTriggerInteraction.Ignore && other.isTrigger) return false; // Check Trigger Interactions 
             if (!MTools.Layer_in_LayerMask(other.gameObject.layer, Layer)) return false;
 
@@ -81,29 +82,7 @@ namespace MalbersAnimations.Utilities
         }
 
 
-        public GameObject FindRealParent(Transform other)
-        {
-            if (other.parent == null)
-                return other.gameObject;
-            else
-            {
-                if (MTools.Layer_in_LayerMask(other.gameObject.layer, Layer))               //If this object is in the same Layer
-                {
-                    if (MTools.Layer_in_LayerMask(other.parent.gameObject.layer, Layer))    //Check the Parent
-                    {
-                        return FindRealParent(other.parent);                                //If the Parent is also on the Layer; Keep searching Upwards
-                    }
-                    else
-                    {
-                        return other.gameObject;                                            //If the Parent is not on the same Layer ... return the Child
-                    }
-                }
-                else
-                {
-                    return other.gameObject;                                                 //If the Child is not on the same Layer ... return the Child
-                }
-            }
-        }
+        
 
         public void OnTriggerEnter(Collider other)
         {
@@ -111,10 +90,13 @@ namespace MalbersAnimations.Utilities
             {
                 var realRoot = other.transform.root.gameObject;        //Get the animal on the entering collider
 
-                if (!MTools.Layer_in_LayerMask(realRoot.layer, Layer))  //If the Root is not on the same Layer
-                    realRoot = FindRealParent(other.transform);         //Means the Root is not on the real root since its not on the search layer 
+                //Means the Root is not on the real root since its not on the search layer
+                if (realRoot.layer != other.gameObject.layer)          
+                    realRoot = MTools.FindRealParentByLayer(other.transform);         
 
                 OnTrigger_Enter.Invoke(other); //Invoke when a Collider enters the Trigger
+              
+
                 if (m_debug) Debug.Log($"<b>{name}</b> [Entering Collider] -> [{other.name}]", this);
 
                 ////Check Recently destroyed Colliders (Strange bug)
@@ -132,12 +114,44 @@ namespace MalbersAnimations.Utilities
                 }
                 else
                 {
-                    EnteringGameObjects.Add(realRoot);
                     EnterTriggerInteraction(realRoot, other);
+                    EnteringGameObjects.Add(realRoot); 
                     OnGameObjectEnter.Invoke(realRoot);
-
                     if (m_debug) Debug.Log($"<b>{name}</b> [Entering GameObject] -> [{realRoot.name}]", this);
                 }
+            }
+        }
+
+        public void TriggerExit(Collider other, bool remove)
+        {
+            if (TrueConditions(other))
+            {
+                var realRoot = other.transform.root.gameObject;         //Get the gameObject on the entering collider
+                //Means the Root is not on the real root since its not on the search layer
+                if (realRoot.layer != other.gameObject.layer)
+                    realRoot = MTools.FindRealParentByLayer(other.transform);
+
+                OnTrigger_Exit.Invoke(other);
+
+                m_colliders.Remove(other);
+                RemoveTarget(other, remove);
+
+                if (m_debug) Debug.Log($"<b>{name}</b> [Exit Collider] -> [{other.name}]", this);
+
+
+
+                if (EnteringGameObjects.Contains(realRoot))             //Means that the Entering GameObject still exist
+                {
+                    if (!m_colliders.Exists(c => c != null && c.transform.root.gameObject == realRoot)) //Means that all that root colliders are out
+                    {
+                        EnteringGameObjects.Remove(realRoot);
+                        OnGameObjectExit.Invoke(realRoot);
+                        ExitTriggerInteraction(realRoot, other);
+
+                        if (m_debug) Debug.Log($"<b>{name}</b> [Leaving Gameobject] -> [{realRoot.name}]", this);
+                    }
+                }
+                //CheckMissingColliders();
             }
         }
 
@@ -170,38 +184,7 @@ namespace MalbersAnimations.Utilities
         public void OnTriggerExit(Collider other) => TriggerExit(other, true);
 
         /// <summary>OnTrigger exit Logic</summary>
-        public void TriggerExit(Collider other, bool remove)
-        {
-            if (TrueConditions(other))
-            {
-                OnTrigger_Exit.Invoke(other);
-
-                m_colliders.Remove(other);
-                RemoveTarget(other, remove);
-
-                if (m_debug) Debug.Log($"<b>{name}</b> [Exit Collider] -> [{other.name}]", this);
-
-                var realRoot = other.transform.root.gameObject;         //Get the gameObject on the entering collider
-
-                if (!MTools.Layer_in_LayerMask(realRoot.layer, Layer))  //If the Root is not on the same Layer
-                    realRoot = FindRealParent(other.transform);         //Means the Root is not on the real root since its not on the search layer
-
-                if (EnteringGameObjects.Contains(realRoot))             //Means that the Entering GameObject still exist
-                {
-                    if (!m_colliders.Exists(c => c != null && c.transform.root.gameObject == realRoot)) //Means that all that root colliders are out
-                    {
-                        EnteringGameObjects.Remove(realRoot);
-
-                        OnGameObjectExit.Invoke(realRoot);
-
-                        ExitTriggerInteraction(realRoot, other);
-
-                        if (m_debug) Debug.Log($"<b>{name}</b> [Leaving Gameobject] -> [{realRoot.name}]", this);
-                    }
-                }
-                //CheckMissingColliders();
-            }
-        }
+  
 
         internal void RemoveTarget(Collider other, bool remove)
         {
@@ -370,71 +353,75 @@ namespace MalbersAnimations.Utilities
             else DrawEvents();
             if (Application.isPlaying && debug.boolValue)
             {
-                EditorGUI.BeginDisabledGroup(true);
-                EditorGUILayout.BeginVertical(EditorStyles.helpBox);    
-
-                EditorGUILayout.LabelField("Debug", EditorStyles.boldLabel);
-
-                //   EditorGUILayout.ObjectField("Own Collider", m.trigger, typeof(Collider), false);
-
-                EditorGUILayout.LabelField("GameObjects (" + m.EnteringGameObjects.Count + ")", EditorStyles.boldLabel);
-                foreach (var item in m.EnteringGameObjects)
+                using (new EditorGUI.DisabledGroupScope(true))
                 {
-                    if (item != null) EditorGUILayout.ObjectField(item.name, item, typeof(GameObject), false);
+                    using (new GUILayout.VerticalScope(EditorStyles.helpBox))
+                    {
+                        EditorGUILayout.LabelField("Debug", EditorStyles.boldLabel);
+
+                        //   EditorGUILayout.ObjectField("Own Collider", m.trigger, typeof(Collider), false);
+
+                        EditorGUILayout.LabelField("GameObjects (" + m.EnteringGameObjects.Count + ")", EditorStyles.boldLabel);
+                        foreach (var item in m.EnteringGameObjects)
+                        {
+                            if (item != null) EditorGUILayout.ObjectField(item.name, item, typeof(GameObject), false);
+                        }
+
+                        EditorGUILayout.LabelField("Colliders (" + m.m_colliders.Count + ")", EditorStyles.boldLabel);
+
+                        foreach (var item in m.m_colliders)
+                        {
+                            if (item != null) EditorGUILayout.ObjectField(item.name, item, typeof(Collider), false);
+                        }
+
+                        //EditorGUILayout.LabelField("Targets (" + m.TriggerTargets.Count + ")", EditorStyles.boldLabel);
+
+                        //foreach (var item in m.TriggerTargets)
+                        //{
+                        //    if (item != null) EditorGUILayout.ObjectField(item.name, item, typeof(Collider), false);
+                        //}
+                    }
+                    Repaint();
                 }
-
-                EditorGUILayout.LabelField("Colliders (" + m.m_colliders.Count + ")", EditorStyles.boldLabel);
-
-                foreach (var item in m.m_colliders)
-                {
-                    if (item != null)   EditorGUILayout.ObjectField(item.name, item, typeof(Collider), false);
-                }
-
-                //EditorGUILayout.LabelField("Targets (" + m.TriggerTargets.Count + ")", EditorStyles.boldLabel);
-
-                //foreach (var item in m.TriggerTargets)
-                //{
-                //    if (item != null) EditorGUILayout.ObjectField(item.name, item, typeof(Collider), false);
-                //}
-
-                EditorGUILayout.EndVertical();
-                Repaint();
-                EditorGUI.EndDisabledGroup();
             }
-
             serializedObject.ApplyModifiedProperties();
         }
 
         private void DrawGeneral()
         {
-            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.PropertyField(hitLayer, new GUIContent("Layer"));
-            MalbersEditor.DrawDebugIcon(debug);
-            EditorGUILayout.EndHorizontal();
-            EditorGUILayout.PropertyField(triggerInteraction);
-            EditorGUILayout.PropertyField(useOnTriggerStay);
-            EditorGUI.indentLevel++;
-            EditorGUILayout.PropertyField(Tags, true);
-            EditorGUI.indentLevel--;
-            EditorGUILayout.EndVertical();
+            using (new GUILayout.VerticalScope(EditorStyles.helpBox))
+            {
+                using (new GUILayout.HorizontalScope())
+                {
+                    EditorGUILayout.PropertyField(hitLayer, new GUIContent("Layer"));
+                    MalbersEditor.DrawDebugIcon(debug);
+                }
+
+                EditorGUILayout.PropertyField(triggerInteraction);
+                EditorGUILayout.PropertyField(useOnTriggerStay);
+                EditorGUI.indentLevel++;
+                EditorGUILayout.PropertyField(Tags, true);
+                EditorGUI.indentLevel--;
+            }
         }
+
+
 
         private void DrawEvents()
         {
-            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+            using (new GUILayout.VerticalScope(EditorStyles.helpBox))
+            {
+                EditorGUILayout.PropertyField(OnTrigger_Enter, new GUIContent("On Trigger Enter"));
+                EditorGUILayout.PropertyField(OnTrigger_Exit, new GUIContent("On Trigger Exit"));
+                if (m.useOnTriggerStay.Value)
+                    EditorGUILayout.PropertyField(OnTrigger_Stay, new GUIContent("On Trigger Stay"));
 
-            EditorGUILayout.PropertyField(OnTrigger_Enter, new GUIContent("On Trigger Enter"));
-            EditorGUILayout.PropertyField(OnTrigger_Exit, new GUIContent("On Trigger Exit"));
-            if (m.useOnTriggerStay.Value)
-                EditorGUILayout.PropertyField(OnTrigger_Stay, new GUIContent("On Trigger Stay"));
 
-
-            EditorGUILayout.PropertyField(OnGameObjectEnter, new GUIContent("On GameObject Enter "));
-            EditorGUILayout.PropertyField(OnGameObjectExit, new GUIContent("On GameObject Exit"));
-            if (m.useOnTriggerStay.Value)
-                EditorGUILayout.PropertyField(OnGameObjectStay, new GUIContent("On GameObject Stay"));
-            EditorGUILayout.EndVertical();
+                EditorGUILayout.PropertyField(OnGameObjectEnter, new GUIContent("On GameObject Enter "));
+                EditorGUILayout.PropertyField(OnGameObjectExit, new GUIContent("On GameObject Exit"));
+                if (m.useOnTriggerStay.Value)
+                    EditorGUILayout.PropertyField(OnGameObjectStay, new GUIContent("On GameObject Stay"));
+            }
         }
     }
 #endif

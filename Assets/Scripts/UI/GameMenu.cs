@@ -1,11 +1,4 @@
-using LostRunes.Menu;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using AudioSettings = LostRunes.Menu.AudioSettings;
-using UnityEngine.SceneManagement;
-using System.ComponentModel.Design;
 
 namespace LostRunes
 {
@@ -34,7 +27,7 @@ namespace LostRunes
             if(_playerControls == null)
             {
                 _playerControls = new PlayerControls();
-                _playerControls.PlayerActions.Start.performed += i => CloseMenu();
+               // _playerControls.PlayerActions.Start.performed += i => CloseMenu();
             }
             _playerControls.Enable();
         }
@@ -45,71 +38,24 @@ namespace LostRunes
         public override void Initialize()
         {
             base.Initialize();
+            _activePanel = _menuPanel;
+            _basePanel = _activePanel;
         }
-        public void ToggleMenuPanel()
+        public void SetMenuPanelActive(bool active)
         {
-            if (_menuPanel == null) return;
-
-            _menuPanel.SetActive(!_menuPanel.activeSelf);
+            SetPanelActive(_menuPanel, active);
         }
-        public void ToggleEquipmentPanel()
+        public void SetEquipmentPanelActive(bool active)
         {
-            if (_equipmentPanel == null) return;
-
-            _equipmentPanel.SetActive(!_equipmentPanel.activeSelf);
+            SetPanelActive(_equipmentPanel, active);
         }
-        public void ToggleInventoryPanel()
+        public void SetInventoryPanelActive(bool active)
         {
-            if (_inventoryPanel == null) return;
-
-            _inventoryPanel.SetActive(!_inventoryPanel.activeSelf);
+            SetPanelActive(_inventoryPanel, active);
         }
-        public void ToggleQuitPanel()
+        public void SetQuitPanelActive(bool active)
         {
-            if (_quitPanel == null) return;
-
-            _quitPanel.SetActive(!_quitPanel.activeSelf);
-        }
-        private void CloseMenu()
-        {
-            if (_quitPanel.activeSelf)
-            {
-                ToggleQuitPanel();
-                ToggleMenuPanel();
-            }
-            else if (_inventoryPanel.activeSelf)
-            {
-                ToggleInventoryPanel();
-                ToggleMenuPanel();
-            }
-            else if (_equipmentPanel.activeSelf)
-            {
-                ToggleEquipmentPanel();
-                ToggleMenuPanel();
-            }
-            else if (OptionMenuUI.gameObject.activeSelf)
-            {
-                ToggleOptionPanel();
-                ToggleMenuPanel();
-            }
-            else if (_menuPanel.activeSelf)
-            {
-                ToggleMenuPanel();
-                ToggleCursorVisibility(false);
-            }
-            else
-            {
-                ToggleMenuPanel();
-                ToggleCursorVisibility(true);
-            }
-        }
-        private void ToggleCursorVisibility(bool visible)
-        {
-            //GameManager instance = GameManager.Instance;
-            //if (instance != null)
-            //{
-            //    instance.HideCursor(visible);
-            //}
+            SetPanelActive(_quitPanel, active);
         }
     }
 }

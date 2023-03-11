@@ -42,6 +42,24 @@ namespace LostRunes
             _audioOptionPanel.gameObject.SetActive(false);
             _gameplayOptionPanel.gameObject.SetActive(true);
         }
+        public void SaveAudioSettings()
+        {
+            _audioSettings.SaveAudioSettings();
+        }
+        public void SaveGraphicSettings()
+        {
+            _graphicSettings.SaveGraphicSettings();
+        }
+        public void SaveGameplaySettings()
+        {
+            _gameplaySettings.SaveGameplaySettings();
+        }
+        public void SaveSettings()
+        {
+            SaveAudioSettings();
+            SaveGraphicSettings();
+            SaveGameplaySettings();
+        }
         public void LoadOptionData()
         {
             _audioSettings.LoadAudioSettingsData();

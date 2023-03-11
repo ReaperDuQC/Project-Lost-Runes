@@ -35,7 +35,7 @@ namespace LostRunes
                 Destroy(this);
                 return;
             }
-
+            this.enabled = true;
             _cameraHandler = cameraHandler;
             _inputHandler = inputHandler;
             _characterStats = stats;

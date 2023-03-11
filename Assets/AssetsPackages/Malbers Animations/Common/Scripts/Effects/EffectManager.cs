@@ -148,6 +148,8 @@ namespace MalbersAnimations.Utilities
                         {
                             e.Instance = Instantiate(e.effect);         //Instantiate!
                             e.Instance.gameObject.SetActive(false);
+
+                            e.Instance.transform.localScale *= e.scale;
                         }
                         else
                         {
@@ -356,6 +358,7 @@ namespace MalbersAnimations.Utilities
 
         /// <summary>Delay Time to execute the effect after is called.</summary>
         public float delay;
+        public float scale = 1f;
 
         /// <summary>Scriptable Object to Modify anything you want before, during or after the effect is invoked</summary>
         public EffectModifier Modifier;
@@ -457,18 +460,27 @@ namespace MalbersAnimations.Utilities
                         if (eff.isExpanded)
                         {
 
-                            string isPrefab = "";
+                            string prefabTooltip = "";
 
-                            if (eff.objectReferenceValue != null && (eff.objectReferenceValue as GameObject).IsPrefab())
-                                isPrefab = "[Prefab]";
+                            var is_Prefab = false;
+                            
+                            if (eff.objectReferenceValue != null) 
+                                is_Prefab = (eff.objectReferenceValue as GameObject).IsPrefab();
 
-                            EditorGUILayout.PropertyField(Element.FindPropertyRelative("effect"), new GUIContent("Effect " + isPrefab, "The Prefab or gameobject which holds the Effect(Particles, transforms)"));
+                            if (eff.objectReferenceValue != null && is_Prefab)
+                            {
+                                prefabTooltip = "[Prefab]";
+                            }
+                            EditorGUILayout.PropertyField(Element.FindPropertyRelative("effect"), new GUIContent("Effect " + prefabTooltip, "The Prefab or gameobject which holds the Effect(Particles, transforms)"));
 
+                            if (is_Prefab )
+                                EditorGUILayout.PropertyField(Element.FindPropertyRelative("scale"), new GUIContent("Scale", "Scale the Prefab object"));
 
                             if (effect.effect != null)
                                 EditorGUILayout.PropertyField(Element.FindPropertyRelative("life"), new GUIContent("Life", "Duration of the Effect. The Effect will be destroyed after the Life time has passed"));
 
                             EditorGUILayout.PropertyField(Element.FindPropertyRelative("delay"), new GUIContent("Delay", "Time before playing the Effect"));
+                            
 
                             if (eff.objectReferenceValue != null && !(eff.objectReferenceValue as GameObject).IsPrefab())
                                 EditorGUILayout.PropertyField(Element.FindPropertyRelative("disableOnStop"), new GUIContent("Disable On Stop", "if the Effect is not a prefab the gameOBject will be disabled"));

@@ -168,7 +168,6 @@ namespace MalbersAnimations
 
           //   Debug.Log($"activemap [{ActiveMap.name.Value}] [{ActiveMapIndex}]");
 
-
             foreach (var item in ActiveMap.inputs)
                 _ = item.GetValue;  //This will set the Current Input value to the inputs and Invoke the Values
 
@@ -203,7 +202,7 @@ namespace MalbersAnimations
                 if (AllInputs[i].name == name)
                 {
                     AllInputs[i].InputValue = value;
-                    AllInputs[i].ToggleValue = value;
+                   // AllInputs[i].ToggleValue = value;
                 }
             }
 
@@ -214,20 +213,33 @@ namespace MalbersAnimations
             //}
         }
 
-        public virtual void ResetToggle(string name)
+        //public virtual void ResetToggle(string name)
+        //{
+        //    for (int i = 0; i < AllInputs.Count; i++)
+        //    {
+        //        if (AllInputs[i].name == name)
+        //        {
+        //            AllInputs[i].ToggleValue = false;
+        //        }
+        //    }
+
+        //    //if (DInputs.TryGetValue(name, out InputRow input))
+        //    //{
+        //    //    input.ToggleValue = false;
+        //    //}
+        //}
+
+        /// <summary>  Resets the value and toggle of an Input to False </summary>
+        public virtual void ResetInput(string name)
         {
             for (int i = 0; i < AllInputs.Count; i++)
             {
                 if (AllInputs[i].name == name)
                 {
-                    AllInputs[i].ToggleValue = false;
+                    //AllInputs[i].ToggleValue = false;
+                    AllInputs[i].InputValue = false;
                 }
             }
-
-            //if (DInputs.TryGetValue(name, out InputRow input))
-            //{
-            //    input.ToggleValue = false;
-            //}
         }
 
         /// <summary>Enable an Input Row</summary>
@@ -245,8 +257,11 @@ namespace MalbersAnimations
         }
 
         /// <summary>Check if an Input Row  exist  and returns it</summary>
-        public virtual InputRow FindInput(string name) => ActiveMap.inputs.Find(item => item.name == name);
-
+        public virtual InputRow FindInput(string name)
+        {
+            if (ActiveMap == null) return null;
+            return ActiveMap.inputs.Find(item => item.name == name);
+        }
 
         public IInputAction GetInput(string name)
         {
@@ -498,7 +513,7 @@ namespace MalbersAnimations
         public InputButton GetPressed = InputButton.Press;
         /// <summary>Current Input Value</summary>
         public bool InputValue = false;
-        public bool ToggleValue = false;
+      //  public bool ToggleValue = false;
         [Tooltip("When the Input is Disabled the Button will a false value to all their connections")]
         public bool ResetOnDisable = true;
 
@@ -699,20 +714,15 @@ namespace MalbersAnimations
                         }
                     case InputButton.Toggle:
                         {
+                            var toggle = (type == InputType.Input) ? InputSystem.GetButtonDown(input) : Input.GetKeyDown(key);
 
-
-                            InputValue = (type == InputType.Input) ? InputSystem.GetButtonDown(input) : Input.GetKeyDown(key);
-
-                            if (oldValue != InputValue)
+                            if (toggle)
                             {
-                                if (InputValue)
-                                {
-                                    ToggleValue ^= true;
-                                    OnInputToggle.Invoke(ToggleValue);
+                                InputValue ^= true;
+                                OnInputToggle.Invoke(InputValue);
 
-                                    if (ToggleValue) OnInputDown.Invoke();
-                                    else OnInputUp.Invoke();
-                                }
+                                if (InputValue) OnInputDown.Invoke();
+                                else OnInputUp.Invoke();
                             }
                             break;
                         }

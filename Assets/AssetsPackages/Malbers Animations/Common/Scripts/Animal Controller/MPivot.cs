@@ -16,7 +16,7 @@ namespace MalbersAnimations.Controller
 
         [HideInInspector] public bool EditorModify = false;
         [HideInInspector] public int EditorDisplay = 0;
-         [HideInInspector] public Color PivotColor = Color.blue;
+        [HideInInspector] public Color PivotColor = Color.blue;
 
         /// <summary>Hit to Store all the RayCast Values </summary>
         public RaycastHit hit;
@@ -31,11 +31,9 @@ namespace MalbersAnimations.Controller
         }
 
         /// <summary>Returns the World position of the Pivot </summary>
-        public Vector3 World(Transform t)
-        { return t.TransformPoint(position); }
+        public Vector3 World(Transform t) => t.TransformPoint(position);
 
         /// <summary>Returns the World Direction of the Pivot </summary>
-        public Vector3 WorldDir(Transform t)
-        { return t.TransformDirection(dir); }
+        public Vector3 WorldDir(Transform t) => t.TransformDirection(dir);
     }
 }

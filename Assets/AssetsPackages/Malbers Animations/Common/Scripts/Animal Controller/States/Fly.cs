@@ -271,8 +271,6 @@ namespace MalbersAnimations.Controller
             {
                 var surfacePos = transform.position + animal.AdditivePosition;
                 var Dist = SurfaceDistance * ScaleFactor;
-             
-
 
                 if (Physics.Raycast(surfacePos, Gravity, out RaycastHit hit, Dist, SurfaceLayer))
                 {

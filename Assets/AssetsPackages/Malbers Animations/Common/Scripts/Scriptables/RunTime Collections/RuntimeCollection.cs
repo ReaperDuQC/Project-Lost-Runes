@@ -44,7 +44,11 @@ namespace MalbersAnimations.Scriptables
         /// <summary>Gets the first object of the list</summary>
         public virtual T Item_GetFirst() => items[0];
 
+        /// <summary>Gets the object by its name</summary>
         public virtual T Item_Get(string name) => items.Find(x => x.name == name);
+
+        /// <summary>Returns true if the object is inside the Set</summary>
+        public virtual bool Has_Item(T obj) => items.Contains(obj);
 
         /// <summary>Gets the Index on the list of an object</summary>
         public virtual int Item_Index(T obj) => items.IndexOf(obj);

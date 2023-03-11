@@ -12,18 +12,44 @@ namespace MalbersAnimations
 {
     public abstract class IDs : ScriptableObject 
     {
-
         [Tooltip("Display name on the ID Selection Context Button")]
         public string DisplayName;
+
         [Tooltip("Integer value to Identify IDs")]
         public int ID;
 
         public static implicit operator int(IDs reference) => reference != null ? reference.ID : 0; //  =>  reference.ID;
 
-        public void OnValidate()
+        protected virtual void OnValidate()
         {
             if (string.IsNullOrEmpty(DisplayName)) DisplayName = name;
         }
+
+        protected void FindID<T>() where T : IDs
+        {
+            int newID = 0;
+            var allAdd = MTools.GetAllInstances<T>();
+
+            bool Found = true;
+
+            while (Found)
+            {
+                newID++;
+                Found = allAdd.Exists(x => (x.ID == newID && x != this));
+            }
+            ID = newID;
+            MTools.SetDirty(this);
+        }
+
+
+#if UNITY_EDITOR 
+        [ContextMenu("Get ID <Hash>")]
+        private void GetIDHash()
+        {
+            ID = Animator.StringToHash(name);
+            MTools.SetDirty(this);
+        } 
+#endif
     }
 
 

@@ -53,10 +53,18 @@ namespace MalbersAnimations
         public void DestroyComponent(Component component) => Destroy(component);
 
         /// <summary>Disable a gameObject and enable it the next frame</summary>
-        public void Reset_GameObject(GameObject go) => StartCoroutine(C_Reset_GameObject(go));
+        public void Reset_GameObject(GameObject go)
+        {
+            go.SetActive(false);
+            this.Delay_Action(() => go.SetActive(true));
+        }
 
         /// <summary>Disable a Monobehaviour and enable it the next frame</summary>
-        public void Reset_Monobehaviour(MonoBehaviour go) => StartCoroutine(C_Reset_Mono(go));
+        public void Reset_Monobehaviour(MonoBehaviour go)
+        {
+            go.SetEnable(false);
+            this.Delay_Action(() => go.SetEnable(true));
+        }
 
         /// <summary>Hide this GameObject after X Time</summary>
         public void GameObjectHide(float time) => Invoke(nameof(DisableGo), time);

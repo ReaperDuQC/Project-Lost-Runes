@@ -514,6 +514,7 @@ namespace MalbersAnimations.Controller.AI
         private bool LookForAnimalPlayer(MAnimalBrain brain, bool assign)
         {
             if (MAnimal.MainAnimal == null || MAnimal.MainAnimal.ActiveStateID == StateEnum.Death) return false; //Means the animal is death or Disable
+            if (MAnimal.MainAnimal == brain.Animal) { Debug.LogError("AI Animal is set as MainAnimal. Fix it!", brain.Animal);return false; }
 
             AssignMoveTarget(brain, MAnimal.MainAnimal.transform, assign);
             return IsInFieldOfView(brain, MAnimal.MainAnimal.Center, out _);

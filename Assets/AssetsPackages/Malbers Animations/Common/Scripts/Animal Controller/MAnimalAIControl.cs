@@ -84,6 +84,9 @@ namespace MalbersAnimations.Controller.AI
         [ContextMenuItem("Set Default", "SetDefaulStopAgent")]
         public List<StateID> StopAgentOn;
 
+        [Tooltip("Multiplier used for Waypoints Wait time. Set it to zero if you want to ignore waiting on waypoints")]
+        [Min(0),SerializeField] private float waitTimeMult = 1f;
+
         /// <summary>Stores the Agent Direction used to move the Animal</summary>
         public Vector3 AIDirection  { get; set; }
         //{
@@ -204,6 +207,14 @@ namespace MalbersAnimations.Controller.AI
 
         /// <summary>The Animal will Rotate/Look at the Target when he arrives to it</summary>
         public bool LookAtTargetOnArrival { get; set; }
+        //{ get => m_LookAtTargetOnArrival;
+        //    set 
+        //    {
+        //        m_LookAtTargetOnArrival = value;
+        //        Debug.Log("m_LookAtTargetOnArrival = " + m_LookAtTargetOnArrival);
+        //    } 
+        //}
+        protected bool m_LookAtTargetOnArrival;
 
         public bool debug = false;
         public bool debugGizmos = true;
@@ -305,6 +316,7 @@ namespace MalbersAnimations.Controller.AI
         public virtual Transform NextTarget { get => nextTarget; set => nextTarget = value; }
 
         public virtual Transform Target { get => target; set => target = value; }
+        public float WaitTimeMult { get => waitTimeMult; set => waitTimeMult = value; }
 
         /// <summary>Stores the Local Agent Position relative to the Animal</summary>
         protected Vector3 AgentPosition;
@@ -372,8 +384,11 @@ namespace MalbersAnimations.Controller.AI
             animal.OnModeEnd.AddListener(OnModeEnd);
 
             IsWaiting = true; //The AI Has not Started yet
+            FreeMove = false;
 
+            if (animal.ActiveState) //If the animal has an active state.
             FreeMove = (animal.ActiveState.General.FreeMovement);
+
             if (FreeMove) ActiveAgent = false;
             if (Agent && !Agent.isOnNavMesh) ActiveAgent = false;
             HasArrived = false;
@@ -419,6 +434,12 @@ namespace MalbersAnimations.Controller.AI
         {
             Debuging($"has started a Mode: <B>[{animal.ActiveMode.ID.name}]</B>. Ability: <B>[{animal.ActiveMode.ActiveAbility.Name}]</B>");
             if (animal.ActiveMode.AllowMovement) return; //Don't stop the Animal Movevemt if the Mode can make movements
+            else
+            {
+                animal.InertiaPositionSpeed = Vector3.zero;
+                animal.StopMoving();
+                animal.MovementAxisSmoothed = Vector3.zero;
+            }
 
             var Dest = DestinationPosition; //Store the Destination with modes
             Stop(); //If the Agent was moving Stop it
@@ -586,24 +607,32 @@ namespace MalbersAnimations.Controller.AI
                 AIDirection = Vector3.zero;                          //Reset AI Direction
                 Move();
 
-                OnTargetPositionArrived.Invoke(DestinationPosition);    //Invoke the Event On Target Position Arrived
-
                 if (target)
                 {
                     Debuging($"<color=green>has arrived to: <B>{target.name}</B> → {DestinationPosition} </color>");
 
-                    OnTargetArrived.Invoke(target);                         //Invoke the Event On Target Arrived
-
                     CheckInteractions();
 
-                    if (IsAITarget != null/* && IsAITarget.GetPosition() == DestinationPosition*/)  //If we have arrived to an AI Target and the Destination is the same one
+                    //If we have arrived to an AI Target and the Destination is the same one
+                    if (IsAITarget != null/* && IsAITarget.GetPosition() == DestinationPosition*/)  
                     {
-                        IsAITarget.TargetArrived(animal.gameObject);                            //Call the method that the Target has arrived to the destination
+                        //Call the method that the Target has arrived to the destination
+                        IsAITarget.TargetArrived(animal.gameObject);                           
+                        
                         LookAtTargetOnArrival = IsAITarget.ArriveLookAt;
-                        if (IsAITarget.TargetType == WayPointType.Ground) FreeMove = false;     //if the next waypoing is on the Ground then set the free Movement to false
-                        if (AutoNextTarget) MovetoNextTarget();                                 //Set and Move to the Next Target
-                        else Stop();
+                        
+                        //if the next waypoing is on the Ground then set the free Movement to false
+                        if (IsAITarget.TargetType == WayPointType.Ground) FreeMove = false;     
+                        
+                        
+                        if (AutoNextTarget)  //Set and Move to the Next Target
+                            MovetoNextTarget();                               
+                        else 
+                            Stop();
                     }
+
+                    OnTargetArrived.Invoke(target);                         //Invoke the Event On Target Arrived
+                    OnTargetPositionArrived.Invoke(DestinationPosition);    //Invoke the Event On Target Position Arrived
                 }
                 else
                 {
@@ -655,10 +684,12 @@ namespace MalbersAnimations.Controller.AI
             if (FreeMove) return; //Do nothing when its on Free Move
             //if (IsWaiting) return; //Do nothing when its waiting
 
-            if (!ActiveAgent) //Enable the Agent in case is disabled
+           // Debug.Log("agent.isOnNavMesh = " + agent.isOnNavMesh);
+
+            if (!ActiveAgent/* && agent.isOnNavMesh*/) //Enable the Agent in case is disabled
             {
-                ActiveAgent = true;
-                ResetFreeMoveOffMesh();
+                    ActiveAgent = true;
+                    ResetFreeMoveOffMesh();
             }
 
             if (Agent.isOnNavMesh)
@@ -868,8 +899,13 @@ namespace MalbersAnimations.Controller.AI
             if (IsWayPoint != null)
             {
                 StopWait();
-                I_WaitToNextTarget = C_WaitToNextTarget(IsWayPoint.WaitTime, NextTarget);   //IMPORTANT YOU NEED TO WAIT 1 FRAME ALWAYS TO GO TO THE NEXT WAYPOINT
-                StartCoroutine(I_WaitToNextTarget);
+
+                if (WaitTimeMult > 0)
+                {   //IMPORTANT YOU NEED TO WAIT 1 FRAME ALWAYS TO GO TO THE NEXT WAYPOINT
+                    I_WaitToNextTarget = C_WaitToNextTarget(IsWayPoint.WaitTime * WaitTimeMult, NextTarget);
+
+                    StartCoroutine(I_WaitToNextTarget);
+                }
             }
             else
             {
@@ -964,13 +1000,18 @@ namespace MalbersAnimations.Controller.AI
         /// <summary> Move Freely towards the Destination.. No Obstacle is calculated</summary>
         protected virtual void FreeMovement()
         {
-            AIDirection = (DestinationPosition - animal.transform.position); //Important to be normalized!!
-            SetRemainingDistance(AIDirection.magnitude);
+            if (!HasArrived)
+            {
+                AIDirection = (DestinationPosition - animal.transform.position); //Important to be normalized!!
+                SetRemainingDistance(AIDirection.magnitude);
 
-            AIDirection = AIDirection.normalized * SlowMultiplier; //Important to be normalized!!
+                AIDirection = AIDirection.normalized * SlowMultiplier; //Important to be normalized!!
 
-            animal.Move(AIDirection);
-            Arrive_Destination();
+                //Debug.Log("AIDirection = " + AIDirection);
+
+                animal.Move(AIDirection);
+                Arrive_Destination();
+            }
         }
 
 
@@ -1278,7 +1319,7 @@ namespace MalbersAnimations.Controller.AI
             stoppingDistance, SlowingDistance, LookAtOffset,targett, UpdateAI, slowingLimit,
             agent, animal, PointStoppingDistance, OnEnabled,OnTargetPositionArrived, OnTargetArrived,
             OnTargetSet, debugGizmos, debugStatus, debug, Editor_Tabs1, nextTarget, OnDisabled, AgentTransform, OffMeshAlignment,
-            StopAgentOn//, TurnAngle
+            StopAgentOn, WaitTimeMult//, TurnAngle
             ;
 
         protected virtual void OnEnable()
@@ -1287,6 +1328,7 @@ namespace MalbersAnimations.Controller.AI
 
             animal = serializedObject.FindProperty("animal");
             AgentTransform = serializedObject.FindProperty("AgentTransform");
+            WaitTimeMult = serializedObject.FindProperty("waitTimeMult");
             GetAgentProperty();
 
             slowingLimit = serializedObject.FindProperty("slowingLimit");
@@ -1366,18 +1408,19 @@ namespace MalbersAnimations.Controller.AI
         }
         private void ShowGeneral()
         {
-              EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+            using (new GUILayout.VerticalScope(EditorStyles.helpBox))
             {
                 targett.isExpanded = MalbersEditor.Foldout(targett.isExpanded, "Targets");
+
                 if (targett.isExpanded)
                 {
                     EditorGUILayout.PropertyField(targett, new GUIContent("Target", "Target to follow"));
                     EditorGUILayout.PropertyField(nextTarget, new GUIContent("Next Target", "Next Target the animal will go"));
                 }
             }
-             EditorGUILayout.EndVertical();
 
-             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+
+            using (new GUILayout.VerticalScope(EditorStyles.helpBox))
             {
                 EditorGUI.BeginChangeCheck();
                 {
@@ -1391,8 +1434,9 @@ namespace MalbersAnimations.Controller.AI
                         EditorGUILayout.PropertyField(SlowingDistance, new GUIContent("Slowing Distance", "Distance to Start slowing the animal before arriving to the destination"));
                         EditorGUILayout.PropertyField(LookAtOffset);
                         EditorGUILayout.PropertyField(PointStoppingDistance, new GUIContent("Point Stop Distance", "Stop Distance used on the SetDestination method. No Target Assigned"));
-                       // EditorGUILayout.PropertyField(TurnAngle);
+                 
                         EditorGUILayout.PropertyField(slowingLimit);
+                        EditorGUILayout.PropertyField(WaitTimeMult);
                         EditorGUILayout.PropertyField(OffMeshAlignment);
                     }
                 }
@@ -1405,10 +1449,8 @@ namespace MalbersAnimations.Controller.AI
                     }
                 }
             }
-             EditorGUILayout.EndVertical();
 
-
-            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+            using (new GUILayout.VerticalScope(EditorStyles.helpBox))
             {
                 animal.isExpanded = MalbersEditor.Foldout(animal.isExpanded, "References");
 
@@ -1445,95 +1487,94 @@ namespace MalbersAnimations.Controller.AI
                     }
                 }
             }
-            EditorGUILayout.EndVertical();
         }
 
         private void ShowEvents()
         {
-            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+            using (new GUILayout.VerticalScope(EditorStyles.helpBox))
             {
                 EditorGUILayout.PropertyField(OnEnabled);
                 EditorGUILayout.PropertyField(OnDisabled);
                 EditorGUILayout.PropertyField(OnTargetPositionArrived, new GUIContent("On Position Arrived"));
                 EditorGUILayout.PropertyField(OnTargetArrived, new GUIContent("On Target Arrived"));
                 EditorGUILayout.PropertyField(OnTargetSet, new GUIContent("On New Target Set"));
-            }
-            EditorGUILayout.EndVertical();
+            }  
         }
 
         protected GUIStyle Bold(bool tru) => tru ? EditorStyles.boldLabel : EditorStyles.miniBoldLabel;
 
         private void ShowDebug()
         {
-            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+            using (new GUILayout.VerticalScope(EditorStyles.helpBox))
             {
-                EditorGUILayout.BeginHorizontal();
-                EditorGUIUtility.labelWidth = 50f;
-                EditorGUILayout.PropertyField(debug, new GUIContent("Console"));
-                EditorGUILayout.PropertyField(debugGizmos, new GUIContent("Gizmos"));
-                EditorGUIUtility.labelWidth = 80f;
-                EditorGUILayout.PropertyField(debugStatus, new GUIContent("In-Game Log"));
-                EditorGUIUtility.labelWidth = 0f;
-                EditorGUILayout.EndHorizontal();
+                using (new GUILayout.HorizontalScope())
+                {
+                    EditorGUIUtility.labelWidth = 50f;
+                    EditorGUILayout.PropertyField(debug, new GUIContent("Console"));
+                    EditorGUILayout.PropertyField(debugGizmos, new GUIContent("Gizmos"));
+                    EditorGUIUtility.labelWidth = 80f;
+                    EditorGUILayout.PropertyField(debugStatus, new GUIContent("In-Game Log"));
+                    EditorGUIUtility.labelWidth = 0f;
+                }
+                
                 if (Application.isPlaying)
                 {
 
-                    Repaint();
-                    EditorGUI.BeginDisabledGroup(true);
-                    EditorGUILayout.PropertyField(targett);
-                    EditorGUILayout.ObjectField("Next Target", M.NextTarget, typeof(Transform), false);
-                    EditorGUILayout.Vector3Field("Destination", M.DestinationPosition);
-                    EditorGUILayout.Vector3Field("AI Direction", M.AIDirection);
-                    EditorGUILayout.Space();
-                    EditorGUILayout.FloatField("Current Stop Distance", M.StoppingDistance);
-                    EditorGUILayout.FloatField("Remaining Distance", M.RemainingDistance);
-                    EditorGUILayout.FloatField("Slow Multiplier", M.SlowMultiplier);
-                    // EditorGUILayout.FloatField("Circling Around", M.CircleAroundMultiplier);
-                    EditorGUILayout.Space();
 
-
-
-
-                    EditorGUIUtility.labelWidth = 70;
-                    EditorGUILayout.BeginHorizontal();
+                    using (new EditorGUI.DisabledGroupScope(true))
                     {
-                        EditorGUILayout.BeginVertical(EditorStyles.helpBox);
-                        EditorGUILayout.ToggleLeft("Target is Moving", M.TargetIsMoving, Bold(M.TargetIsMoving));
-                        EditorGUILayout.ToggleLeft("Target is AITarget", M.IsAITarget != null, Bold(M.IsAITarget != null));
-                        EditorGUILayout.ToggleLeft("Target is WayPoint", M.IsWayPoint != null, Bold(M.IsWayPoint != null));
+                        EditorGUILayout.PropertyField(targett);
+                        EditorGUILayout.ObjectField("Next Target", M.NextTarget, typeof(Transform), false);
+                        EditorGUILayout.Vector3Field("Destination", M.DestinationPosition);
+                        EditorGUILayout.Vector3Field("AI Direction", M.AIDirection);
                         EditorGUILayout.Space();
-                        EditorGUILayout.ToggleLeft("LookAt Target", M.LookAtTargetOnArrival, Bold(M.LookAtTargetOnArrival));
-                        EditorGUILayout.ToggleLeft("Auto Next Target", M.AutoNextTarget, Bold(M.AutoNextTarget));
-                        EditorGUILayout.ToggleLeft("UpdateDestinationPos", M.UpdateDestinationPosition, Bold(M.UpdateDestinationPosition));
-                        EditorGUILayout.EndVertical();
-
-                        EditorGUILayout.BeginVertical(EditorStyles.helpBox);
-                        EditorGUILayout.ToggleLeft("Is On Mode", M.IsOnMode, Bold(M.IsOnMode));
-                        EditorGUILayout.ToggleLeft("Free Move", M.FreeMove, Bold(M.FreeMove));
-                        EditorGUILayout.ToggleLeft("In OffMesh Link", M.InOffMeshLink, Bold(M.InOffMeshLink));
-
+                        EditorGUILayout.FloatField("Current Stop Distance", M.StoppingDistance);
+                        EditorGUILayout.FloatField("Remaining Distance", M.RemainingDistance);
+                        EditorGUILayout.FloatField("Slow Multiplier", M.SlowMultiplier);
+                      
                         EditorGUILayout.Space();
-                        EditorGUILayout.ToggleLeft("Waiting", M.IsWaiting, Bold(M.IsWaiting));
-                        EditorGUILayout.ToggleLeft("Has Arrived to Destination", M.HasArrived, Bold(M.HasArrived));
 
-                        EditorGUILayout.ToggleLeft("Active Agent", M.ActiveAgent, Bold(M.ActiveAgent));
-                        if (M.Agent && M.ActiveAgent)
+                        EditorGUIUtility.labelWidth = 70;
+
+                        using (new GUILayout.HorizontalScope())
                         {
-                            EditorGUILayout.ToggleLeft("Agent in NavMesh", M.Agent.isOnNavMesh, Bold(M.Agent.isOnNavMesh));
+                            using (new GUILayout.VerticalScope(EditorStyles.helpBox))
+                            {
+                                EditorGUILayout.ToggleLeft("Target is Moving", M.TargetIsMoving, Bold(M.TargetIsMoving));
+                                EditorGUILayout.ToggleLeft("Target is AITarget", M.IsAITarget != null, Bold(M.IsAITarget != null));
+                                EditorGUILayout.ToggleLeft("Target is WayPoint", M.IsWayPoint != null, Bold(M.IsWayPoint != null));
+                                EditorGUILayout.Space();
+                                EditorGUILayout.ToggleLeft("LookAt Target", M.LookAtTargetOnArrival, Bold(M.LookAtTargetOnArrival));
+                                EditorGUILayout.ToggleLeft("Auto Next Target", M.AutoNextTarget, Bold(M.AutoNextTarget));
+                                EditorGUILayout.ToggleLeft("UpdateDestinationPos", M.UpdateDestinationPosition, Bold(M.UpdateDestinationPosition));
+                            }
+
+                            using (new GUILayout.VerticalScope(EditorStyles.helpBox))
+                            {
+                                EditorGUILayout.ToggleLeft("Is On Mode", M.IsOnMode, Bold(M.IsOnMode));
+                                EditorGUILayout.ToggleLeft("Free Move", M.FreeMove, Bold(M.FreeMove));
+                                EditorGUILayout.ToggleLeft("In OffMesh Link", M.InOffMeshLink, Bold(M.InOffMeshLink));
+
+                                EditorGUILayout.Space();
+                                EditorGUILayout.ToggleLeft("Waiting", M.IsWaiting, Bold(M.IsWaiting));
+                                EditorGUILayout.ToggleLeft("Has Arrived to Destination", M.HasArrived, Bold(M.HasArrived));
+
+                                EditorGUILayout.ToggleLeft("Active Agent", M.ActiveAgent, Bold(M.ActiveAgent));
+                                if (M.Agent && M.ActiveAgent)
+                                {
+                                    EditorGUILayout.ToggleLeft("Agent in NavMesh", M.Agent.isOnNavMesh, Bold(M.Agent.isOnNavMesh));
+                                }
+                            }
                         }
-                        EditorGUILayout.EndVertical();
 
+                        EditorGUIUtility.labelWidth = 0;
+
+                        DrawChildDebug();
+
+                        Repaint();
                     }
-                    EditorGUILayout.EndHorizontal();
-                    EditorGUIUtility.labelWidth = 0;
-
-                    DrawChildDebug();
-
-
-                    EditorGUI.EndDisabledGroup();
                 }
             }
-            EditorGUILayout.EndVertical();
         }
 
         protected virtual void DrawChildDebug()

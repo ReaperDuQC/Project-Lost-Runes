@@ -18,7 +18,13 @@ MonoBehaviour:
     UseConstant: 1
     ConstantValue: 
     Variable: {fileID: 0}
+  m_StateProfile:
+    UseConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
   Priority: 6
+  ResetInputOnFailed: 1
+  ResetLastState: 0
   General:
     modify: -1
     RootMotion: 1
@@ -45,13 +51,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3787b6d94d5454740bf36d57436185b0, type: 2}
   SleepFromMode: []
   QueueFrom: []
+  ResetFrom: []
   SleepFromStance: []
   stances: []
   TryLoop:
     UseConstant: 1
     ConstantValue: 1
     Variable: {fileID: 0}
-  AllowExitTime:
+  Duration:
     UseConstant: 1
     ConstantValue: 0
     Variable: {fileID: 0}
@@ -63,7 +70,6 @@ MonoBehaviour:
     UseConstant: 1
     ConstantValue: 
     Variable: {fileID: 0}
-  ExitFrame: 1
   ExitOnMain: 1
   EnterCooldown:
     UseConstant: 1
@@ -74,10 +80,11 @@ MonoBehaviour:
     ConstantValue: 0.1
     Variable: {fileID: 0}
   CanStrafe: 0
+  StrafeAnimations: 1
   MovementStrafe: 1
   IdleStrafe: 1
   debug: 1
-  Editor_Tabs1: 3
+  Editor_Tabs1: 0
   ID: {fileID: 11400000, guid: 3fbb696c31f7ed846b7ec9b2f76fd0e5, type: 2}
   LedgeLayer:
     UseConstant: 1
@@ -94,6 +101,7 @@ MonoBehaviour:
     ConstantValue: 1
     Variable: {fileID: 0}
   wallDistance: 0.5
+  MinTerrainAngle: 45
   ForwardLength: 1
   WallChecker: 0.1
   AlignSmoothness: 10
@@ -105,10 +113,10 @@ MonoBehaviour:
     Height: 1.7
     LedgeExitDistance: 0.3
     ExitTime: 0.9
-    AlingOffset: {x: 0, y: 0, z: 0}
+    AlingOffset: {x: 0, y: 0}
     Orient: 1
     AdditivePosition: 1
-    HeightSpeed: 4
+    HeightSpeed: 1
     ForwardSpeed: 2
     HeightCurve:
       serializedVersion: 2

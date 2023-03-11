@@ -25,10 +25,19 @@ namespace MalbersAnimations
         /// <param name="IsCritical">was the damage critical</param>
         /// <param name="react">does the Animal use default reaction? </param>
         /// <param name="ignoreDamageeM">Ignore Damagee Multiplier</param>
-        void ReceiveDamage(Vector3 Direction, GameObject Damager, StatModifier stat, bool IsCritical, bool Default_react, MReaction custom,  bool ignoreDamageeM);
+        /// <param name="element">Element sent by the </param>
+        void ReceiveDamage(
+            Vector3 Direction,
+            GameObject Damager, 
+            StatModifier stat, 
+            bool IsCritical, 
+            bool Default_react, 
+            MReaction custom,  
+            bool ignoreDamageeM,
+            StatElement element);
 
 
-        /// <summary>  Method to receive damage from an Atacker (Simplified)  </summary>
+        /// <summary>Method to receive damage from an Atacker (Simplified)</summary>
         void ReceiveDamage(StatID stat, float amount);
     }
 

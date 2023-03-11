@@ -208,7 +208,7 @@ namespace MalbersAnimations.Weapons
         public virtual bool IsRiding { get; set; }
 
         /// <summary>Is the Weapon Reloading?</summary>
-        public virtual bool IsReloading  { get; set; }
+        public virtual bool IsReloading   { get; set; }
         //{
         //    get => isReloading;
         //    set { isReloading = value; Debug.Log("isReloading = " + isReloading); }
@@ -811,23 +811,23 @@ namespace MalbersAnimations.Weapons
             {
                 EditorGUILayout.LabelField("Modify Stat", EditorStyles.boldLabel);
 
-                EditorGUILayout.BeginHorizontal();
+                using (new GUILayout.HorizontalScope()) 
                 {
                     EditorGUIUtility.labelWidth = 50;
                     EditorGUILayout.PropertyField(StatID, new GUIContent("Stat"));
                     EditorGUILayout.PropertyField(mod, GUIContent.none, GUILayout.MinWidth(50), GUILayout.MaxWidth(120));
                     EditorGUIUtility.labelWidth = 0;
                 }
-                EditorGUILayout.EndHorizontal();
 
-                EditorGUILayout.BeginHorizontal();
+                using (new GUILayout.HorizontalScope())
                 {
                     EditorGUIUtility.labelWidth = 50;
                     EditorGUILayout.PropertyField(minDamage, new GUIContent("Min", "Minimun Damage"));
                     EditorGUILayout.PropertyField(maxDamage, new GUIContent("Max", "Minimun Damage"));
                     EditorGUIUtility.labelWidth = 0;
                 }
-                EditorGUILayout.EndHorizontal();
+
+                DrawElement();
             }
         }
 

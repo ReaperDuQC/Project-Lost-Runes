@@ -26,6 +26,8 @@ namespace MalbersAnimations
         private AudioSource _audio;
         private Transform audioTransform;
 
+        public float MaxDistance = 10f;
+
         private void CheckAudioSource(Animator animator)
         {
             if (audioTransform == null)
@@ -41,6 +43,7 @@ namespace MalbersAnimations
                     var go = new GameObject() { name = goName };
                     audioTransform = go.transform;
                     audioTransform.parent = animator.transform;
+                    audioTransform.ResetLocal();
                 }
 
                 _audio = audioTransform.GetComponent<AudioSource>();
@@ -50,6 +53,7 @@ namespace MalbersAnimations
                     _audio = audioTransform.gameObject.AddComponent<AudioSource>();
                     _audio.spatialBlend = 1; //Make it 3D
                     _audio.loop = Loop;
+                    _audio.maxDistance = MaxDistance;
                 }
             }
         }

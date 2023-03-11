@@ -19,6 +19,7 @@ MonoBehaviour:
     ConstantValue: 
     Variable: {fileID: 0}
   Priority: 3
+  ResetInputOnFailed: 1
   General:
     modify: -1
     RootMotion: 0
@@ -48,7 +49,7 @@ MonoBehaviour:
   stances: []
   TryLoop:
     UseConstant: 1
-    ConstantValue: 6
+    ConstantValue: 1
     Variable: {fileID: 0}
   Duration:
     UseConstant: 1
@@ -62,8 +63,7 @@ MonoBehaviour:
     UseConstant: 1
     ConstantValue: 
     Variable: {fileID: 0}
-  ExitFrame: 0
-  ExitOnMain: 1
+  ExitOnMain: 0
   EnterCooldown:
     UseConstant: 1
     ConstantValue: 0
@@ -77,7 +77,7 @@ MonoBehaviour:
   MovementStrafe: 1
   IdleStrafe: 1
   debug: 1
-  Editor_Tabs1: 1
+  Editor_Tabs1: 0
   ID: {fileID: 11400000, guid: 8078fbdb01991b44b9c1351f444b5efe, type: 2}
   AirControl:
     UseConstant: 0

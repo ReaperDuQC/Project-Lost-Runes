@@ -56,6 +56,9 @@ namespace MalbersAnimations.Controller
         [Tooltip("Don't use the Default Reaction of the Damageable Component")]
         [ExposeScriptableAsset] public MReaction CustomReaction;
 
+        [Tooltip("Type of element damage the Damager can do")]
+        public StatElement element;
+
 
         /// <summary> Extra Transform to Ignore Damage. E.g. The Mount Animal</summary>
         public virtual Transform IgnoreTransform { get; set; }
@@ -172,7 +175,7 @@ namespace MalbersAnimations.Controller
             if (damagee != null && !stat.IsNull)
             {
                 var criticalStat = CheckCriticalCheckMultiplier(stat);
-                damagee.ReceiveDamage(Direction, Owner, criticalStat, IsCritical, react.Value, CustomReaction , pureDamage.Value);
+                damagee.ReceiveDamage(Direction, Owner, criticalStat, IsCritical, react.Value, CustomReaction, pureDamage.Value,element);
 
                 Debugging($"Do Damage to [{damagee.Damagee.name}]", damagee.Damagee);
                 return true;
@@ -224,7 +227,7 @@ namespace MalbersAnimations.Controller
                 isDamager.TriggerInteraction = TriggerInteraction;
             }
 
-            //Next Frame Reset the GameObject visibility
+            //Next Frame Reset the GameObject visibility why!?!?!
             this.Delay_Action(() =>
             {
                 hit.SetActive(false);
@@ -480,7 +483,7 @@ namespace MalbersAnimations.Controller
     {
         protected MDamager MD;
         protected SerializedProperty Force, forceMode, index, statModifier, onhit, OnHitPosition, OnHitInteractable, dontHitOwner, owner, m_Active, debug,
-            hitLayer, triggerInteraction, m_cChance, cMultiplier, pureDamage, react, CustomReaction, interact , m_HitEffect,  interactorID, DestroyHitEffect,
+            hitLayer, triggerInteraction, m_cChance, cMultiplier, element,  pureDamage, react, CustomReaction, interact , m_HitEffect,  interactorID, DestroyHitEffect,
             StopAnimator, AnimatorSpeed, AnimatorStopTime, animator;
 
 
@@ -499,6 +502,7 @@ namespace MalbersAnimations.Controller
             owner = serializedObject.FindProperty("owner");
             interactorID = serializedObject.FindProperty("interactorID");
             DestroyHitEffect = serializedObject.FindProperty("DestroyHitEffect");
+            element = serializedObject.FindProperty("element");
 
 
             react = serializedObject.FindProperty("react");
@@ -612,10 +616,12 @@ namespace MalbersAnimations.Controller
         {
             if (drawbox) EditorGUILayout.BeginVertical(EditorStyles.helpBox);
 
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.PropertyField(m_Active);
-            MalbersEditor.DrawDebugIcon(debug);
-            EditorGUILayout.EndHorizontal();
+            using (new GUILayout.HorizontalScope())
+            {
+                EditorGUILayout.PropertyField(m_Active);
+                MalbersEditor.DrawDebugIcon(debug);
+            }
+           
             
             EditorGUILayout.PropertyField(index);
             EditorGUILayout.PropertyField(hitLayer);
@@ -640,10 +646,13 @@ namespace MalbersAnimations.Controller
             if (Force.isExpanded)
             {
                 //EditorGUILayout.LabelField("Physics", EditorStyles.boldLabel);
-                EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.PropertyField(Force);
-                EditorGUILayout.PropertyField(forceMode, GUIContent.none, GUILayout.MaxWidth(90), GUILayout.MinWidth(20));
-                EditorGUILayout.EndHorizontal();
+
+                using (new GUILayout.HorizontalScope())
+                {
+                    EditorGUILayout.PropertyField(Force);
+                    EditorGUILayout.PropertyField(forceMode, GUIContent.none, GUILayout.MaxWidth(90), GUILayout.MinWidth(20));
+                }
+               
             }
             if (drawbox) EditorGUILayout.EndVertical();
         }
@@ -653,12 +662,15 @@ namespace MalbersAnimations.Controller
         {
             if (drawbox) EditorGUILayout.BeginVertical(EditorStyles.helpBox);
             EditorGUILayout.LabelField("Critical Damage", EditorStyles.boldLabel);
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.PropertyField(m_cChance, new GUIContent("Chance [0-1]"), GUILayout.MinWidth(50));
-            EditorGUIUtility.labelWidth = 47;
-            EditorGUILayout.PropertyField(cMultiplier, new GUIContent("Mult"), GUILayout.MinWidth(50));
-            EditorGUIUtility.labelWidth = 0;
-            EditorGUILayout.EndHorizontal();
+           
+            using (new GUILayout.HorizontalScope())
+            {
+                EditorGUILayout.PropertyField(m_cChance, new GUIContent("Chance [0-1]"), GUILayout.MinWidth(50));
+                EditorGUIUtility.labelWidth = 47;
+                EditorGUILayout.PropertyField(cMultiplier, new GUIContent("Mult"), GUILayout.MinWidth(50));
+                EditorGUIUtility.labelWidth = 0;
+            }
+           
             if (drawbox) EditorGUILayout.EndVertical();
         }
 
@@ -666,11 +678,24 @@ namespace MalbersAnimations.Controller
         protected virtual void DrawStatModifier(bool drawbox = true)
         {
             if (drawbox) EditorGUILayout.BeginVertical(EditorStyles.helpBox);
-                EditorGUILayout.PropertyField(statModifier, new GUIContent("Stat Modifier","Which Stat will be affected on the Object to hit after Impact"), true);
+                EditorGUILayout.PropertyField(statModifier,
+                    new GUIContent("Stat Modifier","Which Stat will be affected on the Object to hit after Impact"), true);
             EditorGUILayout.PropertyField(pureDamage);
+
+            DrawElement();
+
             if (drawbox) EditorGUILayout.EndVertical();
-        } 
-        
+        }
+
+        protected void DrawElement()
+        {
+            using (new GUILayout.HorizontalScope())
+            {
+                EditorGUILayout.LabelField(new GUIContent("Element", "Type of Element this weapon can inflict"), GUILayout.Width(60));
+                EditorGUILayout.PropertyField(element);
+            }
+        }
+
 
         protected void DrawDescription(string desc) => MalbersEditor.DrawDescription(desc);
 

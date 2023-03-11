@@ -57,6 +57,7 @@ namespace LostRunes
                 Destroy(this);
                 return;
             }
+            this.enabled = true;
         }
 
         private void OnEnable()

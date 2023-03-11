@@ -28,7 +28,8 @@ namespace MalbersAnimations
         /// <summary>Multiplies the Damage for a value</summary>
         void DamageMultiplier(float multiplier);
 
-        void PrepareDamage(StatModifier modifier, float CriticalChance, float CriticalMultiplier);
+        /// <summary>Prepares the Bullet Damage</summary>
+        void PrepareDamage(StatModifier modifier, float CriticalChance, float CriticalMultiplier, StatElement element);
 
         /// <summary>Fires the Projectile after being prepared</summary>
         void Fire();

@@ -4,8 +4,6 @@ using UnityEngine.Serialization;
 
 namespace MalbersAnimations.Controller
 {
-    
-    
     [HelpURL("https://malbersanimations.gitbook.io/animal-controller/main-components/manimal-controller/states/fall")]
     public class Fall : State
     {
@@ -148,7 +146,9 @@ namespace MalbersAnimations.Controller
                             TerrainSlope = Vector3.SignedAngle(hit.normal, animal.UpVector, animal.Right);
                             MTools.DrawWireSphere(fall_Pivot + Direction * DistanceToGround, Color.magenta, Radius);
                             FallRayCast = hit;
-                           
+
+                          //  Debug.Log($"hit [{hit.collider.name}] TerrainSlope: {TerrainSlope}", hit.collider);
+
                             if (TerrainSlope > -animal.maxAngleSlope) //Check for the first Good Fall Ray that does not break the Fall.
                                 break;
                         }
@@ -159,8 +159,6 @@ namespace MalbersAnimations.Controller
                         GameObjectHit = FallRayCast.transform.gameObject;
                         IsDebree = GameObjectHit.CompareTag(animal.DebrisTag);
                     }
-
-                    // Debug.Log("IsDebree = " + IsDebree, GameObjectHit);
 
                     if (animal.DeepSlope ||
                         (TerrainSlope < animal.NegativeMaxSlope //Calculate the Deep Slope here
@@ -208,7 +206,9 @@ namespace MalbersAnimations.Controller
         public override void Activate()
         {
             StartingSpeedDirection = animal.ActiveState.Speed_Direction();  //Store the Last Speed Direction.... For AirControl False
+
             base.Activate();
+
             ResetStateValues();
             Fall_Float = animal.State_Float;
         }
@@ -259,6 +259,7 @@ namespace MalbersAnimations.Controller
             if (MTools.CompareOR(animal.LastState.ID, 0, 1, StateEnum.Swim, StateEnum.Climb) && Has_UP_Impulse || animal.HasExternalForce)
                 UpImpulse = Vector3.zero;
 
+           CanExit = true; // FORCE CAN EXIT IF WE ARE ALREADY ON THE ANIMATION Is this working or not???
         }
 
         public override Vector3 Speed_Direction()
@@ -353,7 +354,10 @@ namespace MalbersAnimations.Controller
                             else
                             {
                                 realDistance -= LowerBlendDistance;
-                                Fall_Float = Mathf.Lerp(Fall_Float, 1 - realDistance / MaxHeight, DeltaTime * 10); //Small blend in case there's a new ground found
+                                
+                                //Small blend in case there's a new ground found
+                                Fall_Float = Mathf.Lerp(Fall_Float, 1 - realDistance / MaxHeight, DeltaTime * 10); 
+                                
                                 animal.State_SetFloat(Fall_Float); //Blend between High and Low Fall
                             }
                         }
@@ -373,14 +377,20 @@ namespace MalbersAnimations.Controller
                 {
                     var FallRayAngle = Vector3.SignedAngle(FallRayCast.normal, animal.UpVector, animal.Right);
 
-                  //  Debug.Log("FallRayAngle = " + FallRayAngle);
-                   // Debug.Log("animal.maxAngleSlope + animal.m_deepSlope = " + (FallRayAngle < 0 && FallRayAngle < animal.NegativeMaxSlope));
-                    
+                    //  Debug.Log("FallRayAngle = " + FallRayAngle);
+                    // Debug.Log("animal.maxAngleSlope + animal.m_deepSlope = " + (FallRayAngle < 0 && FallRayAngle < animal.NegativeMaxSlope));
+
+                    if (FallRayCast.transform.gameObject != GameObjectHit) //Check if what the Fall Ray Hit was a Debree
+                    {
+                        GameObjectHit = FallRayCast.transform.gameObject;
+                        IsDebree = GameObjectHit.CompareTag(animal.DebrisTag);
+                    }
+
                     var DeepSlope =
                         ( FallRayAngle > 0 && FallRayAngle > animal.maxAngleSlope)
                         || FallRayAngle < 0 && FallRayAngle < animal.NegativeMaxSlope; //Slope Error
 
-                    if (!DeepSlope) //Check if we are not on a deep slope
+                    if (!DeepSlope || IsDebree) //Check if we are not on a deep slope
                     {
                         AllowExit();
                         animal.CheckIfGrounded();
@@ -388,14 +398,16 @@ namespace MalbersAnimations.Controller
                         animal.Grounded = true;
                         animal.UseGravity = false;
 
-                        var GroundedPos = Vector3.Project(FallRayCast.point - animal.transform.position, Gravity);  //IMPORTANT HACk FOR when the Animal is falling to fast
+                        //IMPORTANT HACk FOR when the Animal is falling to fast
+                        var GroundedPos = Vector3.Project(FallRayCast.point - animal.transform.position, Gravity);
 
                         if (DeltaDistance > 0.1f)
                         {
-                            animal.Teleport_Internal(animal.transform.position + GroundedPos); //SUPER IMPORTANT!!! this is when the Animal is falling from a great height
+                            //SUPER IMPORTANT!!! this is when the Animal is falling from a great height
+                            animal.Teleport_Internal(animal.transform.position + GroundedPos); 
                             animal.ResetUPVector(); //IMPORTANT!
                         }
-                        Debugging($"[Try Exit] (Grounded) + [Terrain Angle ={FallRayAngle}]. DeltaDist: {DeltaDistance:F3}");
+                        Debugging($"[Try Exit] (Grounded) + [Terrain Angle ={FallRayAngle:F2}]. DeltaDist: {DeltaDistance:F2}");
                         animal.InertiaPositionSpeed = Vector3.ProjectOnPlane(animal.RB.velocity * DeltaTime, animal.UpVector); //This is for Helping on Slopes
                         return;
                     }
@@ -419,7 +431,6 @@ namespace MalbersAnimations.Controller
 
                 foreach (var ls in landStatus)
                     if (ls.x < FallCurrentDistance) status = (int)ls.y;
-
             }
             SetExitStatus(status);  //Set the Landing Status!! IMPORTANT for Multiple Landing Animations
 
@@ -431,8 +442,6 @@ namespace MalbersAnimations.Controller
             }
             base.ExitState();
         }
-
-
      
 
         private void ResetRigidbody(float DeltaTime, Vector3 Gravity)
@@ -451,13 +460,10 @@ namespace MalbersAnimations.Controller
 
                 ResetCount++;
 
-
-
                 if (NewDMagn == Old_DMagn) return;
 
                 if ( NewDMagn > (Old_DMagn * Old_DMagn) &&  //New Desired Velocity is greatere 
-                    Old_DMagn < 0.1f && 
-                    ResetCount > 5) //5 seems to be good
+                    Old_DMagn < 0.1f &&   ResetCount > 5) //5 seems to be good
                 {
                     if (animal.DesiredRBVelocity.magnitude > Height)
                     {
@@ -502,7 +508,9 @@ namespace MalbersAnimations.Controller
         {
             if (!Application.isPlaying)
             {
-                var fall_Pivot = animal.Main_Pivot_Point + (animal.Forward * Offset * animal.ScaleFactor); //Calculate ahead the falling ray
+                var fall_Pivot = animal.transform.position +
+                    ((animal.Forward * Offset + new Vector3(0, animal.height)) * animal.ScaleFactor); //Calculate ahead the falling ray
+
                 float Multiplier = animal.Pivot_Multiplier * lengthMultiplier;
 
                 Debug.DrawRay(fall_Pivot, animal.Gravity.normalized * Multiplier, Color.magenta);
@@ -545,7 +553,7 @@ namespace MalbersAnimations.Controller
 
             //SleepFromState = new System.Collections.Generic.List<StateID>() {   MTools.GetInstance<StateID>("Fly") };
 
-            ExitFrame = false; //IMPORTANT
+           // ExitFrame = false; //IMPORTANT
         }
 #endif
     }

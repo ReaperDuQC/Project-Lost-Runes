@@ -9,6 +9,9 @@ namespace MalbersAnimations.Controller
     /// <summary>Idle Should be the Last State on the Queue, when nothing is moving Happening </summary>
     public class Idle : State
     {
+       // [TextArea]
+       // public string IdleDesc = "Idle does not need any Parameter. It's the Base state, and it does nothing";
+
         public override string StateName => "Idle";
         public bool HasLocomotion { get; private set; }
 
@@ -46,6 +49,8 @@ namespace MalbersAnimations.Controller
         void Reset()
         {
             ID = MTools.GetInstance<StateID>("Idle");
+
+            ResetLastState = true; //Important por Idle
 
             General = new AnimalModifier()
             {

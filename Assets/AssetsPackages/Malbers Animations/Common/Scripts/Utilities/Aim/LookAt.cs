@@ -29,8 +29,9 @@ namespace MalbersAnimations.Utilities
         public BoolReference active = new BoolReference(true);     //For Activating and Deactivating the HeadTrack
 
         private IGravity a_UpVector;
-       
-        private IAim aimer;
+
+        [Tooltip("Reference for the Aim Component")]
+        [RequiredField] public Aim aimer;
 
         /// <summary>Max Angle to LookAt</summary>
         [Space, Tooltip("Max Angle to LookAt")]
@@ -108,8 +109,10 @@ namespace MalbersAnimations.Utilities
 
         void Awake()
         {
-            a_UpVector = gameObject.FindInterface<IGravity>();     //Get the main camera
-            aimer = gameObject.FindInterface<IAim>();  //Get the main camera
+            a_UpVector = gameObject.FindInterface<IGravity>();     //Get Up Vector
+
+            if (aimer == null)
+                aimer = gameObject.FindInterface<Aim>();  //Get the Aim Component
 
             aimer.IgnoreTransform = transform;
             ActiveByAnimation = true;
@@ -282,7 +285,7 @@ namespace MalbersAnimations.Utilities
 
         void Reset()
         {
-            aimer = gameObject.FindInterface<IAim>();
+            aimer = gameObject.FindInterface<Aim>();
             if (aimer == null) aimer = gameObject.AddComponent<Aim>();
         }
 

@@ -12,6 +12,10 @@ namespace MalbersAnimations
 
     public class MobileJoystick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
     {
+        [Tooltip("What mouse button to use for the joystick ")]
+        public PointerEventData.InputButton Button = PointerEventData.InputButton.Left;
+
+
         [Tooltip("Inverts the Horizontal value of the joystick")]
         public bool invertX;
         [Tooltip("Inverts the Vertical value of the joystick")]
@@ -127,7 +131,12 @@ namespace MalbersAnimations
         // When draging is occuring this will be called every time the cursor is moved.
         public virtual void OnDrag(PointerEventData Point)
         {
-            Vector2 TargetAxis = Vector2.zero; ;
+            if (Point.button != Button) return; //Check if the Correct Mouse Click.. Right Left or Middle
+
+
+
+
+            Vector2 TargetAxis = Vector2.zero;  
 
             if (RectTransformUtility.ScreenPointToLocalPointInRectangle(bg.rectTransform, Point.position, Point.pressEventCamera, out Vector2 pos))
             {
@@ -175,6 +184,8 @@ namespace MalbersAnimations
         // When the virtual analog's press occured this will be called.
         public virtual void OnPointerDown(PointerEventData Point)
         {
+            if (Point.button != Button) return; //Check if the Correct Mouse Click.. Right Left or Middle
+
             OnJoystickDown.Invoke();
             Pressed = true;
 
@@ -197,8 +208,11 @@ namespace MalbersAnimations
         }
 
         // When the virtual analog's release occured this will be called.
-        public virtual void OnPointerUp(PointerEventData _)
+        public virtual void OnPointerUp(PointerEventData Point)
         {
+            if (Point.button != Button) return; //Check if the Correct Mouse Click.. Right Left or Middle
+
+
             OnJoystickUp.Invoke();
             Pressed = false;
             AxisValue = Vector2.zero;

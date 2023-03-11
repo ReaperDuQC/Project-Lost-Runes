@@ -160,12 +160,14 @@ namespace MalbersAnimations.Controller
             }
         }
 
-        public void Enable_Temp()
+        /// <summary> Enable Temporally the State using a Counter </summary>
+        public void Disable_Temp_Restore()
         {
             DisableValue++;
             //Debug.Log($" {ID.name} DisableValue : {DisableValue}" );
         }
 
+        /// <summary> Disable Temporally the State using a Counter </summary>
         public void Disable_Temp()
         {
             DisableValue--;
@@ -228,6 +230,10 @@ namespace MalbersAnimations.Controller
             Active = false;
             ExitTime = Time.time;
             events?.OnExit.Invoke();
+
+          
+            //Remember to reset the input value of a stance on exit
+          if (!Queued)     Animal.InputSource?.ResetInput(Input);
         }
 
         /// <summary> A new State has been activated</summary>

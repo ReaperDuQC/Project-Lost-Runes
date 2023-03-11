@@ -158,8 +158,8 @@ namespace MalbersAnimations.Controller.AI
                     brain.TaskDone(index);
                     break;
                 case MoveType.Flee:
-                    brain.AIControl.Stop();
-                    brain.TaskDone(index);
+                    //brain.AIControl.Stop();
+                    //brain.TaskDone(index);
                     break;
                 case MoveType.CircleAround:
                     break;
@@ -314,8 +314,11 @@ namespace MalbersAnimations.Controller.AI
         {
             if (brain.Target)
             {
-                brain.AIControl.UpdateDestinationPosition = false;                      //Means the Animal Wont Update the Destination Position with the Target position.
-                brain.AIControl.LookAtTargetOnArrival = false;
+                //Animal wont Update the Destination Position with the Target position. We need to go to the opposite side
+                brain.AIControl.UpdateDestinationPosition = false;      
+
+                //We can look at the target on arrival, we are fleeing from the target!
+               // brain.AIControl.LookAtTargetOnArrival = false;
 
                 var CurrentPos = brain.Animal.transform.position;
 
@@ -335,7 +338,8 @@ namespace MalbersAnimations.Controller.AI
 
                     Debug.DrawRay(fleePoint, Vector3.up * 3, Color.blue, 2f);
 
-                    if (Vector3.Distance(CurrentPos, fleePoint) > stoppingDistance) //If the New flee Point is not in the Stopping distance radius then set a new Flee Point
+                     //If the New flee Point is not in the Stopping distance radius then set a new Flee Point
+                    if (Vector3.Distance(CurrentPos, fleePoint) > stoppingDistance) 
                     {
                         brain.AIControl.UpdateDestinationPosition = false; //Means the Animal wont Update the Destination Position with the Target position.
                         brain.AIControl.SetDestination(fleePoint, true);
@@ -343,16 +347,11 @@ namespace MalbersAnimations.Controller.AI
                         if (brain.debug)
                             Debug.DrawRay(fleePoint, brain.transform.up, Color.blue, 2f);
                     }
-
-                    brain.TaskDone(index, false);
                 }
                 else
                 {
-                    brain.AIControl.StoppingDistance = distance * 100;  //Force a big Stopping distance to ensure the animal can look at the Target
-                    brain.AIControl.DestinationPosition = (brain.Target.position);
+                    brain.AIControl.Stop();
                     brain.AIControl.LookAtTargetOnArrival = LookAtTarget;
-
-                    brain.TaskDone(index);
                 }
             }
         }

@@ -35,7 +35,7 @@ namespace LostRunes
             if (_audioSource == null) return;
             if (clip == null) return;
 
-            MainMenuUI.Instance.OptionMenuUI.AudioSettings.RandomizePitch(_audioSource);
+            AudioSettings.RandomizePitch(_audioSource); 
 
             _audioSource.clip = clip;
             _audioSource.Play();

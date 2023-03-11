@@ -448,21 +448,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 314d00f1b4c62c4439fe886f82ae5243, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnDeactive:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 7cf722dd04e074d4eb5c291280cdd5aa, type: 2}
-        m_TargetAssemblyTypeName: MalbersAnimations.Events.MEvent, Assembly-CSharp
-        m_MethodName: Invoke
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   OnActive:
     m_PersistentCalls:
       m_Calls:
@@ -513,6 +498,21 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+  OnDeactive:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 7cf722dd04e074d4eb5c291280cdd5aa, type: 2}
+        m_TargetAssemblyTypeName: MalbersAnimations.Events.MEvent, Assembly-CSharp
+        m_MethodName: Invoke
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
   Description: 
   ShowDescription: 0
@@ -1412,7 +1412,7 @@ Rigidbody:
   m_CollisionDetection: 0
 --- !u!95 &95767892450346170
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1425,10 +1425,11 @@ Animator:
   m_UpdateMode: 1
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &114648470827843798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1686,6 +1687,12 @@ MonoBehaviour:
     OnAxisValueChanged:
       m_PersistentCalls:
         m_Calls: []
+  horizontal: 0
+  vertical: 0
+  upDown: 0
+  MovementEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &114485145315289786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1821,6 +1828,7 @@ MonoBehaviour:
     ConstantValue: Stair
     Variable: {fileID: 0}
   maxAngleSlope: 40
+  m_deepSlope: 5
   Rotator: {fileID: 7006380194414621522}
   RootBone: {fileID: 14702763796075901}
   grounded:
@@ -2249,7 +2257,7 @@ MonoBehaviour:
     name: Defaut
     Vertical:
       UseConstant: 1
-      ConstantValue: 1
+      ConstantValue: 0
       Variable: {fileID: 0}
     position:
       UseConstant: 1
@@ -2257,11 +2265,11 @@ MonoBehaviour:
       Variable: {fileID: 0}
     lerpPosition:
       UseConstant: 1
-      ConstantValue: 4
+      ConstantValue: 0
       Variable: {fileID: 0}
     lerpPosAnim:
       UseConstant: 1
-      ConstantValue: 4
+      ConstantValue: 0
       Variable: {fileID: 0}
     rotation:
       UseConstant: 1
@@ -2269,19 +2277,19 @@ MonoBehaviour:
       Variable: {fileID: 0}
     lerpRotation:
       UseConstant: 1
-      ConstantValue: 4
+      ConstantValue: 0
       Variable: {fileID: 0}
     lerpRotAnim:
       UseConstant: 1
-      ConstantValue: 4
+      ConstantValue: 0
       Variable: {fileID: 0}
     animator:
       UseConstant: 1
-      ConstantValue: 1
+      ConstantValue: 0
       Variable: {fileID: 0}
     lerpAnimator:
       UseConstant: 1
-      ConstantValue: 4
+      ConstantValue: 0
       Variable: {fileID: 0}
     strafeSpeed:
       UseConstant: 1
@@ -2289,7 +2297,7 @@ MonoBehaviour:
       Variable: {fileID: 0}
     lerpStrafe:
       UseConstant: 1
-      ConstantValue: 4
+      ConstantValue: 0
       Variable: {fileID: 0}
   m_gravityDir:
     UseConstant: 1
@@ -2477,6 +2485,7 @@ MonoBehaviour:
   m_Movement: Movement
   m_State: State
   m_StateOn: StateOn
+  m_StateProfile: StateProfile
   m_ModeOn: ModeOn
   m_StateStatus: StateStatus
   m_StateExitStatus: StateExitStatus
@@ -2701,7 +2710,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_active:
     UseConstant: 1
-    ConstantValue: 0
+    ConstantValue: 1
     Variable: {fileID: 0}
   m_aimOrigin: {fileID: 4300787829047106}
   m_Smoothness: 10
@@ -2736,6 +2745,10 @@ MonoBehaviour:
   m_screenCenter:
     UseConstant: 1
     ConstantValue: {x: 0.5, y: 0.5}
+    Variable: {fileID: 0}
+  m_UseCamera:
+    UseConstant: 1
+    ConstantValue: 1
     Variable: {fileID: 0}
   m_AimSide: 0
   updateMode: 0
@@ -2777,7 +2790,7 @@ MonoBehaviour:
   OnClearTarget:
     m_PersistentCalls:
       m_Calls: []
-  debug: 1
+  debug: 0
   m_Animator: {fileID: 0}
   m_AimHorizontal: AimHorizontal
   m_AimVertical: AimVertical
@@ -3334,6 +3347,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8078fbdb01991b44b9c1351f444b5efe, type: 2}
   - {fileID: 11400000, guid: 9ae07cd2f8f4c054687fecf634f8e5b3, type: 2}
   - {fileID: 11400000, guid: c44e7e8d6840aa243b6c33ec85052763, type: 2}
+  waitTimeMult: 1
   UpdateAI: 0.2
   stoppingDistance: 1.07
   PointStoppingDistance: 0.6

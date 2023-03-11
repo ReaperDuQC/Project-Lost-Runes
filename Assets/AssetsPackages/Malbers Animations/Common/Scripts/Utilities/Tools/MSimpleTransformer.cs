@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -28,8 +29,10 @@ namespace MalbersAnimations.Utilities
 
 
         [Header("Events")]
-        public UnityEvent OnReachStart = new UnityEvent();
-        public UnityEvent OnReachEnd = new UnityEvent();
+        [FormerlySerializedAs("OnReachStart")]
+        public UnityEvent OnStart = new UnityEvent();
+        [FormerlySerializedAs("OnReachEnd")]
+        public UnityEvent OnEnd = new UnityEvent();
 
 
         [Range(0, 1)]
@@ -69,7 +72,7 @@ namespace MalbersAnimations.Utilities
 
         private IEnumerator C_WaitStart()
         {
-            OnReachStart.Invoke();
+            OnStart.Invoke();
 
             if (StartDelay > 0)
             {
@@ -82,7 +85,7 @@ namespace MalbersAnimations.Utilities
 
         private IEnumerator C_WaitEnd()
         {
-            OnReachEnd.Invoke();
+            OnEnd.Invoke();
             if (EndDelay > 0)
             {
                 Waiting = true;
@@ -96,7 +99,7 @@ namespace MalbersAnimations.Utilities
 
         private IEnumerator C_WaitRepeat()
         {
-            OnReachEnd.Invoke();
+            OnEnd.Invoke();
             if (EndDelay > 0)
             {
                 Waiting = true;
@@ -105,7 +108,7 @@ namespace MalbersAnimations.Utilities
             Waiting = false;
             position = 0;
             Evaluate(position);
-            OnReachStart.Invoke();
+            OnStart.Invoke();
 
             if (StartDelay > 0)
             {

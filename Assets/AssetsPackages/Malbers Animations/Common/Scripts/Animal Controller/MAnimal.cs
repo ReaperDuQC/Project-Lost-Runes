@@ -18,7 +18,7 @@ namespace MalbersAnimations.Controller
     public partial class MAnimal : MonoBehaviour,   
         IAnimatorListener, ICharacterMove, IGravity, IObjectCore, 
         IRandomizer, IMAnimator, ISleepController, IMDamagerSet, 
-        IAnimatorStateCycle, ICharacterAction// ITriggerInteract, IInteracter
+        IAnimatorStateCycle, ICharacterAction 
     {
         //Animal Variables: All variables
         //Animal Movement:  All Locomotion Logic
@@ -49,16 +49,6 @@ namespace MalbersAnimations.Controller
         [HideInInspector] public bool debugStances;
         [HideInInspector] public bool debugModes;
         [HideInInspector] public bool debugGizmos = true;
-
-        // [HideInInspector] public bool ShowMovement = false;
-        // [HideInInspector] public bool ShowGround = true;
-
-        //[HideInInspector] public bool ShowFreeMovement = true;
-
-        // [HideInInspector] public bool showGeneral = true;
-        // [HideInInspector] public bool showExposedVariables = false;
-        // [HideInInspector] public bool showReferences = true;
-        // [HideInInspector] public bool showGravity = true;
         #endregion
 
 #if UNITY_EDITOR
@@ -79,7 +69,7 @@ namespace MalbersAnimations.Controller
 
             Anim = GetComponentInParent<Animator>();            //Cache the Animator
             RB = GetComponentInParent<Rigidbody>();             //Catche the Rigid Body  
-
+            
             if (RB == null)
             {
                 RB = gameObject.AddComponent<Rigidbody>();
@@ -108,12 +98,28 @@ namespace MalbersAnimations.Controller
             if (globalSmooth != null) SmoothVertical.Variable = globalSmooth;
             if (globalTurn != null) TurnMultiplier.Variable = globalTurn;
 
-            MTools.SetDirty(this);
 
             var DefStance = MTools.GetInstance<StanceID>("Default");
 
             if (defaultStance == null) defaultStance = DefStance;
             if (currentStance == null) currentStance = DefStance;
+
+            pivots = new List<MPivots>
+            { 
+                new MPivots("Hip", new Vector3(0,0.7f,-0.7f), 1), 
+                new MPivots("Chest", new Vector3(0,0.7f,0.7f), 1), 
+                new MPivots("Water", new Vector3(0,1,0), 0.05f) 
+            };
+
+
+            //Pivot_Hip =  new  MPivots(pivots[0].name, pivots[0].position, pivots[0].multiplier);
+            //Pivot_Chest = new MPivots(pivots[1].name, pivots[1].position, pivots[1].multiplier);
+           
+            //Has_Pivot_Hip = true;
+            //Has_Pivot_Chest = true;
+            //Starting_PivotChest = true;
+
+            MTools.SetDirty(this);
         }
 
         [ContextMenu("Create Event Listeners")]

@@ -12,6 +12,11 @@ namespace LostRunes
         int _vertical;
         int _horizontal;
         public bool _canRotate;
+
+        private void Awake()
+        {
+            Initialize();
+        }
         public void Initialize()
         {
             _animator = GetComponent<Animator>();
@@ -99,6 +104,8 @@ namespace LostRunes
         private void OnAnimatorMove()
         {
             if (_playerManager._isInteracting == false) { return; }
+
+            _animator.applyRootMotion = true;
 
             float delta = Time.deltaTime;
             _playerLocomotion._rigidbody.drag = 0f;

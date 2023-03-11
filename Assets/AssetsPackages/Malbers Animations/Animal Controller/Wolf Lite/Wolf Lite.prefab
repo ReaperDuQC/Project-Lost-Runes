@@ -250,6 +250,7 @@ MonoBehaviour:
     ConstantValue: 1
     Variable: {fileID: 0}
   CustomReaction: {fileID: 0}
+  element: {fileID: 0}
   interact:
     UseConstant: 1
     ConstantValue: 1
@@ -444,6 +445,7 @@ MonoBehaviour:
   AlignTime: 0.3
   LookAtTime: 0.3
   debugColor: {r: 1, g: 0.1682254, b: 0, a: 0}
+  debug: 0
 --- !u!114 &5861542233668488909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -472,6 +474,7 @@ MonoBehaviour:
   AlignTime: 0.3
   LookAtTime: 0.3
   debugColor: {r: 1, g: 0.1682254, b: 0, a: 0}
+  debug: 0
 --- !u!1 &1438017827249262
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,7 +522,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &95706822463566262
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -532,10 +535,11 @@ Animator:
   m_UpdateMode: 1
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!54 &54745952662030160
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -649,7 +653,6 @@ MonoBehaviour:
     key: 32
     GetPressed: 0
     InputValue: 0
-    ToggleValue: 0
     ResetOnDisable: 1
     OnInputDown:
       m_PersistentCalls:
@@ -691,7 +694,6 @@ MonoBehaviour:
     key: 304
     GetPressed: 0
     InputValue: 0
-    ToggleValue: 0
     ResetOnDisable: 1
     OnInputDown:
       m_PersistentCalls:
@@ -745,7 +747,6 @@ MonoBehaviour:
     key: 49
     GetPressed: 1
     InputValue: 0
-    ToggleValue: 0
     ResetOnDisable: 1
     OnInputDown:
       m_PersistentCalls:
@@ -799,7 +800,6 @@ MonoBehaviour:
     key: 50
     GetPressed: 1
     InputValue: 0
-    ToggleValue: 0
     ResetOnDisable: 1
     OnInputDown:
       m_PersistentCalls:
@@ -853,7 +853,6 @@ MonoBehaviour:
     key: 101
     GetPressed: 1
     InputValue: 0
-    ToggleValue: 0
     ResetOnDisable: 1
     OnInputDown:
       m_PersistentCalls:
@@ -907,7 +906,6 @@ MonoBehaviour:
     key: 323
     GetPressed: 0
     InputValue: 0
-    ToggleValue: 0
     ResetOnDisable: 1
     OnInputDown:
       m_PersistentCalls:
@@ -949,7 +947,6 @@ MonoBehaviour:
     key: 101
     GetPressed: 0
     InputValue: 0
-    ToggleValue: 0
     ResetOnDisable: 1
     OnInputDown:
       m_PersistentCalls:
@@ -991,7 +988,6 @@ MonoBehaviour:
     key: 324
     GetPressed: 0
     InputValue: 0
-    ToggleValue: 0
     ResetOnDisable: 1
     OnInputDown:
       m_PersistentCalls:
@@ -1033,7 +1029,6 @@ MonoBehaviour:
     key: 99
     GetPressed: 5
     InputValue: 0
-    ToggleValue: 0
     ResetOnDisable: 0
     OnInputDown:
       m_PersistentCalls:
@@ -1088,7 +1083,6 @@ MonoBehaviour:
     key: 325
     GetPressed: 1
     InputValue: 0
-    ToggleValue: 0
     ResetOnDisable: 1
     OnInputDown:
       m_PersistentCalls:
@@ -1142,7 +1136,6 @@ MonoBehaviour:
     key: 113
     GetPressed: 1
     InputValue: 0
-    ToggleValue: 0
     ResetOnDisable: 1
     OnInputDown:
       m_PersistentCalls:
@@ -1193,7 +1186,6 @@ MonoBehaviour:
       key: 32
       GetPressed: 0
       InputValue: 0
-      ToggleValue: 0
       ResetOnDisable: 1
       OnInputDown:
         m_PersistentCalls:
@@ -1235,7 +1227,6 @@ MonoBehaviour:
       key: 304
       GetPressed: 0
       InputValue: 0
-      ToggleValue: 0
       ResetOnDisable: 1
       OnInputDown:
         m_PersistentCalls:
@@ -1289,7 +1280,6 @@ MonoBehaviour:
       key: 49
       GetPressed: 1
       InputValue: 0
-      ToggleValue: 0
       ResetOnDisable: 1
       OnInputDown:
         m_PersistentCalls:
@@ -1343,7 +1333,6 @@ MonoBehaviour:
       key: 50
       GetPressed: 1
       InputValue: 0
-      ToggleValue: 0
       ResetOnDisable: 1
       OnInputDown:
         m_PersistentCalls:
@@ -1397,7 +1386,6 @@ MonoBehaviour:
       key: 101
       GetPressed: 1
       InputValue: 0
-      ToggleValue: 0
       ResetOnDisable: 1
       OnInputDown:
         m_PersistentCalls:
@@ -1451,7 +1439,6 @@ MonoBehaviour:
       key: 323
       GetPressed: 0
       InputValue: 0
-      ToggleValue: 0
       ResetOnDisable: 1
       OnInputDown:
         m_PersistentCalls:
@@ -1493,7 +1480,6 @@ MonoBehaviour:
       key: 101
       GetPressed: 0
       InputValue: 0
-      ToggleValue: 0
       ResetOnDisable: 1
       OnInputDown:
         m_PersistentCalls:
@@ -1535,7 +1521,6 @@ MonoBehaviour:
       key: 324
       GetPressed: 0
       InputValue: 0
-      ToggleValue: 0
       ResetOnDisable: 1
       OnInputDown:
         m_PersistentCalls:
@@ -1577,7 +1562,6 @@ MonoBehaviour:
       key: 99
       GetPressed: 5
       InputValue: 0
-      ToggleValue: 0
       ResetOnDisable: 0
       OnInputDown:
         m_PersistentCalls:
@@ -1632,7 +1616,6 @@ MonoBehaviour:
       key: 325
       GetPressed: 1
       InputValue: 0
-      ToggleValue: 0
       ResetOnDisable: 1
       OnInputDown:
         m_PersistentCalls:
@@ -1686,7 +1669,6 @@ MonoBehaviour:
       key: 113
       GetPressed: 1
       InputValue: 0
-      ToggleValue: 0
       ResetOnDisable: 1
       OnInputDown:
         m_PersistentCalls:
@@ -1734,7 +1716,6 @@ MonoBehaviour:
       key: 32
       GetPressed: 0
       InputValue: 0
-      ToggleValue: 0
       ResetOnDisable: 1
       OnInputDown:
         m_PersistentCalls:
@@ -1776,7 +1757,6 @@ MonoBehaviour:
       key: 304
       GetPressed: 0
       InputValue: 0
-      ToggleValue: 0
       ResetOnDisable: 1
       OnInputDown:
         m_PersistentCalls:
@@ -1830,7 +1810,6 @@ MonoBehaviour:
       key: 49
       GetPressed: 1
       InputValue: 0
-      ToggleValue: 0
       ResetOnDisable: 1
       OnInputDown:
         m_PersistentCalls:
@@ -1884,7 +1863,6 @@ MonoBehaviour:
       key: 50
       GetPressed: 1
       InputValue: 0
-      ToggleValue: 0
       ResetOnDisable: 1
       OnInputDown:
         m_PersistentCalls:
@@ -1938,7 +1916,6 @@ MonoBehaviour:
       key: 101
       GetPressed: 1
       InputValue: 0
-      ToggleValue: 0
       ResetOnDisable: 1
       OnInputDown:
         m_PersistentCalls:
@@ -1992,7 +1969,6 @@ MonoBehaviour:
       key: 323
       GetPressed: 0
       InputValue: 0
-      ToggleValue: 0
       ResetOnDisable: 1
       OnInputDown:
         m_PersistentCalls:
@@ -2034,7 +2010,6 @@ MonoBehaviour:
       key: 101
       GetPressed: 0
       InputValue: 0
-      ToggleValue: 0
       ResetOnDisable: 1
       OnInputDown:
         m_PersistentCalls:
@@ -2076,7 +2051,6 @@ MonoBehaviour:
       key: 324
       GetPressed: 0
       InputValue: 0
-      ToggleValue: 0
       ResetOnDisable: 1
       OnInputDown:
         m_PersistentCalls:
@@ -2118,7 +2092,6 @@ MonoBehaviour:
       key: 99
       GetPressed: 5
       InputValue: 0
-      ToggleValue: 0
       ResetOnDisable: 0
       OnInputDown:
         m_PersistentCalls:
@@ -2173,7 +2146,6 @@ MonoBehaviour:
       key: 325
       GetPressed: 1
       InputValue: 0
-      ToggleValue: 0
       ResetOnDisable: 1
       OnInputDown:
         m_PersistentCalls:
@@ -2227,7 +2199,6 @@ MonoBehaviour:
       key: 113
       GetPressed: 1
       InputValue: 0
-      ToggleValue: 0
       ResetOnDisable: 1
       OnInputDown:
         m_PersistentCalls:
@@ -2296,6 +2267,12 @@ MonoBehaviour:
     OnAxisValueChanged:
       m_PersistentCalls:
         m_Calls: []
+  horizontal: 0
+  vertical: 0
+  upDown: 0
+  MovementEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &114222225517902476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2311,11 +2288,11 @@ MonoBehaviour:
   PivotPosDir: 0
   SelectedMode: 8
   SelectedState: 3
-  SelectedStance: 0
+  SelectedStance: 1
   ShowStateInInspector: 0
-  Editor_Tabs1: 3
+  Editor_Tabs1: 4
   Mode_Tabs1: 2
-  Editor_Tabs2: 4
+  Editor_Tabs2: 1
   Ability_Tabs: 0
   Editor_EventTabs: 1
   showPivots: 1
@@ -2332,7 +2309,104 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 47af1b04b47957f4ca466d23cbb16cf6, type: 2}
   - {fileID: 11400000, guid: bdb4bb76e2b782f42b909978af887428, type: 2}
   - {fileID: 11400000, guid: c31051ac4cd486e4f9ac40015fdef3a6, type: 2}
-  Stances: []
+  Stances:
+  - ID: {fileID: 11400000, guid: 87ae38bfe93fc3f449ecd25863e2a6fe, type: 2}
+    enabled:
+      UseConstant: 1
+      ConstantValue: 1
+      Variable: {fileID: 0}
+    Input:
+      UseConstant: 1
+      ConstantValue: 
+      Variable: {fileID: 0}
+    persistent:
+      UseConstant: 1
+      ConstantValue: 0
+      Variable: {fileID: 0}
+    CanStrafe:
+      UseConstant: 1
+      ConstantValue: 0
+      Variable: {fileID: 0}
+    CoolDown:
+      UseConstant: 1
+      ConstantValue: 0
+      Variable: {fileID: 0}
+    ExitAfter:
+      UseConstant: 1
+      ConstantValue: 0
+      Variable: {fileID: 0}
+    Include: 1
+    states: []
+    StateQueue: []
+    DisableStances: []
+  - ID: {fileID: 11400000, guid: fbd7296ce55e10746a1ec32a2fcd406a, type: 2}
+    enabled:
+      UseConstant: 1
+      ConstantValue: 1
+      Variable: {fileID: 0}
+    Input:
+      UseConstant: 1
+      ConstantValue: 
+      Variable: {fileID: 0}
+    persistent:
+      UseConstant: 1
+      ConstantValue: 0
+      Variable: {fileID: 0}
+    CanStrafe:
+      UseConstant: 1
+      ConstantValue: 0
+      Variable: {fileID: 0}
+    CoolDown:
+      UseConstant: 1
+      ConstantValue: 0
+      Variable: {fileID: 0}
+    ExitAfter:
+      UseConstant: 1
+      ConstantValue: 0
+      Variable: {fileID: 0}
+    Include: 1
+    states:
+    - {fileID: 11400000, guid: 3787b6d94d5454740bf36d57436185b0, type: 2}
+    - {fileID: 11400000, guid: 7370df9c769c2764381ad7c76eb3d949, type: 2}
+    StateQueue:
+    - {fileID: 11400000, guid: 8078fbdb01991b44b9c1351f444b5efe, type: 2}
+    - {fileID: 11400000, guid: 9ae07cd2f8f4c054687fecf634f8e5b3, type: 2}
+    - {fileID: 11400000, guid: 7e364e53b77644c47aa3abdaa2e2c08c, type: 2}
+    DisableStances: []
+  - ID: {fileID: 11400000, guid: 38814d66fd245804a81106b0a96b0060, type: 2}
+    enabled:
+      UseConstant: 1
+      ConstantValue: 1
+      Variable: {fileID: 0}
+    Input:
+      UseConstant: 1
+      ConstantValue: 
+      Variable: {fileID: 0}
+    persistent:
+      UseConstant: 1
+      ConstantValue: 0
+      Variable: {fileID: 0}
+    CanStrafe:
+      UseConstant: 1
+      ConstantValue: 0
+      Variable: {fileID: 0}
+    CoolDown:
+      UseConstant: 1
+      ConstantValue: 0
+      Variable: {fileID: 0}
+    ExitAfter:
+      UseConstant: 1
+      ConstantValue: 0
+      Variable: {fileID: 0}
+    Include: 1
+    states:
+    - {fileID: 11400000, guid: 7370df9c769c2764381ad7c76eb3d949, type: 2}
+    - {fileID: 11400000, guid: 3787b6d94d5454740bf36d57436185b0, type: 2}
+    StateQueue:
+    - {fileID: 11400000, guid: 8078fbdb01991b44b9c1351f444b5efe, type: 2}
+    - {fileID: 11400000, guid: 9ae07cd2f8f4c054687fecf634f8e5b3, type: 2}
+    - {fileID: 11400000, guid: 3fbb696c31f7ed846b7ec9b2f76fd0e5, type: 2}
+    DisableStances: []
   modes:
   - active: 1
     ignoreLowerModes: 1
@@ -5291,6 +5365,7 @@ MonoBehaviour:
     ConstantValue: Stair
     Variable: {fileID: 0}
   maxAngleSlope: 35
+  m_deepSlope: 5
   Rotator: {fileID: 1735201838}
   RootBone: {fileID: 7156273184025713823}
   grounded:
@@ -5398,6 +5473,14 @@ MonoBehaviour:
     m_LockSpeed:
       UseConstant: 1
       ConstantValue: 0
+      Variable: {fileID: 0}
+    m_RootMotionPos:
+      UseConstant: 1
+      ConstantValue: 1
+      Variable: {fileID: 0}
+    m_RootMotionRot:
+      UseConstant: 1
+      ConstantValue: 1
       Variable: {fileID: 0}
     BackSpeedMult:
       UseConstant: 1
@@ -5530,6 +5613,14 @@ MonoBehaviour:
     m_LockSpeed:
       UseConstant: 1
       ConstantValue: 0
+      Variable: {fileID: 0}
+    m_RootMotionPos:
+      UseConstant: 1
+      ConstantValue: 1
+      Variable: {fileID: 0}
+    m_RootMotionRot:
+      UseConstant: 1
+      ConstantValue: 1
       Variable: {fileID: 0}
     BackSpeedMult:
       UseConstant: 1
@@ -5752,6 +5843,14 @@ MonoBehaviour:
       UseConstant: 1
       ConstantValue: 0
       Variable: {fileID: 0}
+    m_RootMotionPos:
+      UseConstant: 1
+      ConstantValue: 1
+      Variable: {fileID: 0}
+    m_RootMotionRot:
+      UseConstant: 1
+      ConstantValue: 1
+      Variable: {fileID: 0}
     BackSpeedMult:
       UseConstant: 1
       ConstantValue: 0.5
@@ -5883,6 +5982,14 @@ MonoBehaviour:
       UseConstant: 1
       ConstantValue: 0
       Variable: {fileID: 0}
+    m_RootMotionPos:
+      UseConstant: 1
+      ConstantValue: 1
+      Variable: {fileID: 0}
+    m_RootMotionRot:
+      UseConstant: 1
+      ConstantValue: 1
+      Variable: {fileID: 0}
     BackSpeedMult:
       UseConstant: 1
       ConstantValue: 0.5
@@ -5945,24 +6052,210 @@ MonoBehaviour:
         UseConstant: 1
         ConstantValue: 4
         Variable: {fileID: 0}
+  - name: Ice Movement
+    states:
+    - {fileID: 11400000, guid: 7370df9c769c2764381ad7c76eb3d949, type: 2}
+    - {fileID: 11400000, guid: 3787b6d94d5454740bf36d57436185b0, type: 2}
+    stances:
+    - {fileID: 11400000, guid: 38814d66fd245804a81106b0a96b0060, type: 2}
+    StartVerticalIndex:
+      UseConstant: 1
+      ConstantValue: 2
+      Variable: {fileID: 0}
+    TopIndex:
+      UseConstant: 1
+      ConstantValue: 2
+      Variable: {fileID: 0}
+    m_SprintIndex:
+      UseConstant: 1
+      ConstantValue: 3
+      Variable: {fileID: 0}
+    m_LockIndex:
+      UseConstant: 1
+      ConstantValue: 1
+      Variable: {fileID: 0}
+    m_LockSpeed:
+      UseConstant: 1
+      ConstantValue: 0
+      Variable: {fileID: 0}
+    m_RootMotionPos:
+      UseConstant: 1
+      ConstantValue: 0
+      Variable: {fileID: 0}
+    m_RootMotionRot:
+      UseConstant: 1
+      ConstantValue: 0
+      Variable: {fileID: 0}
+    BackSpeedMult:
+      UseConstant: 1
+      ConstantValue: 0.5
+      Variable: {fileID: 0}
+    PitchLerpOn:
+      UseConstant: 1
+      ConstantValue: 10
+      Variable: {fileID: 0}
+    PitchLerpOff:
+      UseConstant: 1
+      ConstantValue: 10
+      Variable: {fileID: 0}
+    BankLerp:
+      UseConstant: 1
+      ConstantValue: 10
+      Variable: {fileID: 0}
+    Speeds:
+    - name: Walk ICE
+      Vertical:
+        UseConstant: 1
+        ConstantValue: 1
+        Variable: {fileID: 0}
+      position:
+        UseConstant: 1
+        ConstantValue: 2
+        Variable: {fileID: 0}
+      lerpPosition:
+        UseConstant: 1
+        ConstantValue: 0.5
+        Variable: {fileID: 0}
+      lerpPosAnim:
+        UseConstant: 1
+        ConstantValue: 6
+        Variable: {fileID: 0}
+      rotation:
+        UseConstant: 0
+        ConstantValue: 0
+        Variable: {fileID: 11400000, guid: 5c4fe0b08ccfb364689cd2dfa25c82aa, type: 2}
+      lerpRotation:
+        UseConstant: 1
+        ConstantValue: 2
+        Variable: {fileID: 0}
+      lerpRotAnim:
+        UseConstant: 1
+        ConstantValue: 6
+        Variable: {fileID: 0}
+      animator:
+        UseConstant: 1
+        ConstantValue: 1
+        Variable: {fileID: 0}
+      lerpAnimator:
+        UseConstant: 1
+        ConstantValue: 8
+        Variable: {fileID: 0}
+      strafeSpeed:
+        UseConstant: 1
+        ConstantValue: 4
+        Variable: {fileID: 0}
+      lerpStrafe:
+        UseConstant: 1
+        ConstantValue: 4
+        Variable: {fileID: 0}
+    - name: Trot ICE
+      Vertical:
+        UseConstant: 1
+        ConstantValue: 2
+        Variable: {fileID: 0}
+      position:
+        UseConstant: 1
+        ConstantValue: 3
+        Variable: {fileID: 0}
+      lerpPosition:
+        UseConstant: 1
+        ConstantValue: 0.5
+        Variable: {fileID: 0}
+      lerpPosAnim:
+        UseConstant: 1
+        ConstantValue: 6
+        Variable: {fileID: 0}
+      rotation:
+        UseConstant: 1
+        ConstantValue: 0
+        Variable: {fileID: 11400000, guid: 5c4fe0b08ccfb364689cd2dfa25c82aa, type: 2}
+      lerpRotation:
+        UseConstant: 1
+        ConstantValue: 1
+        Variable: {fileID: 0}
+      lerpRotAnim:
+        UseConstant: 1
+        ConstantValue: 6
+        Variable: {fileID: 0}
+      animator:
+        UseConstant: 1
+        ConstantValue: 1
+        Variable: {fileID: 0}
+      lerpAnimator:
+        UseConstant: 1
+        ConstantValue: 8
+        Variable: {fileID: 0}
+      strafeSpeed:
+        UseConstant: 1
+        ConstantValue: 4
+        Variable: {fileID: 0}
+      lerpStrafe:
+        UseConstant: 1
+        ConstantValue: 4
+        Variable: {fileID: 0}
+    - name: Run ICE
+      Vertical:
+        UseConstant: 1
+        ConstantValue: 3
+        Variable: {fileID: 0}
+      position:
+        UseConstant: 1
+        ConstantValue: 7
+        Variable: {fileID: 0}
+      lerpPosition:
+        UseConstant: 1
+        ConstantValue: 0.5
+        Variable: {fileID: 0}
+      lerpPosAnim:
+        UseConstant: 1
+        ConstantValue: 6
+        Variable: {fileID: 0}
+      rotation:
+        UseConstant: 1
+        ConstantValue: 0
+        Variable: {fileID: 11400000, guid: 5c4fe0b08ccfb364689cd2dfa25c82aa, type: 2}
+      lerpRotation:
+        UseConstant: 1
+        ConstantValue: 1
+        Variable: {fileID: 0}
+      lerpRotAnim:
+        UseConstant: 1
+        ConstantValue: 6
+        Variable: {fileID: 0}
+      animator:
+        UseConstant: 1
+        ConstantValue: 1
+        Variable: {fileID: 0}
+      lerpAnimator:
+        UseConstant: 1
+        ConstantValue: 8
+        Variable: {fileID: 0}
+      strafeSpeed:
+        UseConstant: 1
+        ConstantValue: 4
+        Variable: {fileID: 0}
+      lerpStrafe:
+        UseConstant: 1
+        ConstantValue: 4
+        Variable: {fileID: 0}
   CustomSpeed: 0
   currentSpeedModifier:
     name: Default
     Vertical:
       UseConstant: 1
-      ConstantValue: 0
+      ConstantValue: 1
       Variable: {fileID: 0}
     position:
       UseConstant: 1
-      ConstantValue: 0
+      ConstantValue: 4.908939
       Variable: {fileID: 0}
     lerpPosition:
       UseConstant: 1
-      ConstantValue: 0
+      ConstantValue: 4
       Variable: {fileID: 0}
     lerpPosAnim:
       UseConstant: 1
-      ConstantValue: 0
+      ConstantValue: 4
       Variable: {fileID: 0}
     rotation:
       UseConstant: 1
@@ -5970,19 +6263,19 @@ MonoBehaviour:
       Variable: {fileID: 0}
     lerpRotation:
       UseConstant: 1
-      ConstantValue: 0
+      ConstantValue: 4
       Variable: {fileID: 0}
     lerpRotAnim:
       UseConstant: 1
-      ConstantValue: 0
+      ConstantValue: 4
       Variable: {fileID: 0}
     animator:
       UseConstant: 1
-      ConstantValue: 0
+      ConstantValue: 1
       Variable: {fileID: 0}
     lerpAnimator:
       UseConstant: 1
-      ConstantValue: 0
+      ConstantValue: 5
       Variable: {fileID: 0}
     strafeSpeed:
       UseConstant: 1
@@ -5990,7 +6283,7 @@ MonoBehaviour:
       Variable: {fileID: 0}
     lerpStrafe:
       UseConstant: 1
-      ConstantValue: 0
+      ConstantValue: 4
       Variable: {fileID: 0}
   m_gravityDir:
     UseConstant: 1
@@ -6142,6 +6435,7 @@ MonoBehaviour:
   m_Movement: Movement
   m_State: State
   m_StateOn: StateOn
+  m_StateProfile: StateProfile
   m_ModeOn: ModeOn
   m_StateStatus: StateStatus
   m_StateExitStatus: StateExitStatus
@@ -6530,7 +6824,7 @@ MonoBehaviour:
     UseConstant: 1
     ConstantValue: 1
     Variable: {fileID: 0}
-  AlingToDamage:
+  AlignToDamage:
     UseConstant: 1
     ConstantValue: 1
     Variable: {fileID: 0}
@@ -6585,6 +6879,10 @@ MonoBehaviour:
     OnDamager:
       m_PersistentCalls:
         m_Calls: []
+    OnElementDamage:
+      m_PersistentCalls:
+        m_Calls: []
+  elements: []
   Editor_Tabs1: 0
 --- !u!114 &114515738253532648
 MonoBehaviour:
@@ -7284,6 +7582,10 @@ MonoBehaviour:
     UseConstant: 1
     ConstantValue: {x: 0.5, y: 0.5}
     Variable: {fileID: 0}
+  m_UseCamera:
+    UseConstant: 1
+    ConstantValue: 1
+    Variable: {fileID: 0}
   m_AimSide: 0
   updateMode: 1
   MaxDistance: 100
@@ -7393,6 +7695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 580e703fe3c4ea64a855a7104b1d92f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SmoothEquip: 0
   UseWeaponsOnlyWhileRiding: 1
   animal: {fileID: 114222225517902476}
   DrawWeaponModeID: {fileID: 11400000, guid: 25a9ab75d9646144eaa77342296c549c, type: 2}
@@ -7443,7 +7746,7 @@ MonoBehaviour:
   m_CombatLayerPath: Layers/Combat2
   m_CombatLayerName: Upper Body (Weapons)
   debug: 0
-  anim: {fileID: 0}
+  anim: {fileID: 95706822463566262}
   StoreAfter:
     UseConstant: 1
     ConstantValue: 0
@@ -8476,6 +8779,7 @@ MonoBehaviour:
       Variable: {fileID: 0}
     life: 0
     delay: 0
+    scale: 1
     Modifier: {fileID: 0}
     OnPlay:
       m_PersistentCalls:
@@ -8502,6 +8806,7 @@ MonoBehaviour:
       Variable: {fileID: 0}
     life: 0.25
     delay: 0
+    scale: 1
     Modifier: {fileID: 0}
     OnPlay:
       m_PersistentCalls:
@@ -8528,6 +8833,7 @@ MonoBehaviour:
       Variable: {fileID: 0}
     life: 0.25
     delay: 0
+    scale: 1
     Modifier: {fileID: 0}
     OnPlay:
       m_PersistentCalls:
@@ -8554,6 +8860,7 @@ MonoBehaviour:
       Variable: {fileID: 0}
     life: 0.25
     delay: 0
+    scale: 1
     Modifier: {fileID: 0}
     OnPlay:
       m_PersistentCalls:
@@ -8580,6 +8887,7 @@ MonoBehaviour:
       Variable: {fileID: 0}
     life: 0.25
     delay: 0
+    scale: 1
     Modifier: {fileID: 0}
     OnPlay:
       m_PersistentCalls:
@@ -8588,6 +8896,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   SelectedEffect: 4
+  debug: 0
 --- !u!1 &1104431049552824099
 GameObject:
   m_ObjectHideFlags: 0
@@ -9061,6 +9370,7 @@ MonoBehaviour:
     UseConstant: 1
     ConstantValue: 1
     Variable: {fileID: 0}
+  aimer: {fileID: 0}
   LimitAngle:
     UseConstant: 1
     ConstantValue: 60
@@ -10401,6 +10711,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8078fbdb01991b44b9c1351f444b5efe, type: 2}
   - {fileID: 11400000, guid: 9ae07cd2f8f4c054687fecf634f8e5b3, type: 2}
   - {fileID: 11400000, guid: c44e7e8d6840aa243b6c33ec85052763, type: 2}
+  waitTimeMult: 1
   UpdateAI: 0.2
   stoppingDistance: 2
   PointStoppingDistance: 0.6
@@ -10444,6 +10755,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointClickData: {fileID: 11400000, guid: b4b12009e452a364c8c23d8a0f881a61, type: 2}
   PointUI: {fileID: 1291115747974048, guid: a7118c63ac516284aa1961df48d8ce0a, type: 3}
+  Button: 0
   radius: 0.2
   ClearTarget: 1
   OnPointClick:

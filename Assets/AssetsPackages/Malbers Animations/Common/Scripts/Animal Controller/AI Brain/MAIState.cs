@@ -24,16 +24,19 @@ namespace MalbersAnimations.Controller.AI
             set => tasks[index] = value;
         }
 
-        //[Tooltip("Creates the Decisions and Tasks inside this AI State")]
-        //public bool internalData = true;
-
-        [FormerlySerializedAs("actions")] public MTask[] tasks;
+        public MTask[] tasks;
         public MAITransition[] transitions;
         public Color GizmoStateColor = Color.gray;
 
         [HideInInspector] public bool CreateTaskAsset = true;
         [HideInInspector] public bool CreateDecisionAsset = true;
 
+
+        private void Reset()
+        {
+            tasks = new MTask[0];
+            transitions = new MAITransition[0];
+        }
 
         public virtual void Play(MAnimalBrain brain) => brain?.StartNewState(this);
 
@@ -640,6 +643,8 @@ namespace MalbersAnimations.Controller.AI
                 },
             };
         }
+
+     
 
         private void OnAddCallback_Decision()
         {

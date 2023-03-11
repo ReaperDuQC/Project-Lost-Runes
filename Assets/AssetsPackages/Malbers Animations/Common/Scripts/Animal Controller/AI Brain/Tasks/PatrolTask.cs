@@ -12,6 +12,10 @@ namespace MalbersAnimations.Controller.AI
         [Tooltip("The Animal will Rotate/Look at the Target when he arrives to it")]
         public bool LookAtOnArrival = false;
 
+
+        [Tooltip("Ignores the Wait time of all waypoints")]
+        public bool IgnoreWaitTime = false;
+
         public PatrolType patrolType = PatrolType.LastWaypoint;
 
         [Tooltip("Use a Runtime GameObjects Set to find the Next waypoint")]
@@ -23,6 +27,8 @@ namespace MalbersAnimations.Controller.AI
 
         public override void StartTask(MAnimalBrain brain, int index)
         {
+            brain.AIControl.AutoNextTarget = true; //When Patrolling make sure AutoTarget is set to true... 
+
             switch (patrolType)
             {
                 case PatrolType.LastWaypoint:
@@ -83,6 +89,13 @@ namespace MalbersAnimations.Controller.AI
         public override void OnTargetArrived(MAnimalBrain brain, Transform Target, int index)
         {
             brain.AIControl.AutoNextTarget = true; //When Patrolling make sure AutoTarget is set to true... 
+
+           // Debug.Log("OnTargetArrived");
+            if (IgnoreWaitTime)
+            {
+                brain.AIControl.StopWait(); //Ingore wait time
+                brain.AIControl.SetTarget(brain.AIControl.NextTarget,true);
+            }                        
         }
 
         void Reset() { Description = "Simple Patrol Logic using the Default AiAnimal Control Movement System"; }
@@ -96,7 +109,8 @@ namespace MalbersAnimations.Controller.AI
     [UnityEditor.CustomEditor(typeof(PatrolTask))]
     public class PatrolTaskEditor : UnityEditor.Editor
     {
-        UnityEditor.SerializedProperty Description, MessageID, patrolType, RuntimeSet, rtype, RTIndex, RTName, WaitForPreviousTask;
+        UnityEditor.SerializedProperty Description, MessageID, patrolType, RuntimeSet, rtype, RTIndex, RTName, 
+            WaitForPreviousTask, LookAtOnArrival, IgnoreWaitTime;
 
         private void OnEnable()
         {
@@ -108,6 +122,8 @@ namespace MalbersAnimations.Controller.AI
             RTIndex = serializedObject.FindProperty("RTIndex");
             RTName = serializedObject.FindProperty("RTName");
             RuntimeSet = serializedObject.FindProperty("RuntimeSet");
+            LookAtOnArrival = serializedObject.FindProperty("LookAtOnArrival");
+            IgnoreWaitTime = serializedObject.FindProperty("IgnoreWaitTime");
         }
         public override void OnInspectorGUI()
         {
@@ -147,6 +163,10 @@ namespace MalbersAnimations.Controller.AI
                 default:
                     break;
             }
+
+            UnityEditor.EditorGUILayout.PropertyField(LookAtOnArrival);
+            UnityEditor.EditorGUILayout.PropertyField(IgnoreWaitTime);
+
             serializedObject.ApplyModifiedProperties();
         }
     }

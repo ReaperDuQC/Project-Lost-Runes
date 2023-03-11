@@ -104,7 +104,8 @@ namespace MalbersAnimations.Weapons
 
 
         /// <summary> Prepare the Projectile for firing </summary>
-        public virtual void Prepare(GameObject Owner, Vector3 Gravity, Vector3 ProjectileVelocity, LayerMask HitLayer, QueryTriggerInteraction triggerInteraction)
+        public virtual void Prepare(GameObject Owner, Vector3 Gravity, 
+            Vector3 ProjectileVelocity, LayerMask HitLayer, QueryTriggerInteraction triggerInteraction)
         {
             this.Layer = HitLayer;
             this.TriggerInteraction = triggerInteraction;
@@ -160,7 +161,7 @@ namespace MalbersAnimations.Weapons
                 {
                     rb.AddTorque(torqueAxis * torque.Value, ForceMode.Impulse);
                 }
-                Debug.Log("RIGID BODY Gravity");
+              //  Debug.Log("RIGID BODY Gravity");
                 rb.AddForce(Velocity, ForceMode.VelocityChange);
             }
 
@@ -187,7 +188,7 @@ namespace MalbersAnimations.Weapons
         }
 
 
-        void OnCollisionEnter(Collision other)
+        private void OnCollisionEnter(UnityEngine.Collision other)
         {
             if (rb && rb.isKinematic) return;
             if (HasImpacted) return; //Do not check new Collisions
@@ -279,13 +280,14 @@ namespace MalbersAnimations.Weapons
             yield return null;
         }
 
-        public void PrepareDamage(StatModifier modifier, float CriticalChance, float CriticalMultiplier)
+        public void PrepareDamage(StatModifier modifier, float CriticalChance, float CriticalMultiplier, StatElement element)
         {
             if (!KeepDamageValues)
             {
                 statModifier = new StatModifier(modifier);
                 this.CriticalChance = CriticalChance;
                 this.CriticalMultiplier = CriticalMultiplier;
+                this.element = element;
             }
         }
 
@@ -316,17 +318,21 @@ namespace MalbersAnimations.Weapons
             // TryPhysics(targetRB, collider, Direction, Force);
             targetRB?.AddForceAtPosition(Direction.normalized * Velocity.magnitude * PushMultiplier, HitPosition, forceMode); //Add a force to the Target RigidBody
 
+            var ClosestTransform = MTools.GetClosestTransform(HitPosition, collider.transform, Layer);
+
+
+
             OnHit.Invoke(collider.transform);
             OnHitPosition.Invoke(HitPosition);
 
-            TryHitEffectProjectile(HitPosition, normal, collider.transform);
+            TryHitEffectProjectile(HitPosition, normal, ClosestTransform);
 
             switch (impactBehaviour)
             {
                 case ImpactBehaviour.None:
                     break;
                 case ImpactBehaviour.StickOnSurface:
-                    Stick_On_Surface(collider, HitPosition);
+                    Stick_On_Surface(ClosestTransform, HitPosition);
                     break;
                 case ImpactBehaviour.DestroyOnImpact:
                     DestroyProjectile();
@@ -357,9 +363,9 @@ namespace MalbersAnimations.Weapons
             }
         }
 
-        private void Stick_On_Surface(Collider collider, Vector3 HitPosition)
+        private void Stick_On_Surface(Transform collider, Vector3 HitPosition)
         {
-            transform.SetParentScaleFixer(collider.transform, HitPosition);
+            transform.SetParentScaleFixer(collider, HitPosition);
             transform.position += transform.forward * Penetration; //Put the Projectile a bit deeper in the collider
         }
 
@@ -373,20 +379,22 @@ namespace MalbersAnimations.Weapons
 
                 if (HitEffect != null)
                 {
-
                     Debugging($"<color=yellow> <b>[HitEffect] </b> [{HitEffect.name}] , {HitPosition} </color>",this);  //Debug
-
 
                     if (HitEffect.IsPrefab())
                     {
                         var instance = Instantiate(HitEffect, HitPosition, HitRotation);
 
-                        instance.transform.SetParentScaleFixer(hitTransform, HitPosition); //Fix the Scale issue
-                       
-                        //Reset the gameobject visibility 
+                        var HasHlp = instance.transform.SetParentScaleFixer(hitTransform, HitPosition); //Fix the Scale issue
 
+                        //Reset the gameobject visibility 
                         CheckHitEffect(instance);
-                        if (DestroyHitEffect > 0) Destroy(instance, DestroyHitEffect);
+
+                        if (DestroyHitEffect > 0)
+                        {
+                            Destroy(instance, DestroyHitEffect);
+                            if (HasHlp) Destroy(HasHlp.gameObject, DestroyHitEffect);
+                        }
                     }
                     else
                     {

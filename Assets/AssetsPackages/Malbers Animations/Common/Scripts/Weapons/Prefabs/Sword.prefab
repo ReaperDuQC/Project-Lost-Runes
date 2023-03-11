@@ -58,7 +58,7 @@ MonoBehaviour:
     UseConstant: 1
     ConstantValue:
       serializedVersion: 2
-      m_Bits: 3499098935
+      m_Bits: 3230662657
     Variable: {fileID: 0}
   triggerInteraction: 1
   owner: {fileID: 1000012785853844}
@@ -76,6 +76,7 @@ MonoBehaviour:
     ConstantValue: 1
     Variable: {fileID: 0}
   CustomReaction: {fileID: 0}
+  element: {fileID: 0}
   interact:
     UseConstant: 1
     ConstantValue: 1
@@ -480,6 +481,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5394148892248859332}
   - component: {fileID: 1054929852354334767}
+  - component: {fileID: 1783436828812147581}
   m_Layer: 2
   m_Name: Attack Collider
   m_TagString: Untagged
@@ -514,6 +516,51 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.35696238, y: 0.35620067, z: 0.66968185}
   m_Center: {x: 5.6141257e-13, y: -9.382575e-14, z: 0.32793653}
+--- !u!114 &1783436828812147581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4641039516145571975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42b20103f05ec694e9515e126d8eb956, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitLayer:
+    UseConstant: 1
+    ConstantValue:
+      serializedVersion: 2
+      m_Bits: 0
+    Variable: {fileID: 0}
+  triggerInteraction: 1
+  Tags: []
+  OnTrigger_Enter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTrigger_Exit:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTrigger_Stay:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGameObjectEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGameObjectExit:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGameObjectStay:
+    m_PersistentCalls:
+      m_Calls: []
+  m_debug: 0
+  useOnTriggerStay:
+    UseConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
+  trigger: {fileID: 0}
+  Editor_Tabs1: 0
 --- !u!1 &7458751067517391639
 GameObject:
   m_ObjectHideFlags: 0

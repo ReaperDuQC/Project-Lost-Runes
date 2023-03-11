@@ -128,7 +128,7 @@ namespace MalbersAnimations.Weapons
                     if (manager.Weapon is MShootable) (manager.Weapon as MShootable).FinishReload();
                     break;
                 case WeaponOption.WeaponIsReady:
-                    manager.Weapon.WeaponReady(ready);
+                  if (manager.Weapon != null)  manager.Weapon.WeaponReady(ready);
                     break;
                 case WeaponOption.CheckAim:
                     manager.CheckAim();

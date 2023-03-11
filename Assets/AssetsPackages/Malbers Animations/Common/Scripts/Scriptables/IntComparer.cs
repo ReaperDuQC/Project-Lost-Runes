@@ -39,20 +39,12 @@ namespace MalbersAnimations
             set => compare[index].Value.Value = value;
         }
 
-        public void Pin_Comparer(int index)
-        {
-            Pin = compare[index];
-        }
+        public void Pin_Comparer(int index) => Pin = compare[index];
+        public void Pin_Comparer_SetValue(int value) => Pin?.SetValue(value);
+        public void Pin_Comparer_SetValue(float value) => Pin?.SetValue((int)value);
+        public void Pin_Comparer_SetValue(IntVar value) => Pin?.SetValue(value.Value);
+        public void Pin_Comparer_SetValue(IDs value) => Pin?.SetValue(value.ID);
 
-        public void Pin_Comparer_SetValue(int value)
-        {
-            if (Pin != null) Pin.Value.Value = value;
-        }
-
-        public void Pin_Comparer_SetValue(IntVar value)
-        {
-            if (Pin != null) Pin.Value.Value = value;
-        }
 
 
 

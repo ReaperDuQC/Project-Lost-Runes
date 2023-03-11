@@ -41,7 +41,7 @@ namespace MalbersAnimations.Weapons
             ActiveHolster = holsters.Find(x => x.GetID == ID);
             ActiveHolsterIndex = ActiveHolster != null ? ActiveHolster.Index : 0;
         }
-
+         
         public void SetNextHolster()
         {
             ActiveHolsterIndex = (ActiveHolsterIndex + 1) % holsters.Count;

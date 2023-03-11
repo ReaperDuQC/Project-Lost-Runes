@@ -51,7 +51,7 @@ namespace MalbersAnimations
 
         /// <summary>Equip the next holster weapon</summary>
 
-        public void Holster_Next()
+        public virtual void Holster_Next()
         {
             ActiveHolsterIndex = (ActiveHolsterIndex + 1) % holsters.Count;
             ActiveHolster = holsters[ActiveHolsterIndex];
@@ -60,7 +60,7 @@ namespace MalbersAnimations
         }
 
         /// <summary>Equip the previous holster weapon</summary>
-        public void Holster_Previus()
+        public virtual void Holster_Previus()
         {
             ActiveHolsterIndex = (ActiveHolsterIndex - 1) % holsters.Count;
             ActiveHolster = holsters[ActiveHolsterIndex];
@@ -74,7 +74,7 @@ namespace MalbersAnimations
                 if (WeaponAction == w_actions[i]) return true;
             return false;
         }
-        public void WeaponReady(bool value) => Weapon.WeaponReady(value);
+        public virtual void WeaponReady(bool value) => Weapon.WeaponReady(value);
 
         /// <summary> Equip a weapon that is located in a Holster  </summary>
         public virtual void Holster_Equip(HolsterID HolsterID) => Holster_Equip(HolsterID.ID);
@@ -105,8 +105,6 @@ namespace MalbersAnimations
                 }
             }
         }
-
-
 
         /// <summary> Equip a weapon that is located in a Holster  </summary> 
         public virtual void Holster_Equip(int HolsterID)
@@ -315,7 +313,7 @@ namespace MalbersAnimations
             {
                 if (UseExternal) TryInstantiateWeapon(Next_Weapon);
                 Weapon = Next_Weapon;
-                Holster_SetActive(Weapon.HolsterID);
+                if (!UseExternal) Holster_SetActive(Weapon.HolsterID); 
                 Equip_Fast();
             }
             else if (!Weapon.Equals(Next_Weapon))             //You are trying to Equip a different weapon, so Unequip the active one then equip the next one
@@ -368,23 +366,11 @@ namespace MalbersAnimations
         #endregion
 
         #region Attack Callbacks
-
-        public virtual void MainAttack()
-        {
-            MainAttack(0);
-        }
-
-        public virtual void _MainAttack()
-        {
-            MainAttack(0);
-        }
+        public virtual void MainAttack() => MainAttack(0);
 
         public virtual void SecondAttack()
         {
-            if (!Aim)
-            {
-                MainAttack(1); 
-            }
+            if (!Aim) MainAttack(1); 
         }
 
         public virtual void MainAttack(int Branch)
@@ -406,8 +392,8 @@ namespace MalbersAnimations
             if (HigherPriorityMode) return;     //Do not attack if other High mode is played 
 
 
-            //Debug.Log($"WeaponIsActive {WeaponIsActive}");
-            //Debug.Log($"Weapon.CanAttack {Weapon.CanAttack}");
+            // Debug.Log($"WeaponIsActive {WeaponIsActive}");
+           //  Debug.Log($"Weapon.CanAttack {Weapon.CanAttack}");
             if (WeaponIsActive)
             {
                 if (Weapon.CanAttack)
@@ -427,12 +413,12 @@ namespace MalbersAnimations
                 {
                     if (comboManager && comboManager.ActiveCombo != null) //if there's a combo manager use it
                     {
-                        //Debug.Log("Unharmed Attack with Combo");
+                       //  Debug.Log("Unharmed Attack with Combo");
                         comboManager.Play();
                     }
                     else
                     {
-                        // Debug.Log("Unharmed Attack with Modes");
+                        //  Debug.Log("Unharmed Attack with Modes");
                         UnArmedMode?.TryActivate(-99); //else do a normal  Animal Mode activation
                     }
                 }
@@ -498,7 +484,7 @@ namespace MalbersAnimations
 
         public virtual void ReloadWeapon()
         {
-            // if (JustChangedAction) return; //DO Nothing if you just change actions
+            if (JustChangedAction) return; //DO Nothing if you just change actions
 
             if (WeaponIsActive && WeaponAction != Weapon_Action.Reload) //Only Reload Once!
             {

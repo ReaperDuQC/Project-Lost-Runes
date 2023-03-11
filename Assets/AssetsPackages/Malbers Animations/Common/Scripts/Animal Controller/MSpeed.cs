@@ -29,6 +29,13 @@ namespace MalbersAnimations.Controller
         [Tooltip("Lock the Speed Set to Certain Value")]
         public BoolReference m_LockSpeed = new BoolReference(false);
 
+
+        [Tooltip("RootMotion multiplier for the speeds Position. Set it to zero to remove RootMotion movement")]
+        public FloatReference m_RootMotionPos = new FloatReference(1f);
+
+        [Tooltip("RootMotion multiplier for the speeds Rotation. Set it to zero to remove RootMotion Rotation")]
+        public FloatReference m_RootMotionRot = new FloatReference(1f);
+
         [Tooltip("Backwards Speed multiplier: When going backwards the speed will be decreased by this value")]
         public FloatReference BackSpeedMult = new FloatReference(0.5f);
 
@@ -40,6 +47,11 @@ namespace MalbersAnimations.Controller
 
         [Tooltip("Lerp used to for the Banking on FreeMovement")]
         public FloatReference BankLerp = new FloatReference(10f);
+
+        //[Tooltip("Multiplier to slowdown the speed if the character is on a slope. E.g. Set the Value (1,0.5) on the last key to slowdown the speed while  ")]
+        //public AnimationCurve SlopeMultiplier = new AnimationCurve(new Keyframe(-1, 1), new Keyframe(0, 1), new Keyframe(1, 1));
+          
+
         /// <summary> List of Speed Modifiers for the Speed Set</summary>
         public List<MSpeed> Speeds;
 
@@ -53,6 +65,10 @@ namespace MalbersAnimations.Controller
         /// <summary>Locked Index of a Speed Set</summary>
         public int LockIndex { get => m_LockIndex.Value; set => m_LockIndex.Value = value; }
         public int SprintIndex { get => m_SprintIndex.Value; set => m_SprintIndex.Value = value; }
+
+        public float RootMotionPos { get => m_RootMotionPos.Value; set => m_RootMotionPos.Value = value; }
+
+        public float RootMotionRot { get => m_RootMotionRot.Value; set => m_RootMotionRot.Value = value; }
 
         /// <summary>Locked Index of a Speed Set</summary>
         public bool LockSpeed

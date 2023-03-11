@@ -35,6 +35,15 @@ namespace MalbersAnimations.UI
 
         public Vector3 ScreenCenter { get; set; }
         public Vector3 DefaultScreenCenter { get; set; }
+        public Transform FollowT
+        {
+            get => followT; 
+            set
+            {
+                //Debug.Log("value = " + value);
+                followT = value;
+            }
+        }
 
         void Awake()
         {
@@ -44,9 +53,9 @@ namespace MalbersAnimations.UI
 
             if (WorldTransform == null) WorldTransform = new TransformReference();
 
-
             if (!WorldTransform.UseConstant && WorldTransform.Variable != null)
                 WorldTransform.Variable.OnValueChanged += ListenTransform;
+
         }
 
 
@@ -65,9 +74,11 @@ namespace MalbersAnimations.UI
          
 
             if (WorldTransform.Value) Align();
-             
+
             //else
             //    Clear();
+
+            SetTransform(WorldTransform);
         }
 
         private void OnDisable()
@@ -97,7 +108,7 @@ namespace MalbersAnimations.UI
 
             FindFollow(newTarget);
 
-            if (followT == null)
+            if (FollowT == null)
             {
                 //Clear();
             }
@@ -112,13 +123,13 @@ namespace MalbersAnimations.UI
         {
             if (newTarget != null && !string.IsNullOrEmpty(UseChild.Value))
             {
-                followT = newTarget.FindGrandChild(UseChild);
+                FollowT = newTarget.FindGrandChild(UseChild);
 
-                if (followT == null) followT = newTarget;
+                if (FollowT == null) FollowT = newTarget;
             }
             else
             {
-                followT = newTarget;
+                FollowT = newTarget;
             }
         }
 
@@ -128,16 +139,18 @@ namespace MalbersAnimations.UI
             enabled = true;
         }
 
-        void Update()
+       private void LateUpdate()
         {
             Align();
         }
 
         public void Align()
         {
-            if (MainCamera == null || followT == null) { /*enabled = false; */return; }
+            //Debug.Log($"{name} :followT" + FollowT, this);
 
-            var pos = MainCamera.WorldToScreenPoint(followT.position + Offset);
+            if (MainCamera == null || FollowT == null) { /*enabled = false; */return; }
+ 
+            var pos = MainCamera.WorldToScreenPoint(FollowT.position + Offset);
             transform.position = pos;
             if (HideOffScreen)
             {

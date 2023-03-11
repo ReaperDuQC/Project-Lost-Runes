@@ -39,6 +39,8 @@ namespace MalbersAnimations.Scriptables
         /// <summary>Add or Remove the passed var value</summary>
         public virtual void Add(float var) => Value += var;
 
+
+
         public static implicit operator float(FloatVar reference) => reference.Value;
     }
 

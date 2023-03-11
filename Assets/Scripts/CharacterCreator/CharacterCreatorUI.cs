@@ -14,7 +14,11 @@ namespace LostRunes
         [Header("Character Creator")]
         [SerializeField] CharacterCreator _characterCreator;
 
-        [SerializeField] GameObject _facialHairGroup;
+        [SerializeField] GameObject _beardButton;
+
+        [Header("Character Creator")]
+        [SerializeField] CustomInputField _inputField;
+        [SerializeField] CustomButton _saveNameButton;
 
         [Header("Gender")]
         [SerializeField] GameObject _genderOptionsGroup;
@@ -58,6 +62,8 @@ namespace LostRunes
             {
                 _hairColorPicker._colorChanged += SetHairColor;
             }
+
+            _saveNameButton.interactable = false;
         }
         private void Start()
         {
@@ -66,11 +72,27 @@ namespace LostRunes
             _eyebrowsCount = _characterCreator.EyebrowsCount;
             _faceCount = _characterCreator.FaceCount;
 
+            Material mat =_characterCreator.GetCharacterMaterial();
+
+            _skinColorPicker.SetColorFromColor(mat.GetColor("_Color_Skin"));
+            _hairColorPicker.SetColorFromColor( mat.GetColor("_Color_Hair"));
             UpdateAllTexts();
         }
         void UpdateText(int optionNumber, int allOptions,TextMeshProUGUI text, string baseText)
         {
             text.text = baseText + " " + optionNumber.ToString() + " / " + allOptions.ToString();
+        }
+        public void OnNamechanged(string value)
+        {
+            if(_saveNameButton == null)  return;
+            if (value.Length <= 0) 
+            { 
+                _saveNameButton.interactable = false; 
+                return; 
+            }
+
+            _saveNameButton.interactable = true;
+
         }
         void UpdateAllTexts()
         {
@@ -79,6 +101,21 @@ namespace LostRunes
             UpdateText(index, _hairCount,_hairText, "Hair");
             UpdateText(index, _eyebrowsCount,_eyebrowsText, "Eyebrows");
             UpdateText(index, _beardCount,_beardText, "Beard");
+        }
+        public void ResetInputText()
+        {
+            _characterCreator.SetCharacterName("");
+            // reset name in input and reset name in character creator
+
+            if (_inputField == null) return;
+
+            _inputField.text = "";
+        }
+        public void SetCharacterName()
+        {
+            if(_inputField == null) return;
+
+            _characterCreator.SetCharacterName(_inputField.text);
         }
         public void HideAllGroup()
         {
@@ -119,7 +156,7 @@ namespace LostRunes
         }
         void EnableFacialHair(bool enabled)
         {
-            _facialHairGroup.SetActive(enabled);
+            _beardButton.SetActive(enabled);
         }
         public void SetFacialHair(int indexToAdd)
         {

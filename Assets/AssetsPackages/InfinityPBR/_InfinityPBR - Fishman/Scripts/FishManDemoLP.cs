@@ -77,15 +77,15 @@ public class FishManDemoLP : MonoBehaviour
 
     public void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.R))
-        //{
-        //    Randomize();
-        //}
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Randomize();
+        }
 
-        //if (Input.GetKeyDown(KeyCode.C))
-        //{
-        //    canvas.SetActive(!canvas.activeSelf);
-        //}
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            canvas.SetActive(!canvas.activeSelf);
+        }
     }
     
 }

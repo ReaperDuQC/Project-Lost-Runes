@@ -271,6 +271,8 @@ namespace MalbersAnimations
             set
             {
                 combatMode = value;
+
+              //  Debug.Log("CombatMode = " + combatMode);
                 OnCombatMode.Invoke(value);
             }
         }
@@ -348,14 +350,14 @@ namespace MalbersAnimations
         /// <summary>This will recieve the messages Animator Behaviors the moment the rider make an action on the weapon</summary>
         public virtual void Action(int value) => WeaponAction = (Weapon_Action)value;
 
-        #region Bones References 
-        public Transform RightShoulder { get; set; }
-        public Transform LeftShoulder { get; set; }
+        //#region Bones References 
+        //public Transform RightShoulder { get; set; }
+        //public Transform LeftShoulder { get; set; }
         public Transform RightHand { get; set; }
         public Transform LeftHand { get; set; }
-        public Transform Head { get; set; }
-        public Transform Chest { get; set; }
-        #endregion
+        //public Transform Head { get; set; }
+        //public Transform Chest { get; set; }
+        //#endregion
 
         [Tooltip("Set the Aiming to true on the Weapon Manager")]
         public BoolReference aim = new BoolReference();

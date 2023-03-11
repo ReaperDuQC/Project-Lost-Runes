@@ -29,7 +29,7 @@ namespace MalbersAnimations.Controller
         /// <summary>ID of the Mode </summary>
         [SerializeField] public ModeID ID;
 
-        [CreateScriptableAsset]
+      //  [CreateScriptableAsset]
         /// <summary>Modifier that can be used when the Mode is Enabled/Disabled or Interrupted</summary>
         [ExposeScriptableAsset]
         public ModeModifier modifier;
@@ -178,7 +178,6 @@ namespace MalbersAnimations.Controller
         //private bool m_InputValue;
         #endregion
 
-
         internal void ConnectInput(IInputSource InputSource, bool connect)
         {
             //Mode Input
@@ -283,8 +282,9 @@ namespace MalbersAnimations.Controller
                     Debugging($"<B><color=yellow>[Try Activate by Input <{Input}>]</color></B>");
 
 
-                    if (Animal.InZone && Animal.InZone.IsMode) //meaning the Zone its a Mode zone and it also changes the Status
-                        Animal.InZone.ActivateZone(Animal);
+                     //meaning the animal is on a Mode Zone with the same ID
+                    if (Animal.InZone && Animal.InZone.IsMode && Animal.InZone.modeID == ID) 
+                        Animal.InZone.ActivateZone(Animal); //Activate the Zone which it will activate the Mode 
                     else
                         TryActivate();
                 }
@@ -336,17 +336,22 @@ namespace MalbersAnimations.Controller
             Animal.SetModeParameters(this, modeStatus);
 
             ChargeValue = 0;
+            Animal.NextFramePreparingMode = 0;
 
             ActiveAbility.modifier?.OnModeEnter(this); //Active Local Mode Modifier
 
+            //Get the Audio Source from the Mode
             AudioSource source = ActiveAbility.audioSource != null ? ActiveAbility.audioSource : m_Source;
+
             if (source && source.isActiveAndEnabled)
             {
-                if (!ActiveAbility.audioClip.NullOrEmpty())
+                if (!ActiveAbility.audioClip.NullOrEmpty()) 
+                {
                     source.clip = ActiveAbility.audioClip.GetValue();
 
-                if (source.isPlaying) source.Stop();
-                source.PlayDelayed(ActiveAbility.ClipDelay);
+                    if (source.isPlaying) source.Stop();
+                    source.PlayDelayed(ActiveAbility.ClipDelay);
+                }
             }
 
             Debugging($"<B><color=yellow>[PREPARED]</color></B> Ability: <B><color=white>[{ActiveAbility.Name}] " +
@@ -362,8 +367,11 @@ namespace MalbersAnimations.Controller
         {
             if (abilityIndex != 0) AbilityIndex = abilityIndex;
 
-            if (!Animal.IsPreparingMode)
+            // Debug.Log("IsPreparingMode = " + Animal.IsPreparingMode);
+
+          //  if (!Animal.IsPreparingMode)
             {
+                Animal.IsPreparingMode = false;
                 Debugging($"<B><color=Cyan>[FORCED ACTIVATE] Next Ability:[{AbilityIndex}]</color></B>");
 
                 if (Animal.IsPlayingMode)
@@ -371,9 +379,10 @@ namespace MalbersAnimations.Controller
                     Animal.ActiveMode.ResetMode();
                     Animal.ActiveMode.ModeExit();                          //This allows to Play a mode again
                 }
+
                 return TryActivate();
             }
-            return false;
+           // return false;
         }
          
 
@@ -731,7 +740,12 @@ namespace MalbersAnimations.Controller
             return false;
         }
 
-
+        /// <summary>
+        /// List of stances that can interrupt the current active mode
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <param name="ability"></param>
+        /// <returns></returns>
         public virtual bool StanceCanInterrupt(StanceID ID, Ability ability = null)
         {
             if (ability == null) ability = ActiveAbility;
@@ -789,7 +803,9 @@ namespace MalbersAnimations.Controller
         protected IEnumerator Ability_By_Time(float time)
         {
             yield return new WaitForSeconds(time);
-            Animal.Mode_Interrupt();
+
+          //  Animal.Mode_Interrupt();
+            Animal.SetModeStatus(0);
 
             Debugging($"<B><color=yellow>[INTERRUPTED]</color> Ability: <Color=white>[{ActiveAbility.Name}]</color> " +
                         $"Status: <Color=white>[Time elapsed]</color></B>");

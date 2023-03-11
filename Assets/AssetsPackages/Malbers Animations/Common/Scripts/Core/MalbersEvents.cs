@@ -5,6 +5,7 @@ using UnityEngine.Events;
 namespace MalbersAnimations.Events
 {
     [Serializable] public class GameObjectEvent : UnityEvent<GameObject> { }
+    [Serializable] public class IDsEvent : UnityEvent<IDs> { }
 
     [Serializable] public class SpriteEvent : UnityEvent<Sprite> { }
 
@@ -30,7 +31,7 @@ namespace MalbersAnimations.Events
 
     [Serializable] public class ColliderEvent : UnityEvent<Collider> { }
 
-    [Serializable] public class CollisionEvent : UnityEvent<Collision> { }
+    [Serializable] public class CollisionEvent : UnityEvent<UnityEngine.Collision> { }
 
     [Serializable] public class ComponentEvent : UnityEvent<Component> { }
 

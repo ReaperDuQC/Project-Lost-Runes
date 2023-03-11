@@ -468,7 +468,7 @@ namespace MalbersAnimations.Controller
             if (!animal.IsPlayingMode)
             {
                 animal.Mode_SetPower(ModeFloat); //Set the correct height for the Animal Animation 
-                return animal.Mode_TryActivate(ZoneID, ModeAbilityIndex, m_abilityStatus);
+                return animal.Mode_TryActivate(ZoneID, ModeAbilityIndex, m_abilityStatus, AbilityTime);
             }
             return false;
         }
