@@ -14,13 +14,13 @@ namespace InfinityPBR
     [Serializable]
     public class WardrobePrefabManagerEditor : InfinityEditor<WardrobePrefabManager>
     {
-        public List<string> objectFitStrings = new List<string>();
+        public List<string> objectFitStrings = new();
         
-        private Color inactiveColor2 = new Color(0.75f, .75f, 0.75f, 1f);
-        private Color activeColor = new Color(0.6f, 1f, 0.6f, 1f);
-        private Color activeColor2 = new Color(0.0f, 1f, 0.0f, 1f);
+        private Color inactiveColor2 = new(0.75f, .75f, 0.75f, 1f);
+        private Color activeColor = new(0.6f, 1f, 0.6f, 1f);
+        private Color activeColor2 = new (0.0f, 1f, 0.0f, 1f);
         private Color mixedColor = Color.yellow;
-        private Color redColor = new Color(1f, 0.25f, 0.25f, 1f);
+        private Color redColor = new(1f, 0.25f, 0.25f, 1f);
         
         
         private string[] actionTypes = new string[] {"Explicit", "Less than", "Greater than"};
@@ -30,7 +30,7 @@ namespace InfinityPBR
         private WardrobePrefabManager Manager => GetManager();
         private WardrobePrefabManager _wardrobePrefabManager;
 
-        private bool _initialCheck = false;
+        //private bool _initialCheck = false;
         
         private WardrobePrefabManager GetManager()
         {
@@ -329,7 +329,7 @@ namespace InfinityPBR
             EditorGUI.indentLevel--;
         }
 
-        private void SectionButton(string button, string prefs, int width = 150)
+        private void SectionButton(string button, string prefs)
         {
             GUI.backgroundColor = EditorPrefs.GetBool(prefs) ? Color.green : Color.black;
             if (GUILayout.Button(button))
@@ -381,7 +381,7 @@ namespace InfinityPBR
 
         private void AddToList(string eventType, MatchList matchList, BlendShapeGroup group)
         {
-            BlendShapeItem newItem = new BlendShapeItem();
+            BlendShapeItem newItem = new();
             BlendShapeGameObject obj = BlendShapesManager.blendShapeGameObjects[matchList.objectIndex];
             BlendShapeValue value = obj.blendShapeValues[matchList.valueIndex];
             string triggerName = value.triggerName;
@@ -396,7 +396,7 @@ namespace InfinityPBR
                     //    return;
                 }
                 group.onActivate.Add(new BlendShapeItem());
-                newItem = group.onActivate[group.onActivate.Count - 1];
+                newItem = group.onActivate[^1];
             }
             if (eventType == "Deactivate" || eventType == "Revert Back")
             {
@@ -406,7 +406,7 @@ namespace InfinityPBR
                         return;
                 }
                 group.onDeactivate.Add(new BlendShapeItem());
-                newItem = group.onDeactivate[group.onDeactivate.Count - 1];
+                newItem = group.onDeactivate[^1];
                 if (eventType == "Revert Back")
                     newItem.revertBack = true;
             }
@@ -418,7 +418,7 @@ namespace InfinityPBR
         
         private void AddToList(string eventType, BlendShapeGroup group)
         {
-            BlendShapeItem newItem = new BlendShapeItem();
+            BlendShapeItem newItem = new();
             if (group.actualBlendShapeNames[group.shapeChoiceIndex].Contains(BlendShapesManager.plusMinus.Item1))
                 newItem.min = -100f;
             string triggerName = BlendShapesManager.GetHumanName(group.actualBlendShapeNames[group.shapeChoiceIndex]);
@@ -432,7 +432,7 @@ namespace InfinityPBR
                         return;
                 }
                 group.onActivate.Add(new BlendShapeItem());
-                newItem = group.onActivate[group.onActivate.Count - 1];
+                newItem = group.onActivate[^1];
                 objectName = group.blendShapeObjectName[group.shapeChoiceIndex];
             }
             else if (eventType == "Deactivate" || eventType == "Revert Back")
@@ -443,7 +443,7 @@ namespace InfinityPBR
                         return;
                 }
                 group.onDeactivate.Add(new BlendShapeItem());
-                newItem = group.onDeactivate[group.onDeactivate.Count - 1];
+                newItem = group.onDeactivate[^1];
                 objectName = group.blendShapeObjectName[group.shapeChoiceIndex];
                 if (eventType == "Revert Back")
                     newItem.revertBack = true;

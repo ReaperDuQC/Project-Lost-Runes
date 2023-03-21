@@ -62,25 +62,25 @@ namespace LostRunes
         }
         public async void JoinLobbyWithID()
         {
-            //ulong Id;
-            //if (!ulong.TryParse(_lobbyIDInputField.text, out Id))
-            //    return;
-            //Lobby[] lobbies = await SteamMatchmaking.LobbyList.WithSlotsAvailable(1).RequestAsync();
+            string text = "420";
+            if (!ulong.TryParse(text, out ulong Id))
+                return;
+            Lobby[] lobbies = await SteamMatchmaking.LobbyList.WithSlotsAvailable(1).RequestAsync();
 
-            //foreach (Lobby lobby in lobbies)
-            //{
-            //    if (lobby.Id == Id)
-            //    {
-            //        await lobby.Join();
-            //        return;
-            //    }
-            //}
+            foreach (Lobby lobby in lobbies)
+            {
+                if (lobby.Id == Id)
+                {
+                    await lobby.Join();
+                    return;
+                }
+            }
         }
         public void CopyLobbyId()
         {
             //if (_lobbyId == null) return;
 
-            TextEditor textEditor = new TextEditor();
+            TextEditor textEditor = new();
             //textEditor.text = _lobbyId.text;
             textEditor.SelectAll();
             textEditor.Copy();

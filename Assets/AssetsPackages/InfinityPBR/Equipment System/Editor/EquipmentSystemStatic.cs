@@ -18,7 +18,7 @@ namespace InfinityPBR
     [System.Serializable]
     public static class EquipmentSystemStatic
     {
-        public static List<GameObject> WardrobePrefabManagers = new List<GameObject>();
+        public static List<GameObject> WardrobePrefabManagers = new();
         
         public static List<string> EquipmentObjectTypes(List<GameObject> equipmentObjects)
         {
@@ -27,7 +27,7 @@ namespace InfinityPBR
             {
                 var path = AssetDatabase.GetAssetPath(obj);
                 string[] pathParts = path.Split('/');
-                var type = pathParts[pathParts.Length - 2];
+                var type = pathParts[^2];
                 if (newList.Contains(type)) continue;
 
                 newList.Add(type);
@@ -40,7 +40,7 @@ namespace InfinityPBR
         {
             var path = AssetDatabase.GetAssetPath(gameObject);
             string[] pathParts = path.Split('/');
-            return pathParts[pathParts.Length - 2];
+            return pathParts[^2];
         }
         
         public static List<GameObject> EquipmentObjectObjects(List<GameObject> equipmentObjects, string type)
@@ -48,9 +48,9 @@ namespace InfinityPBR
             return equipmentObjects
                 .Distinct() // Only distinct assets
                 .OrderBy(x => x.name) // Alphabetize
-                .Where(x => !PrefabUtility.IsPartOfPrefabInstance(x.gameObject)) // Ensure it is not part of an instance (i.e in the scene)
-                .Where(x => ParentDirectoryName(x.gameObject) == type)
-                .Select(x => x.gameObject) // Select the game object itself
+                .Where(x => !PrefabUtility.IsPartOfPrefabInstance(x)) // Ensure it is not part of an instance (i.e in the scene)
+                .Where(x => ParentDirectoryName(x) == type)
+                .Select(x => x) // Select the game object itself
                 .ToList();
         }
 
@@ -59,7 +59,7 @@ namespace InfinityPBR
         
         public static List<GameObject> EquipmentObjectObjects()
         {
-            List<GameObject> foundObjects = new List<GameObject>();
+            List<GameObject> foundObjects = new();
             foreach (var path in AllPrefabPaths)
             {
                 var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path) as GameObject;
@@ -72,8 +72,8 @@ namespace InfinityPBR
             return foundObjects
                 .Distinct() // Only distinct assets
                 .OrderBy(x => x.name) // Alphabetize
-                .Where(x => !PrefabUtility.IsPartOfPrefabInstance(x.gameObject)) // Ensure it is not part of an instance (i.e in the scene)
-                .Select(x => x.gameObject) // Select the game object itself
+                .Where(x => !PrefabUtility.IsPartOfPrefabInstance(x)) // Ensure it is not part of an instance (i.e in the scene)
+                .Select(x => x) // Select the game object itself
                 .ToList();
         }
         
@@ -93,23 +93,23 @@ namespace InfinityPBR
         /// </summary>
         public static List<GameObject> CacheWardrobePrefabManagers()
         {
-            List<GameObject> foundObjects = new List<GameObject>();
+            List<GameObject> foundObjects = new();
             foreach (var path in AllPrefabPaths)
             {
                 var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path) as GameObject;
-                if (!prefab.TryGetComponent(out WardrobePrefabManager equipmentObject)) continue;
+                if (!prefab.TryGetComponent(out WardrobePrefabManager _)) continue;
                 foundObjects.Add(prefab);
             }
 
             WardrobePrefabManagers = foundObjects;
             return WardrobePrefabManagers;
 
-            return foundObjects
-                .Distinct() // Only distinct assets
-                .OrderBy(x => x.name) // Alphabetize
-                .Where(x => !PrefabUtility.IsPartOfPrefabInstance(x.gameObject)) // Ensure it is not part of an instance (i.e in the scene)
-                .Select(x => x.gameObject) // Select the game object itself
-                .ToList();
+            //return foundObjects
+            //    .Distinct() // Only distinct assets
+            //    .OrderBy(x => x.name) // Alphabetize
+            //    .Where(x => !PrefabUtility.IsPartOfPrefabInstance(x.gameObject)) // Ensure it is not part of an instance (i.e in the scene)
+            //    .Select(x => x.gameObject) // Select the game object itself
+            //    .ToList();
         }
     }
 }

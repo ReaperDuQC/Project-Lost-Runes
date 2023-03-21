@@ -5,10 +5,10 @@ using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace LostRunes.Menu
 {
-    public enum NameStatus { Valid, AlreadyExist, TooShort, TooLong }
     [System.Serializable]
     public class WorldData
     {
@@ -22,7 +22,7 @@ namespace LostRunes.Menu
     [System.Serializable]
     public class WorldAtlas
     {
-        public List<string> Worlds = new List<string>();
+        public List<string> Worlds = new();
         public WorldAtlas() { }
 
         public WorldAtlas(List<string> worlds)
@@ -32,81 +32,30 @@ namespace LostRunes.Menu
     }
     public class WorldSelectionHandler : MonoBehaviour
     {
-        [SerializeField] GameObject _worldButtonPrefab;
+        [SerializeField] GameObject _createButtonPrefab;
         [SerializeField] Transform _content;
-        NameStatus _nameStatus = NameStatus.TooShort;
 
-        [SerializeField] CustomButton _validateButton;
-        [SerializeField] TextMeshProUGUI _errorMessage;
         [SerializeField] SceneLoaderManager _sceneLoaderManager;
+
+        [SerializeField] NameInputHandler _nameInputHandler;
 
         WorldAtlas _worldAtlas;
         private void Awake()
         {
             LoadWorldsAtlas();
-            SetValidateNameButtonInteractable(false);
         }
 
         public void GenerateNewWorld(TMP_InputField inputField)
         {
-            WorldData worldData = new WorldData(inputField.text);
-            _worldAtlas.Worlds.Insert(0, inputField.text);
+            string worldName = inputField.text;
+            WorldData worldData = new(worldName);
+            SaveSystem.SaveSystem.SaveWorldData(worldData);
+            _worldAtlas.Worlds.Insert(0, worldName);
             CreateButtons();
-        }
-        public void IsWorldValid(string value)
-        {
-            if (string.IsNullOrEmpty(value) || value.Length <= 1)
-            {
-                _nameStatus = NameStatus.TooShort;
-                UpdateErrorMessage("The name of the world is too short.");
-                SetValidateNameButtonInteractable(false);
-                return;
-            }
-            if (value.Length > 20)
-            {
-                _nameStatus = NameStatus.TooLong;
-                UpdateErrorMessage("The name of the world is too long.");
-                SetValidateNameButtonInteractable(false);
-                return;
-            }
-
-            foreach (string name in _worldAtlas.Worlds)
-            {
-                if (name == value)
-                {
-                    _nameStatus = NameStatus.AlreadyExist;
-                    UpdateErrorMessage("Another world alread have that name.");
-                    SetValidateNameButtonInteractable(false);
-                    return;
-                }
-            }
-
-            _nameStatus = NameStatus.Valid;
-            SetValidateNameButtonInteractable(true);
-            UpdateErrorMessage("");
-        }
-        void UpdateErrorMessage(string message)
-        {
-            if (_errorMessage == null) return;
-
-            if (string.IsNullOrEmpty(message) || message.Length == 0)
-            {
-                _errorMessage.text = "";
-                return;
-            }
-
-            _errorMessage.text = "Error : " + message;
         }
         void SaveWorldsAtlas()
         {
             SaveSystem.SaveSystem.SaveWorldAtlas(_worldAtlas);
-        }
-        void SetValidateNameButtonInteractable(bool interactable)
-        {
-            if (_validateButton == null) return;
-
-            _validateButton.interactable = interactable;
-
         }
         void LoadWorldsAtlas()
         {
@@ -114,12 +63,22 @@ namespace LostRunes.Menu
 
             CreateButtons();
         }
+        public void CheckName(string name)
+        {
+            _nameInputHandler.IsNameValid(name, _worldAtlas.Worlds);
+        }
 
         private void CreateButtons()
         {
+            List<GameObject> listToDestroy = new();
             for (int i = 1; i < _content.childCount; i++)
             {
-                Destroy(_content.GetChild(i));
+                listToDestroy.Add(_content.GetChild(i).gameObject);
+            }
+
+            foreach (GameObject obj in listToDestroy)
+            {
+                Destroy(obj);
             }
 
             foreach (string worldName in _worldAtlas.Worlds)
@@ -130,6 +89,7 @@ namespace LostRunes.Menu
 
         public void LoadWorld(string worldName)
         {
+            WorldData data = SaveSystem.SaveSystem.LoadWorldData(worldName);
             if(_sceneLoaderManager != null)
             {
                 _sceneLoaderManager.LoadScene();
@@ -138,29 +98,20 @@ namespace LostRunes.Menu
         void CreateNewButton(string worldName)
         {
             if (_content == null) return;
-            if (_worldButtonPrefab == null) return;
+            if (_createButtonPrefab == null) return;
 
-            CustomButton button = Instantiate(_worldButtonPrefab, _content).GetComponent<CustomButton>();
+            CustomButton[] buttons = Instantiate(_createButtonPrefab, _content).GetComponentsInChildren<CustomButton>();
 
-            button.ButtonText.text = worldName;
-            button.onClick.AddListener(new UnityAction(() => LoadWorld(worldName)));
+            buttons[0].ButtonText.text = worldName;
+            buttons[0].onClick.AddListener(new UnityAction(() => LoadWorld(worldName)));
 
-            //CustomButton destroyButton;
-            // destroyButton.onClick.AddListener(new UnityAction(() => DeleteExistingWorld(worldName)));
+            buttons[1].onClick.AddListener(new UnityAction(() => DeleteExistingWorld(worldName)));
         }
         public void DeleteExistingWorld(string fileName)
         {
-            string filePath = Path.Combine(Application.persistentDataPath, fileName);
+            SaveSystem.SaveSystem.DeleteExistingWorld(fileName);
 
-            if (File.Exists(filePath))
-            {
-                File.Delete(filePath);
-                Debug.Log("Successfully deleted file: " + fileName);
-            }
-            else
-            {
-                Debug.LogError("File not found: " + fileName);
-            }
+            LoadWorldsAtlas();
         }
         private void OnDestroy()
         {

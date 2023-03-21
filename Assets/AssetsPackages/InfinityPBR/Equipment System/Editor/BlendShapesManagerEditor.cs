@@ -10,11 +10,8 @@ using InfinityPBR;
 [Serializable]
 public class BlendShapesManagerEditor : Editor
 {
-    private Color inactiveColor2 = new Color(0.75f, .75f, 0.75f, 1f);
-    private Color activeColor = new Color(0.6f, 1f, 0.6f, 1f);
-    private Color activeColor2 = new Color(0.0f, 1f, 0.0f, 1f);
     private Color mixedColor = Color.yellow;
-    private Color redColor = new Color(1f, 0.25f, 0.25f, 1f);
+    private Color redColor = new(1f, 0.25f, 0.25f, 1f);
 
     private BlendShapesManager Manager => GetManager();
     private BlendShapesManager _blendShapesManager;
@@ -128,7 +125,6 @@ public class BlendShapesManagerEditor : Editor
         if (newRangeObject)
         {
             Manager.ImportRangeFile(newRangeObject);
-            newRangeObject = null;
         }
         EditorGUILayout.EndHorizontal();
         EditorGUI.indentLevel--;
@@ -271,7 +267,7 @@ public class BlendShapesManagerEditor : Editor
        EditorUtility.SetDirty(this);
     }
 
-    private void SectionButton(string button, string prefs, int width = 150)
+    private void SectionButton(string button, string prefs)
     {
         GUI.backgroundColor = EditorPrefs.GetBool(prefs) ? Color.green : Color.black;
         if (GUILayout.Button(button))
@@ -302,7 +298,7 @@ public class BlendShapesManagerEditor : Editor
             {
                 if (EditorPrefs.GetBool("Blend Shapes Manager Hide Controlled Shapes"))
                     continue;
-                DisplayControlledMessage(obj, obj.blendShapeValues[i]);
+                DisplayControlledMessage(obj.blendShapeValues[i]);
                 continue;
             }
             
@@ -324,7 +320,7 @@ public class BlendShapesManagerEditor : Editor
     /*
      * This is the message that is displayed when the shape is being controlled by another shape.
      */
-    private void DisplayControlledMessage(BlendShapeGameObject obj, BlendShapeValue value)
+    private void DisplayControlledMessage(BlendShapeValue value)
     {
         GUI.backgroundColor = redColor;
         EditorGUILayout.BeginVertical(EditorStyles.helpBox);
@@ -569,7 +565,7 @@ public class BlendShapesManagerEditor : Editor
         
         // Add the match shape to the controlling shape
         value.otherValuesMatchThis.Add(new MatchValue());
-        MatchValue newMatchValue = value.otherValuesMatchThis[value.otherValuesMatchThis.Count - 1];
+        MatchValue newMatchValue = value.otherValuesMatchThis[^1];
         newMatchValue.objectIndex = matchList.objectIndex;
         newMatchValue.valueIndex = matchList.valueIndex;
         
@@ -697,16 +693,16 @@ public class BlendShapesManagerEditor : Editor
     }
     
     private string symbolInfo = "ⓘ";
-    private string symbolX = "✘";
-    private string symbolCheck = "✔";
-    private string symbolCheckSquare = "☑";
-    private string symbolDollar = "$";
-    private string symbolCent = "¢";
-    private string symbolCarrotRight = "‣";
-    private string symbolCarrotLeft = "◄";
-    private string symbolCarrotUp = "▲";
-    private string symbolCarrotDown = "▼";
-    private string symbolDash = "⁃";
-    private string symbolBulletClosed = "⦿";
-    private string symbolBulletOpen = "⦾";
+    //private string symbolX = "✘";
+    //private string symbolCheck = "✔";
+    //private string symbolCheckSquare = "☑";
+    //private string symbolDollar = "$";
+    //private string symbolCent = "¢";
+    //private string symbolCarrotRight = "‣";
+    //private string symbolCarrotLeft = "◄";
+    //private string symbolCarrotUp = "▲";
+    //private string symbolCarrotDown = "▼";
+    //private string symbolDash = "⁃";
+    //private string symbolBulletClosed = "⦿";
+    //private string symbolBulletOpen = "⦾";
 }

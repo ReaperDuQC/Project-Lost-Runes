@@ -1103,7 +1103,9 @@ namespace FIMSpace.FTail
                 GUI.color = c;
                 GUILayout.Space(5f);
                 EditorGUILayout.PropertyField(sp_SmoothingStyle);
-
+                //var spc = sp_SmoothingStyle.Copy();
+                //spc.Next(false);
+                //EditorGUILayout.PropertyField(spc);
 
                 //GUILayout.Space(4f);
                 //if (Get.ClassicSlithery == 0f) GUI.color = defaultValC;

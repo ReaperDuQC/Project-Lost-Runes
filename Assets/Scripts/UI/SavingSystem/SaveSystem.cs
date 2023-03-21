@@ -24,10 +24,10 @@ namespace LostRunes.SaveSystem
             }
 
 
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Create);
+            BinaryFormatter formatter = new();
+            FileStream stream = new(path, FileMode.Create);
 
-            AudioSettingsData data = new AudioSettingsData(audioSettings);
+            AudioSettingsData data = new(audioSettings);
 
             formatter.Serialize(stream, data);
             stream.Close();
@@ -44,8 +44,8 @@ namespace LostRunes.SaveSystem
 
             if (File.Exists(path))
             {
-                BinaryFormatter formatter = new BinaryFormatter();
-                FileStream stream = new FileStream(path, FileMode.Open);
+                BinaryFormatter formatter = new();
+                FileStream stream = new(path, FileMode.Open);
 
                 AudioSettingsData data = formatter.Deserialize(stream) as AudioSettingsData;
                 stream.Close();
@@ -72,10 +72,10 @@ namespace LostRunes.SaveSystem
                 Directory.CreateDirectory(Application.persistentDataPath + "/" + folderName);
             }
 
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Create);
+            BinaryFormatter formatter = new();
+            FileStream stream = new(path, FileMode.Create);
 
-            GameplaySettingsData data = new GameplaySettingsData(gameplaySettings);
+            GameplaySettingsData data = new(gameplaySettings);
 
             formatter.Serialize(stream, data);
             stream.Close();
@@ -92,8 +92,8 @@ namespace LostRunes.SaveSystem
 
             if (File.Exists(path))
             {
-                BinaryFormatter formatter = new BinaryFormatter();
-                FileStream stream = new FileStream(path, FileMode.Open);
+                BinaryFormatter formatter = new();
+                FileStream stream = new(path, FileMode.Open);
 
                 GameplaySettingsData data = formatter.Deserialize(stream) as GameplaySettingsData;
                 stream.Close();
@@ -119,10 +119,10 @@ namespace LostRunes.SaveSystem
                 Directory.CreateDirectory(Application.persistentDataPath + "/" + folderName);
             }
 
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Create);
+            BinaryFormatter formatter = new();
+            FileStream stream = new(path, FileMode.Create);
 
-            GraphicSettingsData data = new GraphicSettingsData(graphicSettings);
+            GraphicSettingsData data = new(graphicSettings);
 
             formatter.Serialize(stream, data);
             stream.Close();
@@ -139,8 +139,8 @@ namespace LostRunes.SaveSystem
 
             if (File.Exists(path))
             {
-                BinaryFormatter formatter = new BinaryFormatter();
-                FileStream stream = new FileStream(path, FileMode.Open);
+                BinaryFormatter formatter = new();
+                FileStream stream = new(path, FileMode.Open);
 
                 GraphicSettingsData data = formatter.Deserialize(stream) as GraphicSettingsData;
                 stream.Close();
@@ -159,27 +159,41 @@ namespace LostRunes.SaveSystem
 
         #region Player
 
-        public static void SavePlayerAtlas() // need player atlas data
+        public static void SavePlayerAtlas(PlayerAtlas atlas) // need player atlas data
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            string path = Application.persistentDataPath + "/Data/graphic";
-            FileStream stream = new FileStream(path, FileMode.Create);
+            string folderName = "Data";
+            string path = Application.persistentDataPath + "/" + folderName + "/" + "PlayerAtlas.plr";
 
-            //GraphicSettingsData data = new GraphicSettingsData(graphicSettings);
+            if (!Directory.Exists(Application.persistentDataPath + "/" + folderName))
+            {
+                Directory.CreateDirectory(Application.persistentDataPath + "/" + folderName);
+            }
 
-            //formatter.Serialize(stream, data);
+            BinaryFormatter formatter = new();
+            FileStream stream = new(path, FileMode.Create);
+
+            PlayerAtlas data = atlas;
+
+            formatter.Serialize(stream, data);
             stream.Close();
         }
-        public static GraphicSettingsData LoadPlayerAtlas()
+        public static PlayerAtlas LoadPlayerAtlas()
         {
-            string path = Application.persistentDataPath + "/Settings/graphic";
+            string folderName = "Data";
+            string path = Application.persistentDataPath + "/" + folderName + "/" + "PlayerAtlas.plr";
+
+            if (!Directory.Exists(Application.persistentDataPath + "/" + folderName))
+            {
+                Directory.CreateDirectory(Application.persistentDataPath + "/" + folderName);
+            }
+
 
             if (File.Exists(path))
             {
-                BinaryFormatter formatter = new BinaryFormatter();
-                FileStream stream = new FileStream(path, FileMode.Open);
+                BinaryFormatter formatter = new();
+                FileStream stream = new(path, FileMode.Open);
 
-                GraphicSettingsData data = formatter.Deserialize(stream) as GraphicSettingsData;
+                PlayerAtlas data = formatter.Deserialize(stream) as PlayerAtlas;
                 stream.Close();
 
                 return data;
@@ -187,31 +201,44 @@ namespace LostRunes.SaveSystem
             else
             {
                 //Debug.Log("Save file not found in " + path);
-                return new GraphicSettingsData();
+                return new PlayerAtlas();
             }
         }
 
-        public static void SavePlayerData()
+        public static void SavePlayerData(PlayerData playerData)
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            string path = Application.persistentDataPath + "/Settings/graphic";
-            FileStream stream = new FileStream(path, FileMode.Create);
+            string folderName = "Data";
+            string path = Application.persistentDataPath + "/" + folderName + "/" + playerData._name + ".plr";
 
-            //GraphicSettingsData data = new GraphicSettingsData(graphicSettings);
+            if (!Directory.Exists(Application.persistentDataPath + "/" + folderName))
+            {
+                Directory.CreateDirectory(Application.persistentDataPath + "/" + folderName);
+            }
 
-            //formatter.Serialize(stream, data);
+            BinaryFormatter formatter = new();
+            FileStream stream = new(path, FileMode.Create);
+
+            PlayerData data = playerData;
+
+            formatter.Serialize(stream, data);
             stream.Close();
         }
-        public static GraphicSettingsData LoadPlayerData()
+        public static PlayerData LoadPlayerData(string playerName)
         {
-            string path = Application.persistentDataPath + "/Settings/graphic";
+            string folderName = "Data";
+            string path = Application.persistentDataPath + "/" + folderName + "/" + playerName + ".plr";
+
+            if (!Directory.Exists(Application.persistentDataPath + "/" + folderName))
+            {
+                Directory.CreateDirectory(Application.persistentDataPath + "/" + folderName);
+            }
 
             if (File.Exists(path))
             {
-                BinaryFormatter formatter = new BinaryFormatter();
-                FileStream stream = new FileStream(path, FileMode.Open);
+                BinaryFormatter formatter = new();
+                FileStream stream = new(path, FileMode.Open);
 
-                GraphicSettingsData data = formatter.Deserialize(stream) as GraphicSettingsData;
+                PlayerData data = formatter.Deserialize(stream) as PlayerData;
                 stream.Close();
 
                 return data;
@@ -219,13 +246,37 @@ namespace LostRunes.SaveSystem
             else
             {
                 //Debug.Log("Save file not found in " + path);
-                return new GraphicSettingsData();
+                return new PlayerData();
+            }
+        }
+
+        public static void DeleteExistingPlayer(string fileName)
+        {
+            PlayerAtlas atlas = LoadPlayerAtlas();
+
+            if (!atlas.Players.Contains(fileName)) return;
+
+            atlas.Players.Remove(fileName);
+
+            SavePlayerAtlas(atlas);
+
+
+            string folderName = "Data";
+            string path = Application.persistentDataPath + "/" + folderName + "/" + fileName + ".plr";
+
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+                Debug.Log("Successfully deleted file: " + fileName);
+            }
+            else
+            {
+                Debug.LogError("File not found: " + fileName);
             }
         }
         #endregion
 
         #region World
-
         public static void SaveWorldAtlas(WorldAtlas worldAtlas)
         {
             string folderName = "Data";
@@ -236,8 +287,8 @@ namespace LostRunes.SaveSystem
                 Directory.CreateDirectory(Application.persistentDataPath + "/" + folderName);
             }
 
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Create);
+            BinaryFormatter formatter = new();
+            FileStream stream = new(path, FileMode.Create);
 
             WorldAtlas data = worldAtlas;
 
@@ -257,8 +308,8 @@ namespace LostRunes.SaveSystem
 
             if (File.Exists(path))
             {
-                BinaryFormatter formatter = new BinaryFormatter();
-                FileStream stream = new FileStream(path, FileMode.Open);
+                BinaryFormatter formatter = new();
+                FileStream stream = new(path, FileMode.Open);
 
                 WorldAtlas data = formatter.Deserialize(stream) as WorldAtlas;
                 stream.Close();
@@ -271,10 +322,28 @@ namespace LostRunes.SaveSystem
                 return new WorldAtlas();
             }
         }
-        public static void SaveWorldData(GraphicSettings graphicSettings)
+        public static void SaveWorldData(WorldData worldData)
         {
             string folderName = "Data";
-            string path = Application.persistentDataPath + "/" + folderName + "/" + " " +".wld";
+            string path = Application.persistentDataPath + "/" + folderName + "/" + worldData._worldName + ".wld";
+
+            if (!Directory.Exists(Application.persistentDataPath + "/" + folderName))
+            {
+                Directory.CreateDirectory(Application.persistentDataPath + "/" + folderName);
+            }
+
+            BinaryFormatter formatter = new();
+            FileStream stream = new(path, FileMode.Create);
+
+            WorldData data = worldData;
+
+            formatter.Serialize(stream, data);
+            stream.Close();
+        }
+        public static WorldData LoadWorldData(string worldName)
+        {
+            string folderName = "Data";
+            string path = Application.persistentDataPath + "/" + folderName + "/" + worldName + ".wld";
 
             if (!Directory.Exists(Application.persistentDataPath + "/" + folderName))
             {
@@ -282,24 +351,12 @@ namespace LostRunes.SaveSystem
             }
 
 
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Create);
-
-            GraphicSettingsData data = new GraphicSettingsData(graphicSettings);
-
-            formatter.Serialize(stream, data);
-            stream.Close();
-        }
-        public static GraphicSettingsData LoadWorldData()
-        {
-            string path = Application.persistentDataPath + "/Settings/graphic";
-
             if (File.Exists(path))
             {
-                BinaryFormatter formatter = new BinaryFormatter();
-                FileStream stream = new FileStream(path, FileMode.Open);
+                BinaryFormatter formatter = new();
+                FileStream stream = new(path, FileMode.Open);
 
-                GraphicSettingsData data = formatter.Deserialize(stream) as GraphicSettingsData;
+                WorldData data = formatter.Deserialize(stream) as WorldData;
                 stream.Close();
 
                 return data;
@@ -307,7 +364,31 @@ namespace LostRunes.SaveSystem
             else
             {
                 //Debug.Log("Save file not found in " + path);
-                return new GraphicSettingsData();
+                return null;
+            }
+        }
+        public static void DeleteExistingWorld(string fileName)
+        {
+            WorldAtlas atlas = LoadWorldAtlas();
+
+            if (!atlas.Worlds.Contains(fileName)) return;
+
+            atlas.Worlds.Remove(fileName);
+
+            SaveWorldAtlas(atlas);
+
+
+            string folderName = "Data";
+            string path = Application.persistentDataPath + "/" + folderName + "/" + fileName + ".wld";
+
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+                Debug.Log("Successfully deleted file: " + fileName);
+            }
+            else
+            {
+                Debug.LogError("File not found: " + fileName);
             }
         }
         #endregion

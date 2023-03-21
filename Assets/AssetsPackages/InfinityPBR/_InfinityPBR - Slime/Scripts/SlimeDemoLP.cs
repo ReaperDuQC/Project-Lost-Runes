@@ -6,7 +6,7 @@ using UnityEngine;
 public class SlimeDemoLP : MonoBehaviour
 {
 
-    public Renderer[] renderer;
+    public Renderer[] _renderer;
     public Renderer[] rendererBody;
     public Animator animator;
     public GameObject[] bodyParts;
@@ -33,25 +33,25 @@ public class SlimeDemoLP : MonoBehaviour
     
     public void SetHue(float value)
     {
-        for (int i = 0; i < renderer.Length; i++)
+        for (int i = 0; i < _renderer.Length; i++)
         {
-            renderer[i].material.SetFloat("_Hue", value);
+            _renderer[i].material.SetFloat("_Hue", value);
         }
     }
     
     public void SetSaturation(float value)
     {
-        for (int i = 0; i < renderer.Length; i++)
+        for (int i = 0; i < _renderer.Length; i++)
         {
-            renderer[i].material.SetFloat("_Saturation", value);
+            _renderer[i].material.SetFloat("_Saturation", value);
         }
     }
     
     public void SetValue(float value)
     {
-        for (int i = 0; i < renderer.Length; i++)
+        for (int i = 0; i < _renderer.Length; i++)
         {
-            renderer[i].material.SetFloat("_Value", value);
+            _renderer[i].material.SetFloat("_Value", value);
         }
     }
     

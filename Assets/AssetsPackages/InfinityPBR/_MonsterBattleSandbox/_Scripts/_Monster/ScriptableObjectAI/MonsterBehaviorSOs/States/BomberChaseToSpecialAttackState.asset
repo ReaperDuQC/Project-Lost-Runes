@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39a1e69ca034e8c4bb112f5173a00a8d, type: 3}
+  m_Name: BomberChaseToSpecialAttackState
+  m_EditorClassIdentifier: 
+  actions:
+  - {fileID: 11400000, guid: 3c499044de1c8cc42bea230294e8a02d, type: 2}
+  transitions:
+  - decision: {fileID: 11400000, guid: e1cb68eaa93a7a444973b93ebd2802f3, type: 2}
+    trueState: {fileID: 11400000, guid: d06d96155e7d4f640ba693a26527aac6, type: 2}
+    falseState: {fileID: 11400000, guid: d06d96155e7d4f640ba693a26527aac6, type: 2}
+  - decision: {fileID: 11400000, guid: 0c2ae30bd3a198049a00f5442ef23d5a, type: 2}
+    trueState: {fileID: 11400000, guid: 889953aaacb75b441a267f6f4c8bb698, type: 2}
+    falseState: {fileID: 11400000, guid: d06d96155e7d4f640ba693a26527aac6, type: 2}
+  sceneGizmoColor: {r: 0.9811321, g: 0.84831846, b: 0, a: 1}

@@ -464,8 +464,7 @@ namespace FIMSpace.FTail
             GUI.color = c;
 
             GUILayout.Label(new GUIContent(" "), GUILayout.Width(1));
-            string inclColFoldTitle = "";
-
+            string inclColFoldTitle;
             if (Get.DynamicWorldCollidersInclusion)
             {
                 if (Application.isPlaying)
@@ -579,10 +578,7 @@ namespace FIMSpace.FTail
             GUI.color = c;
 
             GUILayout.Label(new GUIContent(" "), GUILayout.Width(1));
-            string inclColFoldTitle = "";
-
-            inclColFoldTitle = "2D " + Lang("Collide With") + " (" + (inclC == 0 ? "None" : inclC.ToString()) + ")";
-
+            string inclColFoldTitle = "2D " + Lang("Collide With") + " (" + (inclC == 0 ? "None" : inclC.ToString()) + ")";
             if (GUILayout.Button(new GUIContent(" " + f + "  " + inclColFoldTitle, FGUI_Resources.TexBehaviourIcon), FGUI_Resources.FoldStyle, GUILayout.Height(24))) drawInclud = !drawInclud;
 
             if (drawInclud)
@@ -756,7 +752,7 @@ namespace FIMSpace.FTail
                                         Collider2D[] coll = draggedObject.GetComponents<Collider2D>();
                                         for (int ci = 0; ci < coll.Length; ci++)
                                         {
-                                            if (coll[ci] is CharacterController) continue;
+                                            //if (coll[ci] is CharacterController) continue;
                                             tail.AddCollider(coll[ci]);
                                         }
                                     }

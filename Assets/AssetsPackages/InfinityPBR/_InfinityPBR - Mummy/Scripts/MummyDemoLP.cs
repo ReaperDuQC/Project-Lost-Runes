@@ -17,7 +17,7 @@ public class MummyDemoLP : MonoBehaviour
    
     public Material[] materials;
 
-    public SkinnedMeshRenderer[] renderer;
+    public SkinnedMeshRenderer[] _renderer;
     
     
     public void ResetStanding(){
@@ -52,25 +52,25 @@ public class MummyDemoLP : MonoBehaviour
     
     public void SetHue(float value)
     {
-        for (int i = 0; i < renderer.Length; i++)
+        for (int i = 0; i < _renderer.Length; i++)
         {
-            renderer[i].material.SetFloat("_Hue", value);
+            _renderer[i].material.SetFloat("_Hue", value);
         }
     }
     
     public void SetSaturation(float value)
     {
-        for (int i = 0; i < renderer.Length; i++)
+        for (int i = 0; i < _renderer.Length; i++)
         {
-            renderer[i].material.SetFloat("_Saturation", value);
+            _renderer[i].material.SetFloat("_Saturation", value);
         }
     }
     
     public void SetValue(float value)
     {
-        for (int i = 0; i < renderer.Length; i++)
+        for (int i = 0; i < _renderer.Length; i++)
         {
-            renderer[i].material.SetFloat("_Value", value);
+            _renderer[i].material.SetFloat("_Value", value);
         }
     }
 }

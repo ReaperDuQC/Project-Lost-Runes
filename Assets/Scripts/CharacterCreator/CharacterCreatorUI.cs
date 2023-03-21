@@ -1,24 +1,37 @@
 using LostRunes.Menu;
+using LostRunes.Multiplayer;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace LostRunes
 {
     public class CharacterCreatorUI : MonoBehaviour
     {
+        [SerializeField] GameMenu _gameMenu;
+        [SerializeField] GameObject _createButtonPrefab;
+        [SerializeField] Transform _content;
+        NameStatus _nameStatus = NameStatus.TooShort;
+
+        [SerializeField] StatRoller _statRoller;
+        [SerializeField] GameObject _playerUI;
+
+        PlayerAtlas _playerAtlas;
+        [SerializeField] CustomButton _nameButton;
+
         [Header("Character Creator")]
         [SerializeField] CharacterCreator _characterCreator;
 
         [SerializeField] GameObject _beardButton;
 
-        [Header("Character Creator")]
-        [SerializeField] CustomInputField _inputField;
-        [SerializeField] CustomButton _saveNameButton;
+        [Header("Name Input")]
+        [SerializeField] NameInputHandler _nameInputHandler;
 
         [Header("Gender")]
         [SerializeField] GameObject _genderOptionsGroup;
@@ -53,6 +66,8 @@ namespace LostRunes
 
         private void Awake()
         {
+            LoadPlayersAtlas();
+
             if (_skinColorPicker != null)
             {
                 _skinColorPicker._colorChanged += SetSkinColor;
@@ -62,8 +77,6 @@ namespace LostRunes
             {
                 _hairColorPicker._colorChanged += SetHairColor;
             }
-
-            _saveNameButton.interactable = false;
         }
         private void Start()
         {
@@ -82,18 +95,6 @@ namespace LostRunes
         {
             text.text = baseText + " " + optionNumber.ToString() + " / " + allOptions.ToString();
         }
-        public void OnNamechanged(string value)
-        {
-            if(_saveNameButton == null)  return;
-            if (value.Length <= 0) 
-            { 
-                _saveNameButton.interactable = false; 
-                return; 
-            }
-
-            _saveNameButton.interactable = true;
-
-        }
         void UpdateAllTexts()
         {
             int index = 1;
@@ -104,19 +105,29 @@ namespace LostRunes
         }
         public void ResetInputText()
         {
+            UpdateNameButton("Character Name");
+
             _characterCreator.SetCharacterName("");
-            // reset name in input and reset name in character creator
 
-            if (_inputField == null) return;
-
-            _inputField.text = "";
+            _nameInputHandler.ResetInputText();
         }
         public void SetCharacterName()
         {
-            if(_inputField == null) return;
+            if (_nameInputHandler == null) return;
+            string characterName = _nameInputHandler.GetName();
 
-            _characterCreator.SetCharacterName(_inputField.text);
+            _characterCreator.SetCharacterName(characterName);
+
+            UpdateNameButton(characterName);
         }
+
+        private void UpdateNameButton(string text)
+        {
+            if (_nameButton == null) return;
+
+            _nameButton.ButtonText.text = text;
+        }
+
         public void HideAllGroup()
         {
             _genderOptionsGroup.SetActive(false);
@@ -179,6 +190,98 @@ namespace LostRunes
             if (_characterCreator == null) return;
 
             _characterCreator.DestroyCharacter();
+        }
+        public void GenerateNewPlayer(TMP_InputField inputField)
+        {
+            CharacterStatsData statsData = _statRoller.SaveStats();
+            PlayerData playerData = _characterCreator.GetPlayerData();
+            playerData._stats = statsData;
+            SaveSystem.SaveSystem.SavePlayerData(playerData);
+            _playerAtlas.Players.Insert(0, inputField.text);
+            CreateButtons();
+        }
+        void SavePlayersAtlas()
+        {
+            SaveSystem.SaveSystem.SavePlayerAtlas(_playerAtlas);
+        }
+        void LoadPlayersAtlas()
+        {
+            _playerAtlas = SaveSystem.SaveSystem.LoadPlayerAtlas();
+
+            CreateButtons();
+        }
+        public void CheckName(string name)
+        {
+            _nameInputHandler.IsNameValid(name, _playerAtlas.Players);
+        }
+
+        private void CreateButtons()
+        {
+            List<GameObject> listToDestroy = new();
+            for (int i = 1; i < _content.childCount; i++)
+            {
+                listToDestroy.Add(_content.GetChild(i).gameObject);
+            }
+
+            foreach(GameObject obj in listToDestroy)
+            {
+                Destroy(obj);
+            }
+
+            foreach (string worldName in _playerAtlas.Players)
+            {
+                CreateNewButton(worldName);
+            }
+        }
+
+        public void LoadCharacter(string playerName)
+        {
+            PlayerData playerData = SaveSystem.SaveSystem.LoadPlayerData(playerName);
+
+            _characterCreator.CreateCharacter(playerData);
+        }
+        void CreateNewButton(string playerName)
+        {
+            if (_content == null) return;
+            if (_createButtonPrefab == null) return;
+
+            CustomButton[] buttons = Instantiate(_createButtonPrefab, _content).GetComponentsInChildren<CustomButton>();
+
+            buttons[0].ButtonText.text = playerName;
+            buttons[0].onClick.AddListener(new UnityAction(() => LoadCharacter(playerName)));
+            buttons[0].onClick.AddListener(new UnityAction(() => Play()));
+
+            buttons[1].onClick.AddListener(new UnityAction(() => DeleteExistingPlayer(playerName)));
+        }
+        public void DeleteExistingPlayer(string fileName)
+        {
+            SaveSystem.SaveSystem.DeleteExistingPlayer(fileName);
+
+            LoadPlayersAtlas();
+        }
+        private void OnDestroy()
+        {
+            SavePlayersAtlas();
+        }
+        private void Play()
+        {
+            this.gameObject.SetActive(false);
+            // Enable usage of normal Menu
+            _gameMenu.EnableMenuInteraction(true);
+
+            // Initialize Player
+
+
+            _playerUI.SetActive(true);
+        }
+        public void ResetNewCharacter()
+        {
+            _hairColorPicker.Reset();
+            _skinColorPicker.Reset();
+            ResetInputText();
+            DestroyCharacter();
+            SpawnNewCharacter();
+            UpdateAllTexts();
         }
     }
 }

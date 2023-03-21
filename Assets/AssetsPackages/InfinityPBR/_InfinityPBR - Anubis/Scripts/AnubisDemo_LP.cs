@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class AnubisDemo_LP : MonoBehaviour
 {
-    public Renderer[] renderer;
+    public Renderer[] _renderer;
     public Renderer[] rendererGear;
     public BlendShapesManager[] bsmanager;
     public GameObject canvas;
@@ -17,18 +17,6 @@ public class AnubisDemo_LP : MonoBehaviour
     {
         animator = GetComponent<Animator>();
     }
-    void Update()
-    {
-        //if (Input.GetKeyDown(KeyCode.R))
-        //{
-        //    Randomize();
-        //}
-        
-        //if (Input.GetKeyDown(KeyCode.C))
-        //{
-        //    ToggleCanvas();
-        //}
-    }
     
     public void Locomotion(float newValue){
         animator.SetFloat ("locomotion", newValue);
@@ -36,30 +24,30 @@ public class AnubisDemo_LP : MonoBehaviour
 
     public void ToggleCanvas()
     {
-        canvas.SetActive(!canvas.active);
+        canvas.SetActive(!canvas.activeSelf);
     }
     
     public void SetHue(float value)
     {
-        for (int i = 0; i < renderer.Length; i++)
+        for (int i = 0; i < _renderer.Length; i++)
         {
-            renderer[i].material.SetFloat("_Hue", value);
+            _renderer[i].material.SetFloat("_Hue", value);
         }
     }
     
     public void SetSaturation(float value)
     {
-        for (int i = 0; i < renderer.Length; i++)
+        for (int i = 0; i < _renderer.Length; i++)
         {
-            renderer[i].material.SetFloat("_Saturation", value);
+            _renderer[i].material.SetFloat("_Saturation", value);
         }
     }
     
     public void SetValue(float value)
     {
-        for (int i = 0; i < renderer.Length; i++)
+        for (int i = 0; i < _renderer.Length; i++)
         {
-            renderer[i].material.SetFloat("_Value", value);
+            _renderer[i].material.SetFloat("_Value", value);
         }
     }
     

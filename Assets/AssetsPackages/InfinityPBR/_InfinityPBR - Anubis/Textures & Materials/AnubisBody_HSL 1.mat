@@ -8,8 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: AnubisBody_HSL 1
-  m_Shader: {fileID: -6465566751694194690, guid: 907387501e9338848a9a9e90bee48310,
-    type: 3}
+  m_Shader: {fileID: 4800000, guid: 089c60fe3e3c5294ead5e8c602c02d74, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -88,6 +87,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaClip: 0
+    - _AlphaCutoff: 0.5
     - _Blend: 0
     - _BlendOp: 0
     - _BumpScale: 1
@@ -95,24 +95,26 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _EnvironmentReflections: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Hue: 0.81
+    - _Hue: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _ReceiveShadows: 1
     - _SampleGI: 0
-    - _Saturation: 1
+    - _Saturation: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
     - _UVSec: 0
-    - _Value: 0.35
+    - _Value: 0
     - _ZWrite: 1
     - __dirty: 1
     m_Colors:

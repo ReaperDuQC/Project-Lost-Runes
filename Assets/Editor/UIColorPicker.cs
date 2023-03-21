@@ -12,11 +12,8 @@ public class UIColorPicker : EditorWindow
 {
     Transform _UIParent;
 
-    Color _normalBackgroundColor;
-    Color _highlightBackgroundColor;
-
-    Color _normalBorderColor;
-    Color _highlightBorderColor;
+    Sprite _backgroundSprite;
+    Sprite _borderSprite;
 
     List<Image> _backgrounds;
     List<Image> _borders;
@@ -36,12 +33,8 @@ public class UIColorPicker : EditorWindow
         _UIParent = EditorGUILayout.ObjectField("UI Parent", _UIParent, typeof(Transform), true) as Transform;
 
         GUILayout.Label("Background Colors", EditorStyles.boldLabel);
-        _normalBackgroundColor = EditorGUILayout.ColorField("Normal Background Color",_normalBackgroundColor);
-        _highlightBackgroundColor = EditorGUILayout.ColorField("Highlight Background Color", _highlightBackgroundColor);
-
-        GUILayout.Label("Border Colors", EditorStyles.boldLabel);
-        _normalBorderColor = EditorGUILayout.ColorField("Normal Border Color", _normalBorderColor);
-        _highlightBorderColor = EditorGUILayout.ColorField("Highlight Border Color", _highlightBorderColor);
+        _backgroundSprite = (Sprite)EditorGUILayout.ObjectField("Background Sprite", _backgroundSprite, typeof(Sprite), false);
+        _borderSprite = (Sprite)EditorGUILayout.ObjectField("Border Sprite", _borderSprite, typeof(Sprite), false);
 
         _backgroundsCount = EditorGUILayout.IntField(_backgroundsCount);
         _bordersCount = EditorGUILayout.IntField(_bordersCount);
@@ -49,8 +42,6 @@ public class UIColorPicker : EditorWindow
 
         if (GUILayout.Button("Get References"))
         {
-            if (_UIParent == null) return;
-
             _backgrounds.Clear();
             _backgrounds.TrimExcess();
             _borders.Clear();
@@ -65,44 +56,42 @@ public class UIColorPicker : EditorWindow
 
         if (GUILayout.Button("Set Color Schemes"))
         {
-            SetColors();
+            SetSprites();
         }
     }
     void CheckChildForImage(Transform parent)
     {
-        foreach (Transform child in parent)
+      if(parent == null) return;
+
+        CustomButton[] buttons = parent.GetComponentsInChildren<CustomButton>();
+
+        foreach(var b in buttons)
         {
-            Image i = child.GetComponent<Image>();
-            if (i != null)
-            {
-                if (i.sprite != null)
-                {
-                    string name = i.sprite.name;
-                    if (name == "Background")
-                    {
-                        _backgrounds.Add(i);
-                    }
-                    else if (name == "Border")
-                    {
-                        _borders.Add(i);
-                    }
-                }
-            }
-            CheckChildForImage(child);
+            Image topImage = b.GetComponent<Image>();
+            topImage.color = Color.white;
+           _backgrounds.Add(topImage);
+
+            Image belowImage = b.transform.GetChild(0).GetComponent<Image>();
+            belowImage.color = Color.white; 
+           _borders.Add(belowImage);
         }
     }
-    private void SetColors()
+    private void SetSprites()
     {
-        foreach (Image background in _backgrounds)
+        if (_backgroundSprite != null)
         {
-            background.color = _normalBackgroundColor;
+            foreach (Image background in _backgrounds)
+            {
+                background.sprite = _backgroundSprite;
+            }
         }
-
-        foreach (Image border in _borders)
+        if (_borderSprite != null)
         {
-            border.color = _normalBorderColor;
+            foreach (Image border in _borders)
+            {
+                border.sprite = _borderSprite;
+            }
         }
-
         Repaint();
     }
 }

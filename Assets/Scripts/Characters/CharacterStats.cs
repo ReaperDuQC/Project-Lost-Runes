@@ -1,3 +1,4 @@
+using LostRunes.Menu;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,12 +6,9 @@ using UnityEngine;
 
 namespace LostRunes
 {
-    [Serializable]
+    [System.Serializable]
     public class CharacterStatsData 
     {
-        public string _characterName;
-        public bool _isMale;
-
         public int _characterLevel = 1;
 
         public int _healthLevel = 10;
@@ -20,10 +18,8 @@ namespace LostRunes
         public int _dexterityLevel = 10;
         public int _intelligenceLevel = 10;
         public int _faithLevel = 10;
-        public CharacterStatsData(string name, bool isMale,List<int> stats)
+        public CharacterStatsData(List<int> stats)
         {
-            _characterName = name;
-            _isMale = isMale;
 
             _characterLevel = 1;
 
@@ -37,8 +33,6 @@ namespace LostRunes
         }
         public CharacterStatsData(CharacterStats stats)
         {
-            _characterName = stats.name;
-
             _characterLevel = stats._characterLevel;
 
             _healthLevel = stats._healthLevel;
@@ -64,19 +58,22 @@ namespace LostRunes
         public int _dexterityLevel = 10;
         public int _intelligenceLevel = 10;
         public int _faithLevel = 10;
-        public void InitializeCharacter(CharacterStatsData data)
+        public void InitializeCharacter(PlayerData data)
         {
-            _characterName = data._characterName;
-            _isMale = data._isMale;
-            _characterLevel = data._characterLevel;
+            _characterName = data._name;
+            _isMale = data._gender == 0;
+            _characterLevel = data._stats._characterLevel;
 
-            _healthLevel = data._healthLevel;
-            _enduranceLevel = data._enduranceLevel;
-            _constitutionLevel = data._constitutionLevel;
-            _strengthLevel = data._strengthLevel;
-            _dexterityLevel = data._dexterityLevel;
-            _intelligenceLevel = data._intelligenceLevel;
-            _faithLevel = data._faithLevel;
+            _healthLevel = data._stats._healthLevel;
+            _enduranceLevel = data._stats._enduranceLevel;
+            _constitutionLevel = data._stats._constitutionLevel;
+            _strengthLevel = data._stats._strengthLevel;
+            _dexterityLevel = data._stats._dexterityLevel;
+            _intelligenceLevel = data._stats._intelligenceLevel;
+            _faithLevel = data._stats._faithLevel;
+
+            transform.position = data.GetPosition();
+            transform.rotation = data.GetRotation();
         }
     }
 }

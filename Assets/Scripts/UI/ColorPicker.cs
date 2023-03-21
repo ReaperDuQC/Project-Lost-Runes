@@ -43,6 +43,10 @@ namespace LostRunes
         [Header("Preview")]
         [SerializeField] Image _previewImage;
         [SerializeField] string _hexCode;
+        Color _initialColor;
+
+        Material _baseMaterial;
+        Material _saturationMat;
 
         // refactor to use the same set of sliders instead of a seperate set of slider
 
@@ -60,7 +64,7 @@ namespace LostRunes
         public void SetColorFromColor(Color color)
         {
             Color = color;
-
+            _initialColor = _color;
             if (_currentColorType == ColorPickerTypes.RGB)
             {
                 UpdateSlidersFromRGB();
@@ -77,9 +81,9 @@ namespace LostRunes
 
             _currentColorType = (ColorPickerTypes)ColorPickerType;
 
-            _sliderTop.onValueChanged.AddListener(SetTopValue); 
-            _sliderMiddle.onValueChanged.AddListener(SetMiddleValue);
-            _sliderBottom.onValueChanged.AddListener(SetBottomValue);
+            _sliderTop.onValueChanged.RemoveAllListeners();
+            _sliderMiddle.onValueChanged.RemoveAllListeners();
+            _sliderBottom.onValueChanged.RemoveAllListeners();
 
             if (_currentColorType == ColorPickerTypes.RGB)
             {
@@ -98,16 +102,21 @@ namespace LostRunes
             }
             else
             {
-                SetSliderMinMaxValue(_sliderTop, 0f, 0.99f);
-                SetSliderMinMaxValue(_sliderMiddle, 0.01f, 1f);
-                SetSliderMinMaxValue(_sliderBottom, 0.01f, 1f);
+                SetSliderMinMaxValue(_sliderTop, 0f, 1f); // need to check upper clamp to 0.99f
+                SetSliderMinMaxValue(_sliderMiddle, 0f, 1f);// need to check bottom clamp 0.01f
+                SetSliderMinMaxValue(_sliderBottom, 0f, 1f);// need to check bottom clamp 0.01f
 
                 UpdateTextForHSV();
 
                 UpdateSlidersFromHSV();
 
                 SetBackgroundsFromHSV();
+                UpdateBackgroundsFromHSV();
             }
+
+            _sliderTop.onValueChanged.AddListener(SetTopValue);
+            _sliderMiddle.onValueChanged.AddListener(SetMiddleValue);
+            _sliderBottom.onValueChanged.AddListener(SetBottomValue);
 
             //set value in slide for color types
         }
@@ -127,8 +136,17 @@ namespace LostRunes
         {
             _backgroundTop.color = Color.white;
             _backgroundTop.sprite = _hueBackground;
-            _backgroundMiddle.color = Color.white; 
-            _backgroundMiddle.sprite = _saturationBackground;
+
+            if(_backgroundMiddle.material == _baseMaterial)
+            {
+                _backgroundMiddle.color = Color.white;
+                _backgroundMiddle.sprite = null;
+
+                _saturationMat = new Material(Shader.Find("Custom/SaturationGradient"));
+                _backgroundMiddle.material = _saturationMat;
+                _saturationMat.SetColor("_Color", _color);
+            }
+
             _backgroundBottom.color = Color.white;
             _backgroundBottom.sprite = _valueBackground;
         }
@@ -136,9 +154,15 @@ namespace LostRunes
         {
             _backgroundTop.color = Color.red;
             _backgroundTop.sprite = _grayScaleBackground;
-            _backgroundMiddle.color = Color.blue;
+            if (_baseMaterial == null)
+            {
+                _baseMaterial = _backgroundMiddle.material;
+            }
+            _backgroundMiddle.material = _baseMaterial;
+            _backgroundMiddle.color = Color.green;
             _backgroundMiddle.sprite = _grayScaleBackground;
-            _backgroundBottom.color = Color.green;
+                
+            _backgroundBottom.color = Color.blue;
             _backgroundBottom.sprite = _grayScaleBackground;
         }
         private void UpdateSlidersFromHSV()
@@ -154,31 +178,11 @@ namespace LostRunes
             _sliderMiddle.value = Color.b;
             _sliderBottom.value = Color.g;
         }
-        void CreateBackgroundSprite(Image image) // supposed to create saturation backgroud image
+        void UpdateSaturationMaterial() 
         {
-            if (image == null) return;
+            if (_saturationMat == null) return;
 
-            Sprite currentsprite =  image.sprite;
-            Texture2D backgroundTexture = new Texture2D(currentsprite.texture.width, currentsprite.texture.height);
-            Rect backgroundRect = new Rect(currentsprite.rect.x, currentsprite.rect.y, currentsprite.rect.width, currentsprite.rect.height);
-
-
-            for (int i = 0; i < backgroundTexture.width; i++)
-            {
-                float r = (float)i / (float)backgroundTexture.width;
-                Color color = Color.Lerp(new Color(1f, 1f, 1f), Color, r);
-
-                for (int j = 0; j < backgroundTexture.height; j++)
-                {
-                    backgroundTexture.SetPixel(i, j, new Color(color.r, color.g, color.b, 1f));
-                }
-            }
-
-            backgroundTexture.Apply();
-            Sprite newSprite = Sprite.Create(backgroundTexture, backgroundRect, new Vector2(0.5f, 0.5f), currentsprite.pixelsPerUnit);
-
-            image.sprite = newSprite;
-
+            _saturationMat.SetColor("_Color", _color);
         }
         void SetSliderMinMaxValue(Slider slider,float min, float max)
         {
@@ -202,9 +206,17 @@ namespace LostRunes
                 Color.RGBToHSV(Color, out float h, out float s, out float v);
                 Color = Color.HSVToRGB(value, s, v);
                 UpdateSlidersFromHSV();
+                UpdateBackgroundsFromHSV();
             }
             SetColorPreview();
         }
+
+        private void UpdateBackgroundsFromHSV()
+        {
+            UpdateSaturationMaterial();
+            _backgroundBottom.color = _color;
+        }
+
         void SetMiddleValue(float value)
         {
             if (_currentColorType == ColorPickerTypes.RGB)
@@ -218,6 +230,7 @@ namespace LostRunes
                 Color.RGBToHSV(Color, out float h, out float s, out float v);
                 Color = Color.HSVToRGB(h, value, v);
                 UpdateSlidersFromHSV();
+                UpdateBackgroundsFromHSV();
             }
             SetColorPreview();
         }
@@ -234,6 +247,7 @@ namespace LostRunes
                 Color.RGBToHSV(Color, out float h, out float s, out float v);
                 Color = Color.HSVToRGB(h, s, value);
                 UpdateSlidersFromHSV();
+                UpdateBackgroundsFromHSV();
             }
 
             SetColorPreview();
@@ -256,6 +270,12 @@ namespace LostRunes
         void DisplayHexCode(Color color)
         {
             _hexCode = ColorUtility.ToHtmlStringRGBA(color);
+        }
+        public void Reset()
+        {
+            _color = _initialColor;
+            _currentColorType = ColorPickerTypes.RGB;
+            SetColorType((int)_currentColorType);
         }
     }
 }

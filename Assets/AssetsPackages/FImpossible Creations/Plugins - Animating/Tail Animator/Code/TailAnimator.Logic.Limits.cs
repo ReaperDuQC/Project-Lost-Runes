@@ -25,15 +25,18 @@ namespace FIMSpace.FTail
 
                 if (dist > maxDist) // If tail too long
                 {
-                    _limiting_limitPosition = bone.ProceduralPosition + backDir * ((dist - bone.BoneLengthScaled) / dist);
-
                     if (MaxStretching == 0f)
+                    {
+                        _limiting_limitPosition = bone.ProceduralPosition + backDir * ((dist - bone.BoneLengthScaled) / dist);
                         bone.ProceduralPosition = _limiting_limitPosition;
+                    }
                     else
                     {
+                        _limiting_limitPosition = bone.ParentBone.ProceduralPosition - backDir.normalized * maxDist;
+                        //bone.ProceduralPosition = _limiting_limitPosition;
                         float limValue = Mathf.InverseLerp(dist, 0f, maxDist) + _limiting_stretchingHelperTooLong; if (limValue > 0.999f) limValue = 0.99f;
                         if (ReactionSpeed < 0.5f) limValue *= deltaForLerps * (10f + ReactionSpeed * 30f);
-                        bone.ProceduralPosition = Vector3.LerpUnclamped(bone.ProceduralPosition, _limiting_limitPosition, limValue);
+                        bone.ProceduralPosition = Vector3.Lerp(bone.ProceduralPosition, _limiting_limitPosition, limValue);
                     }
                 }
                 else // If tail too short
@@ -309,7 +312,7 @@ namespace FIMSpace.FTail
 
 
             // If we are using distance limitation
-            if ( MaximumDistance > 0f && finalDistanceFrom != null)
+            if (MaximumDistance > 0f && finalDistanceFrom != null)
             {
                 if (!maxDistanceExceed) // If look motion is not out of look range etc.
                 {

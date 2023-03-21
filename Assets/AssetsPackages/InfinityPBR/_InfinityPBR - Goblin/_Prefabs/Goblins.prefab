@@ -1,5 +1,213 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &899020086159582917
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 9223372036854775807, guid: 6de603eefc108483abfb7377d645e132,
+    type: 3}
+  m_PrefabInstance: {fileID: 4853594058549183448}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2674344005172316417}
+  - component: {fileID: 6909183932983885610}
+  m_Layer: 0
+  m_Name: Placeholder for referenced SkinnedMeshRenderer in Prefab instance (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2674344005172316417
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 9223372036854775806, guid: 6de603eefc108483abfb7377d645e132,
+    type: 3}
+  m_PrefabInstance: {fileID: 4853594058549183448}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899020086159582917}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6909183932986568206}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!137 &6909183932983885610
+SkinnedMeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 2069742929925274866, guid: 6de603eefc108483abfb7377d645e132,
+    type: 3}
+  m_PrefabInstance: {fileID: 4853594058549183448}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899020086159582917}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials: []
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  serializedVersion: 2
+  m_Quality: 0
+  m_UpdateWhenOffscreen: 0
+  m_SkinnedMotionVectors: 1
+  m_Mesh: {fileID: 0}
+  m_Bones: []
+  m_BlendShapeWeights: []
+  m_RootBone: {fileID: 0}
+  m_AABB:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_DirtyAABB: 0
+--- !u!1 &1426792040592815776
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 2069742929920061942, guid: 6de603eefc108483abfb7377d645e132,
+    type: 3}
+  m_PrefabInstance: {fileID: 4853594058549183448}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6909183932986568206}
+  m_Layer: 0
+  m_Name: 'Goblin Sword (Missing Prefab with guid: 6de603eefc108483abfb7377d645e132)'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6909183932986568206
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 2069742929920224726, guid: 6de603eefc108483abfb7377d645e132,
+    type: 3}
+  m_PrefabInstance: {fileID: 4853594058549183448}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426792040592815776}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2674344005172316417}
+  m_Father: {fileID: 6938002865850017962}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5389046685946427468
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 9223372036854775806, guid: 9677f7cd2d1b8469db9d0d7c7680a2c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 6159267412418739926}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7329697065635231445}
+  - component: {fileID: 8739235070031664954}
+  m_Layer: 0
+  m_Name: Placeholder for referenced SkinnedMeshRenderer in Prefab instance (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7329697065635231445
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 9223372036854775805, guid: 9677f7cd2d1b8469db9d0d7c7680a2c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 6159267412418739926}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5389046685946427468}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2429544739773279142}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!137 &8739235070031664954
+SkinnedMeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 3187953607844833772, guid: 9677f7cd2d1b8469db9d0d7c7680a2c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 6159267412418739926}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5389046685946427468}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials: []
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  serializedVersion: 2
+  m_Quality: 0
+  m_UpdateWhenOffscreen: 0
+  m_SkinnedMotionVectors: 1
+  m_Mesh: {fileID: 0}
+  m_Bones: []
+  m_BlendShapeWeights: []
+  m_RootBone: {fileID: 0}
+  m_AABB:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_DirtyAABB: 0
 --- !u!1 &6938002865850315776
 GameObject:
   m_ObjectHideFlags: 0
@@ -26,6 +234,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 1.110223e-16, w: 1}
   m_LocalPosition: {x: 0.015343958, y: -6.764723e-17, z: 0.12861612}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018166}
   m_RootOrder: 14
@@ -56,6 +265,7 @@ Transform:
   m_LocalRotation: {x: -0.5909078, y: -0.057124194, z: -0.07743228, w: 0.80098003}
   m_LocalPosition: {x: -0.10360931, y: 0.11223123, z: 0.013073269}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850017934}
   m_Father: {fileID: 6938002865850017960}
@@ -87,6 +297,7 @@ Transform:
   m_LocalRotation: {x: -0.07743228, y: 0.80098003, z: 0.5909078, w: 0.057124194}
   m_LocalPosition: {x: -0.10360939, y: -0.1122315, z: 0.013073072}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850017922}
   m_Father: {fileID: 6938002865850017960}
@@ -118,6 +329,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 1.110223e-16, w: 1}
   m_LocalPosition: {x: 0.03388622, y: -2.9417883e-16, z: 0.16613647}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018166}
   m_RootOrder: 15
@@ -148,6 +360,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 1.6653345e-16, w: 1}
   m_LocalPosition: {x: 0.13538527, y: 3.006157e-17, z: 0.016326614}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018026}
   m_Father: {fileID: 6938002865850017960}
@@ -179,6 +392,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 1.6653345e-16, w: 1}
   m_LocalPosition: {x: 0.094050445, y: 2.0883394e-17, z: 0.0021670924}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018028}
   m_Father: {fileID: 6938002865850018024}
@@ -210,6 +424,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 1.6653345e-16, w: 1}
   m_LocalPosition: {x: 0.19370957, y: 4.3012164e-17, z: -0.02041025}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850017946}
   - {fileID: 6938002865850017938}
@@ -246,6 +461,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018160}
   m_RootOrder: 3
@@ -261,9 +477,12 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -275,6 +494,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -326,6 +546,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 1.6653345e-16, w: 1}
   m_LocalPosition: {x: -0.07131409, y: 0.07433567, z: -0.02553486}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018086}
   m_Father: {fileID: 6938002865850017978}
@@ -357,6 +578,7 @@ Transform:
   m_LocalRotation: {x: 5.5277963e-33, y: -6.123234e-17, z: -1.110223e-16, w: 1}
   m_LocalPosition: {x: 0.07131454, y: -0.07433551, z: 0.025535248}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018104}
   m_Father: {fileID: 6938002865850017982}
@@ -388,6 +610,7 @@ Transform:
   m_LocalRotation: {x: 0.24487808, y: 0.27023128, z: -0.09348222, w: 0.9264291}
   m_LocalPosition: {x: 0.07199052, y: -0.0048927907, z: -0.039522473}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018146}
   m_Father: {fileID: 6938002865850018164}
@@ -419,6 +642,7 @@ Transform:
   m_LocalRotation: {x: 0.16003369, y: 0.18218127, z: 0.082476676, w: 0.966642}
   m_LocalPosition: {x: 0.052595012, y: -0.00000041555413, z: -0.0000001535174}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018148}
   m_Father: {fileID: 6938002865850018144}
@@ -450,6 +674,7 @@ Transform:
   m_LocalRotation: {x: -0.4242878, y: -0.3948379, z: 0.012588956, w: 0.8148156}
   m_LocalPosition: {x: 0.039621245, y: 0.0000002941595, z: -0.000000084627494}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018146}
   m_RootOrder: 0
@@ -481,6 +706,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 3.9443044e-33, y: -1.1967092, z: -0.30467755}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018072}
   - {fileID: 6938002865850018078}
@@ -499,9 +725,12 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -513,6 +742,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -690,6 +920,7 @@ Transform:
   m_LocalRotation: {x: 0.49681646, y: 0.22965086, z: -0.24814355, w: 0.79928637}
   m_LocalPosition: {x: 0.03989059, y: 0.00000009303199, z: 0.00000022743832}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018134}
   m_RootOrder: 0
@@ -720,6 +951,7 @@ Transform:
   m_LocalRotation: {x: 0.24487808, y: 0.27023128, z: -0.09348222, w: 0.9264291}
   m_LocalPosition: {x: -0.071990766, y: 0.0048931474, z: 0.039522912}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018156}
   m_Father: {fileID: 6938002865850018162}
@@ -751,6 +983,7 @@ Transform:
   m_LocalRotation: {x: 0.16003369, y: 0.18218127, z: 0.082476676, w: 0.966642}
   m_LocalPosition: {x: -0.052594755, y: 0, z: -1.4210854e-16}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018158}
   m_Father: {fileID: 6938002865850018154}
@@ -782,6 +1015,7 @@ Transform:
   m_LocalRotation: {x: -0.4242878, y: -0.3948379, z: 0.012588956, w: 0.8148156}
   m_LocalPosition: {x: -0.03962072, y: 7.105427e-17, z: 7.105427e-17}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018156}
   m_RootOrder: 0
@@ -796,7 +1030,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6938002865850018160}
   - component: {fileID: 6938002865843013352}
-  - component: {fileID: 2715434174443224858}
   - component: {fileID: 6255297871685565852}
   m_Layer: 0
   m_Name: Goblins
@@ -815,6 +1048,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.962, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018056}
   - {fileID: 6938002865850017964}
@@ -825,7 +1059,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &6938002865843013352
 Animator:
-  serializedVersion: 3
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -838,3156 +1072,15 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
-  m_WarningMessage: 
+  m_StabilizeFeet: 0
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed
+    by Humanoid clips.\n\tTransform 'eye_R_blink'\n\tTransform 'eye_L_blink'\n\tTransform
+    'eye_R_blink'\n\tTransform 'eye_L_blink'\n\tTransform 'eye_R_blink'\n\tTransform
+    'eye_L_blink'\n\tFrom animation clip 'Attack1'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2715434174443224858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6938002865850315920}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c90a720fc10b6450da271a65db9e647f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  blendShapeObjects:
-  - name: Belt
-    meshObject: {fileID: 4300030, guid: d232dcc2ecf544d0fb564d4da1617eea, type: 3}
-    renderer: {fileID: 6938002865847203880}
-    blendShapes:
-    - name: Belt
-      fullName: ButtSize5.SFB_BSM_Belt_ButtSize
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 0
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Belt
-      fullName: LegMuscles2.SFB_BSM_Belt_LegMusclesPlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 1
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Belt
-      fullName: LegMuscles2.SFB_BSM_Belt_LegMusclesMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 2
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Belt
-      fullName: TorsoSize15.SFB_BSM_Belt_TorsoSizePlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 3
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Belt
-      fullName: TorsoSize15.SFB_BSM_Belt_TorsoSizeMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 4
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    primaryShapes: 0
-    expandedInspector: 0
-  - name: Chest_armor_F
-    meshObject: {fileID: 4300036, guid: d232dcc2ecf544d0fb564d4da1617eea, type: 3}
-    renderer: {fileID: 6938002865847203882}
-    blendShapes:
-    - name: Colar
-      fullName: ArmMuscles16.SFB_BSM_Colar_ArmMusclesPlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 0
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Colar
-      fullName: ArmMuscles16.SFB_BSM_Colar_ArmMusclesMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 1
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Chest
-      fullName: BreastDrop1.SFB_BSM_Chest_BreastDropPlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 2
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Chest
-      fullName: BreastDrop1.SFB_BSM_Chest_BreastDropMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 3
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: chest
-      fullName: BreastSize1.SFB_BSM_chest_BreastSizePlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 4
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: chest
-      fullName: BreastSize1.SFB_BSM_chest_BreastSizeMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 5
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: ChestF
-      fullName: TorsoSize7.SFB_BSM_ChestF_TorsoSizePlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 6
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: ChestF
-      fullName: TorsoSize7.SFB_BSM_ChestF_TorsoSizeMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 7
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    primaryShapes: 0
-    expandedInspector: 0
-  - name: Chest_armor_M
-    meshObject: {fileID: 4300034, guid: d232dcc2ecf544d0fb564d4da1617eea, type: 3}
-    renderer: {fileID: 6938002865847203884}
-    blendShapes:
-    - name: Colar
-      fullName: ArmMuscles15.SFB_BSM_Colar_ArmMusclesPlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 0
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Colar
-      fullName: ArmMuscles15.SFB_BSM_Colar_ArmMusclesMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 1
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: ChestM
-      fullName: TorsoSize8.SFB_BSM_ChestM_TorsoSizePlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 2
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: ChestM
-      fullName: TorsoSize8.SFB_BSM_ChestM_TorsoSizeMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 3
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    primaryShapes: 0
-    expandedInspector: 0
-  - name: Cloth1_F
-    meshObject: {fileID: 4300042, guid: d232dcc2ecf544d0fb564d4da1617eea, type: 3}
-    renderer: {fileID: 6938002865847203886}
-    blendShapes:
-    - name: Cloth1
-      fullName: BreastDrop3.SFB_BSM_Cloth1_BreastDropPlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 0
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Cloth1
-      fullName: BreastDrop3.SFB_BSM_Cloth1_BreastDropMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 1
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Cloth1F
-      fullName: BreastSize3.SFB_BSM_Cloth1F_BreastSizePlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 2
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Cloth1F
-      fullName: BreastSize3.SFB_BSM_Cloth1F_BreastSizeMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 3
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Cloth1F
-      fullName: ButtSize7.SFB_BSM_Cloth1F_ButtSize
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 4
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Cloth1F
-      fullName: LegMuscles6.SFB_BSM_Cloth1F_LegMusclesPlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 5
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Cloth1F
-      fullName: LegMuscles6.SFB_BSM_Cloth1F_LegMusclesMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 6
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Cloth1F
-      fullName: TorsoSize13.SFB_BSM_Cloth1F_TorsoSizePlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 7
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Cloth1F
-      fullName: TorsoSize13.SFB_BSM_Cloth1F_TorsoSizeMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 8
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    primaryShapes: 0
-    expandedInspector: 0
-  - name: Cloth1_M
-    meshObject: {fileID: 4300040, guid: d232dcc2ecf544d0fb564d4da1617eea, type: 3}
-    renderer: {fileID: 6938002865847203872}
-    blendShapes:
-    - name: Cloth1M
-      fullName: ButtSize6.SFB_BSM_Cloth1M_ButtSize
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 0
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Cloth1M
-      fullName: LegMuscles7.SFB_BSM_Cloth1M_LegMusclesPlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 1
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Cloth1M
-      fullName: LegMuscles7.SFB_BSM_Cloth1M_LegMusclesMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 2
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Cloth1M
-      fullName: TorsoSize14.SFB_BSM_Cloth1M_TorsoSizePlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 3
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Cloth1M
-      fullName: TorsoSize14.SFB_BSM_Cloth1M_TorsoSizeMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 4
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    primaryShapes: 0
-    expandedInspector: 0
-  - name: Cloth2_F
-    meshObject: {fileID: 4300046, guid: d232dcc2ecf544d0fb564d4da1617eea, type: 3}
-    renderer: {fileID: 6938002865847203874}
-    blendShapes:
-    - name: Cloth2
-      fullName: BreastDrop2.SFB_BSM_Cloth2_BreastDropPlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 0
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Cloth2
-      fullName: BreastDrop2.SFB_BSM_Cloth2_BreastDropMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 1
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Cloth2F
-      fullName: BreastSize2.SFB_BSM_Cloth2F_BreastSizePlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 2
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Cloth2F
-      fullName: BreastSize2.SFB_BSM_Cloth2F_BreastSizeMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 3
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Cloth2F
-      fullName: ButtSize3.SFB_BSM_Cloth2F_ButtSize
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 4
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Cloth2M
-      fullName: LegMuscles5.SFB_BSM_Cloth2M_LegMusclesPlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 5
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Cloth2M
-      fullName: LegMuscles5.SFB_BSM_Cloth2M_LegMusclesMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 6
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Cloth2F
-      fullName: TorsoSize12.SFB_BSM_Cloth2F_TorsoSizePlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 7
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Cloth2F
-      fullName: TorsoSize12.SFB_BSM_Cloth2F_TorsoSizeMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 8
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Cloth1F
-      fullName: ArmMuscles13.SFB_BSM_Cloth1F_ArmMusclesPlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 9
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Cloth1F
-      fullName: ArmMuscles13.SFB_BSM_Cloth1F_ArmMusclesMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 10
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    primaryShapes: 0
-    expandedInspector: 0
-  - name: Cloth2_M
-    meshObject: {fileID: 4300044, guid: d232dcc2ecf544d0fb564d4da1617eea, type: 3}
-    renderer: {fileID: 6938002865847203876}
-    blendShapes:
-    - name: Cloth2M
-      fullName: ButtSize2.SFB_BSM_Cloth2M_ButtSize
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 0
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Cloth2F
-      fullName: LegMuscles4.SFB_BSM_Cloth2F_LegMusclesPlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 1
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Cloth2F
-      fullName: LegMuscles4.SFB_BSM_Cloth2F_LegMusclesMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 2
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Cloth2M
-      fullName: TorsoSize11.SFB_BSM_Cloth2M_TorsoSizePlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 3
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Cloth2M
-      fullName: TorsoSize11.SFB_BSM_Cloth2M_TorsoSizeMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 4
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Cloth1M
-      fullName: ArmMuscles17.SFB_BSM_Cloth1M_ArmMusclesPlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 5
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Cloth1M
-      fullName: ArmMuscles17.SFB_BSM_Cloth1M_ArmMusclesMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 6
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    primaryShapes: 0
-    expandedInspector: 0
-  - name: Collar
-    meshObject: {fileID: 4300032, guid: d232dcc2ecf544d0fb564d4da1617eea, type: 3}
-    renderer: {fileID: 6938002865847203878}
-    blendShapes:
-    - name: Colar
-      fullName: TorsoSize2.SFB_BSM_Colar_TorsoSizePlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 0
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Colar
-      fullName: TorsoSize2.SFB_BSM_Colar_TorsoSizeMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 1
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Colar
-      fullName: ArmMuscles2.SFB_BSM_Colar_ArmMusclesPlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 2
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Colar
-      fullName: ArmMuscles2.SFB_BSM_Colar_ArmMusclesMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 3
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    primaryShapes: 0
-    expandedInspector: 0
-  - name: Glove_L
-    meshObject: {fileID: 4300008, guid: d232dcc2ecf544d0fb564d4da1617eea, type: 3}
-    renderer: {fileID: 6938002865847203898}
-    blendShapes:
-    - name: GloveR
-      fullName: ArmMuscles8.SFB_BSM_GloveR_ArmMusclesPlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 0
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: GloveR
-      fullName: ArmMuscles8.SFB_BSM_GloveR_ArmMusclesMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 1
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    primaryShapes: 0
-    expandedInspector: 0
-  - name: Glove_R
-    meshObject: {fileID: 4300010, guid: d232dcc2ecf544d0fb564d4da1617eea, type: 3}
-    renderer: {fileID: 6938002865847203900}
-    blendShapes:
-    - name: GloveL
-      fullName: ArmMuscles7.SFB_BSM_GloveL_ArmMusclesPlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 0
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: GloveL
-      fullName: ArmMuscles7.SFB_BSM_GloveL_ArmMusclesMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 1
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    primaryShapes: 0
-    expandedInspector: 0
-  - name: Helmet
-    meshObject: {fileID: 4300028, guid: d232dcc2ecf544d0fb564d4da1617eea, type: 3}
-    renderer: {fileID: 6938002865847203902}
-    blendShapes:
-    - name: Helmet
-      fullName: FaceWidth2.SFB_BSM_Helmet_FaceWidthPlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 0
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Helmet
-      fullName: FaceWidth2.SFB_BSM_Helmet_FaceWidthMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 1
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    primaryShapes: 0
-    expandedInspector: 0
-  - name: Knee_L_armor
-    meshObject: {fileID: 4300018, guid: d232dcc2ecf544d0fb564d4da1617eea, type: 3}
-    renderer: {fileID: 6938002865847203888}
-    blendShapes:
-    - name: KneeR
-      fullName: LegMuscles8.SFB_BSM_KneeR_LegMusclesPlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 0
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: KneeR
-      fullName: LegMuscles8.SFB_BSM_KneeR_LegMusclesMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 1
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    primaryShapes: 0
-    expandedInspector: 0
-  - name: Knee_R_armor
-    meshObject: {fileID: 4300016, guid: d232dcc2ecf544d0fb564d4da1617eea, type: 3}
-    renderer: {fileID: 6938002865847203890}
-    blendShapes:
-    - name: KneeL
-      fullName: LegMuscles9.SFB_BSM_KneeL_LegMusclesPlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 0
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: KneeL
-      fullName: LegMuscles9.SFB_BSM_KneeL_LegMusclesMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 1
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    primaryShapes: 0
-    expandedInspector: 0
-  - name: paudron_L
-    meshObject: {fileID: 4300006, guid: d232dcc2ecf544d0fb564d4da1617eea, type: 3}
-    renderer: {fileID: 6938002865847203894}
-    blendShapes:
-    - name: ShL
-      fullName: TorsoSize3.SFB_BSM_ShL_TorsoSizePlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 0
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: ShL
-      fullName: TorsoSize3.SFB_BSM_ShL_TorsoSizeMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 1
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: paudrL
-      fullName: ArmMuscles3.SFB_BSM_paudrL_ArmMusclesPlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 2
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: paudrL
-      fullName: ArmMuscles3.SFB_BSM_paudrL_ArmMusclesMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 3
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    primaryShapes: 0
-    expandedInspector: 0
-  - name: paudron_R
-    meshObject: {fileID: 4300004, guid: d232dcc2ecf544d0fb564d4da1617eea, type: 3}
-    renderer: {fileID: 6938002865847203912}
-    blendShapes:
-    - name: ShR
-      fullName: TorsoSize4.SFB_BSM_ShR_TorsoSizePlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 0
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: ShR
-      fullName: TorsoSize4.SFB_BSM_ShR_TorsoSizeMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 1
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: paudrR
-      fullName: ArmMuscles4.SFB_BSM_paudrR_ArmMusclesPlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 2
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: paudrR
-      fullName: ArmMuscles4.SFB_BSM_paudrR_ArmMusclesMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 3
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    primaryShapes: 0
-    expandedInspector: 0
-  - name: shoe_L
-    meshObject: {fileID: 4300026, guid: d232dcc2ecf544d0fb564d4da1617eea, type: 3}
-    renderer: {fileID: 6938002865847203916}
-    blendShapes:
-    - name: ShoeR
-      fullName: LegMuscles13.SFB_BSM_ShoeR_LegMusclesPlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 0
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: ShoeR
-      fullName: LegMuscles13.SFB_BSM_ShoeR_LegMusclesMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 1
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    primaryShapes: 0
-    expandedInspector: 0
-  - name: shoe_L_armor
-    meshObject: {fileID: 4300022, guid: d232dcc2ecf544d0fb564d4da1617eea, type: 3}
-    renderer: {fileID: 6938002865847203918}
-    blendShapes:
-    - name: ShoeLArm
-      fullName: LegMuscles11.SFB_BSM_ShoeLArm_LegMusclesPlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 0
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: ShoeLArm
-      fullName: LegMuscles11.SFB_BSM_ShoeLArm_LegMusclesMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 1
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    primaryShapes: 0
-    expandedInspector: 0
-  - name: shoe_R
-    meshObject: {fileID: 4300024, guid: d232dcc2ecf544d0fb564d4da1617eea, type: 3}
-    renderer: {fileID: 6938002865847203904}
-    blendShapes:
-    - name: ShoeL
-      fullName: LegMuscles12.SFB_BSM_ShoeL_LegMusclesPlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 0
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: ShoeL
-      fullName: LegMuscles12.SFB_BSM_ShoeL_LegMusclesMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 1
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    primaryShapes: 0
-    expandedInspector: 0
-  - name: shoe_R_armor
-    meshObject: {fileID: 4300020, guid: d232dcc2ecf544d0fb564d4da1617eea, type: 3}
-    renderer: {fileID: 6938002865847203906}
-    blendShapes:
-    - name: ShoeRArm
-      fullName: LegMuscles10.SFB_BSM_ShoeRArm_LegMusclesPlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 0
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: ShoeRArm
-      fullName: LegMuscles10.SFB_BSM_ShoeRArm_LegMusclesMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 1
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    primaryShapes: 0
-    expandedInspector: 0
-  - name: shoulder_L_armor
-    meshObject: {fileID: 4300014, guid: d232dcc2ecf544d0fb564d4da1617eea, type: 3}
-    renderer: {fileID: 6938002865847203908}
-    blendShapes:
-    - name: ShouldR
-      fullName: TorsoSize5.SFB_BSM_ShouldR_TorsoSizePlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 0
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: ShouldR
-      fullName: TorsoSize5.SFB_BSM_ShouldR_TorsoSizeMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 1
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: ShouldR
-      fullName: ArmMuscles5.SFB_BSM_ShouldR_ArmMusclesPlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 2
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: ShouldR
-      fullName: ArmMuscles5.SFB_BSM_ShouldR_ArmMusclesMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 3
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    primaryShapes: 0
-    expandedInspector: 0
-  - name: shoulder_R_armor
-    meshObject: {fileID: 4300012, guid: d232dcc2ecf544d0fb564d4da1617eea, type: 3}
-    renderer: {fileID: 6938002865847203910}
-    blendShapes:
-    - name: ShouldL
-      fullName: TorsoSize6.SFB_BSM_ShouldL_TorsoSizePlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 0
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: ShouldL
-      fullName: TorsoSize6.SFB_BSM_ShouldL_TorsoSizeMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 1
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: ShouldL
-      fullName: ArmMuscles6.SFB_BSM_ShouldL_ArmMusclesPlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 2
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: ShouldL
-      fullName: ArmMuscles6.SFB_BSM_ShouldL_ArmMusclesMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 3
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    primaryShapes: 0
-    expandedInspector: 0
-  - name: Skirt
-    meshObject: {fileID: 4300038, guid: d232dcc2ecf544d0fb564d4da1617eea, type: 3}
-    renderer: {fileID: 6938002865847203928}
-    blendShapes:
-    - name: Skirt
-      fullName: ButtSize4.SFB_BSM_Skirt_ButtSize
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 0
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Skirt
-      fullName: LegMuscles3.SFB_BSM_Skirt_LegMusclesPlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 1
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Skirt
-      fullName: LegMuscles3.SFB_BSM_Skirt_LegMusclesMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 2
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Skirt
-      fullName: TorsoSize10.SFB_BSM_Skirt_TorsoSizePlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 3
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Skirt
-      fullName: TorsoSize10.SFB_BSM_Skirt_TorsoSizeMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 4
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    primaryShapes: 0
-    expandedInspector: 0
-  - name: F_rig
-    meshObject: {fileID: 4300002, guid: d232dcc2ecf544d0fb564d4da1617eea, type: 3}
-    renderer: {fileID: 6938002865847203896}
-    blendShapes:
-    - name: BreastDropPlus
-      fullName: BreastDrop.SFB_BS_BreastDropPlus
-      isMinus: 0
-      isPlus: 1
-      inspectorID: 0
-      id: 0
-      minValue: -100
-      maxValue: 100
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 1
-      blendMatches:
-      - name: BreastDrop1.SFB_BSM_Chest_BreastDropPlus
-        objectID: 1
-        shapeID: 2
-      - name: BreastDrop3.SFB_BSM_Cloth1_BreastDropPlus
-        objectID: 3
-        shapeID: 0
-      - name: BreastDrop2.SFB_BSM_Cloth2_BreastDropPlus
-        objectID: 5
-        shapeID: 0
-      presetExport: 1
-      presetExportValue: 1
-    - name: BreastDropMinus
-      fullName: BreastDrop.SFB_BS_BreastDropMinus
-      isMinus: 1
-      isPlus: 0
-      inspectorID: 0
-      id: 1
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches:
-      - name: BreastDrop1.SFB_BSM_Chest_BreastDropMinus
-        objectID: 1
-        shapeID: 3
-      - name: BreastDrop3.SFB_BSM_Cloth1_BreastDropMinus
-        objectID: 3
-        shapeID: 1
-      - name: BreastDrop2.SFB_BSM_Cloth2_BreastDropMinus
-        objectID: 5
-        shapeID: 1
-      presetExport: 1
-      presetExportValue: 1
-    - name: Female
-      fullName: LegMuscles1.SFB_BSM_Female_LegMusclesPlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 2
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Female
-      fullName: LegMuscles1.SFB_BSM_Female_LegMusclesMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 3
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: female
-      fullName: EarShape1.SFB_BSM_female_EarShapeMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 4
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: female
-      fullName: EarShape1.SFB_BSM_female_EarShapePlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 5
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Female
-      fullName: TeethLength1.SFB_BSM_Female_TeethLengthMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 6
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Female
-      fullName: TeethLength1.SFB_BSM_Female_TeethLengthPlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 7
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Female
-      fullName: CheekSize1.SFB_BSM_Female_CheekSizePlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 8
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Female
-      fullName: CheekSize1.SFB_BSM_Female_CheekSizeMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 9
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Female
-      fullName: BrowDepth1.SFB_BSM_Female_BrowDepthPlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 10
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Female
-      fullName: BrowDepth1.SFB_BSM_Female_BrowDepthMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 11
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Female
-      fullName: ArmMuscles1.SFB_BSM_Female_ArmMusclesPlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 12
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Female
-      fullName: ArmMuscles1.SFB_BSM_Female_ArmMusclesMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 13
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Female
-      fullName: NoseFleshSize1.SFB_BSM_Female_NoseFleshSizePlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 14
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Female
-      fullName: NoseFleshSize1.SFB_BSM_Female_NoseFleshSizeMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 15
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Female
-      fullName: ChinLength1.SFB_BSM_Female_ChinLength
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 16
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Female
-      fullName: ChinWidth1.SFB_BSM_Female_ChinWidthMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 17
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Female
-      fullName: ChinWidth1.SFB_BSM_Female_ChinWidthPlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 18
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Female
-      fullName: NoseLength1.SFB_BSM_Female_NoseLengthPlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 19
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Female
-      fullName: NoseLength1.SFB_BSM_Female_NoseLengthMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 20
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Female
-      fullName: NoseSize1.SFB_BSM_Female_NoseSizePlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 21
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Female
-      fullName: NoseSize1.SFB_BSM_Female_NoseSizeMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 22
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: NippleSizePlus
-      fullName: NippleSize.SFB_BS_NippleSizePlus
-      isMinus: 0
-      isPlus: 1
-      inspectorID: 1
-      id: 23
-      minValue: -51
-      maxValue: 31
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 1
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: NippleSizeMinus
-      fullName: NippleSize.SFB_BS_NippleSizeMinus
-      isMinus: 1
-      isPlus: 0
-      inspectorID: 0
-      id: 24
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: BreastSizePlus
-      fullName: BreastSize.SFB_BS_BreastSizePlus
-      isMinus: 0
-      isPlus: 1
-      inspectorID: 2
-      id: 25
-      minValue: -64
-      maxValue: 67
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 1
-      blendMatches:
-      - name: BreastSize1.SFB_BSM_chest_BreastSizePlus
-        objectID: 1
-        shapeID: 4
-      - name: BreastSize3.SFB_BSM_Cloth1F_BreastSizePlus
-        objectID: 3
-        shapeID: 2
-      - name: BreastSize2.SFB_BSM_Cloth2F_BreastSizePlus
-        objectID: 5
-        shapeID: 2
-      presetExport: 1
-      presetExportValue: 1
-    - name: BreastSizeMinus
-      fullName: BreastSize.SFB_BS_BreastSizeMinus
-      isMinus: 1
-      isPlus: 0
-      inspectorID: 0
-      id: 26
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches:
-      - name: BreastSize1.SFB_BSM_chest_BreastSizeMinus
-        objectID: 1
-        shapeID: 5
-      - name: BreastSize3.SFB_BSM_Cloth1F_BreastSizeMinus
-        objectID: 3
-        shapeID: 3
-      - name: BreastSize2.SFB_BSM_Cloth2F_BreastSizeMinus
-        objectID: 5
-        shapeID: 3
-      presetExport: 1
-      presetExportValue: 1
-    - name: Female
-      fullName: TorsoSize16.SFB_BSM_Female_TorsoSizePlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 27
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Female
-      fullName: TorsoSize16.SFB_BSM_Female_TorsoSizeMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 28
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Female
-      fullName: EarLength1.SFB_BSM_Female_EarLengthPlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 29
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Female
-      fullName: EarLength1.SFB_BSM_Female_EarLengthMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 30
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Female
-      fullName: EarSize1.SFB_BSM_Female_EarSizePlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 31
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Female
-      fullName: EarSize1.SFB_BSM_Female_EarSizeMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 32
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Female
-      fullName: FaceWidth1.SFB_BSM_Female_FaceWidthPlus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 33
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Female
-      fullName: FaceWidth1.SFB_BSM_Female_FaceWidthMinus
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 34
-      minValue: 0
-      maxValue: 0
-      value: -0
-      sliderValue: -0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: Female
-      fullName: ButtSize1.SFB_BSM_Female_ButtSize
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 0
-      id: 35
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    primaryShapes: 6
-    expandedInspector: 0
-  - name: M_rig
-    meshObject: {fileID: 4300000, guid: d232dcc2ecf544d0fb564d4da1617eea, type: 3}
-    renderer: {fileID: 6938002865847203892}
-    blendShapes:
-    - name: TorsoSizePlus
-      fullName: TorsoSize.SFB_BS_TorsoSizePlus
-      isMinus: 0
-      isPlus: 1
-      inspectorID: 3
-      id: 0
-      minValue: -62
-      maxValue: 51
-      value: -43
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 1
-      blendMatches:
-      - name: TorsoSize15.SFB_BSM_Belt_TorsoSizePlus
-        objectID: 0
-        shapeID: 3
-      - name: TorsoSize7.SFB_BSM_ChestF_TorsoSizePlus
-        objectID: 1
-        shapeID: 6
-      - name: TorsoSize8.SFB_BSM_ChestM_TorsoSizePlus
-        objectID: 2
-        shapeID: 2
-      - name: TorsoSize13.SFB_BSM_Cloth1F_TorsoSizePlus
-        objectID: 3
-        shapeID: 7
-      - name: TorsoSize14.SFB_BSM_Cloth1M_TorsoSizePlus
-        objectID: 4
-        shapeID: 3
-      - name: TorsoSize12.SFB_BSM_Cloth2F_TorsoSizePlus
-        objectID: 5
-        shapeID: 7
-      - name: TorsoSize11.SFB_BSM_Cloth2M_TorsoSizePlus
-        objectID: 6
-        shapeID: 3
-      - name: TorsoSize2.SFB_BSM_Colar_TorsoSizePlus
-        objectID: 7
-        shapeID: 0
-      - name: TorsoSize3.SFB_BSM_ShL_TorsoSizePlus
-        objectID: 13
-        shapeID: 0
-      - name: TorsoSize4.SFB_BSM_ShR_TorsoSizePlus
-        objectID: 14
-        shapeID: 0
-      - name: TorsoSize5.SFB_BSM_ShouldR_TorsoSizePlus
-        objectID: 19
-        shapeID: 0
-      - name: TorsoSize6.SFB_BSM_ShouldL_TorsoSizePlus
-        objectID: 20
-        shapeID: 0
-      - name: TorsoSize10.SFB_BSM_Skirt_TorsoSizePlus
-        objectID: 21
-        shapeID: 3
-      - name: TorsoSize16.SFB_BSM_Female_TorsoSizePlus
-        objectID: 22
-        shapeID: 27
-      presetExport: 1
-      presetExportValue: 1
-    - name: TorsoSizeMinus
-      fullName: TorsoSize.SFB_BS_TorsoSizeMinus
-      isMinus: 1
-      isPlus: 0
-      inspectorID: 0
-      id: 1
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches:
-      - name: TorsoSize15.SFB_BSM_Belt_TorsoSizeMinus
-        objectID: 0
-        shapeID: 4
-      - name: TorsoSize7.SFB_BSM_ChestF_TorsoSizeMinus
-        objectID: 1
-        shapeID: 7
-      - name: TorsoSize8.SFB_BSM_ChestM_TorsoSizeMinus
-        objectID: 2
-        shapeID: 3
-      - name: TorsoSize13.SFB_BSM_Cloth1F_TorsoSizeMinus
-        objectID: 3
-        shapeID: 8
-      - name: TorsoSize14.SFB_BSM_Cloth1M_TorsoSizeMinus
-        objectID: 4
-        shapeID: 4
-      - name: TorsoSize12.SFB_BSM_Cloth2F_TorsoSizeMinus
-        objectID: 5
-        shapeID: 8
-      - name: TorsoSize11.SFB_BSM_Cloth2M_TorsoSizeMinus
-        objectID: 6
-        shapeID: 4
-      - name: TorsoSize2.SFB_BSM_Colar_TorsoSizeMinus
-        objectID: 7
-        shapeID: 1
-      - name: TorsoSize3.SFB_BSM_ShL_TorsoSizeMinus
-        objectID: 13
-        shapeID: 1
-      - name: TorsoSize4.SFB_BSM_ShR_TorsoSizeMinus
-        objectID: 14
-        shapeID: 1
-      - name: TorsoSize5.SFB_BSM_ShouldR_TorsoSizeMinus
-        objectID: 19
-        shapeID: 1
-      - name: TorsoSize6.SFB_BSM_ShouldL_TorsoSizeMinus
-        objectID: 20
-        shapeID: 1
-      - name: TorsoSize10.SFB_BSM_Skirt_TorsoSizeMinus
-        objectID: 21
-        shapeID: 4
-      - name: TorsoSize16.SFB_BSM_Female_TorsoSizeMinus
-        objectID: 22
-        shapeID: 28
-      presetExport: 1
-      presetExportValue: 1
-    - name: ArmMusclesPlus
-      fullName: ArmMuscles.SFB_BS_ArmMusclesPlus
-      isMinus: 0
-      isPlus: 1
-      inspectorID: 4
-      id: 2
-      minValue: -49
-      maxValue: 83
-      value: -31
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 1
-      blendMatches:
-      - name: ArmMuscles16.SFB_BSM_Colar_ArmMusclesPlus
-        objectID: 1
-        shapeID: 0
-      - name: ArmMuscles15.SFB_BSM_Colar_ArmMusclesPlus
-        objectID: 2
-        shapeID: 0
-      - name: ArmMuscles13.SFB_BSM_Cloth1F_ArmMusclesPlus
-        objectID: 5
-        shapeID: 9
-      - name: ArmMuscles17.SFB_BSM_Cloth1M_ArmMusclesPlus
-        objectID: 6
-        shapeID: 5
-      - name: ArmMuscles2.SFB_BSM_Colar_ArmMusclesPlus
-        objectID: 7
-        shapeID: 2
-      - name: ArmMuscles8.SFB_BSM_GloveR_ArmMusclesPlus
-        objectID: 8
-        shapeID: 0
-      - name: ArmMuscles7.SFB_BSM_GloveL_ArmMusclesPlus
-        objectID: 9
-        shapeID: 0
-      - name: ArmMuscles3.SFB_BSM_paudrL_ArmMusclesPlus
-        objectID: 13
-        shapeID: 2
-      - name: ArmMuscles4.SFB_BSM_paudrR_ArmMusclesPlus
-        objectID: 14
-        shapeID: 2
-      - name: ArmMuscles5.SFB_BSM_ShouldR_ArmMusclesPlus
-        objectID: 19
-        shapeID: 2
-      - name: ArmMuscles6.SFB_BSM_ShouldL_ArmMusclesPlus
-        objectID: 20
-        shapeID: 2
-      - name: ArmMuscles1.SFB_BSM_Female_ArmMusclesPlus
-        objectID: 22
-        shapeID: 12
-      presetExport: 1
-      presetExportValue: 1
-    - name: ArmMusclesMinus
-      fullName: ArmMuscles.SFB_BS_ArmMusclesMinus
-      isMinus: 1
-      isPlus: 0
-      inspectorID: 0
-      id: 3
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches:
-      - name: ArmMuscles16.SFB_BSM_Colar_ArmMusclesMinus
-        objectID: 1
-        shapeID: 1
-      - name: ArmMuscles15.SFB_BSM_Colar_ArmMusclesMinus
-        objectID: 2
-        shapeID: 1
-      - name: ArmMuscles13.SFB_BSM_Cloth1F_ArmMusclesMinus
-        objectID: 5
-        shapeID: 10
-      - name: ArmMuscles17.SFB_BSM_Cloth1M_ArmMusclesMinus
-        objectID: 6
-        shapeID: 6
-      - name: ArmMuscles2.SFB_BSM_Colar_ArmMusclesMinus
-        objectID: 7
-        shapeID: 3
-      - name: ArmMuscles8.SFB_BSM_GloveR_ArmMusclesMinus
-        objectID: 8
-        shapeID: 1
-      - name: ArmMuscles7.SFB_BSM_GloveL_ArmMusclesMinus
-        objectID: 9
-        shapeID: 1
-      - name: ArmMuscles3.SFB_BSM_paudrL_ArmMusclesMinus
-        objectID: 13
-        shapeID: 3
-      - name: ArmMuscles4.SFB_BSM_paudrR_ArmMusclesMinus
-        objectID: 14
-        shapeID: 3
-      - name: ArmMuscles5.SFB_BSM_ShouldR_ArmMusclesMinus
-        objectID: 19
-        shapeID: 3
-      - name: ArmMuscles6.SFB_BSM_ShouldL_ArmMusclesMinus
-        objectID: 20
-        shapeID: 3
-      - name: ArmMuscles1.SFB_BSM_Female_ArmMusclesMinus
-        objectID: 22
-        shapeID: 13
-      presetExport: 1
-      presetExportValue: 1
-    - name: EarShapePlus
-      fullName: EarShape.SFB_BS_EarShapePlus
-      isMinus: 0
-      isPlus: 1
-      inspectorID: 5
-      id: 4
-      minValue: -100
-      maxValue: 100
-      value: 94
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 1
-      blendMatches:
-      - name: EarShape1.SFB_BSM_female_EarShapePlus
-        objectID: 22
-        shapeID: 5
-      presetExport: 1
-      presetExportValue: 1
-    - name: EarShapeMinus
-      fullName: EarShape.SFB_BS_EarShapeMinus
-      isMinus: 1
-      isPlus: 0
-      inspectorID: 0
-      id: 5
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches:
-      - name: EarShape1.SFB_BSM_female_EarShapeMinus
-        objectID: 22
-        shapeID: 4
-      presetExport: 1
-      presetExportValue: 1
-    - name: EarLengthPlus
-      fullName: EarLength.SFB_BS_EarLengthPlus
-      isMinus: 0
-      isPlus: 1
-      inspectorID: 6
-      id: 6
-      minValue: -43
-      maxValue: 76
-      value: -33
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 1
-      blendMatches:
-      - name: EarLength1.SFB_BSM_Female_EarLengthPlus
-        objectID: 22
-        shapeID: 29
-      presetExport: 1
-      presetExportValue: 1
-    - name: EarLengthMinus
-      fullName: EarLength.SFB_BS_EarLengthMinus
-      isMinus: 1
-      isPlus: 0
-      inspectorID: 0
-      id: 7
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches:
-      - name: EarLength1.SFB_BSM_Female_EarLengthMinus
-        objectID: 22
-        shapeID: 30
-      presetExport: 1
-      presetExportValue: 1
-    - name: EarSizePlus
-      fullName: EarSize.SFB_BS_EarSizePlus
-      isMinus: 0
-      isPlus: 1
-      inspectorID: 7
-      id: 8
-      minValue: -33
-      maxValue: 59
-      value: 8
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 1
-      blendMatches:
-      - name: EarSize1.SFB_BSM_Female_EarSizePlus
-        objectID: 22
-        shapeID: 31
-      presetExport: 1
-      presetExportValue: 1
-    - name: EarSizeMinus
-      fullName: EarSize.SFB_BS_EarSizeMinus
-      isMinus: 1
-      isPlus: 0
-      inspectorID: 0
-      id: 9
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches:
-      - name: EarSize1.SFB_BSM_Female_EarSizeMinus
-        objectID: 22
-        shapeID: 32
-      presetExport: 1
-      presetExportValue: 1
-    - name: FaceWidthPlus
-      fullName: FaceWidth.SFB_BS_FaceWidthPlus
-      isMinus: 0
-      isPlus: 1
-      inspectorID: 8
-      id: 10
-      minValue: -70
-      maxValue: 46
-      value: 33
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 1
-      blendMatches:
-      - name: FaceWidth2.SFB_BSM_Helmet_FaceWidthPlus
-        objectID: 10
-        shapeID: 0
-      - name: FaceWidth1.SFB_BSM_Female_FaceWidthPlus
-        objectID: 22
-        shapeID: 33
-      presetExport: 1
-      presetExportValue: 1
-    - name: FaceWidthMinus
-      fullName: FaceWidth.SFB_BS_FaceWidthMinus
-      isMinus: 1
-      isPlus: 0
-      inspectorID: 0
-      id: 11
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches:
-      - name: FaceWidth2.SFB_BSM_Helmet_FaceWidthMinus
-        objectID: 10
-        shapeID: 1
-      - name: FaceWidth1.SFB_BSM_Female_FaceWidthMinus
-        objectID: 22
-        shapeID: 34
-      presetExport: 1
-      presetExportValue: 1
-    - name: ChinWidthPlus
-      fullName: ChinWidth.SFB_BS_ChinWidthPlus
-      isMinus: 0
-      isPlus: 1
-      inspectorID: 9
-      id: 12
-      minValue: -43
-      maxValue: 46
-      value: 44
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 1
-      blendMatches:
-      - name: ChinWidth1.SFB_BSM_Female_ChinWidthPlus
-        objectID: 22
-        shapeID: 18
-      presetExport: 1
-      presetExportValue: 1
-    - name: ChinWidthMinus
-      fullName: ChinWidth.SFB_BS_ChinWidthMinus
-      isMinus: 1
-      isPlus: 0
-      inspectorID: 0
-      id: 13
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches:
-      - name: ChinWidth1.SFB_BSM_Female_ChinWidthMinus
-        objectID: 22
-        shapeID: 17
-      presetExport: 1
-      presetExportValue: 1
-    - name: ChinLength
-      fullName: ChinLength.SFB_BS_ChinLength
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 10
-      id: 14
-      minValue: 0
-      maxValue: 63
-      value: 14
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 1
-      blendMatches:
-      - name: ChinLength1.SFB_BSM_Female_ChinLength
-        objectID: 22
-        shapeID: 16
-      presetExport: 1
-      presetExportValue: 1
-    - name: CheekSizePlus
-      fullName: CheekSize.SFB_BS_CheekSizePlus
-      isMinus: 0
-      isPlus: 1
-      inspectorID: 11
-      id: 15
-      minValue: -80
-      maxValue: 100
-      value: -11
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 1
-      blendMatches:
-      - name: CheekSize1.SFB_BSM_Female_CheekSizePlus
-        objectID: 22
-        shapeID: 8
-      presetExport: 1
-      presetExportValue: 1
-    - name: CheekSizeMinus
-      fullName: CheekSize.SFB_BS_CheekSizeMinus
-      isMinus: 1
-      isPlus: 0
-      inspectorID: 0
-      id: 16
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches:
-      - name: CheekSize1.SFB_BSM_Female_CheekSizeMinus
-        objectID: 22
-        shapeID: 9
-      presetExport: 1
-      presetExportValue: 1
-    - name: BrowDepthPlus
-      fullName: BrowDepth.SFB_BS_BrowDepthPlus
-      isMinus: 0
-      isPlus: 1
-      inspectorID: 12
-      id: 17
-      minValue: -100
-      maxValue: 100
-      value: 23
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 1
-      blendMatches:
-      - name: BrowDepth1.SFB_BSM_Female_BrowDepthPlus
-        objectID: 22
-        shapeID: 10
-      presetExport: 1
-      presetExportValue: 1
-    - name: BrowDepthMinus
-      fullName: BrowDepth.SFB_BS_BrowDepthMinus
-      isMinus: 1
-      isPlus: 0
-      inspectorID: 0
-      id: 18
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches:
-      - name: BrowDepth1.SFB_BSM_Female_BrowDepthMinus
-        objectID: 22
-        shapeID: 11
-      presetExport: 1
-      presetExportValue: 1
-    - name: NoseBumpSizePlus
-      fullName: NoseBumpSize.SFB_BS_NoseBumpSizePlus
-      isMinus: 0
-      isPlus: 1
-      inspectorID: 13
-      id: 19
-      minValue: -43
-      maxValue: 36
-      value: -8
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 1
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: NoseBumpSizeMinus
-      fullName: NoseBumpSize.SFB_BS_NoseBumpSizeMinus
-      isMinus: 1
-      isPlus: 0
-      inspectorID: 0
-      id: 20
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: NoseFleshSizePlus
-      fullName: NoseFleshSize.SFB_BS_NoseFleshSizePlus
-      isMinus: 0
-      isPlus: 1
-      inspectorID: 14
-      id: 21
-      minValue: -35
-      maxValue: 67
-      value: 53
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 1
-      blendMatches:
-      - name: NoseFleshSize1.SFB_BSM_Female_NoseFleshSizePlus
-        objectID: 22
-        shapeID: 14
-      presetExport: 1
-      presetExportValue: 1
-    - name: NoseFleshSizeMinus
-      fullName: NoseFleshSize.SFB_BS_NoseFleshSizeMinus
-      isMinus: 1
-      isPlus: 0
-      inspectorID: 0
-      id: 22
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches:
-      - name: NoseFleshSize1.SFB_BSM_Female_NoseFleshSizeMinus
-        objectID: 22
-        shapeID: 15
-      presetExport: 1
-      presetExportValue: 1
-    - name: NoseLengthPlus
-      fullName: NoseLength.SFB_BS_NoseLengthPlus
-      isMinus: 0
-      isPlus: 1
-      inspectorID: 15
-      id: 23
-      minValue: -49
-      maxValue: 44
-      value: -21
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 1
-      blendMatches:
-      - name: NoseLength1.SFB_BSM_Female_NoseLengthPlus
-        objectID: 22
-        shapeID: 19
-      presetExport: 1
-      presetExportValue: 1
-    - name: NoseLengthMinus
-      fullName: NoseLength.SFB_BS_NoseLengthMinus
-      isMinus: 1
-      isPlus: 0
-      inspectorID: 0
-      id: 24
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches:
-      - name: NoseLength1.SFB_BSM_Female_NoseLengthMinus
-        objectID: 22
-        shapeID: 20
-      presetExport: 1
-      presetExportValue: 1
-    - name: NoseSizeMinus
-      fullName: NoseSize.SFB_BS_NoseSizeMinus
-      isMinus: 1
-      isPlus: 0
-      inspectorID: 0
-      id: 25
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches:
-      - name: NoseSize1.SFB_BSM_Female_NoseSizeMinus
-        objectID: 22
-        shapeID: 22
-      presetExport: 1
-      presetExportValue: 1
-    - name: NoseSizePlus
-      fullName: NoseSize.SFB_BS_NoseSizePlus
-      isMinus: 0
-      isPlus: 1
-      inspectorID: 16
-      id: 26
-      minValue: -33
-      maxValue: 36
-      value: -12
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 1
-      blendMatches:
-      - name: NoseSize1.SFB_BSM_Female_NoseSizePlus
-        objectID: 22
-        shapeID: 21
-      presetExport: 1
-      presetExportValue: 1
-    - name: ButtSize
-      fullName: ButtSize.SFB_BS_ButtSize
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 17
-      id: 27
-      minValue: 0
-      maxValue: 95
-      value: 6
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 1
-      blendMatches:
-      - name: ButtSize5.SFB_BSM_Belt_ButtSize
-        objectID: 0
-        shapeID: 0
-      - name: ButtSize7.SFB_BSM_Cloth1F_ButtSize
-        objectID: 3
-        shapeID: 4
-      - name: ButtSize6.SFB_BSM_Cloth1M_ButtSize
-        objectID: 4
-        shapeID: 0
-      - name: ButtSize3.SFB_BSM_Cloth2F_ButtSize
-        objectID: 5
-        shapeID: 4
-      - name: ButtSize2.SFB_BSM_Cloth2M_ButtSize
-        objectID: 6
-        shapeID: 0
-      - name: ButtSize4.SFB_BSM_Skirt_ButtSize
-        objectID: 21
-        shapeID: 0
-      - name: ButtSize1.SFB_BSM_Female_ButtSize
-        objectID: 22
-        shapeID: 35
-      presetExport: 1
-      presetExportValue: 1
-    - name: LegMusclesPlus
-      fullName: LegMuscles.SFB_BS_LegMusclesPlus
-      isMinus: 0
-      isPlus: 1
-      inspectorID: 18
-      id: 28
-      minValue: -52
-      maxValue: 36
-      value: -50
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 1
-      blendMatches:
-      - name: LegMuscles2.SFB_BSM_Belt_LegMusclesPlus
-        objectID: 0
-        shapeID: 1
-      - name: LegMuscles6.SFB_BSM_Cloth1F_LegMusclesPlus
-        objectID: 3
-        shapeID: 5
-      - name: LegMuscles7.SFB_BSM_Cloth1M_LegMusclesPlus
-        objectID: 4
-        shapeID: 1
-      - name: LegMuscles5.SFB_BSM_Cloth2M_LegMusclesPlus
-        objectID: 5
-        shapeID: 5
-      - name: LegMuscles4.SFB_BSM_Cloth2F_LegMusclesPlus
-        objectID: 6
-        shapeID: 1
-      - name: LegMuscles8.SFB_BSM_KneeR_LegMusclesPlus
-        objectID: 11
-        shapeID: 0
-      - name: LegMuscles9.SFB_BSM_KneeL_LegMusclesPlus
-        objectID: 12
-        shapeID: 0
-      - name: LegMuscles13.SFB_BSM_ShoeR_LegMusclesPlus
-        objectID: 15
-        shapeID: 0
-      - name: LegMuscles11.SFB_BSM_ShoeLArm_LegMusclesPlus
-        objectID: 16
-        shapeID: 0
-      - name: LegMuscles12.SFB_BSM_ShoeL_LegMusclesPlus
-        objectID: 17
-        shapeID: 0
-      - name: LegMuscles10.SFB_BSM_ShoeRArm_LegMusclesPlus
-        objectID: 18
-        shapeID: 0
-      - name: LegMuscles3.SFB_BSM_Skirt_LegMusclesPlus
-        objectID: 21
-        shapeID: 1
-      - name: LegMuscles1.SFB_BSM_Female_LegMusclesPlus
-        objectID: 22
-        shapeID: 2
-      presetExport: 1
-      presetExportValue: 1
-    - name: LegMusclesMinus
-      fullName: LegMuscles.SFB_BS_LegMusclesMinus
-      isMinus: 1
-      isPlus: 0
-      inspectorID: 0
-      id: 29
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches:
-      - name: LegMuscles2.SFB_BSM_Belt_LegMusclesMinus
-        objectID: 0
-        shapeID: 2
-      - name: LegMuscles6.SFB_BSM_Cloth1F_LegMusclesMinus
-        objectID: 3
-        shapeID: 6
-      - name: LegMuscles7.SFB_BSM_Cloth1M_LegMusclesMinus
-        objectID: 4
-        shapeID: 2
-      - name: LegMuscles5.SFB_BSM_Cloth2M_LegMusclesMinus
-        objectID: 5
-        shapeID: 6
-      - name: LegMuscles4.SFB_BSM_Cloth2F_LegMusclesMinus
-        objectID: 6
-        shapeID: 2
-      - name: LegMuscles8.SFB_BSM_KneeR_LegMusclesMinus
-        objectID: 11
-        shapeID: 1
-      - name: LegMuscles9.SFB_BSM_KneeL_LegMusclesMinus
-        objectID: 12
-        shapeID: 1
-      - name: LegMuscles13.SFB_BSM_ShoeR_LegMusclesMinus
-        objectID: 15
-        shapeID: 1
-      - name: LegMuscles11.SFB_BSM_ShoeLArm_LegMusclesMinus
-        objectID: 16
-        shapeID: 1
-      - name: LegMuscles12.SFB_BSM_ShoeL_LegMusclesMinus
-        objectID: 17
-        shapeID: 1
-      - name: LegMuscles10.SFB_BSM_ShoeRArm_LegMusclesMinus
-        objectID: 18
-        shapeID: 1
-      - name: LegMuscles3.SFB_BSM_Skirt_LegMusclesMinus
-        objectID: 21
-        shapeID: 2
-      - name: LegMuscles1.SFB_BSM_Female_LegMusclesMinus
-        objectID: 22
-        shapeID: 3
-      presetExport: 1
-      presetExportValue: 1
-    - name: TeethLengthMinus
-      fullName: TeethLength.SFB_BS_TeethLengthMinus
-      isMinus: 1
-      isPlus: 0
-      inspectorID: 0
-      id: 30
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches:
-      - name: TeethLength1.SFB_BSM_Female_TeethLengthMinus
-        objectID: 22
-        shapeID: 6
-      presetExport: 1
-      presetExportValue: 1
-    - name: TeethLengthPlus
-      fullName: TeethLength.SFB_BS_TeethLengthPlus
-      isMinus: 0
-      isPlus: 1
-      inspectorID: 19
-      id: 31
-      minValue: -100
-      maxValue: 100
-      value: -59
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 1
-      blendMatches:
-      - name: TeethLength1.SFB_BSM_Female_TeethLengthPlus
-        objectID: 22
-        shapeID: 7
-      presetExport: 1
-      presetExportValue: 1
-    primaryShapes: 32
-    expandedInspector: 0
-  - name: Shield007_Center
-    meshObject: {fileID: 4300000, guid: 65c1e966684874597887f93f31383d69, type: 3}
-    renderer: {fileID: 8739235070031664954}
-    blendShapes:
-    - name: CenterDepthPlus
-      fullName: SFB_BS_CenterDepthPlus
-      isMinus: 0
-      isPlus: 1
-      inspectorID: 20
-      id: 0
-      minValue: -68
-      maxValue: 60
-      value: -50
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 1
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: CenterDepthMinus
-      fullName: SFB_BS_CenterDepthMinus
-      isMinus: 1
-      isPlus: 0
-      inspectorID: 0
-      id: 1
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    primaryShapes: 2
-    expandedInspector: 0
-  - name: Sword02
-    meshObject: {fileID: 4300006, guid: 6668caaa6092a4d32b219f9ba97956d1, type: 3}
-    renderer: {fileID: 6909183932983885610}
-    blendShapes:
-    - name: BladeLength
-      fullName: SFB_BS_BladeLength
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 21
-      id: 0
-      minValue: 0
-      maxValue: 14
-      value: 12
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 1
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: TeethLengthMinus
-      fullName: SFB_BS_TeethLengthMinus
-      isMinus: 1
-      isPlus: 0
-      inspectorID: 0
-      id: 1
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches:
-      - name: TeethLength1.SFB_BSM_Female_TeethLengthMinus
-        objectID: 22
-        shapeID: 6
-      presetExport: 1
-      presetExportValue: 1
-    - name: TeethLengthPlus
-      fullName: SFB_BS_TeethLengthPlus
-      isMinus: 0
-      isPlus: 1
-      inspectorID: 22
-      id: 2
-      minValue: -64
-      maxValue: 100
-      value: 70
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 1
-      blendMatches:
-      - name: TeethLength1.SFB_BSM_Female_TeethLengthPlus
-        objectID: 22
-        shapeID: 7
-      presetExport: 1
-      presetExportValue: 1
-    - name: BladeSpikeLengthMinus
-      fullName: SFB_BS_BladeSpikeLengthMinus
-      isMinus: 1
-      isPlus: 0
-      inspectorID: 0
-      id: 3
-      minValue: 0
-      maxValue: 0
-      value: 0
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 0
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: BladeSpikeLengthPlus
-      fullName: SFB_BS_BladeSpikeLengthPlus
-      isMinus: 0
-      isPlus: 1
-      inspectorID: 23
-      id: 4
-      minValue: -64
-      maxValue: 100
-      value: 59
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 1
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    - name: CrossbarLength
-      fullName: SFB_BS_CrossbarLength
-      isMinus: 0
-      isPlus: 0
-      inspectorID: 24
-      id: 5
-      minValue: 0
-      maxValue: 88
-      value: 45
-      sliderValue: 0
-      changeDuration: 0
-      isVisible: 1
-      blendMatches: []
-      presetExport: 1
-      presetExportValue: 1
-    primaryShapes: 6
-    expandedInspector: 0
-  inspectorObjects:
-  - objectID: 22
-    shapeID: 0
-    blendShapeID: 0
-  - objectID: 22
-    shapeID: 23
-    blendShapeID: 23
-  - objectID: 22
-    shapeID: 25
-    blendShapeID: 25
-  - objectID: 23
-    shapeID: 0
-    blendShapeID: 0
-  - objectID: 23
-    shapeID: 2
-    blendShapeID: 2
-  - objectID: 23
-    shapeID: 4
-    blendShapeID: 4
-  - objectID: 23
-    shapeID: 6
-    blendShapeID: 6
-  - objectID: 23
-    shapeID: 8
-    blendShapeID: 8
-  - objectID: 23
-    shapeID: 10
-    blendShapeID: 10
-  - objectID: 23
-    shapeID: 12
-    blendShapeID: 12
-  - objectID: 23
-    shapeID: 14
-    blendShapeID: 14
-  - objectID: 23
-    shapeID: 15
-    blendShapeID: 15
-  - objectID: 23
-    shapeID: 17
-    blendShapeID: 17
-  - objectID: 23
-    shapeID: 19
-    blendShapeID: 19
-  - objectID: 23
-    shapeID: 21
-    blendShapeID: 21
-  - objectID: 23
-    shapeID: 23
-    blendShapeID: 23
-  - objectID: 23
-    shapeID: 26
-    blendShapeID: 26
-  - objectID: 23
-    shapeID: 27
-    blendShapeID: 27
-  - objectID: 23
-    shapeID: 28
-    blendShapeID: 28
-  - objectID: 23
-    shapeID: 31
-    blendShapeID: 31
-  - objectID: 24
-    shapeID: 0
-    blendShapeID: 0
-  - objectID: 25
-    shapeID: 0
-    blendShapeID: 0
-  - objectID: 25
-    shapeID: 2
-    blendShapeID: 2
-  - objectID: 25
-    shapeID: 4
-    blendShapeID: 4
-  - objectID: 25
-    shapeID: 5
-    blendShapeID: 5
-  presetObjects: []
-  showWireframe: 1
-  presetName: 
-  showPresets: 0
-  showShapes: 1
-  showData: 1
-  showScripting: 0
-  selectedShape: 0
-  globalRangeModifier: 0.5
 --- !u!114 &6255297871685565852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4045,6 +1138,7 @@ Transform:
   m_LocalRotation: {x: 0.37660274, y: 0.14477465, z: -0.3283197, w: 0.85405904}
   m_LocalPosition: {x: -0.20209366, y: 0.19683024, z: 0.09432801}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018102}
   - {fileID: 6938002865850018114}
@@ -4080,6 +1174,7 @@ Transform:
   m_LocalRotation: {x: 0.37660274, y: 0.14477465, z: -0.3283197, w: 0.85405904}
   m_LocalPosition: {x: 0.20209342, y: -0.19683075, z: -0.09432825}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018124}
   - {fileID: 6938002865850018136}
@@ -4115,6 +1210,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 1.6653345e-16, w: 1}
   m_LocalPosition: {x: 0.070739895, y: 1.5707412e-17, z: 0.0051962994}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018052}
   - {fileID: 6938002865850018054}
@@ -4161,6 +1257,7 @@ Transform:
   m_LocalRotation: {x: 0.7371339, y: 0.6161409, z: -0.09786264, w: 0.25966677}
   m_LocalPosition: {x: -0.39394045, y: -0.0989877, z: -0.0033777764}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018058}
   m_Father: {fileID: 6938002865850017934}
@@ -4192,6 +1289,7 @@ Transform:
   m_LocalRotation: {x: 0.7371339, y: 0.6161409, z: -0.09786264, w: 0.25966677}
   m_LocalPosition: {x: 0.3939421, y: 0.09898789, z: 0.0033779235}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018060}
   m_Father: {fileID: 6938002865850017922}
@@ -4224,6 +1322,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.0016925049, y: -1.0244355, z: 0.0054691313}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018056}
   m_RootOrder: 3
@@ -4239,9 +1338,12 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4253,6 +1355,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -4308,6 +1411,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.0016925049, y: -1.0244355, z: 0.0054691313}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018056}
   m_RootOrder: 4
@@ -4323,9 +1427,12 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4337,6 +1444,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -4392,6 +1500,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.0016925049, y: -1.0244355, z: 0.0054691313}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018056}
   m_RootOrder: 6
@@ -4407,9 +1516,12 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4421,6 +1533,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -4479,6 +1592,7 @@ Transform:
   m_LocalRotation: {x: 0.056195546, y: 0.015206958, z: -0.07135122, w: 0.9957509}
   m_LocalPosition: {x: 0.41437757, y: 0.009519451, z: -0.0031365796}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018170}
   m_Father: {fileID: 6938002865850018020}
@@ -4511,6 +1625,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.0016925049, y: -1.0244355, z: 0.0054691313}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018056}
   m_RootOrder: 7
@@ -4526,9 +1641,12 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4540,6 +1658,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -4599,8 +1718,9 @@ Transform:
   m_LocalRotation: {x: -0.087766305, y: -0.08626492, z: 0.129534, w: 0.9839087}
   m_LocalPosition: {x: -0.09350953, y: -0.05560962, z: -0.006658831}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8739235070017570330}
+  - {fileID: 2429544739773279142}
   m_Father: {fileID: 6938002865850018162}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4630,6 +1750,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 1.6653345e-16, w: 1}
   m_LocalPosition: {x: 0.28035423, y: 6.2251145e-17, z: 0.053634237}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018166}
   m_RootOrder: 10
@@ -4661,6 +1782,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.0016925049, y: -1.0244355, z: 0.0054691313}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018056}
   m_RootOrder: 5
@@ -4676,9 +1798,12 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4690,6 +1815,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -4743,6 +1869,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 1.110223e-16, w: 1}
   m_LocalPosition: {x: -0.0051436964, y: -3.6075467e-16, z: 0.098074056}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018050}
   m_Father: {fileID: 6938002865850018166}
@@ -4774,6 +1901,7 @@ Transform:
   m_LocalRotation: {x: 0.056195546, y: 0.015206958, z: -0.07135122, w: 0.9957509}
   m_LocalPosition: {x: -0.4143778, y: -0.0095191505, z: 0.0031363938}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018168}
   m_Father: {fileID: 6938002865850018018}
@@ -4806,6 +1934,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.0016925049, y: -1.0244355, z: 0.0054691313}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018056}
   m_RootOrder: 8
@@ -4821,9 +1950,12 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4835,6 +1967,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -4890,6 +2023,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 1.6653345e-16, w: 1}
   m_LocalPosition: {x: 0.09094802, y: 0.21356358, z: -0.061974734}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018028}
   m_RootOrder: 1
@@ -4921,6 +2055,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.0016925049, y: -1.0244355, z: 0.0054691313}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018056}
   m_RootOrder: 9
@@ -4936,9 +2071,12 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4950,6 +2088,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -5005,6 +2144,7 @@ Transform:
   m_LocalRotation: {x: -6.123234e-17, y: 1, z: 6.123234e-17, w: -3.7493994e-33}
   m_LocalPosition: {x: 0.09094833, y: -0.21356325, z: -0.06197463}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018028}
   m_RootOrder: 2
@@ -5036,6 +2176,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 3.9443044e-33, y: -1.1967092, z: -0.30467755}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018074}
   - {fileID: 6938002865850018064}
@@ -5054,9 +2195,12 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5068,6 +2212,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -5241,6 +2386,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 1.6653345e-16, w: 1}
   m_LocalPosition: {x: 0.1935765, y: 4.2982617e-17, z: 0.001916549}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018166}
   m_Father: {fileID: 6938002865850018028}
@@ -5272,6 +2418,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0.11390962, y: 0.03453779, z: 0.16727836}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018166}
   m_RootOrder: 12
@@ -5302,6 +2449,7 @@ Transform:
   m_LocalRotation: {x: 0.7071068, y: -0.7071068, z: -4.3297806e-17, w: 4.3297806e-17}
   m_LocalPosition: {x: 0.11390969, y: -0.0345378, z: 0.16727802}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018166}
   m_RootOrder: 13
@@ -5333,6 +2481,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.0016925049, y: -1.0244355, z: 0.0054691313}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018056}
   m_RootOrder: 10
@@ -5348,9 +2497,12 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5362,6 +2514,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -5420,6 +2573,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.0016925049, y: -1.0244355, z: 0.0054691313}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018056}
   m_RootOrder: 11
@@ -5435,9 +2589,12 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5449,6 +2606,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -5507,6 +2665,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.0016925049, y: -1.0244355, z: 0.0054691313}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018056}
   m_RootOrder: 12
@@ -5522,9 +2681,12 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5536,6 +2698,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -5595,6 +2758,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.0016925049, y: -1.0244355, z: 0.0054691313}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018056}
   m_RootOrder: 13
@@ -5610,9 +2774,12 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5624,6 +2791,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -5681,6 +2849,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -0, y: 1.04705, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850017990}
   - {fileID: 6938002865850018000}
@@ -5719,6 +2888,7 @@ Transform:
   m_LocalRotation: {x: -0.058968607, y: -0.042188194, z: 0.1124649, w: 0.99100685}
   m_LocalPosition: {x: 0.09897196, y: 0.060617786, z: 0.002875124}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6909183932986568206}
   m_Father: {fileID: 6938002865850018164}
@@ -5750,6 +2920,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850017960}
   m_Father: {fileID: 6938002865850018160}
@@ -5782,6 +2953,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018160}
   m_RootOrder: 2
@@ -5797,9 +2969,12 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5811,6 +2986,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -5863,6 +3039,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.0016925049, y: -1.0244355, z: 0.0054691313}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018056}
   m_RootOrder: 16
@@ -5878,9 +3055,12 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5892,6 +3072,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -5967,6 +3148,7 @@ Transform:
   m_LocalRotation: {x: -0.704585, y: -0.096771404, z: -0.09565438, w: 0.6964521}
   m_LocalPosition: {x: 0.04118431, y: 0.000536499, z: -0.18472923}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850017972}
   m_Father: {fileID: 6938002865850017960}
@@ -5998,6 +3180,7 @@ Transform:
   m_LocalRotation: {x: -0.0001873241, y: -0.00003400462, z: 0.09327393, w: 0.99564046}
   m_LocalPosition: {x: -0.1271413, y: 0, z: -1.7763568e-17}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850017974}
   m_Father: {fileID: 6938002865850017970}
@@ -6029,6 +3212,7 @@ Transform:
   m_LocalRotation: {x: 0.020973312, y: 0.0013723788, z: 0.020815654, w: 0.9995624}
   m_LocalPosition: {x: -0.12481032, y: 0, z: -1.110223e-18}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850017992}
   m_Father: {fileID: 6938002865850017972}
@@ -6061,6 +3245,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.0016925049, y: -1.0244355, z: 0.0054691313}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018056}
   m_RootOrder: 14
@@ -6076,9 +3261,12 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6090,6 +3278,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -6151,6 +3340,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 1.6653345e-16, w: 1}
   m_LocalPosition: {x: 0.09054245, y: 0.14246188, z: -0.02628695}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018040}
   m_Father: {fileID: 6938002865850018028}
@@ -6183,6 +3373,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.0016925049, y: -1.0244355, z: 0.0054691313}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018056}
   m_RootOrder: 15
@@ -6198,9 +3389,12 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6212,6 +3406,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -6272,6 +3467,7 @@ Transform:
   m_LocalRotation: {x: -6.123234e-17, y: 1, z: 6.123234e-17, w: -3.7493994e-33}
   m_LocalPosition: {x: 0.0905426, y: -0.14246175, z: -0.026286632}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018042}
   m_Father: {fileID: 6938002865850018028}
@@ -6303,6 +3499,7 @@ Transform:
   m_LocalRotation: {x: -0.2090024, y: -0.02784102, z: -0.12907423, w: 0.9689596}
   m_LocalPosition: {x: 0.05553421, y: 0.2239978, z: 0.03201561}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850017986}
   m_Father: {fileID: 6938002865850017960}
@@ -6334,6 +3531,7 @@ Transform:
   m_LocalRotation: {x: -0.59173316, y: -0.13468821, z: 0.032621834, w: 0.7941327}
   m_LocalPosition: {x: -0.14441028, y: 1.4210854e-16, z: -1.7763568e-17}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850017988}
   m_Father: {fileID: 6938002865850017984}
@@ -6365,6 +3563,7 @@ Transform:
   m_LocalRotation: {x: 0.0315068, y: 0.009453817, z: -0.108487576, w: 0.99355346}
   m_LocalPosition: {x: -0.11633339, y: -1.7763568e-17, z: -1.7763567e-16}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018008}
   m_Father: {fileID: 6938002865850017986}
@@ -6396,6 +3595,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 1.6653345e-16, w: 1}
   m_LocalPosition: {x: -0.023014298, y: 0.009683251, z: 0.19646522}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018010}
   m_Father: {fileID: 6938002865850017960}
@@ -6427,6 +3627,7 @@ Transform:
   m_LocalRotation: {x: 0.4813491, y: 0.50327015, z: -0.49603486, w: 0.5186247}
   m_LocalPosition: {x: -0.13009296, y: -3.1974422e-16, z: 1.6653344e-17}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850017974}
   m_RootOrder: 0
@@ -6457,6 +3658,7 @@ Transform:
   m_LocalRotation: {x: -0.0891803, y: -0.01138665, z: -0.12614013, w: 0.9879301}
   m_LocalPosition: {x: 0.01729309, y: 0.14044617, z: 0.16871868}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850017996}
   m_Father: {fileID: 6938002865850017960}
@@ -6488,6 +3690,7 @@ Transform:
   m_LocalRotation: {x: -0.55095446, y: -0.11867948, z: 0.034537952, w: 0.82533115}
   m_LocalPosition: {x: -0.101061784, y: -7.105427e-17, z: 3.5527136e-17}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850017998}
   m_Father: {fileID: 6938002865850017994}
@@ -6519,6 +3722,7 @@ Transform:
   m_LocalRotation: {x: 0.4095591, y: 0.4860217, z: -0.49749523, w: 0.59037507}
   m_LocalPosition: {x: -0.093719244, y: 4.440892e-18, z: 2.1316282e-16}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850017996}
   m_RootOrder: 0
@@ -6549,6 +3753,7 @@ Transform:
   m_LocalRotation: {x: 0.97480047, y: 0.0956698, z: 0.01968345, w: -0.20055898}
   m_LocalPosition: {x: 0.05015869, y: -0.22157532, z: 0.03029106}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018002}
   m_Father: {fileID: 6938002865850017960}
@@ -6580,6 +3785,7 @@ Transform:
   m_LocalRotation: {x: 0.4064218, y: 0.08689474, z: -0.013618766, w: 0.90944225}
   m_LocalPosition: {x: -0.14130282, y: -7.105427e-17, z: 1.7763568e-17}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018004}
   m_Father: {fileID: 6938002865850018000}
@@ -6611,6 +3817,7 @@ Transform:
   m_LocalRotation: {x: 0.18323459, y: 0.05918441, z: -0.08508174, w: 0.9775906}
   m_LocalPosition: {x: -0.11260047, y: 1.0658141e-16, z: 3.5527136e-17}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018006}
   m_Father: {fileID: 6938002865850018002}
@@ -6642,6 +3849,7 @@ Transform:
   m_LocalRotation: {x: 0.3750236, y: 0.56525165, z: -0.40620348, w: 0.6122473}
   m_LocalPosition: {x: -0.10846094, y: -7.105427e-17, z: -1.4210854e-16}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018004}
   m_RootOrder: 0
@@ -6672,6 +3880,7 @@ Transform:
   m_LocalRotation: {x: 0.40826452, y: 0.6160461, z: -0.37213838, w: 0.5615339}
   m_LocalPosition: {x: -0.106381394, y: -0.024471588, z: -0.006981673}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850017988}
   m_RootOrder: 0
@@ -6702,6 +3911,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 1.110223e-16, w: 1}
   m_LocalPosition: {x: -0.10316001, y: -1.7763568e-17, z: -0.034396734}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018012}
   m_Father: {fileID: 6938002865850017990}
@@ -6733,6 +3943,7 @@ Transform:
   m_LocalRotation: {x: 0.99997973, y: 0.0063682897, z: 6.084115e-17, w: -6.1621045e-17}
   m_LocalPosition: {x: -0.13454658, y: -0.00082062784, z: -0.032803167}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018014}
   m_Father: {fileID: 6938002865850018010}
@@ -6764,6 +3975,7 @@ Transform:
   m_LocalRotation: {x: 0.7025894, y: 0.7115955, z: -5.514659e-19, w: -8.659385e-17}
   m_LocalPosition: {x: -0.13782679, y: -1.1435297e-16, z: 0.033778615}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018012}
   m_RootOrder: 0
@@ -6794,6 +4006,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.0016925049, y: 0.17227364, z: 0.3101467}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018150}
   - {fileID: 6938002865850017944}
@@ -6826,6 +4039,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 1.110223e-16, w: 1}
   m_LocalPosition: {x: 0.010672651, y: 2.3698046e-18, z: 0.068062425}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850017932}
   m_RootOrder: 0
@@ -6856,6 +4070,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0.16907963, y: 0.047104873, z: 0.1423493}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018166}
   m_RootOrder: 0
@@ -6886,6 +4101,7 @@ Transform:
   m_LocalRotation: {x: 0.7071068, y: -0.7071068, z: -4.3297806e-17, w: 4.3297806e-17}
   m_LocalPosition: {x: 0.16907966, y: -0.047104873, z: 0.14234951}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018166}
   m_RootOrder: 1
@@ -6916,6 +4132,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.0016925049, y: 1.0244355, z: -0.0054691313}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018048}
   - {fileID: 6938002865850018062}
@@ -6963,6 +4180,7 @@ Transform:
   m_LocalRotation: {x: 0.018579904, y: 0.070674665, z: -0.25357428, w: 0.9645517}
   m_LocalPosition: {x: -0.19035028, y: -0.0059141396, z: 0.011587275}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018168}
   m_RootOrder: 0
@@ -6993,6 +4211,7 @@ Transform:
   m_LocalRotation: {x: 0.018579904, y: 0.070674665, z: -0.25357428, w: 0.9645517}
   m_LocalPosition: {x: 0.19034891, y: 0.005911174, z: -0.011587583}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018170}
   m_RootOrder: 0
@@ -7024,6 +4243,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.0016925049, y: -1.0244355, z: 0.0054691313}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018056}
   m_RootOrder: 1
@@ -7039,9 +4259,12 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7053,6 +4276,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -7128,6 +4352,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850017944}
   m_RootOrder: 1
@@ -7143,9 +4368,12 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7157,6 +4385,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -7236,6 +4465,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018150}
   m_RootOrder: 2
@@ -7251,9 +4481,12 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7265,6 +4498,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -7359,6 +4593,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850017944}
   m_RootOrder: 2
@@ -7374,9 +4609,12 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7388,6 +4626,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -7487,6 +4726,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018150}
   m_RootOrder: 0
@@ -7502,9 +4742,12 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7516,6 +4759,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -7598,6 +4842,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850017944}
   m_RootOrder: 0
@@ -7613,9 +4858,12 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7627,6 +4875,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -7705,6 +4954,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018150}
   m_RootOrder: 1
@@ -7720,9 +4970,12 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7734,6 +4987,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -7823,6 +5077,7 @@ Transform:
   m_LocalRotation: {x: 0.7071068, y: -0.7071068, z: 4.3297806e-17, w: -4.3297806e-17}
   m_LocalPosition: {x: 0.13708091, y: -0.11145825, z: 0.0024490184}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018082}
   m_Father: {fileID: 6938002865850018166}
@@ -7854,6 +5109,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -1.3596311e-32, z: -1.110223e-16, w: 1}
   m_LocalPosition: {x: 0.05286375, y: -0.022397999, z: 0.03059925}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018084}
   m_Father: {fileID: 6938002865850018080}
@@ -7885,6 +5141,7 @@ Transform:
   m_LocalRotation: {x: -1.2246469e-16, y: 6.162976e-33, z: 0, w: 1}
   m_LocalPosition: {x: 0.04475625, y: -0.02199525, z: 0.012798}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018082}
   m_RootOrder: 0
@@ -7915,6 +5172,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 1.6653345e-16, w: 1}
   m_LocalPosition: {x: -0.24493682, y: 0.15213074, z: 0.022045298}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018162}
   m_Father: {fileID: 6938002865850018040}
@@ -7947,6 +5205,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.0016925049, y: -1.0244355, z: 0.0054691313}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018056}
   m_RootOrder: 2
@@ -7962,9 +5221,12 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7976,6 +5238,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -8043,6 +5306,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0.13708057, y: 0.11145788, z: 0.002449348}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018092}
   m_Father: {fileID: 6938002865850018166}
@@ -8074,6 +5338,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 1.110223e-16, w: 1}
   m_LocalPosition: {x: -0.052863922, y: 0.022398029, z: -0.030599758}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018094}
   m_Father: {fileID: 6938002865850018090}
@@ -8105,6 +5370,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.044756718, y: 0.02199594, z: -0.012797957}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018092}
   m_RootOrder: 0
@@ -8135,6 +5401,7 @@ Transform:
   m_LocalRotation: {x: 0.7071068, y: -0.7071068, z: -4.3297806e-17, w: 4.3297806e-17}
   m_LocalPosition: {x: 0.15012002, y: -0.044513896, z: 0.1278467}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018166}
   m_RootOrder: 7
@@ -8165,6 +5432,7 @@ Transform:
   m_LocalRotation: {x: 0.7071068, y: -0.7071068, z: -4.3297806e-17, w: 4.3297806e-17}
   m_LocalPosition: {x: 0.14679416, y: -0.045133647, z: 0.11161976}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018166}
   m_RootOrder: 8
@@ -8195,6 +5463,7 @@ Transform:
   m_LocalRotation: {x: -0.6798176, y: 0.7326995, z: -0.013777903, w: 0.028453209}
   m_LocalPosition: {x: 0.15410824, y: -0.042164, z: 0.1157527}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018166}
   m_RootOrder: 9
@@ -8225,6 +5494,7 @@ Transform:
   m_LocalRotation: {x: -0.058968607, y: -0.042188194, z: 0.1124649, w: 0.99100685}
   m_LocalPosition: {x: -0.1355464, y: 0, z: -1.4210854e-16}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018120}
   m_Father: {fileID: 6938002865850018162}
@@ -8256,6 +5526,7 @@ Transform:
   m_LocalRotation: {x: 5.5277963e-33, y: -6.123234e-17, z: -1.110223e-16, w: 1}
   m_LocalPosition: {x: 0.24493651, y: -0.15213074, z: -0.0220455}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018164}
   m_Father: {fileID: 6938002865850018042}
@@ -8287,6 +5558,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0.15011673, y: 0.0445139, z: 0.12784648}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018166}
   m_RootOrder: 4
@@ -8317,6 +5589,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0.14679402, y: 0.045133624, z: 0.11161971}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018166}
   m_RootOrder: 5
@@ -8347,6 +5620,7 @@ Transform:
   m_LocalRotation: {x: 0.013777903, y: -0.028453209, z: -0.6798176, w: 0.7326995}
   m_LocalPosition: {x: 0.15411068, y: 0.042164043, z: 0.11575319}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018166}
   m_RootOrder: 6
@@ -8377,6 +5651,7 @@ Transform:
   m_LocalRotation: {x: -0.39905423, y: -0.047521465, z: 0.10828067, w: 0.9092704}
   m_LocalPosition: {x: 0.044816304, y: 0.00000012002145, z: -0.00000008939772}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018126}
   m_RootOrder: 0
@@ -8407,6 +5682,7 @@ Transform:
   m_LocalRotation: {x: -0.2846052, y: -0.17136414, z: 0.18002267, w: 0.92586505}
   m_LocalPosition: {x: -0.11611589, y: -0.030137796, z: -0.03664987}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018116}
   m_Father: {fileID: 6938002865850018162}
@@ -8438,6 +5714,7 @@ Transform:
   m_LocalRotation: {x: 0.24068679, y: 0.061795004, z: 0.0953656, w: 0.96392775}
   m_LocalPosition: {x: -0.06201248, y: -2.842171e-16, z: 1.02140514e-16}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018118}
   m_Father: {fileID: 6938002865850018114}
@@ -8469,6 +5746,7 @@ Transform:
   m_LocalRotation: {x: 0.078962095, y: 0.03749819, z: -0.28548244, w: 0.95438915}
   m_LocalPosition: {x: -0.04554677, y: 0, z: 7.105427e-17}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018116}
   m_RootOrder: 0
@@ -8499,6 +5777,7 @@ Transform:
   m_LocalRotation: {x: 0.06591125, y: 0.025756652, z: 0.13472427, w: 0.988353}
   m_LocalPosition: {x: -0.049610924, y: 0, z: 1.4210854e-16}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018122}
   m_Father: {fileID: 6938002865850018102}
@@ -8530,6 +5809,7 @@ Transform:
   m_LocalRotation: {x: -0.39905423, y: -0.047521465, z: 0.10828067, w: 0.9092704}
   m_LocalPosition: {x: -0.044816226, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018120}
   m_RootOrder: 0
@@ -8560,6 +5840,7 @@ Transform:
   m_LocalRotation: {x: -0.058968607, y: -0.042188194, z: 0.1124649, w: 0.99100685}
   m_LocalPosition: {x: 0.13554619, y: 0.0000006044703, z: -0.00000007385021}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018126}
   m_Father: {fileID: 6938002865850018164}
@@ -8591,6 +5872,7 @@ Transform:
   m_LocalRotation: {x: 0.06591125, y: 0.025756652, z: 0.13472427, w: 0.988353}
   m_LocalPosition: {x: 0.049610674, y: -0.00000021712816, z: 0.00000031954497}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018112}
   m_Father: {fileID: 6938002865850018124}
@@ -8622,6 +5904,7 @@ Transform:
   m_LocalRotation: {x: 0.008464711, y: 0.0022898514, z: 0.131836, w: 0.99123275}
   m_LocalPosition: {x: -0.04965585, y: 0, z: 7.105427e-17}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018130}
   m_Father: {fileID: 6938002865850018142}
@@ -8653,6 +5936,7 @@ Transform:
   m_LocalRotation: {x: 0.49681646, y: 0.22965086, z: -0.24814355, w: 0.79928637}
   m_LocalPosition: {x: -0.039890107, y: -4.2632563e-16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018128}
   m_RootOrder: 0
@@ -8683,6 +5967,7 @@ Transform:
   m_LocalRotation: {x: -0.468382, y: -0.29706645, z: 0.13978702, w: 0.8202618}
   m_LocalPosition: {x: 0.08660073, y: 0.06951899, z: 0.06066328}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018134}
   m_Father: {fileID: 6938002865850018164}
@@ -8714,6 +5999,7 @@ Transform:
   m_LocalRotation: {x: 0.008464711, y: 0.0022898514, z: 0.131836, w: 0.99123275}
   m_LocalPosition: {x: 0.049655776, y: -0.00000046513017, z: 0.0000000053936153}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018152}
   m_Father: {fileID: 6938002865850018132}
@@ -8745,6 +6031,7 @@ Transform:
   m_LocalRotation: {x: -0.2846052, y: -0.17136414, z: 0.18002267, w: 0.92586505}
   m_LocalPosition: {x: 0.11611596, y: 0.03013787, z: 0.036649995}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018138}
   m_Father: {fileID: 6938002865850018164}
@@ -8776,6 +6063,7 @@ Transform:
   m_LocalRotation: {x: 0.24068679, y: 0.061795004, z: 0.0953656, w: 0.96392775}
   m_LocalPosition: {x: 0.062012885, y: 0.00000011779618, z: -0.000000005869284}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018140}
   m_Father: {fileID: 6938002865850018136}
@@ -8807,6 +6095,7 @@ Transform:
   m_LocalRotation: {x: 0.078962095, y: 0.03749819, z: -0.28548244, w: 0.95438915}
   m_LocalPosition: {x: 0.045546435, y: 0.00000041814397, z: -0.00000012675365}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6938002865850018138}
   m_RootOrder: 0
@@ -8837,10 +6126,79 @@ Transform:
   m_LocalRotation: {x: -0.468382, y: -0.29706645, z: 0.13978702, w: 0.8202618}
   m_LocalPosition: {x: -0.08660106, y: -0.06951845, z: -0.060663484}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6938002865850018128}
   m_Father: {fileID: 6938002865850018162}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7737765171140183041
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 3187953607858496748, guid: 9677f7cd2d1b8469db9d0d7c7680a2c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 6159267412418739926}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2429544739773279142}
+  m_Layer: 0
+  m_Name: 'Goblin Shield (Missing Prefab with guid: 9677f7cd2d1b8469db9d0d7c7680a2c7)'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2429544739773279142
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 3187953607858403530, guid: 9677f7cd2d1b8469db9d0d7c7680a2c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 6159267412418739926}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7737765171140183041}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8739235070017570330}
+  - {fileID: 7329697065635231445}
+  m_Father: {fileID: 6938002865850017926}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8610991546687562381
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 9223372036854775807, guid: 9677f7cd2d1b8469db9d0d7c7680a2c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 6159267412418739926}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8739235070017570330}
+  m_Layer: 0
+  m_Name: Placeholder for referenced Transform in Prefab instance (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8739235070017570330
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 3187953607858403532, guid: 9677f7cd2d1b8469db9d0d7c7680a2c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 6159267412418739926}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8610991546687562381}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2429544739773279142}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &4853594058549183448
 PrefabInstance:
@@ -8853,6 +6211,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Goblin Sword
+      objectReference: {fileID: 0}
+    - target: {fileID: 2069742929920224726, guid: 6de603eefc108483abfb7377d645e132,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2069742929920224726, guid: 6de603eefc108483abfb7377d645e132,
         type: 3}
@@ -8871,6 +6234,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2069742929920224726, guid: 6de603eefc108483abfb7377d645e132,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.21470654
+      objectReference: {fileID: 0}
+    - target: {fileID: 2069742929920224726, guid: 6de603eefc108483abfb7377d645e132,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0.7598616
       objectReference: {fileID: 0}
@@ -8883,16 +6251,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.27136222
-      objectReference: {fileID: 0}
-    - target: {fileID: 2069742929920224726, guid: 6de603eefc108483abfb7377d645e132,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.21470654
-      objectReference: {fileID: 0}
-    - target: {fileID: 2069742929920224726, guid: 6de603eefc108483abfb7377d645e132,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2069742929920224726, guid: 6de603eefc108483abfb7377d645e132,
         type: 3}
@@ -8916,18 +6274,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6de603eefc108483abfb7377d645e132, type: 3}
---- !u!4 &6909183932986568206 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2069742929920224726, guid: 6de603eefc108483abfb7377d645e132,
-    type: 3}
-  m_PrefabInstance: {fileID: 4853594058549183448}
-  m_PrefabAsset: {fileID: 0}
---- !u!137 &6909183932983885610 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2069742929925274866, guid: 6de603eefc108483abfb7377d645e132,
-    type: 3}
-  m_PrefabInstance: {fileID: 4853594058549183448}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6159267412418739926
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8935,10 +6281,35 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6938002865850017926}
     m_Modifications:
-    - target: {fileID: 3187953607858496748, guid: 9677f7cd2d1b8469db9d0d7c7680a2c7,
+    - target: {fileID: 3187953607844833772, guid: 9677f7cd2d1b8469db9d0d7c7680a2c7,
         type: 3}
-      propertyPath: m_Name
-      value: Goblin Shield
+      propertyPath: m_BlendShapeWeights.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3187953607858403530, guid: 9677f7cd2d1b8469db9d0d7c7680a2c7,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.3474369
+      objectReference: {fileID: 0}
+    - target: {fileID: 3187953607858403530, guid: 9677f7cd2d1b8469db9d0d7c7680a2c7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.0001
+      objectReference: {fileID: 0}
+    - target: {fileID: 3187953607858403530, guid: 9677f7cd2d1b8469db9d0d7c7680a2c7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0154
+      objectReference: {fileID: 0}
+    - target: {fileID: 3187953607858403530, guid: 9677f7cd2d1b8469db9d0d7c7680a2c7,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.0754
+      objectReference: {fileID: 0}
+    - target: {fileID: 3187953607858403532, guid: 9677f7cd2d1b8469db9d0d7c7680a2c7,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3187953607858403532, guid: 9677f7cd2d1b8469db9d0d7c7680a2c7,
         type: 3}
@@ -8957,6 +6328,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3187953607858403532, guid: 9677f7cd2d1b8469db9d0d7c7680a2c7,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.4578188
+      objectReference: {fileID: 0}
+    - target: {fileID: 3187953607858403532, guid: 9677f7cd2d1b8469db9d0d7c7680a2c7,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: -0.886537
       objectReference: {fileID: 0}
@@ -8969,16 +6345,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.05929842
-      objectReference: {fileID: 0}
-    - target: {fileID: 3187953607858403532, guid: 9677f7cd2d1b8469db9d0d7c7680a2c7,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.4578188
-      objectReference: {fileID: 0}
-    - target: {fileID: 3187953607858403532, guid: 9677f7cd2d1b8469db9d0d7c7680a2c7,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3187953607858403532, guid: 9677f7cd2d1b8469db9d0d7c7680a2c7,
         type: 3}
@@ -8995,42 +6361,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -10.623993
       objectReference: {fileID: 0}
-    - target: {fileID: 3187953607844833772, guid: 9677f7cd2d1b8469db9d0d7c7680a2c7,
+    - target: {fileID: 3187953607858496748, guid: 9677f7cd2d1b8469db9d0d7c7680a2c7,
         type: 3}
-      propertyPath: m_BlendShapeWeights.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3187953607858403530, guid: 9677f7cd2d1b8469db9d0d7c7680a2c7,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.0001
-      objectReference: {fileID: 0}
-    - target: {fileID: 3187953607858403530, guid: 9677f7cd2d1b8469db9d0d7c7680a2c7,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.0154
-      objectReference: {fileID: 0}
-    - target: {fileID: 3187953607858403530, guid: 9677f7cd2d1b8469db9d0d7c7680a2c7,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.0754
-      objectReference: {fileID: 0}
-    - target: {fileID: 3187953607858403530, guid: 9677f7cd2d1b8469db9d0d7c7680a2c7,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.3474369
+      propertyPath: m_Name
+      value: Goblin Shield
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9677f7cd2d1b8469db9d0d7c7680a2c7, type: 3}
---- !u!137 &8739235070031664954 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 3187953607844833772, guid: 9677f7cd2d1b8469db9d0d7c7680a2c7,
-    type: 3}
-  m_PrefabInstance: {fileID: 6159267412418739926}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &8739235070017570330 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3187953607858403532, guid: 9677f7cd2d1b8469db9d0d7c7680a2c7,
-    type: 3}
-  m_PrefabInstance: {fileID: 6159267412418739926}
-  m_PrefabAsset: {fileID: 0}

@@ -11,22 +11,22 @@ namespace LostRunes.Menu
     public class MainMenuUI : RPGMenu
     {
         [Header("Main")]
-        [SerializeField] GameObject _mainPanel;
+        [SerializeField] CustomMenuPanel _mainPanel;
 
         [Header("Multiplayer")]
-        [SerializeField] GameObject _multiplayerPanel;
+        [SerializeField] CustomMenuPanel _multiplayerPanel;
 
         [Header("World Selection")]
-        [SerializeField] GameObject _worldSelectionPanel;
+        [SerializeField] CustomMenuPanel _worldSelectionPanel;
 
         [Header("World Name")]
-        [SerializeField] GameObject _worldNamePanel;
+        [SerializeField] CustomMenuPanel _worldNamePanel;
 
         [Header("Achievements")]
-        [SerializeField] GameObject _achievementsPanel;
+        [SerializeField] CustomMenuPanel _achievementsPanel;
 
         [Header("Credits")]
-        [SerializeField] GameObject _creditsPanel;
+        [SerializeField] CustomMenuPanel _creditsPanel;
 
         static MainMenuUI _instance;
         public static MainMenuUI Instance { get { return _instance; } }

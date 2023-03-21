@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57a9e1b7a541afa4ca3b423370679633, type: 3}
+  m_Name: FireballSpell
+  m_EditorClassIdentifier: 
+  attackRate: 3
+  range: 10
+  minDamage: 10
+  maxDamage: 30
+  criticalMultiplier: 1.5
+  criticalChance: 0.1
+  ProjectileToFire: {fileID: 4978640628789592828, guid: 2a9c7f43190fd6c468cecb85c3405c2a, type: 3}
+  ProjectileSpeed: 8

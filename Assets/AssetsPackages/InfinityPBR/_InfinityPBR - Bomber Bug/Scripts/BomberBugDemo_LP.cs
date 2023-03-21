@@ -63,7 +63,7 @@ public class BomberBugDemo_LP : MonoBehaviour
 
     public void ToggleCanvas()
     {
-        canvas.SetActive(!canvas.active);
+        canvas.SetActive(!canvas.activeSelf);
     }
 
     public void Default()

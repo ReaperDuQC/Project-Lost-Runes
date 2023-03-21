@@ -62,6 +62,8 @@ namespace FIMSpace.FTail
 
         [Tooltip("Smoothing motion values change over time style to be applied for 'Reaction Speed' and 'Rotation Relevancy' parameters")]
         public EAnimationStyle SmoothingStyle = EAnimationStyle.Accelerating;
+        [Tooltip("Slowmo or speedup tail animation reaction")]
+        public float TimeScale = 1f;
 
         [Tooltip("Delta time type to be used by algorithm")]
         public EFDeltaType DeltaType = EFDeltaType.SafeDelta;

@@ -12,14 +12,15 @@ namespace LostRunes
         [Header("Option")]
         [SerializeField] OptionMenuUI _optionMenu;
         public OptionMenuUI OptionMenuUI { get { return _optionMenu; } }
+        [SerializeField] CustomMenuPanel _optionPanel;
 
         [Header("Audio Components")]
         [SerializeField] BackgroundMusicPlayer _backgroundMusicPlayer;
         [SerializeField] MenuNavigationSound _menuNavigationSound;
 
-        protected GameObject _basePanel;
-        [SerializeField] protected GameObject _activePanel;
-        [SerializeField] protected GameObject _previousPanel;
+        protected CustomMenuPanel _basePanel;
+        [SerializeField] protected CustomMenuPanel _activePanel;
+        [SerializeField] protected CustomMenuPanel _previousPanel;
 
         public virtual void Initialize()
         {
@@ -38,7 +39,7 @@ namespace LostRunes
             {
                 _optionMenu.SaveSettings();
             }
-            SetPanelActive(_optionMenu.gameObject, active);
+            SetPanelActive(_optionPanel, active);
         }
         void PlayBackgroundMusic()
         {
@@ -62,23 +63,22 @@ namespace LostRunes
         {
             _optionMenu.LoadOptionData();
         }
-        protected void SetPanelActive(GameObject panel, bool active)
+        protected void SetPanelActive(CustomMenuPanel panel, bool active)
         {
-            if (panel == null) { return; }
-
             if (active)
             {
                 _previousPanel = _activePanel;
-                _previousPanel.SetActive(false);
+                _previousPanel?.gameObject.SetActive(false);
                 _activePanel = panel;
             }
             else
             {
                 _activePanel = (_activePanel == _previousPanel) ? _basePanel : _previousPanel;
-                _activePanel.SetActive(true);
+                _activePanel?.gameObject.SetActive(true);
             }
 
-            panel.SetActive(active);
+            panel?.gameObject.SetActive(active);
+            _activePanel?.SelectDefaultSelectable();
         }
     }      
 }

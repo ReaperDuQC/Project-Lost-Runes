@@ -868,6 +868,45 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "CharacterCreator",
+            "id": "6b1ac0c7-99ae-4b1d-81ed-66c0ad07aec0",
+            "actions": [
+                {
+                    "name": "Camera",
+                    "type": "PassThrough",
+                    "id": "4802881c-397f-4c0d-8628-1cbbbaa7a055",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "92c2ed72-2fa7-466e-80e2-4c90e8d45040",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse & Keyboard",
+                    "action": "Camera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3c41f73e-72b7-4606-a4e2-ecdd0a740cc2",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Camera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

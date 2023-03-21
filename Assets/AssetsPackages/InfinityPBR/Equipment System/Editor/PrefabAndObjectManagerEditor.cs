@@ -970,11 +970,11 @@ namespace InfinityPBR
                 if (oldTransformObject != groupObject.parentTransform)
                 {
 
-                    if (!groupObject.parentTransform.IsChildOf(Manager.thisTransform))
+                    if (!groupObject.parentTransform.IsChildOf(Manager.ThisTransform))
                     {
                         groupObject.parentTransform = oldTransformObject;
                         Debug.LogError("Error: Transform must be the parent transform or a child of " +
-                                       Manager.thisTransform.name);
+                                       Manager.ThisTransform.name);
                     }
                     else
                     {
@@ -1322,7 +1322,7 @@ namespace InfinityPBR
         private void CheckOptionsAreSet(PrefabGroup group, GroupObject groupObject)
         {
             if (groupObject.parentTransform == null)
-                groupObject.parentTransform = Manager.thisTransform;
+                groupObject.parentTransform = Manager.ThisTransform;
         }
         
         private void RelinkObjects()

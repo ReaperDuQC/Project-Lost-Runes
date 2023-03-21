@@ -1,22 +1,29 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace LostRunes
 {
     public class GameMenu : RPGMenu
     {
         [Header("Menu")]
-        [SerializeField] GameObject _menuPanel;
+        [SerializeField] CustomMenuPanel _menuPanel;
 
         [Header("Equipment")]
-        [SerializeField] GameObject _equipmentPanel;
+        [SerializeField] CustomMenuPanel _equipmentPanel;
 
         [Header("Inventory")]
-        [SerializeField] GameObject _inventoryPanel;
+        [SerializeField] CustomMenuPanel _inventoryPanel;
 
         [Header("Quit")]
-        [SerializeField] GameObject _quitPanel;
+        [SerializeField] CustomMenuPanel _quitPanel;
+        [Header("Cursor")]
+        [SerializeField] UICursor _cursor;
+        [SerializeField] GameObject _playerUI;
 
         PlayerControls _playerControls;
+        bool _interactable = false;
 
         private void Start()
         {
@@ -27,9 +34,39 @@ namespace LostRunes
             if(_playerControls == null)
             {
                 _playerControls = new PlayerControls();
-               // _playerControls.PlayerActions.Start.performed += i => CloseMenu();
+               _playerControls.PlayerActions.Start.performed += CloseMenu;
             }
             _playerControls.Enable();
+        }
+
+        private void CloseMenu(InputAction.CallbackContext context)
+        {
+            if (context.performed && _interactable)
+            {
+                bool show = true;
+                if (_activePanel == _menuPanel)
+                {
+                    show = false;
+                    SetMenuPanelActive(false);
+                    _activePanel = null;
+                }
+                else if(_activePanel == null) 
+                {
+                    SetMenuPanelActive(true);
+                }
+                else
+                {
+                    SetPanelActive(_activePanel, false);
+                }
+                _playerUI.SetActive(_activePanel == null);
+                _cursor.ShowCursor(show);
+            }
+        }
+        public void EnableMenuInteraction(bool interactable)
+        {
+            _interactable = interactable;
+            _cursor.ShowCursor(false);
+            _playerUI.SetActive(true);
         }
         private void OnDisable()
         {
@@ -38,8 +75,8 @@ namespace LostRunes
         public override void Initialize()
         {
             base.Initialize();
-            _activePanel = _menuPanel;
-            _basePanel = _activePanel;
+            _activePanel = null;
+            _basePanel = _menuPanel;
         }
         public void SetMenuPanelActive(bool active)
         {

@@ -22,7 +22,7 @@ namespace FIMSpace.FTail
         /// <summary> Smoothing position for _tc_bone with lerp divide logics changing _tc_smoothPos variable in iteration towards _tc_targetPos </summary>
         Vector3 TailCalculations_SmoothPositionLerp(Vector3 from, Vector3 to, float speed)
         {
-            return Vector3.LerpUnclamped(from, to, secPeriodDelta * speed);
+            return Vector3.Lerp(from, to, secPeriodDelta * speed);
         }
 
         /// <summary> Smoothing position for _tc_bone with smooth damp method changing _tc_smoothPos variable in iteration towards _tc_targetPos </summary>
@@ -59,7 +59,7 @@ namespace FIMSpace.FTail
         /// <summary> Smoothing rotation for _tc_bone with lerp divide logics changing _tc_smoothRot variable in iteration towards _tc_targetRot </summary>
         Quaternion TailCalculations_SmoothRotationLerp(Quaternion from, Quaternion to, float speed)
         {
-            return Quaternion.LerpUnclamped(from, to, secPeriodDelta * speed);
+            return Quaternion.Lerp(from, to, secPeriodDelta * speed);
         }
 
         /// <summary> Smoothing rotation for _tc_bone with smooth damp method changing _tc_smoothRot variable in iteration towards _tc_targetRot </summary>

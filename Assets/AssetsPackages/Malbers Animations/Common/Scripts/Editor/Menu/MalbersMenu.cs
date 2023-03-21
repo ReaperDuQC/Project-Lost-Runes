@@ -9,7 +9,6 @@ namespace MalbersAnimations
         const string URPL_Shader_Path2020 = "Assets/Malbers Animations/Common/Shaders/URP_Malbers Shaders 2020.unitypackage";
         const string URPL_Shader_Path2021 = "Assets/Malbers Animations/Common/Shaders/URP_Malbers Shaders 2021.unitypackage";
         const string HRPL20_Shader_Path = "Assets/Malbers Animations/Common/Shaders/HDRP_MalbersShaders 2020.unitypackage";
-        const string HRPL22_Shader_Path = "Assets/Malbers Animations/Common/Shaders/HDRP_MalbersShaders 2022.unitypackage";
 
 
         [MenuItem("Tools/Malbers Animations/Malbers URP Shaders [Unity 2020]", false, 1)]
@@ -17,17 +16,14 @@ namespace MalbersAnimations
 
 
 
-        [MenuItem("Tools/Malbers Animations/Malbers URP Shaders [Unity 2021+]", false, 1)]
+        [MenuItem("Tools/Malbers Animations/Malbers URP Shaders [Unity 2021]", false, 1)]
         public static void UpgradeMaterialsURPL2021() => AssetDatabase.ImportPackage(URPL_Shader_Path2021, true);
 
 
 
-        [MenuItem("Tools/Malbers Animations/Malbers HDRP Shaders [Unity 2020+]", false, 1)]
+        [MenuItem("Tools/Malbers Animations/Malbers HDRP Shaders", false, 1)]
         public static void UpgradeMaterialsHRPL2020() => AssetDatabase.ImportPackage(HRPL20_Shader_Path, true);
 
-
-        [MenuItem("Tools/Malbers Animations/Malbers HDRP Shaders [Unity 2022+]", false, 1)]
-        public static void UpgradeMaterialsHRPL2022() => AssetDatabase.ImportPackage(HRPL22_Shader_Path, true);
 
 
         [MenuItem("Tools/Malbers Animations/Create Test Scene", false, 100)]

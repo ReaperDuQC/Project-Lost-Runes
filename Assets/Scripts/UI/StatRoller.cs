@@ -194,9 +194,9 @@ namespace LostRunes
 
             return _highStatSound;
         }
-        public void SaveStats()
+        public CharacterStatsData SaveStats()
         {
-
+            return new CharacterStatsData(_statLevels);
         }
     }
 }

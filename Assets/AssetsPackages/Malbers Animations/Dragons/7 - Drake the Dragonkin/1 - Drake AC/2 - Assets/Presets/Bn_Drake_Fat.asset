@@ -1,0 +1,468 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9752e66000c12874890fb0ab6333c4c1, type: 3}
+  m_Name: Bn_Drake_Fat
+  m_EditorClassIdentifier: 
+  BlendTime:
+    UseConstant: 1
+    ConstantValue: 1
+    Variable: {fileID: 0}
+  BlendCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.07660033
+    - serializedVersion: 3
+      time: 0.75342345
+      value: 1.0727584
+      inSlope: 0.93685097
+      outSlope: 0.93685097
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.10307983
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  positions: 0
+  scales: 1
+  Bones:
+  - name: Root
+    Position: {x: -9.86, y: 0, z: 0}
+    Scale: {x: 1.2, y: 1.2, z: 1.2}
+  - name: CG
+    Position: {x: 0.00062073994, y: 1.2751741, z: 0.090907454}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: Pelvis
+    Position: {x: -0, y: 0, z: 0}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Thigh
+    Position: {x: 0.00000022888183, y: 0.00000028610228, z: 0.17383613}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Calf
+    Position: {x: -0.66135633, y: 0, z: 0}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L HorseLink
+    Position: {x: -0.3742194, y: 0, z: -0.000000057220458}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Foot
+    Position: {x: -0.24647652, y: 0.000000019073486, z: 0}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Toe0
+    Position: {x: -0.11483576, y: 0.10177167, z: -0.10862953}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Toe01
+    Position: {x: -0.14849743, y: 0, z: 0.000000019073486}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Toe1
+    Position: {x: -0.11483578, y: 0.1401336, z: -0.035982933}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Toe11
+    Position: {x: -0.16090629, y: 0, z: -0.000000095367426}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Toe2
+    Position: {x: -0.11483576, y: 0.15104128, z: 0.006664581}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Toe21
+    Position: {x: -0.16900942, y: 0, z: 0}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Toe3
+    Position: {x: -0.114835754, y: 0.11685763, z: 0.07951902}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Toe31
+    Position: {x: -0.16651988, y: 0, z: -0.000000019073486}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Toe4
+    Position: {x: -0.07362084, y: -0.04647845, z: 0.07387972}
+    Scale: {x: 1, y: 1, z: 1.000001}
+  - name: L Toe41
+    Position: {x: -0.11277986, y: 0, z: 0}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Thigh
+    Position: {x: -0.00000022888183, y: -0.00000018119812, z: -0.17383613}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Calf
+    Position: {x: -0.6613565, y: 0, z: -0.000000019073486}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R HorseLink
+    Position: {x: -0.37421942, y: 0.000000038146972, z: -0.000000019073486}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Foot
+    Position: {x: -0.24647646, y: 0, z: 0}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Toe0
+    Position: {x: -0.11483576, y: 0.10177162, z: 0.10862953}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Toe01
+    Position: {x: -0.14849746, y: 0, z: 0}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Toe1
+    Position: {x: -0.11483576, y: 0.14013354, z: 0.035982933}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Toe11
+    Position: {x: -0.16090629, y: 0, z: -0.000000019073486}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Toe2
+    Position: {x: -0.11483576, y: 0.15104124, z: -0.006664524}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Toe21
+    Position: {x: -0.16900954, y: 0, z: 0}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Toe3
+    Position: {x: -0.114835754, y: 0.11685764, z: -0.07951904}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Toe31
+    Position: {x: -0.16651992, y: 0, z: -0.000000019073486}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Toe4
+    Position: {x: -0.07362083, y: -0.04647846, z: -0.07387972}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Toe41
+    Position: {x: -0.112779856, y: 0.0000000023841857, z: 0}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: Spine
+    Position: {x: -0.07707618, y: -0.03052586, z: 0.00000018920748}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: Spine1
+    Position: {x: -0.19831482, y: -0.00016448021, z: -4.4703483e-10}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: Spine2
+    Position: {x: -0.2065654, y: -0.0003635645, z: -0.0000000010058283}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Clavicle
+    Position: {x: -0.28505522, y: -0.020497316, z: 0.011696591}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L UpperArm
+    Position: {x: -0.2946938, y: -0.0000000047683715, z: 0.00000015258789}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Forearm
+    Position: {x: -0.43090075, y: 0, z: 0}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Hand
+    Position: {x: -0.3732728, y: 0, z: -0.00000015258789}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Finger1
+    Position: {x: -0.15874237, y: -0.008008422, z: -0.07793411}
+    Scale: {x: 1, y: 1, z: 1.000001}
+  - name: L Finger11
+    Position: {x: -0.09300216, y: 0, z: 0}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Finger12
+    Position: {x: -0.0706855, y: 0, z: -0.000000057220458}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Finger2
+    Position: {x: -0.16845948, y: -0.031895295, z: -0.027621917}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Finger21
+    Position: {x: -0.114087485, y: 0, z: 0.000000019073486}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Finger22
+    Position: {x: -0.06889244, y: -0.00000015258789, z: 0}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Finger3
+    Position: {x: -0.17867424, y: -0.048468016, z: 0.03636013}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Finger31
+    Position: {x: -0.11134666, y: 0, z: 0}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Finger32
+    Position: {x: -0.05365883, y: 0, z: 0.000000019073486}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Finger4
+    Position: {x: -0.16763648, y: -0.04138336, z: 0.0885907}
+    Scale: {x: 1, y: 0.999999, z: 1.000001}
+  - name: L Finger41
+    Position: {x: -0.07854419, y: 0, z: -0.000000038146972}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Finger42
+    Position: {x: -0.06295311, y: -0.00000015258789, z: 0}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Finger0
+    Position: {x: -0.021367645, y: 0.0021333313, z: -0.0543832}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Finger01
+    Position: {x: -0.075218044, y: 0.000000076293944, z: -0.00000015258789}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Finger02
+    Position: {x: -0.07798378, y: -0.000000076293944, z: 0.00000015258789}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Wing01
+    Position: {x: -0.19782287, y: -0.1447637, z: 0.11214352}
+    Scale: {x: 0.4, y: 0.4, z: 0.4}
+  - name: L Wing02
+    Position: {x: -0.42764857, y: -0.0003361511, z: -0.000055534838}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L WingFinger_101
+    Position: {x: -0.82288146, y: -0.01472477, z: 0.0032015417}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L WingFinger_102
+    Position: {x: -0.5689709, y: -0.00030151368, z: -0.0000024414062}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L WingFinger_103
+    Position: {x: -0.40637144, y: -0.00045043943, z: 0.000005130768}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L WingFinger_201
+    Position: {x: -0.82288086, y: -0.0147339245, z: 0.0032002067}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L WingFinger_202
+    Position: {x: -0.6963805, y: -0.00042053222, z: -0.000031967164}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L WingFinger_203
+    Position: {x: -0.54385656, y: -0.0005718994, z: -0.0000048828124}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L WingFinger_301
+    Position: {x: -0.84080166, y: -0.029251212, z: -0.006165752}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L WingFinger_302
+    Position: {x: -0.7612508, y: -0.0005807495, z: -0.0000024986266}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L WingFinger_303
+    Position: {x: -0.8204521, y: -0.0006942749, z: -0.000000038146972}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L WingFinger_304
+    Position: {x: -1.033, y: -0.045, z: -0.013}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L WingFinger_401
+    Position: {x: -0.42666072, y: 0.000084686275, z: 0.000005264282}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: Neck
+    Position: {x: -0.38446608, y: -0.03479299, z: -0.00000004649162}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: Neck1
+    Position: {x: -0.13745682, y: -0.00011352539, z: -2.6077032e-10}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: Head
+    Position: {x: -0.1455133, y: 0.040163115, z: 0.00000015262513}
+    Scale: {x: 1.06, y: 1.06, z: 1.06}
+  - name: Jaw
+    Position: {x: 0.009029998, y: 0.0064318944, z: 0.000000007823109}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Lip Bottom01
+    Position: {x: -0.18115123, y: -0.022845, z: 0.062471412}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Lip Bottom02
+    Position: {x: -0.2495061, y: -0.014301757, z: 0.028373448}
+    Scale: {x: 1.3223, y: 1.3223, z: 1.3223}
+  - name: R Lip Bottom01
+    Position: {x: -0.18115123, y: -0.022844696, z: -0.06247152}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Lip Bottom02
+    Position: {x: -0.2495061, y: -0.014301605, z: -0.028373523}
+    Scale: {x: 1.3223, y: 1.3223, z: 1.3223}
+  - name: Tongue01
+    Position: {x: -0.093216516, y: -0.040188447, z: -0.0000009714812}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: Tongue02
+    Position: {x: -0.078850016, y: -0.000055694578, z: -7.4505804e-11}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Eyebrow01
+    Position: {x: -0.119055934, y: 0.16406475, z: 0.014205443}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Eyebrow02
+    Position: {x: -0.14040649, y: 0.12433861, z: 0.035980605}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Eyebrow03
+    Position: {x: -0.14389618, y: 0.06873555, z: 0.062422786}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L EyeCore
+    Position: {x: -0.08881576, y: 0.13580355, z: 0.03438464}
+    Scale: {x: 1.5647781, y: 1.5647781, z: 1.9157579}
+  - name: L Eye
+    Position: {x: -0.000000076293944, y: 0.00012802123, z: -0.000000028610229}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Lid Bottom
+    Position: {x: -0.000010375977, y: 0.00015975951, z: -0.000000019073486}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Lid Upper
+    Position: {x: 0.00001701355, y: -0.000044403074, z: 0.000000019073486}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Lip Upper01
+    Position: {x: -0.029374084, y: 0.19609466, z: 0.06456522}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: Nose
+    Position: {x: -0.06465042, y: 0.2284114, z: 0.000000057853757}
+    Scale: {x: 1.1641, y: 1.1641, z: 1.1641}
+  - name: L Lip Upper02
+    Position: {x: -0.046036433, y: 0.030334776, z: 0.03262562}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: L Nostril
+    Position: {x: -0.04278795, y: -0.010836639, z: 0.0006357031}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Lip Upper02
+    Position: {x: -0.046036508, y: 0.030335234, z: -0.032625444}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Nostril
+    Position: {x: -0.04278795, y: -0.010836639, z: 0.0006130462}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Eyebrow01
+    Position: {x: -0.11905609, y: 0.16406482, z: -0.014204529}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Eyebrow02
+    Position: {x: -0.14040649, y: 0.124338806, z: -0.03597991}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Eyebrow03
+    Position: {x: -0.14389618, y: 0.06873589, z: -0.06242243}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R EyeCore
+    Position: {x: -0.08881576, y: 0.13580374, z: -0.03438389}
+    Scale: {x: 1.5647781, y: 1.5647781, z: 1.9157579}
+  - name: R Eye
+    Position: {x: -0.000000038146972, y: 0.00012817382, z: 0.000000038146972}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Lid Bottom
+    Position: {x: -0.000010375977, y: 0.0001599121, z: -0.000000019073486}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Lid Upper
+    Position: {x: 0.000017051696, y: -0.000044250486, z: 0.000000019073486}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Lip Upper01
+    Position: {x: -0.029374084, y: 0.19609505, z: -0.06456414}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: AI Eyes
+    Position: {x: 0, y: 0, z: 0}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Clavicle
+    Position: {x: -0.28505507, y: -0.020497253, z: -0.011696708}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R UpperArm
+    Position: {x: -0.29469377, y: 0.0000000047683715, z: 0}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Forearm
+    Position: {x: -0.43090078, y: 0.000000019073486, z: 0.00000015258789}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Hand
+    Position: {x: -0.3732727, y: 0, z: 0}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Finger0
+    Position: {x: -0.021367569, y: 0.0021333313, z: 0.054383162}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Finger01
+    Position: {x: -0.075218044, y: -0.000000076293944, z: 0}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Finger02
+    Position: {x: -0.077983856, y: -0.000000076293944, z: -0.00000015258789}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Finger1
+    Position: {x: -0.1587423, y: -0.008008422, z: 0.07793411}
+    Scale: {x: 1, y: 1, z: 1.000001}
+  - name: R Finger11
+    Position: {x: -0.09300209, y: 0, z: -0.000000076293944}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Finger12
+    Position: {x: -0.070685424, y: 0, z: 0.000000038146972}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Finger2
+    Position: {x: -0.16845955, y: -0.031895448, z: 0.027621878}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Finger21
+    Position: {x: -0.11408752, y: 0, z: -0.000000009536743}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Finger22
+    Position: {x: -0.06889244, y: 0, z: 0.000000038146972}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Finger3
+    Position: {x: -0.17867424, y: -0.048468016, z: -0.03636013}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Finger31
+    Position: {x: -0.11134666, y: -0.00000030517577, z: 0}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Finger32
+    Position: {x: -0.053658903, y: 0, z: 0}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Finger4
+    Position: {x: -0.16763641, y: -0.041383665, z: -0.0885907}
+    Scale: {x: 1, y: 1, z: 1.000001}
+  - name: R Finger41
+    Position: {x: -0.07854431, y: 0, z: 0}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Finger42
+    Position: {x: -0.06295318, y: 0, z: -0.000000038146972}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R Wing01
+    Position: {x: -0.19782287, y: -0.14476311, z: -0.11214428}
+    Scale: {x: 0.4, y: 0.4, z: 0.4}
+  - name: R Wing02
+    Position: {x: -0.4276486, y: -0.0003363037, z: 0.000055494307}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R WingFinger_101
+    Position: {x: -0.82288176, y: -0.014724655, z: -0.003201618}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R WingFinger_102
+    Position: {x: -0.5689395, y: -0.00038208006, z: 0.0000028991699}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R WingFinger_103
+    Position: {x: -0.51547635, y: -0.00036285399, z: -0.000000021457671}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R WingFinger_201
+    Position: {x: -0.8228802, y: -0.014734039, z: -0.0032003021}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R WingFinger_202
+    Position: {x: -0.69637996, y: -0.00042022704, z: 0.000032043456}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R WingFinger_203
+    Position: {x: -0.54385686, y: -0.0005718994, z: 0.0000048828124}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R WingFinger_301
+    Position: {x: -0.84080166, y: -0.029251175, z: 0.0061654854}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R WingFinger_302
+    Position: {x: -0.7612507, y: -0.00058135984, z: 0.000002861023}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R WingFinger_303
+    Position: {x: -0.82045174, y: -0.0006939697, z: -0.0000002479553}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R WingFinger_304
+    Position: {x: -1.655, y: -0.574, z: -0.033}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: R WingFinger_4
+    Position: {x: -0.4266606, y: 0.000084686275, z: -0.000005264282}
+    Scale: {x: 1, y: 1, z: 1}
+  - name: Tail01
+    Position: {x: 0.050511703, y: -0.19255836, z: 0.00000048719346}
+    Scale: {x: 1.0441, y: 1.0441, z: 1.0441}
+  - name: Tail02
+    Position: {x: -0.31682563, y: -0.00025039673, z: -6.705522e-10}
+    Scale: {x: 0.92877, y: 0.92877, z: 0.92877}
+  - name: Tail03
+    Position: {x: -0.31679437, y: -0.00025230407, z: -7.45058e-10}
+    Scale: {x: 0.908067, y: 0.908067, z: 0.908067}
+  - name: Tail04
+    Position: {x: -0.31679416, y: -0.00025222776, z: -7.0780515e-10}
+    Scale: {x: 0.98, y: 0.98, z: 0.98}
+  - name: Tail05
+    Position: {x: -0.3167943, y: -0.00025238036, z: -7.0780515e-10}
+    Scale: {x: 0.93586, y: 0.93586, z: 0.93586}
+  - name: Tail06
+    Position: {x: -0.3167942, y: -0.00025230407, z: -7.0780515e-10}
+    Scale: {x: 0.90528, y: 0.90528, z: 0.90528}
+  - name: Tail07
+    Position: {x: -0.31679428, y: -0.00025222776, z: -7.45058e-10}
+    Scale: {x: 0.91, y: 0.91, z: 0.91}
+  - name: Tail08
+    Position: {x: -0.31679428, y: -0.00025215148, z: -6.705522e-10}
+    Scale: {x: 0.92586, y: 0.92586, z: 0.92586}

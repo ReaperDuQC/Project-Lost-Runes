@@ -190,5 +190,10 @@ namespace LostRunes
 #endif
             Application.Quit();
         }
+        public void ReloadScene()
+        {
+            _sceneToLoad = SceneManager.GetActiveScene().name;
+            SceneManager.LoadScene(_sceneToLoad);
+        }
     }
 }

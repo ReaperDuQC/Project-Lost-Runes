@@ -17,8 +17,6 @@ namespace LostRunes
         [SerializeField] bool _cursorVisible;
 
 
-        Camera _camera;
-
         private void Awake()
         {
             Cursor.visible = false;
@@ -26,8 +24,7 @@ namespace LostRunes
         }
         void Start()
         {
-            _camera = Camera.main;
-            _cursorGraphic.gameObject.SetActive(_cursorVisible);
+            ShowCursor(_cursorVisible);
         }
 
         // Update is called once per frame
@@ -42,6 +39,13 @@ namespace LostRunes
 
             _cursorPos = Mouse.current.position.ReadValue();
             _transform.position = _cursorPos + _offsetPos;
+        }
+        public void ShowCursor(bool show)
+        {
+            _cursorVisible = show;
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Confined;
+            _cursorGraphic.gameObject.SetActive(_cursorVisible);
         }
     }
 }

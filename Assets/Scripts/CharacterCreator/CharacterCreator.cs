@@ -5,16 +5,105 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using Steamworks.Ugc;
+using LostRunes.Multiplayer;
 //using PsychoticLab;
 
 namespace LostRunes.Menu
 {
+    [System.Serializable]
+    public class PlayerData
+    {
+        public string _name;
+
+        public CharacterStatsData _stats;
+
+        public int[] _appearanceData;
+
+        public float _hairColorR;
+        public float _hairColorG;
+        public float _hairColorB;
+        public float _hairColorA;
+
+        public float _skinColorR;
+        public float _skinColorG;
+        public float _skinColorB;
+        public float _skinColorA;
+
+        public int _gender;
+        public int _race;
+
+        public float _positionX;
+        public float _positionY;
+        public float _positionZ;
+
+        public float _rotationX;
+        public float _rotationY;
+        public float _rotationZ;
+        public float _rotationW;
+        public PlayerData() { }
+
+        public Vector3 GetPosition()
+        {
+            return new Vector3(_positionX, _positionY, _positionZ);
+        }
+        public void SetPosition(Vector3 position)
+        {
+            _positionX = position.x;
+            _positionY = position.y;
+            _positionZ = position.z;
+        }
+        public Quaternion GetRotation()
+        {
+            return new Quaternion(_rotationX, _rotationY, _rotationZ, _rotationW);
+        }
+        public void SetRotation(Quaternion rotation)
+        {
+            _rotationX = rotation.x;
+            _rotationY = rotation.y;
+            _rotationZ = rotation.z;
+            _rotationW = rotation.w;
+        }
+        public void SetSkinColor(Color color)
+        {
+            _skinColorR = color.r;
+            _skinColorG = color.g;
+            _skinColorB = color.b;
+            _skinColorA = color.a;
+        }
+        public Color GetSkinColor()
+        {
+            return new Color(_skinColorR, _skinColorG, _skinColorB, _skinColorA);
+        }
+        public void SetHairColor(Color color)
+        {
+            _hairColorR = color.r;
+            _hairColorG = color.g;
+            _hairColorB = color.b;
+            _hairColorA = color.a;
+        }
+        public Color GetHairColor()
+        {
+            return new Color(_hairColorR, _hairColorG, _hairColorB, _hairColorA);
+        }
+    }
+
+    [System.Serializable]
+    public class PlayerAtlas
+    {
+        public List<string> Players = new List<string>();
+        public PlayerAtlas() { }
+
+        public PlayerAtlas(List<string> players)
+        {
+            Players = players;
+        }
+    }
     public class CharacterCreator : MonoBehaviour
     {
-
         [Header("Character")]
         [SerializeField] GameObject _playerPrefab;
-        [SerializeField] Transform _spawnPosition;
+        [SerializeField] Transform _characterCreatorPosition;
+        [SerializeField] Transform _spawnPlayPosition;
         Transform _transform;
 
         [Header("Material")]
@@ -57,7 +146,6 @@ namespace LostRunes.Menu
         [Header("Body Art Colors")]
         public Color[] _bodyArt = { new Color(0.0509804f, 0.6745098f, 0.9843138f), new Color(0.7215686f, 0.2666667f, 0.2666667f), new Color(0.3058824f, 0.7215686f, 0.6862745f), new Color(0.9254903f, 0.882353f, 0.8509805f), new Color(0.3098039f, 0.7058824f, 0.3137255f), new Color(0.5294118f, 0.3098039f, 0.6470588f), new Color(0.8666667f, 0.7764707f, 0.254902f), new Color(0.2392157f, 0.4588236f, 0.8156863f) };
 
-
         // character object lists
         // male list
         [HideInInspector]
@@ -77,9 +165,11 @@ namespace LostRunes.Menu
         Gender _gender = Gender.Male;
         int _race;
         int[] _equipped;
+       
         int _maxParts = 0;
         List<GameObject>[,] _allObjects;
-        private string _characterName;
+
+        PlayerData _playerData = new PlayerData();
 
         public int FaceCount { get { return _allObjects[(int)_gender, (int)BodyParts.HeadAllElements].Count; } }
         public int HairCount { get { return _allObjects[(int)_gender, (int)BodyParts.All_Hair].Count; } }
@@ -90,44 +180,40 @@ namespace LostRunes.Menu
 
         private void Awake()
         {
-            if (_playerPrefab == null) return;
+            Initialize();
+        }
 
-            Vector3 position = _spawnPosition != null ? _spawnPosition.position : Vector3.zero;
-            Quaternion rotation = _spawnPosition != null ? _spawnPosition.rotation : Quaternion.identity;
+        private void SetPositionAtCharacterCreatorView()
+        {
+            Vector3 position = _characterCreatorPosition != null ? _characterCreatorPosition.position : Vector3.zero;
+            Quaternion rotation = _characterCreatorPosition != null ? _characterCreatorPosition.rotation : Quaternion.identity;
 
-            _transform = _playerPrefab.transform;
             _transform.position = position;
             _transform.rotation = rotation;
+        }
 
+        private void Initialize()
+        {
             _maxParts = Enum.GetValues(typeof(BodyParts)).Length;
+
             _equipped = new int[_maxParts];
-            _allObjects = new List<GameObject>[2, _maxParts];
-
-            //BuildLists();
-
             for (int i = 0; i < _maxParts; i++)
             {
                 _equipped[i] = -1;
             }
 
+            _transform = _playerPrefab.transform;
+
+            _allObjects = new List<GameObject>[2, _maxParts];
+
             BuildLists();
+            SetSkinColor(_whiteSkin[0]);
+            SetHairColor(_whiteHair[0]);
         }
+
         public void CreateNewCharacter()
         {
-            if (_playerPrefab == null) return;
-
-            Vector3 position = _spawnPosition != null ? _spawnPosition.position : Vector3.zero;
-            Quaternion rotation = _spawnPosition != null ? _spawnPosition.rotation : Quaternion.identity;
-
-           // _transform = _playerPrefab.transform;
-            _transform.position = position;
-            _transform.rotation = rotation;
-
-            //_maxParts = Enum.GetValues(typeof(BodyParts)).Length;
-            //_equipped = new int[_maxParts];
-            //_allObjects = new List<GameObject>[2, _maxParts];
-
-            //BuildLists();
+            SetPositionAtCharacterCreatorView();
 
             for (int i = 0; i < _maxParts; i++)
             {
@@ -136,6 +222,8 @@ namespace LostRunes.Menu
 
             //default startup as male
             _race = 1;
+            _gender = Gender.Male;
+            _playerData._race = _race;
             _equipped[(int)BodyParts.HeadAllElements] = 0;
             _equipped[(int)BodyParts.Eyebrow] = 0;
             _equipped[(int)BodyParts.Torso] = 0;
@@ -149,15 +237,41 @@ namespace LostRunes.Menu
             _equipped[(int)BodyParts.Leg_Right] = 0;
             _equipped[(int)BodyParts.Leg_Left] = 0;
 
+            _playerData._appearanceData = _equipped;
+            _playerData._gender = (int)Gender.Male;
+
+            SetSkinColor(_whiteSkin[0]);
+            SetHairColor(_whiteHair[0]);
             EnableCharacter();
+        }
+        public PlayerData GetPlayerData()
+        {
+            return _playerData;
+        }
+        public void CreateCharacter(PlayerData data)
+        {
+            CreateNewCharacter();
+
+            _equipped = data._appearanceData;
+            _gender = (Gender)data._gender;
+
+            EnableCharacter();
+            SetSkinColor(data.GetSkinColor());
+            SetHairColor(data.GetHairColor());
+
+            data.SetPosition(_spawnPlayPosition.position);
+
+            _transform.GetComponent<PlayerInitializer>().OnNetworkSpawn();
+
+            _transform.GetComponent<CharacterStats>().InitializeCharacter(data);
         }
         public void DestroyCharacter()
         {
             if(_transform == null ) return;
 
+            DisableCharacter();
             _transform.gameObject.SetActive(false);
         }
-
         private void EnableCharacter()
         {
             _transform.gameObject.SetActive(true);
@@ -174,7 +288,6 @@ namespace LostRunes.Menu
                 DeactivateItem(i, _equipped[i]);
             }
         }
-
         private void DeactivateItem(int itemType, int itemIndex)
         {
             if (_equipped[itemType] != -1 && _equipped[itemType] < _allObjects[(int)_gender, itemType].Count)
@@ -182,7 +295,6 @@ namespace LostRunes.Menu
                 _allObjects[(int)_gender, itemType][_equipped[itemType]]?.SetActive(false);
             }
         }
-
         private void ActivateItem(int itemType, int itemIndex)
         {
             if (itemIndex == -1 ) return;
@@ -208,7 +320,6 @@ namespace LostRunes.Menu
                 _allObjects[(int)_gender, itemType][_equipped[itemType]].SetActive(true);
             }
         }
-
         private void BuildLists()
         {
             //build out male lists
@@ -457,6 +568,7 @@ namespace LostRunes.Menu
                     break;
             }
             */
+            _playerData.SetSkinColor(color);
             _mat.SetColor("_Color_Skin", skinColor);
 
             _mat.SetColor("_Color_Stubble", stubbleColor);
@@ -467,6 +579,7 @@ namespace LostRunes.Menu
         }
         public void SetHairColor(/*string name,*/ Color color)
         {
+            _playerData.SetHairColor(color);
             _mat.SetColor("_Color_Hair", color);
         }
         public bool SetGender(int genderIndex/*, Color color*/)
@@ -487,16 +600,15 @@ namespace LostRunes.Menu
                 DisableCharacter();
                 _gender = newGender;
                 EnableCharacter();
+                _playerData._gender = genderIndex;
             }
 
             return _gender == Gender.Male;
         }
-
         internal void SetCharacterName(string characterName)
         {
-           _characterName = characterName;
+            _playerData._name = characterName;
         }
-
         internal Material GetCharacterMaterial()
         {
             return _mat;

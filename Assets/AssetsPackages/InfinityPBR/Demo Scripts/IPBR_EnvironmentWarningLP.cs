@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class IPBR_EnvironmentWarningLP : MonoBehaviour
 {
-    private string folderPath = "assets/PolygonDungeon";
+    private readonly string folderPath = "assets/PolygonDungeon";
     public GameObject panel;
     #if UNITY_EDITOR
 

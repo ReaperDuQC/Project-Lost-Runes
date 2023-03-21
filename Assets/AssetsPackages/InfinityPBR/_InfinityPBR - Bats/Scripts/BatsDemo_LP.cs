@@ -50,7 +50,7 @@ public class BatsDemo_LP : MonoBehaviour
         }
     }
     
-    public void startDeath(){
+    public void StartDeath(){
 															// For each bat
 			deathStartPosition = transform.position;											// Set start position
 			deathEndPosition = new Vector3(deathStartPosition.x, deathGroundHeight, deathStartPosition.z);	// Compute end position (for the demo, just the gound at y = .05 [to keep the bat fully above ground])
@@ -77,7 +77,7 @@ public class BatsDemo_LP : MonoBehaviour
 
     public void ToggleCanvas()
     {
-        canvas.SetActive(!canvas.active);
+        canvas.SetActive(!canvas.activeSelf);
     }
 
     public void Default()

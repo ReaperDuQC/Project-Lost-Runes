@@ -184,6 +184,7 @@ namespace FIMSpace.FTail
                     case EFDeltaType.FixedDeltaTime: justDelta = Time.fixedDeltaTime; break;
                 }
 
+                justDelta *= TimeScale;
                 secPeriodDelta = 1f;
                 deltaForLerps = secPeriodDelta;
                 rateDelta = 1f / (float)UpdateRate;
@@ -201,8 +202,9 @@ namespace FIMSpace.FTail
                     case EFDeltaType.FixedDeltaTime: justDelta = Time.fixedDeltaTime; break;
                 }
 
-                deltaForLerps = Mathf.Pow(secPeriodDelta, 0.1f) * 0.02f;
                 rateDelta = justDelta;
+                deltaForLerps = Mathf.Pow(secPeriodDelta, 0.1f) * 0.02f;
+                justDelta *= TimeScale;
 
                 // Helper parameter to not calculate "*60" i-times
                 secPeriodDelta = Mathf.Min(1f, justDelta * 60f);
@@ -210,6 +212,7 @@ namespace FIMSpace.FTail
                 framesToSimulate = 1;
                 previousframesToSimulate = 1;
             }
+
         }
 
 

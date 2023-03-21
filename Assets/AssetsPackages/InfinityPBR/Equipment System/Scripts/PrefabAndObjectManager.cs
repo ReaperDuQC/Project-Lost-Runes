@@ -22,7 +22,7 @@ namespace InfinityPBR
     {
         public PrefabChildEvent _event;
         
-        public List<PrefabGroup> prefabGroups = new List<PrefabGroup>();
+        public List<PrefabGroup> prefabGroups = new();
         public bool onlyOneGroupActivePerType = true;
         public bool unpackPrefabs = true;
         public bool revertToDefaultGroupByType = true;
@@ -50,22 +50,21 @@ namespace InfinityPBR
             return _wardrobePrefabManager;
         }
         
-        public Transform thisTransform => transform;
+        public Transform ThisTransform => transform;
         [HideInInspector] public bool showHelpBoxes = true;
         [HideInInspector] public bool showSetup = true;
         [HideInInspector] public bool showFullInspector = false;
         [HideInInspector] public bool showPrefabGroups = true;
         [HideInInspector] public bool instantiatePrefabsAsAdded = true;
-        [HideInInspector] public List<GameObject> equipmentObjects = new List<GameObject>();
+        [HideInInspector] public List<GameObject> equipmentObjects = new();
 
         public List<string> GroupTypeNames => GetGroupTypeNames();
-        private List<string> _groupTypeNames = new List<string>();
+        private List<string> _groupTypeNames = new();
         public bool cacheTypes = true;
 
         private void Start()
         {
-            if (_event == null)
-                _event = new PrefabChildEvent();
+            _event ??= new PrefabChildEvent();
 
             cacheTypes = true; // Set true on start, so this will trigger the first time it's called.
         }
@@ -340,7 +339,7 @@ namespace InfinityPBR
         /// <param name="type"></param>
         private void CheckForDefaultGroup(string type)
         {
-            int defaultGroupIndex = -1;
+            //int defaultGroupIndex = -1;
             for (int g = 0; g < prefabGroups.Count; g++)
             {
                 if (prefabGroups[g].groupType != type) continue; // Continue if the type is wrong
@@ -358,10 +357,10 @@ namespace InfinityPBR
             {
 #if UNITY_EDITOR
                 // July 9, 2022 - Can't do this, as it unpacks the prefab...need to fix the issue another way
-                bool wasPrefab = false;
+                //bool wasPrefab = false;
                 if (PrefabUtility.IsPartOfAnyPrefab(inGameObject))
                 {
-                    wasPrefab = true;
+                    //wasPrefab = true;
                     inGameObject.SetActive(false);
                 }
                 else
@@ -394,29 +393,29 @@ namespace InfinityPBR
             
             
             
-            int prefabs = 0;
-            int inGameObjects = 0;
+            //int prefabs = 0;
+            //int inGameObjects = 0;
             
-            for (int i = 0; i < group.groupObjects.Count; i++)
-            {
-                if (!group.groupObjects[i].objectToHandle)
-                    continue;
+            //for (int i = 0; i < group.groupObjects.Count; i++)
+            //{
+            //    if (!group.groupObjects[i].objectToHandle)
+            //        continue;
                 
-                // If render is true, then increase the count of prefabs for this group                
-                if (group.groupObjects[i].render)
-                    prefabs++;
-                else if (group.groupObjects[i].isPrefab && group.groupObjects[i].inGameObject)
-                    inGameObjects++;
-                else if (!group.groupObjects[i].isPrefab && group.groupObjects[i].objectToHandle.activeSelf)
-                    inGameObjects++;
-            }
+            //    // If render is true, then increase the count of prefabs for this group                
+            //    if (group.groupObjects[i].render)
+            //        prefabs++;
+            //    else if (group.groupObjects[i].isPrefab && group.groupObjects[i].inGameObject)
+            //        inGameObjects++;
+            //    else if (!group.groupObjects[i].isPrefab && group.groupObjects[i].objectToHandle.activeSelf)
+            //        inGameObjects++;
+            //}
 
-            if (prefabs == inGameObjects && (prefabs > 0 || group.isActive))
-                return 2;
-            if (prefabs > inGameObjects && inGameObjects > 0)
-                return 1;
+            //if (prefabs == inGameObjects && (prefabs > 0 || group.isActive))
+            //    return 2;
+            //if (prefabs > inGameObjects && inGameObjects > 0)
+            //    return 1;
 
-            return 0;
+            //return 0;
         }
 
         public int GroupIsActive(int groupIndex) => GroupIsActive(prefabGroups[groupIndex]);
@@ -426,7 +425,7 @@ namespace InfinityPBR
         {
             var newGroupObject = new GroupObject
             {
-                objectToHandle = prefab == null ? group.newPrefab : prefab, parentTransform = thisTransform, isPrefab = true
+                objectToHandle = prefab == null ? group.newPrefab : prefab, parentTransform = ThisTransform, isPrefab = true
             };
             group.groupObjects.Add(newGroupObject);
         }
@@ -569,16 +568,16 @@ namespace InfinityPBR
         public string groupType;
         public bool isActive;
 
-        [FormerlySerializedAs("prefabObjects")] public List<GroupObject> groupObjects = new List<GroupObject>();
+        [FormerlySerializedAs("prefabObjects")] public List<GroupObject> groupObjects = new();
 
         [HideInInspector] public GameObject newPrefab;
         [HideInInspector] public GameObject newGameObject;
         
         // EDITOR SCRIPT FOR SELECTING NEW EQUIPMENT OBJECTS
-        [HideInInspector] public List<GameObject> equipmentObjectObjects = new List<GameObject>();
-        [HideInInspector] public List<string> equipmentObjectObjectNames = new List<string>();
+        [HideInInspector] public List<GameObject> equipmentObjectObjects = new();
+        [HideInInspector] public List<string> equipmentObjectObjectNames = new();
         [HideInInspector] public int equipmentObjectIndex;
-        [HideInInspector] public List<string> equipmentObjectTypes = new List<string>();
+        [HideInInspector] public List<string> equipmentObjectTypes = new();
         [HideInInspector] public int equipmentObjectTypeIndex;
         [FormerlySerializedAs("excludeFromRandom")] [HideInInspector] public bool canRandomize = true;
 

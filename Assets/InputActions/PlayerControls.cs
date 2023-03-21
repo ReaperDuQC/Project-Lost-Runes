@@ -890,6 +890,45 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""CharacterCreator"",
+            ""id"": ""6b1ac0c7-99ae-4b1d-81ed-66c0ad07aec0"",
+            ""actions"": [
+                {
+                    ""name"": ""Camera"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""4802881c-397f-4c0d-8628-1cbbbaa7a055"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""92c2ed72-2fa7-466e-80e2-4c90e8d45040"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse & Keyboard"",
+                    ""action"": ""Camera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3c41f73e-72b7-4606-a4e2-ecdd0a740cc2"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Camera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -958,6 +997,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_CharacterShowRoom_Next = m_CharacterShowRoom.FindAction("Next", throwIfNotFound: true);
         m_CharacterShowRoom_Previous = m_CharacterShowRoom.FindAction("Previous", throwIfNotFound: true);
         m_CharacterShowRoom_Offset = m_CharacterShowRoom.FindAction("Offset", throwIfNotFound: true);
+        // CharacterCreator
+        m_CharacterCreator = asset.FindActionMap("CharacterCreator", throwIfNotFound: true);
+        m_CharacterCreator_Camera = m_CharacterCreator.FindAction("Camera", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1346,6 +1388,39 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         }
     }
     public CharacterShowRoomActions @CharacterShowRoom => new CharacterShowRoomActions(this);
+
+    // CharacterCreator
+    private readonly InputActionMap m_CharacterCreator;
+    private ICharacterCreatorActions m_CharacterCreatorActionsCallbackInterface;
+    private readonly InputAction m_CharacterCreator_Camera;
+    public struct CharacterCreatorActions
+    {
+        private @PlayerControls m_Wrapper;
+        public CharacterCreatorActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Camera => m_Wrapper.m_CharacterCreator_Camera;
+        public InputActionMap Get() { return m_Wrapper.m_CharacterCreator; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CharacterCreatorActions set) { return set.Get(); }
+        public void SetCallbacks(ICharacterCreatorActions instance)
+        {
+            if (m_Wrapper.m_CharacterCreatorActionsCallbackInterface != null)
+            {
+                @Camera.started -= m_Wrapper.m_CharacterCreatorActionsCallbackInterface.OnCamera;
+                @Camera.performed -= m_Wrapper.m_CharacterCreatorActionsCallbackInterface.OnCamera;
+                @Camera.canceled -= m_Wrapper.m_CharacterCreatorActionsCallbackInterface.OnCamera;
+            }
+            m_Wrapper.m_CharacterCreatorActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Camera.started += instance.OnCamera;
+                @Camera.performed += instance.OnCamera;
+                @Camera.canceled += instance.OnCamera;
+            }
+        }
+    }
+    public CharacterCreatorActions @CharacterCreator => new CharacterCreatorActions(this);
     private int m_ControllerSchemeIndex = -1;
     public InputControlScheme ControllerScheme
     {
@@ -1404,5 +1479,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnNext(InputAction.CallbackContext context);
         void OnPrevious(InputAction.CallbackContext context);
         void OnOffset(InputAction.CallbackContext context);
+    }
+    public interface ICharacterCreatorActions
+    {
+        void OnCamera(InputAction.CallbackContext context);
     }
 }

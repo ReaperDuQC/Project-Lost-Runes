@@ -43,12 +43,12 @@ namespace InfinityPBR.Demo
         private float _randomFrom;
         private float _randomSeed;
         private float _randomLerp;
-        private bool _randomWait;
-        private float _randomSeedChangeSpeed = 1f;
-        private float _randomSeedChangePeriod = 1f;
+        private readonly bool _randomWait;
+        //private readonly float _randomSeedChangeSpeed = 1f;
+        //private readonly float _randomSeedChangePeriod = 1f;
         
         // Start is called before the first frame update
-        public void Start()
+        protected virtual void Start()
         {
             Debug.Log($"Start");
             if (automateStyles) CreateStyleToggle();

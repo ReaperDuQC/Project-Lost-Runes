@@ -6,7 +6,7 @@ using UnityEngine;
 public class FlyingEyeLPDemo : MonoBehaviour
 {
     public Animator animator;
-    public Renderer renderer;
+    public Renderer _renderer;
     public Renderer renderer2;
     public GameObject[] randomObjects;
     public BlendShapesManager bsm;
@@ -26,17 +26,17 @@ public class FlyingEyeLPDemo : MonoBehaviour
 
     public void SetHue(float value)
     {
-        renderer.material.SetFloat("_Hue", value);
+        _renderer.material.SetFloat("_Hue", value);
     }
     
     public void SetSaturation(float value)
     {
-        renderer.material.SetFloat("_Saturation", value);
+        _renderer.material.SetFloat("_Saturation", value);
     }
     
     public void SetValue(float value)
     {
-        renderer.material.SetFloat("_Value", value);
+        _renderer.material.SetFloat("_Value", value);
     }
     
     public void SetHue2(float value)

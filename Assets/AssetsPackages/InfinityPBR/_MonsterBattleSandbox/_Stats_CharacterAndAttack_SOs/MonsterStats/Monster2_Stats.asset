@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c2c6a810886eff4ca139f73793723f6, type: 3}
+  m_Name: Monster2_Stats
+  m_EditorClassIdentifier: 
+  statsSetManually: 1
+  unitPrefab: {fileID: 0}
+  monsterPrefab: {fileID: 7496334091678816524, guid: 00195c6a8548e694ba7d45452bd97c41, type: 3}
+  characterName: 
+  characterSpecies: Monster #2
+  characterClass: Tank Beast
+  spawnUIColor: {r: 0.40000004, g: 0.7294118, b: 0.9960785, a: 1}
+  characterPortrait: {fileID: 21300000, guid: c22f8e2610437f446b757fb721a7bbfa, type: 3}
+  portraitOffset: {x: 28.76, y: -26.75, z: 0}
+  baseAttack: {fileID: 11400000, guid: dcc7b85ab92edcf42aea399761abce3d, type: 2}
+  specialAttack: {fileID: 0}
+  speed: 1
+  maxHealth: 300
+  currentHealth: 300
+  maxMana: 50
+  currentMana: 50
+  baseDamage: 0
+  currentDamage: 0
+  baseResistance: 0
+  currentResistance: 0
+  characterLevelUps:
+  - maxHealth: 10
+    maxMana: 10
+    baseDamage: 10
+    baseResistance: 10
+  - maxHealth: 20
+    maxMana: 20
+    baseDamage: 20
+    baseResistance: 20
+  - maxHealth: 30
+    maxMana: 30
+    baseDamage: 30
+    baseResistance: 30
+  - maxHealth: 0
+    maxMana: 0
+    baseDamage: 0
+    baseResistance: 0
+  - maxHealth: 0
+    maxMana: 0
+    baseDamage: 0
+    baseResistance: 0
