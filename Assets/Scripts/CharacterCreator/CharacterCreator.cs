@@ -1,12 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 using System;
-using Steamworks.Ugc;
 using LostRunes.Multiplayer;
-//using PsychoticLab;
 
 namespace LostRunes.Menu
 {
@@ -222,8 +217,8 @@ namespace LostRunes.Menu
 
             //default startup as male
             _race = 1;
-            _gender = Gender.Male;
             _playerData._race = _race;
+            _gender = Gender.Male;
             _equipped[(int)BodyParts.HeadAllElements] = 0;
             _equipped[(int)BodyParts.Eyebrow] = 0;
             _equipped[(int)BodyParts.Torso] = 0;
@@ -250,7 +245,10 @@ namespace LostRunes.Menu
         }
         public void CreateCharacter(PlayerData data)
         {
-            CreateNewCharacter();
+            for (int i = 0; i < _maxParts; i++)
+            {
+                _equipped[i] = -1;
+            }
 
             _equipped = data._appearanceData;
             _gender = (Gender)data._gender;
@@ -263,7 +261,7 @@ namespace LostRunes.Menu
 
             _transform.GetComponent<PlayerInitializer>().OnNetworkSpawn();
 
-            _transform.GetComponent<CharacterStats>().InitializeCharacter(data);
+            _transform.GetComponent<CharacterStats>().InitializeCharacter(data, _transform);
         }
         public void DestroyCharacter()
         {
@@ -293,6 +291,7 @@ namespace LostRunes.Menu
             if (_equipped[itemType] != -1 && _equipped[itemType] < _allObjects[(int)_gender, itemType].Count)
             {
                 _allObjects[(int)_gender, itemType][_equipped[itemType]]?.SetActive(false);
+                _equipped[itemType] = -1;
             }
         }
         private void ActivateItem(int itemType, int itemIndex)
@@ -485,52 +484,62 @@ namespace LostRunes.Menu
         #endregion
 
         #region UI Setters
-        private int HandleBoundary(int current, int max)
+        private int HandleBoundary(int current, int min,int max)
         {
-            if(current < 0)
+            if(current < min)
             {
                 current = max - 1;
             }
             else if (current >= max)
             {
-                current = 0;
+                current = min;
             }
             return current;
         }
-        public int SetHead(int index/*, string name*/)
+        public int SetHead(int index)
         {
-            index = HandleBoundary(_equipped[(int)BodyParts.HeadAllElements] + index, _allObjects[(int)_gender, (int)BodyParts.HeadAllElements].Count);
-            //if (index < _allObjects[(int)_gender, (int)BodyParts.HeadAllElements].Count)
-            {
-                ActivateItem((int)BodyParts.HeadAllElements, index);
-            }
+            index = HandleBoundary(_equipped[(int)BodyParts.HeadAllElements] + index, 0,_allObjects[(int)_gender, (int)BodyParts.HeadAllElements].Count);
+            index = Math.Max(index, 0);
+            ActivateItem((int)BodyParts.HeadAllElements, index);
+            
             return index;
         }
-        public int SetEyebrows(int index/*, string name*/)
+        public int SetEyebrows(int index)
         {
-            index = HandleBoundary(_equipped[(int)BodyParts.Eyebrow] + index, _allObjects[(int)_gender, (int)BodyParts.Eyebrow].Count);
-            //if (index < _allObjects[(int)_gender, (int)BodyParts.Eyebrow].Count)
+            index = HandleBoundary(_equipped[(int)BodyParts.Eyebrow] + index, -1,_allObjects[(int)_gender, (int)BodyParts.Eyebrow].Count);
+            if (index == -1) 
+            { 
+                DeactivateItem((int)BodyParts.Eyebrow, index); 
+            }
+            else
             {
                 ActivateItem((int)BodyParts.Eyebrow, index);
             }
+
             return index;
         }
-        public int SetHair(int index/*, string name*/)
+        public int SetHair(int index)
         {
-            index = HandleBoundary(_equipped[(int)BodyParts.All_Hair] + index, _allObjects[(int)_gender, (int)BodyParts.All_Hair].Count);
-            // index--;
-            //if (index < _allObjects[(int)_gender, (int)BodyParts.All_Hair].Count)
+            index = HandleBoundary(_equipped[(int)BodyParts.All_Hair] + index, -1,_allObjects[(int)_gender, (int)BodyParts.All_Hair].Count);
+            if (index == -1)
+            {
+                DeactivateItem((int)BodyParts.All_Hair, index);
+            }
+            else
             {
                 ActivateItem((int)BodyParts.All_Hair, index);
             }
             return index;
         }
-        public int SetFacialHair(int index/*, string name*/)
+        public int SetFacialHair(int index)
         {
             if (_gender == Gender.Female) return 0;
-            index = HandleBoundary(_equipped[(int)BodyParts.FacialHair] + index, _allObjects[(int)_gender, (int)BodyParts.FacialHair].Count);
-            //index--;
-            //if (index < _allObjects[(int)_gender, (int)BodyParts.FacialHair].Count)
+            index = HandleBoundary(_equipped[(int)BodyParts.FacialHair] + index, -1, _allObjects[(int)_gender, (int)BodyParts.FacialHair].Count);
+            if (index == -1)
+            {
+                DeactivateItem((int)BodyParts.FacialHair, index);
+            }
+            else
             {
                 ActivateItem((int)BodyParts.FacialHair, index);
             }
@@ -577,12 +586,12 @@ namespace LostRunes.Menu
 
             return _race;
         }
-        public void SetHairColor(/*string name,*/ Color color)
+        public void SetHairColor(Color color)
         {
             _playerData.SetHairColor(color);
             _mat.SetColor("_Color_Hair", color);
         }
-        public bool SetGender(int genderIndex/*, Color color*/)
+        public bool SetGender(int genderIndex)
         {
             Gender newGender;
 

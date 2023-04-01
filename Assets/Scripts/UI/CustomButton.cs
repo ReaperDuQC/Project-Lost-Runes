@@ -96,7 +96,7 @@ namespace LostRunes
 
             if (_buttonText == null) return;
 
-            _buttonText.CrossFadeColor(targetColor, instant ? 0f : colors.fadeDuration, true, true);
+            //_buttonText.CrossFadeColor(targetColor, instant ? 0f : colors.fadeDuration, true, true);
         }
     }
 }

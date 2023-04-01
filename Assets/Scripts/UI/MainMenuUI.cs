@@ -34,14 +34,6 @@ namespace LostRunes.Menu
         [SerializeField] bool _needOnline;
         private void Awake()
         {
-            if (_needOnline)
-            {
-                if (NetworkManager.Singleton == null)
-                {
-                    SceneManager.LoadScene("Intro");
-                    return;
-                }
-            }
 
             if (_instance == null)
             {

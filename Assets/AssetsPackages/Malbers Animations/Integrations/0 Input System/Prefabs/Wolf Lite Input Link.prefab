@@ -1,0 +1,459 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3023449083974595987
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 441813731, guid: a578de702f2191b4fa9cdcec1ad493c5, type: 3}
+      propertyPath: Editor_Tabs1
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 441813731, guid: a578de702f2191b4fa9cdcec1ad493c5, type: 3}
+      propertyPath: Editor_Tabs2
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1438017827249262, guid: a578de702f2191b4fa9cdcec1ad493c5, type: 3}
+      propertyPath: m_Name
+      value: Wolf Lite
+      objectReference: {fileID: 0}
+    - target: {fileID: 4417229628137580, guid: a578de702f2191b4fa9cdcec1ad493c5, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4417229628137580, guid: a578de702f2191b4fa9cdcec1ad493c5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4417229628137580, guid: a578de702f2191b4fa9cdcec1ad493c5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4417229628137580, guid: a578de702f2191b4fa9cdcec1ad493c5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4417229628137580, guid: a578de702f2191b4fa9cdcec1ad493c5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4417229628137580, guid: a578de702f2191b4fa9cdcec1ad493c5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4417229628137580, guid: a578de702f2191b4fa9cdcec1ad493c5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4417229628137580, guid: a578de702f2191b4fa9cdcec1ad493c5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4417229628137580, guid: a578de702f2191b4fa9cdcec1ad493c5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4417229628137580, guid: a578de702f2191b4fa9cdcec1ad493c5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4417229628137580, guid: a578de702f2191b4fa9cdcec1ad493c5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114515738253532648, guid: a578de702f2191b4fa9cdcec1ad493c5,
+        type: 3}
+      propertyPath: Events.Array.data[0].Response.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114392047167580918, guid: a578de702f2191b4fa9cdcec1ad493c5, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: a578de702f2191b4fa9cdcec1ad493c5, type: 3}
+--- !u!1 &3022031017110088189 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1438017827249262, guid: a578de702f2191b4fa9cdcec1ad493c5,
+    type: 3}
+  m_PrefabInstance: {fileID: 3023449083974595987}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2909534739200986911 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114222225517902476, guid: a578de702f2191b4fa9cdcec1ad493c5,
+    type: 3}
+  m_PrefabInstance: {fileID: 3023449083974595987}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3022031017110088189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ee1fbf4dd84c7d4faf7900812b348a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &841509740535345186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3022031017110088189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28890a41834da814d83616f18995198b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InputActions: {fileID: -944628639613478452, guid: f006110a172c10f4c8e1027983a87f42,
+    type: 3}
+  ActiveActionMapIndex: 1
+  ShowMapIndex: 0
+  m_MapButtons:
+  - Index: 0
+    Move: {fileID: -3191349354230456957, guid: f006110a172c10f4c8e1027983a87f42, type: 3}
+    UpDown: {fileID: 3516014182410567137, guid: f006110a172c10f4c8e1027983a87f42,
+      type: 3}
+    buttons:
+    - action: {fileID: 4487774808754929522, guid: f006110a172c10f4c8e1027983a87f42,
+        type: 3}
+      active:
+        UseConstant: 1
+        ConstantValue: 1
+        Variable: {fileID: 0}
+      ResetOnDisable:
+        UseConstant: 1
+        ConstantValue: 1
+        Variable: {fileID: 0}
+      interaction: 0
+      InputValue: 0
+      DoubleTapTime:
+        UseConstant: 1
+        ConstantValue: 0.3
+        Variable: {fileID: 0}
+      LongPressTime:
+        UseConstant: 1
+        ConstantValue: 0.5
+        Variable: {fileID: 0}
+      name: Jump
+      OnInputDown:
+        m_PersistentCalls:
+          m_Calls: []
+      OnInputUp:
+        m_PersistentCalls:
+          m_Calls: []
+      OnLongPress:
+        m_PersistentCalls:
+          m_Calls: []
+      OnDoubleTap:
+        m_PersistentCalls:
+          m_Calls: []
+      OnInputChanged:
+        m_PersistentCalls:
+          m_Calls: []
+      OnInputPressed:
+        m_PersistentCalls:
+          m_Calls: []
+      OnInputFloatValue:
+        m_PersistentCalls:
+          m_Calls: []
+    - action: {fileID: 2610944140782005787, guid: f006110a172c10f4c8e1027983a87f42,
+        type: 3}
+      active:
+        UseConstant: 1
+        ConstantValue: 1
+        Variable: {fileID: 0}
+      ResetOnDisable:
+        UseConstant: 1
+        ConstantValue: 1
+        Variable: {fileID: 0}
+      interaction: 0
+      InputValue: 0
+      DoubleTapTime:
+        UseConstant: 1
+        ConstantValue: 0.3
+        Variable: {fileID: 0}
+      LongPressTime:
+        UseConstant: 1
+        ConstantValue: 0.5
+        Variable: {fileID: 0}
+      name: Sprint
+      OnInputDown:
+        m_PersistentCalls:
+          m_Calls: []
+      OnInputUp:
+        m_PersistentCalls:
+          m_Calls: []
+      OnLongPress:
+        m_PersistentCalls:
+          m_Calls: []
+      OnDoubleTap:
+        m_PersistentCalls:
+          m_Calls: []
+      OnInputChanged:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 2909534739200986911}
+            m_TargetAssemblyTypeName: MalbersAnimations.Controller.MAnimal, Assembly-CSharp
+            m_MethodName: set_Sprint
+            m_Mode: 0
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+      OnInputPressed:
+        m_PersistentCalls:
+          m_Calls: []
+      OnInputFloatValue:
+        m_PersistentCalls:
+          m_Calls: []
+    - action: {fileID: 1140058971831734011, guid: f006110a172c10f4c8e1027983a87f42,
+        type: 3}
+      active:
+        UseConstant: 1
+        ConstantValue: 1
+        Variable: {fileID: 0}
+      ResetOnDisable:
+        UseConstant: 1
+        ConstantValue: 1
+        Variable: {fileID: 0}
+      interaction: 0
+      InputValue: 0
+      DoubleTapTime:
+        UseConstant: 1
+        ConstantValue: 0.3
+        Variable: {fileID: 0}
+      LongPressTime:
+        UseConstant: 1
+        ConstantValue: 0.5
+        Variable: {fileID: 0}
+      name: Attack1
+      OnInputDown:
+        m_PersistentCalls:
+          m_Calls: []
+      OnInputUp:
+        m_PersistentCalls:
+          m_Calls: []
+      OnLongPress:
+        m_PersistentCalls:
+          m_Calls: []
+      OnDoubleTap:
+        m_PersistentCalls:
+          m_Calls: []
+      OnInputChanged:
+        m_PersistentCalls:
+          m_Calls: []
+      OnInputPressed:
+        m_PersistentCalls:
+          m_Calls: []
+      OnInputFloatValue:
+        m_PersistentCalls:
+          m_Calls: []
+    - action: {fileID: 940361505211797540, guid: f006110a172c10f4c8e1027983a87f42,
+        type: 3}
+      active:
+        UseConstant: 1
+        ConstantValue: 1
+        Variable: {fileID: 0}
+      ResetOnDisable:
+        UseConstant: 1
+        ConstantValue: 1
+        Variable: {fileID: 0}
+      interaction: 0
+      InputValue: 0
+      DoubleTapTime:
+        UseConstant: 1
+        ConstantValue: 0.3
+        Variable: {fileID: 0}
+      LongPressTime:
+        UseConstant: 1
+        ConstantValue: 0.5
+        Variable: {fileID: 0}
+      name: Attack2
+      OnInputDown:
+        m_PersistentCalls:
+          m_Calls: []
+      OnInputUp:
+        m_PersistentCalls:
+          m_Calls: []
+      OnLongPress:
+        m_PersistentCalls:
+          m_Calls: []
+      OnDoubleTap:
+        m_PersistentCalls:
+          m_Calls: []
+      OnInputChanged:
+        m_PersistentCalls:
+          m_Calls: []
+      OnInputPressed:
+        m_PersistentCalls:
+          m_Calls: []
+      OnInputFloatValue:
+        m_PersistentCalls:
+          m_Calls: []
+    - action: {fileID: -3577234916187228403, guid: f006110a172c10f4c8e1027983a87f42,
+        type: 3}
+      active:
+        UseConstant: 1
+        ConstantValue: 1
+        Variable: {fileID: 0}
+      ResetOnDisable:
+        UseConstant: 1
+        ConstantValue: 1
+        Variable: {fileID: 0}
+      interaction: 0
+      InputValue: 0
+      DoubleTapTime:
+        UseConstant: 1
+        ConstantValue: 0.3
+        Variable: {fileID: 0}
+      LongPressTime:
+        UseConstant: 1
+        ConstantValue: 0.5
+        Variable: {fileID: 0}
+      name: Interact
+      OnInputDown:
+        m_PersistentCalls:
+          m_Calls: []
+      OnInputUp:
+        m_PersistentCalls:
+          m_Calls: []
+      OnLongPress:
+        m_PersistentCalls:
+          m_Calls: []
+      OnDoubleTap:
+        m_PersistentCalls:
+          m_Calls: []
+      OnInputChanged:
+        m_PersistentCalls:
+          m_Calls: []
+      OnInputPressed:
+        m_PersistentCalls:
+          m_Calls: []
+      OnInputFloatValue:
+        m_PersistentCalls:
+          m_Calls: []
+    - action: {fileID: -3066153943269417062, guid: f006110a172c10f4c8e1027983a87f42,
+        type: 3}
+      active:
+        UseConstant: 1
+        ConstantValue: 1
+        Variable: {fileID: 0}
+      ResetOnDisable:
+        UseConstant: 1
+        ConstantValue: 1
+        Variable: {fileID: 0}
+      interaction: 1
+      InputValue: 0
+      DoubleTapTime:
+        UseConstant: 1
+        ConstantValue: 0.3
+        Variable: {fileID: 0}
+      LongPressTime:
+        UseConstant: 1
+        ConstantValue: 0.5
+        Variable: {fileID: 0}
+      name: SpeedUp
+      OnInputDown:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 2909534739200986911}
+            m_TargetAssemblyTypeName: MalbersAnimations.Controller.MAnimal, Assembly-CSharp
+            m_MethodName: SpeedUp
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+      OnInputUp:
+        m_PersistentCalls:
+          m_Calls: []
+      OnLongPress:
+        m_PersistentCalls:
+          m_Calls: []
+      OnDoubleTap:
+        m_PersistentCalls:
+          m_Calls: []
+      OnInputChanged:
+        m_PersistentCalls:
+          m_Calls: []
+      OnInputPressed:
+        m_PersistentCalls:
+          m_Calls: []
+      OnInputFloatValue:
+        m_PersistentCalls:
+          m_Calls: []
+    - action: {fileID: 7842680351687182530, guid: f006110a172c10f4c8e1027983a87f42,
+        type: 3}
+      active:
+        UseConstant: 1
+        ConstantValue: 1
+        Variable: {fileID: 0}
+      ResetOnDisable:
+        UseConstant: 1
+        ConstantValue: 1
+        Variable: {fileID: 0}
+      interaction: 1
+      InputValue: 0
+      DoubleTapTime:
+        UseConstant: 1
+        ConstantValue: 0.3
+        Variable: {fileID: 0}
+      LongPressTime:
+        UseConstant: 1
+        ConstantValue: 0.5
+        Variable: {fileID: 0}
+      name: SpeedDown
+      OnInputDown:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 2909534739200986911}
+            m_TargetAssemblyTypeName: MalbersAnimations.Controller.MAnimal, Assembly-CSharp
+            m_MethodName: SpeedDown
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+      OnInputUp:
+        m_PersistentCalls:
+          m_Calls: []
+      OnLongPress:
+        m_PersistentCalls:
+          m_Calls: []
+      OnDoubleTap:
+        m_PersistentCalls:
+          m_Calls: []
+      OnInputChanged:
+        m_PersistentCalls:
+          m_Calls: []
+      OnInputPressed:
+        m_PersistentCalls:
+          m_Calls: []
+      OnInputFloatValue:
+        m_PersistentCalls:
+          m_Calls: []
+  - Index: 1
+    Move: {fileID: 0}
+    UpDown: {fileID: 0}
+    buttons: []
+  showInputEvents: 0
+  OnInputEnabled:
+    m_PersistentCalls:
+      m_Calls: []
+  OnInputDisabled:
+    m_PersistentCalls:
+      m_Calls: []
+  IgnoreOnPause:
+    UseConstant: 1
+    ConstantValue: 1
+    Variable: {fileID: 0}
+  debug: 0

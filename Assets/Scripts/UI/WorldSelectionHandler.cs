@@ -92,7 +92,7 @@ namespace LostRunes.Menu
             WorldData data = SaveSystem.SaveSystem.LoadWorldData(worldName);
             if(_sceneLoaderManager != null)
             {
-                _sceneLoaderManager.LoadScene();
+                //_sceneLoaderManager.LoadScene();
             }
         }
         void CreateNewButton(string worldName)
@@ -104,6 +104,7 @@ namespace LostRunes.Menu
 
             buttons[0].ButtonText.text = worldName;
             buttons[0].onClick.AddListener(new UnityAction(() => LoadWorld(worldName)));
+            buttons[0].onClick.AddListener(new UnityAction(() => GameNetworkManager.Instance.StartHost()));
 
             buttons[1].onClick.AddListener(new UnityAction(() => DeleteExistingWorld(worldName)));
         }

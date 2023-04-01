@@ -903,6 +903,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Zoom"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""09ce83b4-9cc1-4b60-9cff-94ead9cb5398"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -925,6 +934,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Controller"",
                     ""action"": ""Camera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""448e1748-17dc-4289-bf7b-858c379720ee"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse & Keyboard"",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a454a9b0-140a-43ff-8484-e62e1e0dea0c"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Zoom"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1000,6 +1031,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         // CharacterCreator
         m_CharacterCreator = asset.FindActionMap("CharacterCreator", throwIfNotFound: true);
         m_CharacterCreator_Camera = m_CharacterCreator.FindAction("Camera", throwIfNotFound: true);
+        m_CharacterCreator_Zoom = m_CharacterCreator.FindAction("Zoom", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1393,11 +1425,13 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_CharacterCreator;
     private ICharacterCreatorActions m_CharacterCreatorActionsCallbackInterface;
     private readonly InputAction m_CharacterCreator_Camera;
+    private readonly InputAction m_CharacterCreator_Zoom;
     public struct CharacterCreatorActions
     {
         private @PlayerControls m_Wrapper;
         public CharacterCreatorActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Camera => m_Wrapper.m_CharacterCreator_Camera;
+        public InputAction @Zoom => m_Wrapper.m_CharacterCreator_Zoom;
         public InputActionMap Get() { return m_Wrapper.m_CharacterCreator; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1410,6 +1444,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Camera.started -= m_Wrapper.m_CharacterCreatorActionsCallbackInterface.OnCamera;
                 @Camera.performed -= m_Wrapper.m_CharacterCreatorActionsCallbackInterface.OnCamera;
                 @Camera.canceled -= m_Wrapper.m_CharacterCreatorActionsCallbackInterface.OnCamera;
+                @Zoom.started -= m_Wrapper.m_CharacterCreatorActionsCallbackInterface.OnZoom;
+                @Zoom.performed -= m_Wrapper.m_CharacterCreatorActionsCallbackInterface.OnZoom;
+                @Zoom.canceled -= m_Wrapper.m_CharacterCreatorActionsCallbackInterface.OnZoom;
             }
             m_Wrapper.m_CharacterCreatorActionsCallbackInterface = instance;
             if (instance != null)
@@ -1417,6 +1454,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Camera.started += instance.OnCamera;
                 @Camera.performed += instance.OnCamera;
                 @Camera.canceled += instance.OnCamera;
+                @Zoom.started += instance.OnZoom;
+                @Zoom.performed += instance.OnZoom;
+                @Zoom.canceled += instance.OnZoom;
             }
         }
     }
@@ -1483,5 +1523,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     public interface ICharacterCreatorActions
     {
         void OnCamera(InputAction.CallbackContext context);
+        void OnZoom(InputAction.CallbackContext context);
     }
 }

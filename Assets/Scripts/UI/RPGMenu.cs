@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using AudioSettings = LostRunes.Menu.AudioSettings;
 
-namespace LostRunes
+namespace LostRunes.Menu
 {
     public class RPGMenu : MonoBehaviour
     {

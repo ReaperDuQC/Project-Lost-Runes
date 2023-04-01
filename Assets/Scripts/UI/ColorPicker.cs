@@ -1,14 +1,16 @@
 using Google.Protobuf.WellKnownTypes;
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 using ColorUtility = UnityEngine.ColorUtility;
 using Image = UnityEngine.UI.Image;
 using Slider = UnityEngine.UI.Slider;
 
-namespace LostRunes
+namespace LostRunes.Menu
 {
     public class ColorPicker : MonoBehaviour
     {
@@ -41,12 +43,17 @@ namespace LostRunes
         [SerializeField] Sprite _valueBackground;
 
         [Header("Preview")]
+        [SerializeField] Transform _presetsContainer;
+        [SerializeField] List<Color> _presetColors = new();
+        [SerializeField] GameObject _presetPrefab;
         [SerializeField] Image _previewImage;
         [SerializeField] string _hexCode;
         Color _initialColor;
 
         Material _baseMaterial;
         Material _saturationMat;
+
+        bool _initialized = false;
 
         // refactor to use the same set of sliders instead of a seperate set of slider
 
@@ -60,11 +67,35 @@ namespace LostRunes
             SetSliderMinMaxValue(_sliderBottom, 0f, 1f);
 
             SetColorType((int)_currentColorType);
+            CreatePresets();
+        }
+        void CreatePresets()
+        {
+            if (_presetPrefab == null) return;
+            if (_presetsContainer == null) return;
+
+            foreach(var color in _presetColors)
+            {
+                GameObject preset = Instantiate(_presetPrefab, _presetsContainer);
+
+                CustomButton button = preset.GetComponent<CustomButton>();
+                if(button != null)
+                {
+                    button.onClick.AddListener(new UnityAction(() => SetColorFromColor(color)));
+                }
+
+                Image image = preset.GetComponentInChildren<Image>();
+
+                if(image != null)
+                {
+                    image.color = color;
+                }
+            }
         }
         public void SetColorFromColor(Color color)
         {
             Color = color;
-            _initialColor = _color;
+            _initialColor = !_initialized ? _color : _initialColor;
             if (_currentColorType == ColorPickerTypes.RGB)
             {
                 UpdateSlidersFromRGB();
@@ -175,8 +206,8 @@ namespace LostRunes
         private void UpdateSlidersFromRGB()
         {
             _sliderTop.value = Color.r;
-            _sliderMiddle.value = Color.b;
-            _sliderBottom.value = Color.g;
+            _sliderMiddle.value = Color.g;
+            _sliderBottom.value = Color.b;
         }
         void UpdateSaturationMaterial() 
         {
@@ -263,7 +294,7 @@ namespace LostRunes
         {
             DisplayHexCode(Color);
 
-            _previewImage.color = Color;
+            //_previewImage.color = Color;
 
             _colorChanged?.Invoke(Color);
         }

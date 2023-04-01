@@ -58,7 +58,6 @@ namespace MalbersAnimations
     /// <summary>Redundant functions to be used all over the assets</summary>
     public static class MTools
     {
-        #region Math
 
         public static float SmoothStep(float min, float max, float value)
         {
@@ -66,21 +65,6 @@ namespace MalbersAnimations
             p = Mathf.Clamp01(p);
             return p * p * (3 - 2 * p);
         }
-
-        /// <summary> Takes a number and stores the digits on an array. E.g: 6542 = [6,5,4,2] </summary>
-        public static int[] GetDigits(int num)
-        {
-            List<int> listOfInts = new List<int>();
-            while (num > 0)
-            {
-                listOfInts.Add(num % 10);
-                num /= 10;
-            }
-            listOfInts.Reverse();
-            return listOfInts.ToArray();
-        }
-
-        #endregion
 
         /// <summary>Check if x Seconds have elapsed since the Started Time </summary>
         public static bool ElapsedTime(float StartTime, float intervalTime) => (Time.time - StartTime) >= intervalTime;

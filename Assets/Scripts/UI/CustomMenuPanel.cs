@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace LostRunes {
+namespace LostRunes.Menu
+{
     public class CustomMenuPanel : MonoBehaviour
     {
         [SerializeField] Selectable _defaultSelectable;

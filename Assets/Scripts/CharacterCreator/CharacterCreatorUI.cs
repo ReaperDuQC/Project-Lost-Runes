@@ -10,7 +10,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace LostRunes
+namespace LostRunes.Menu
 {
     public class CharacterCreatorUI : MonoBehaviour
     {
@@ -64,10 +64,12 @@ namespace LostRunes
         [SerializeField] GameObject _hairColorOptionsGroup;
         [SerializeField] ColorPicker _hairColorPicker;
 
+        [SerializeField] GameObject _cameraPreview;
+
         private void Awake()
         {
             LoadPlayersAtlas();
-
+            _cameraPreview.SetActive(true);
             if (_skinColorPicker != null)
             {
                 _skinColorPicker._colorChanged += SetSkinColor;
@@ -97,11 +99,10 @@ namespace LostRunes
         }
         void UpdateAllTexts()
         {
-            int index = 1;
-            UpdateText(index, _faceCount, _faceText, "Head");
-            UpdateText(index, _hairCount,_hairText, "Hair");
-            UpdateText(index, _eyebrowsCount,_eyebrowsText, "Eyebrows");
-            UpdateText(index, _beardCount,_beardText, "Beard");
+            UpdateText(1, _faceCount, _faceText, "Head");
+            UpdateText(0, _hairCount,_hairText, "Hair");
+            UpdateText(1, _eyebrowsCount,_eyebrowsText, "Eyebrows");
+            UpdateText(0, _beardCount,_beardText, "Beard");
         }
         public void ResetInputText()
         {
@@ -271,7 +272,7 @@ namespace LostRunes
 
             // Initialize Player
 
-
+            _cameraPreview.SetActive(false);
             _playerUI.SetActive(true);
         }
         public void ResetNewCharacter()

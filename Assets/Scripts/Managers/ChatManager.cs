@@ -3,9 +3,6 @@ using TMPro;
 using UnityEngine.EventSystems;
 using Steamworks;
 using Steamworks.Data;
-using UnityEngine.InputSystem;
-using System;
-using UnityEngine.UIElements;
 using UnityEngine.UI;
 
 namespace LostRunes
@@ -78,7 +75,7 @@ namespace LostRunes
             {
                 if (!string.IsNullOrEmpty(_messageInputField.text))
                 {
-                    LobbySaver.Instance._currentLobby?.SendChatString(_messageInputField.text);
+                    //LobbySaver.Instance._currentLobby?.SendChatString(_messageInputField.text);
                 }
                 _messageInputField.gameObject.SetActive(false);
                 EventSystem.current.SetSelectedGameObject(null);

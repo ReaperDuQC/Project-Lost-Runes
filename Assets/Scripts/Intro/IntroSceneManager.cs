@@ -15,7 +15,6 @@ namespace LostRunes
         {
             LinkIntroPlayerToSceneManager();
             _introPlayer.PlayIntro();
-            WaitForNetworkManager();
         }
 
         private void LinkIntroPlayerToSceneManager()
@@ -24,20 +23,11 @@ namespace LostRunes
             if (_sceneLoaderManager == null) return;
 
             _introPlayer.OnIntroVideoEnded += _sceneLoaderManager.LoadScene;
+            _introPlayer.OnIntroVideoEnded += SetReadyToLoad;
         }
-
-        void WaitForNetworkManager()
+        private void SetReadyToLoad()
         {
-            StartCoroutine(WaitForNetworkManagerCoroutine());
-        }
-        IEnumerator WaitForNetworkManagerCoroutine()
-        {
-            yield return new WaitUntil(() => NetworkManager.Singleton != null);
-
-            if (_sceneLoaderManager != null)
-            {
-                _sceneLoaderManager.ReadyToLoad();
-            }
+            _sceneLoaderManager.ReadyToLoad();
         }
     }
 }

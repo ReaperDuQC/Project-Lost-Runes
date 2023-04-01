@@ -20,25 +20,25 @@ public class ControlSchemeTracker : MonoBehaviour
 
     private void Start()
     {
-        InputSystem.onActionChange += (obj, change) =>
-        {
-            if (change == InputActionChange.ActionPerformed)
-            {
-                var inputAction = (InputAction)obj;
-                var lastControl = inputAction.activeControl;
-                var lastDevice = lastControl.device;
+        //InputSystem.onActionChange += (obj, change) =>
+        //{
+        //    if (change == InputActionChange.ActionPerformed)
+        //    {
+        //        var inputAction = (InputAction)obj;
+        //        var lastControl = inputAction.activeControl;
+        //        var lastDevice = lastControl.device;
 
-                Debug.Log($"device: {lastDevice.displayName}");
-            }
-        };
+        //        Debug.Log($"device: {lastDevice.displayName}");
+        //    }
+        //};
     }
 private void OnEnable()
     {
-        InputSystem.onDeviceChange += DeviceChangeCallback;
+       // InputSystem.onDeviceChange += DeviceChangeCallback;
     }
     private void OnDisable()
     {
-        InputSystem.onDeviceChange -= DeviceChangeCallback;
+        //InputSystem.onDeviceChange -= DeviceChangeCallback;
     }
 
     private void DeviceChangeCallback(InputDevice newInputDevice, InputDeviceChange deviceChange)
@@ -55,23 +55,5 @@ private void OnEnable()
             _controlSchemeChanged(newInputDevice.name);
         }
         
-    }
-
-    private void InputActionChangeCallback(object obj, InputActionChange change)
-    {
-        //if (change == InputActionChange.ActionPerformed)
-        //{
-        //    InputAction receivedInputAction = (InputAction)obj;
-        //    InputDevice lastDevice = receivedInputAction.activeControl.device;
-
-        //    if(controlSchemeChanged != null)
-        //    {
-        //        controlSchemeChanged(lastDevice.name);
-        //    }
-
-        //    //isKeyboardAndMouse = lastDevice.name.Equals("Keyboard") || lastDevice.name.Equals("Mouse");
-        //    //If needed we could check for "XInputControllerWindows" or "DualShock4GamepadHID"
-        //    //Maybe if it Contains "controller" could be xbox layout and "gamepad" sony? More investigation needed
-        //}
     }
 }

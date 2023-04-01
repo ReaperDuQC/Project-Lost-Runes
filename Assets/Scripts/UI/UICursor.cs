@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace LostRunes
+namespace LostRunes.Menu
 {
     public class UICursor : MonoBehaviour
     {

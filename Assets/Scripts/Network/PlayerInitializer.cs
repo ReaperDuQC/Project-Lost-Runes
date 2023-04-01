@@ -18,7 +18,12 @@ namespace LostRunes.Multiplayer
         string _player = "Player ";
         public override void OnNetworkSpawn()
         {
-            bool isOwner = true;//IsOwner;
+            base.OnNetworkSpawn();
+        }
+
+        public void Initialize()
+        {
+            bool isOwner = IsOwner;
             gameObject.name = _player + GetComponent<NetworkObject>().OwnerClientId.ToString();
 
             _inputHandler = GetComponent<InputHandler>();

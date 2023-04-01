@@ -36,6 +36,7 @@ namespace LostRunes
         [SerializeField] AudioClip _statSound;
 
         int _currentStatIndex = 0;
+        int _baseLuckValue = 100;
         bool _autoRoll = false;
         List<int> _statLevels;
 
@@ -81,7 +82,7 @@ namespace LostRunes
         }
         void Update()
         {
-            for (int i = _currentStatIndex; i < _statsLevelText.Length; i++)
+            for (int i = _currentStatIndex; i < _statsText.Length; i++)
             {
                 RandomizeStatValue(i);
             }
@@ -90,16 +91,31 @@ namespace LostRunes
         {
             _statLevels = new List<int>();
 
-            for (int i = 0; i < _statsLevelText.Length; i++)
+            for (int i = 0; i < _statsText.Length; i++)
             {
                 _statLevels.Add(_minStatValue);
             }
+            _statLevels.Add(_baseLuckValue);
         }
         void RandomizeStatValue(int currentIdx)
         {
             _statLevels[currentIdx] = Random.Range(_minStatValue, _maxStatValue);
             _statsLevelText[currentIdx].text = _statLevels[currentIdx].ToString();
         }
+
+        private void UpdateLuckStat(int currentIdx)
+        {
+            //int rolledStat = _statLevels[currentIdx];
+
+            //int bonus = rolledStat == _minStatValue ? 1 : 0;
+            //bonus = rolledStat == _maxStatValue ? -1 : bonus;
+
+            //int valueToAdd = -(rolledStat - 10) + bonus;
+
+            //_statLevels[^1] += valueToAdd;
+            //_statsLevelText[^1].text = _statLevels[^1].ToString();
+        }
+
         void SelectStat()
         {
             if (_autoRoll) return;
@@ -111,6 +127,7 @@ namespace LostRunes
 
             RandomizeStatValue(_currentStatIndex);
             StartCoroutine(UpdateColor(_currentStatIndex));
+            UpdateLuckStat(_currentStatIndex);
             PlaySound(_currentStatIndex);
             _currentStatIndex++;
             UpdateCurrentStatText();

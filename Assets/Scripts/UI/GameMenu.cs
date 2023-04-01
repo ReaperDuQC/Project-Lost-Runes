@@ -3,7 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace LostRunes
+namespace LostRunes.Menu
 {
     public class GameMenu : RPGMenu
     {
@@ -22,8 +22,14 @@ namespace LostRunes
         [SerializeField] UICursor _cursor;
         [SerializeField] GameObject _playerUI;
 
+        [SerializeField] GameObject _characterCreator;
+
         PlayerControls _playerControls;
         bool _interactable = false;
+        private void Awake()
+        {
+            _characterCreator.SetActive(true);
+        }
 
         private void Start()
         {
@@ -34,34 +40,38 @@ namespace LostRunes
             if(_playerControls == null)
             {
                 _playerControls = new PlayerControls();
-               _playerControls.PlayerActions.Start.performed += CloseMenu;
+               _playerControls.PlayerActions.Start.performed += CloseMenuCallback;
             }
             _playerControls.Enable();
         }
-
-        private void CloseMenu(InputAction.CallbackContext context)
+        private void CloseMenuCallback(InputAction.CallbackContext context)
         {
             if (context.performed && _interactable)
             {
-                bool show = true;
-                if (_activePanel == _menuPanel)
-                {
-                    show = false;
-                    SetMenuPanelActive(false);
-                    _activePanel = null;
-                }
-                else if(_activePanel == null) 
-                {
-                    SetMenuPanelActive(true);
-                }
-                else
-                {
-                    SetPanelActive(_activePanel, false);
-                }
-                _playerUI.SetActive(_activePanel == null);
-                _cursor.ShowCursor(show);
+                CloseMenu();
             }
         }
+        public void CloseMenu()
+        {
+            bool show = true;
+            if (_activePanel == _menuPanel)
+            {
+                show = false;
+                SetMenuPanelActive(false);
+                _activePanel = null;
+            }
+            else if (_activePanel == null)
+            {
+                SetMenuPanelActive(true);
+            }
+            else
+            {
+                SetPanelActive(_activePanel, false);
+            }
+            _playerUI.SetActive(_activePanel == null);
+            _cursor.ShowCursor(show);
+        }
+
         public void EnableMenuInteraction(bool interactable)
         {
             _interactable = interactable;
