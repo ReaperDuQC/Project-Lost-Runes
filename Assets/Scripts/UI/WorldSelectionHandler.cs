@@ -86,7 +86,6 @@ namespace LostRunes.Menu
                 CreateNewButton(worldName);
             }
         }
-
         public void LoadWorld(string worldName)
         {
             WorldData data = SaveSystem.SaveSystem.LoadWorldData(worldName);
