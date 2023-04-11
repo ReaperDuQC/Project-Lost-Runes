@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18198729, g: 0.2242292, b: 0.28740552, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -98,7 +98,8 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: bdcbeb6b1c94f604e8f9cabf6658a804,
+    type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -215,15 +216,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _randomHeightRange: {x: 0, y: 0.01}
-  _heightMapImage: {fileID: 2800000, guid: 7eee94fcd2a10cc419144f9bb9d5a029, type: 3}
-  _heightMapScale: {x: 2, y: 1, z: 2}
-  _perlinXScale: 0.002
-  _perlinYScale: 0.002
-  _perlinOffsetX: 2419
-  _perlinOffsetY: 3941
-  _perlinOctave: 3
-  _perlinPersistence: 8
-  _perlinHeightScale: 0.09
+  _heightMapImage: {fileID: 2800000, guid: 3e82a556a1e963541aed082b40e6376d, type: 3}
+  _heightMapScale: {x: 2, y: 0.1, z: 2}
+  _resetTerrain: 1
+  _perlinXScale: 0.018
+  _perlinYScale: 0.018
+  _perlinOffsetX: 6637
+  _perlinOffsetY: 4956
+  _perlinOctave: 1
+  _perlinPersistence: 2.64
+  _perlinHeightScale: 0.285
+  _perlinParameters:
+  - _perlinXScale: 0.01
+    _perlinYScale: 0.01
+    _perlinOffsetX: 0
+    _perlinOffsetY: 0
+    _perlinOctave: 3
+    _perlinPersistence: 8
+    _perlinHeightScale: 0.09
+    _remove: 0
+  _voronoiPeakCount: 3
+  _voronoiFallOff: 8.76
+  _voronoiDropOff: 5.86
+  _voronoiMinHeight: 0.455
+  _voronoiMaxHeight: 0.474
+  _voronoiType: 3
   _terrain: {fileID: 193319251}
   _terrainData: {fileID: 15600000, guid: cdc70c3c1c615fb418e16aa54880f5bf, type: 2}
 --- !u!1 &652657555
@@ -242,7 +259,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!108 &652657556
 Light:
@@ -313,14 +330,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 652657555}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.25638798, y: -0.4632559, z: -0.10894509, w: 0.8413027}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 19.297, y: -62.259, z: -26.482}
 --- !u!114 &652657558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -361,17 +378,17 @@ PrefabInstance:
     - target: {fileID: 486301289810406767, guid: 612744cdf526b264493e09320b097ba3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 331.75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 486301289810406767, guid: 612744cdf526b264493e09320b097ba3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.3
+      value: 17.27
       objectReference: {fileID: 0}
     - target: {fileID: 486301289810406767, guid: 612744cdf526b264493e09320b097ba3,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 103.22
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 486301289810406767, guid: 612744cdf526b264493e09320b097ba3,
         type: 3}

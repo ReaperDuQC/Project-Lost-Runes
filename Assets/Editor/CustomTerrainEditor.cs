@@ -28,10 +28,19 @@ namespace LostRunes
 
         SerializedProperty _resetTerrain;
 
+        SerializedProperty _voronoiPeakCount;
+        SerializedProperty _voronoiFallOff;
+        SerializedProperty _voronoiDropOff;
+        SerializedProperty _voronoiMinHeight;
+        SerializedProperty _voronoiMaxHeight;
+        SerializedProperty _voronoiType;
+
+
         bool _showRandom = false;
         bool _showLoadHeights = false;
         bool _showPerlin = false;
         bool _showMultiplePerlin = false;
+        bool _showVoronoi = false;
         private void OnEnable()
         {
             _randomHeightRange = serializedObject.FindProperty("_randomHeightRange");
@@ -46,10 +55,17 @@ namespace LostRunes
             _perlinPersistence = serializedObject.FindProperty("_perlinPersistence");
             _perlinHeightScale = serializedObject.FindProperty("_perlinHeightScale");
 
-            _perlinParameters = serializedObject.FindProperty("_perlinParameters");
             _perlinParameterTable = new GUITableState("_perlinParameterTable");
+            _perlinParameters = serializedObject.FindProperty("_perlinParameters");
 
             _resetTerrain = serializedObject.FindProperty("_resetTerrain");
+
+            _voronoiPeakCount = serializedObject.FindProperty("_voronoiPeakCount");
+            _voronoiFallOff = serializedObject.FindProperty("_voronoiFallOff");
+            _voronoiDropOff = serializedObject.FindProperty("_voronoiDropOff");
+            _voronoiMinHeight = serializedObject.FindProperty("_voronoiMinHeight");
+            _voronoiMaxHeight = serializedObject.FindProperty("_voronoiMaxHeight");
+            _voronoiType = serializedObject.FindProperty("_voronoiType");
         }
         public override void OnInspectorGUI()
         {
@@ -114,7 +130,6 @@ namespace LostRunes
             {
                 EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
                 GUILayout.Label("Multiple Perlin Noise", EditorStyles.boldLabel);
-                _perlinParameterTable = GUITableLayout.DrawTable(_perlinParameterTable, serializedObject.FindProperty("_perlinParameters"));
 
                 EditorGUILayout.BeginHorizontal();
                 if (GUILayout.Button("+"))
@@ -126,10 +141,29 @@ namespace LostRunes
                     terrain.RemovePerlinParameters();
                 }
                 EditorGUILayout.EndHorizontal();
+                _perlinParameterTable = GUITableLayout.DrawTable(_perlinParameterTable, serializedObject.FindProperty("_perlinParameters"));
+                GUILayout.Space(20);
+
 
                 if (GUILayout.Button("Apply Multiple Perlin"))
                 {
                     terrain.MultiplePerlinTerrain();
+                }
+            }
+
+            _showVoronoi = EditorGUILayout.Foldout(_showVoronoi, "Voronoi");
+            if (_showVoronoi)
+            {
+                EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+                EditorGUILayout.IntSlider(_voronoiPeakCount, 0, 25, new GUIContent("Peak Count"));
+                EditorGUILayout.Slider(_voronoiFallOff, 0, 10f, new GUIContent("Falloff"));
+                EditorGUILayout.Slider(_voronoiDropOff, 0, 10f, new GUIContent("Dropoff"));
+                EditorGUILayout.Slider(_voronoiMinHeight, 0, 1f, new GUIContent("Min Height"));
+                EditorGUILayout.Slider(_voronoiMaxHeight, 0, 1f, new GUIContent("Max Height"));
+                EditorGUILayout.PropertyField(_voronoiType);
+                if (GUILayout.Button("Voronoi"))
+                {
+                    terrain.Voronoi();
                 }
             }
 
