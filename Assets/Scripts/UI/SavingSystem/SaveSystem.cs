@@ -208,7 +208,7 @@ namespace LostRunes.SaveSystem
         public static void SavePlayerData(PlayerData playerData)
         {
             string folderName = "Data";
-            string path = Application.persistentDataPath + "/" + folderName + "/" + playerData._name + ".plr";
+            string path = Application.persistentDataPath + "/" + folderName + "/" + playerData._statData._characterName + ".plr";
 
             if (!Directory.Exists(Application.persistentDataPath + "/" + folderName))
             {

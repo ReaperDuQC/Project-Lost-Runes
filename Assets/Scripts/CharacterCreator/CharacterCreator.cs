@@ -6,13 +6,9 @@ using LostRunes.Multiplayer;
 namespace LostRunes.Menu
 {
     [System.Serializable]
-    public class PlayerData
+    public class AppearanceData
     {
-        public string _name;
-
-        public CharacterStatsData _stats;
-
-        public int[] _appearanceData;
+        public int[] _equipped;
 
         public float _hairColorR;
         public float _hairColorG;
@@ -24,40 +20,8 @@ namespace LostRunes.Menu
         public float _skinColorB;
         public float _skinColorA;
 
-        public int _gender;
         public int _race;
 
-        public float _positionX;
-        public float _positionY;
-        public float _positionZ;
-
-        public float _rotationX;
-        public float _rotationY;
-        public float _rotationZ;
-        public float _rotationW;
-        public PlayerData() { }
-
-        public Vector3 GetPosition()
-        {
-            return new Vector3(_positionX, _positionY, _positionZ);
-        }
-        public void SetPosition(Vector3 position)
-        {
-            _positionX = position.x;
-            _positionY = position.y;
-            _positionZ = position.z;
-        }
-        public Quaternion GetRotation()
-        {
-            return new Quaternion(_rotationX, _rotationY, _rotationZ, _rotationW);
-        }
-        public void SetRotation(Quaternion rotation)
-        {
-            _rotationX = rotation.x;
-            _rotationY = rotation.y;
-            _rotationZ = rotation.z;
-            _rotationW = rotation.w;
-        }
         public void SetSkinColor(Color color)
         {
             _skinColorR = color.r;
@@ -79,6 +43,49 @@ namespace LostRunes.Menu
         public Color GetHairColor()
         {
             return new Color(_hairColorR, _hairColorG, _hairColorB, _hairColorA);
+        }
+    }
+    [System.Serializable]
+    public class PlayerData
+    {
+        public CharacterStatsData _statData;
+
+        public AppearanceData _appearanceData;
+
+        public float _positionX;
+        public float _positionY;
+        public float _positionZ;
+
+        public float _rotationX;
+        public float _rotationY;
+        public float _rotationZ;
+        public float _rotationW;
+        public PlayerData() 
+        {
+            _appearanceData = new();
+            _statData = new();
+        }
+
+        public Vector3 GetPosition()
+        {
+            return new Vector3(_positionX, _positionY, _positionZ);
+        }
+        public void SetPosition(Vector3 position)
+        {
+            _positionX = position.x;
+            _positionY = position.y;
+            _positionZ = position.z;
+        }
+        public Quaternion GetRotation()
+        {
+            return new Quaternion(_rotationX, _rotationY, _rotationZ, _rotationW);
+        }
+        public void SetRotation(Quaternion rotation)
+        {
+            _rotationX = rotation.x;
+            _rotationY = rotation.y;
+            _rotationZ = rotation.z;
+            _rotationW = rotation.w;
         }
     }
 
@@ -217,7 +224,7 @@ namespace LostRunes.Menu
 
             //default startup as male
             _race = 1;
-            _playerData._race = _race;
+            _playerData._appearanceData._race = _race;
             _gender = Gender.Male;
             _equipped[(int)BodyParts.HeadAllElements] = 0;
             _equipped[(int)BodyParts.Eyebrow] = 0;
@@ -232,8 +239,8 @@ namespace LostRunes.Menu
             _equipped[(int)BodyParts.Leg_Right] = 0;
             _equipped[(int)BodyParts.Leg_Left] = 0;
 
-            _playerData._appearanceData = _equipped;
-            _playerData._gender = (int)Gender.Male;
+            _playerData._appearanceData._equipped = _equipped;
+            _playerData._statData._isMale = true;
 
             SetSkinColor(_whiteSkin[0]);
             SetHairColor(_whiteHair[0]);
@@ -250,18 +257,20 @@ namespace LostRunes.Menu
                 _equipped[i] = -1;
             }
 
-            _equipped = data._appearanceData;
-            _gender = (Gender)data._gender;
+            _equipped = data._appearanceData._equipped;
+            _gender = (Gender)(data._statData._isMale ? 0 : 1);
 
             EnableCharacter();
-            SetSkinColor(data.GetSkinColor());
-            SetHairColor(data.GetHairColor());
+            SetSkinColor(data._appearanceData.GetSkinColor());
+            SetHairColor(data._appearanceData.GetHairColor());
 
             data.SetPosition(_spawnPlayPosition.position);
 
-            _transform.GetComponent<PlayerInitializer>().OnNetworkSpawn();
+            CharacterStats stat = ScriptableObject.CreateInstance<CharacterStats>();
+            stat.InitializeCharacter(data, _transform);
 
-            _transform.GetComponent<CharacterStats>().InitializeCharacter(data, _transform);
+            _transform.GetComponent<PlayerInitializer>().Initialize(stat);
+
         }
         public void DestroyCharacter()
         {
@@ -577,7 +586,7 @@ namespace LostRunes.Menu
                     break;
             }
             */
-            _playerData.SetSkinColor(color);
+            _playerData._appearanceData.SetSkinColor(color);
             _mat.SetColor("_Color_Skin", skinColor);
 
             _mat.SetColor("_Color_Stubble", stubbleColor);
@@ -588,7 +597,7 @@ namespace LostRunes.Menu
         }
         public void SetHairColor(Color color)
         {
-            _playerData.SetHairColor(color);
+            _playerData._appearanceData.SetHairColor(color);
             _mat.SetColor("_Color_Hair", color);
         }
         public bool SetGender(int genderIndex)
@@ -609,14 +618,14 @@ namespace LostRunes.Menu
                 DisableCharacter();
                 _gender = newGender;
                 EnableCharacter();
-                _playerData._gender = genderIndex;
+                _playerData._statData._isMale = genderIndex == 0;
             }
 
             return _gender == Gender.Male;
         }
         internal void SetCharacterName(string characterName)
         {
-            _playerData._name = characterName;
+            _playerData._statData._characterName = characterName;
         }
         internal Material GetCharacterMaterial()
         {

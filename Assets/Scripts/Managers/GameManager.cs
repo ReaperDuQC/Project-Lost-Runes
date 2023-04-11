@@ -19,6 +19,16 @@ namespace LostRunes
 
         [SerializeField] CharacterCreator _characterCreator;
 
+        [SerializeField] HealthBar _healthBar;
+        public HealthBar HealthBar { get { return _healthBar; } }
+        [SerializeField] ManaBar _manaBar;
+        public ManaBar ManaBar { get { return _manaBar; } }
+        [SerializeField] StaminaBar _staminaBar;
+        public StaminaBar StaminaBar { get { return _staminaBar; } }
+
+        [SerializeField] CharacterStatUI _characterStatUI;
+        public CharacterStatUI CharacterStatUI { get { return _characterStatUI; } }
+
         [SerializeField] bool _needOnline;
         private void Awake()
         {

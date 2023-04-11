@@ -53,8 +53,8 @@ namespace InfinityPBR
         public static string symbolEightCircleClosed = "➑";
         public static string symbolNineCircleOpen = "➈";
         public static string symbolNineCircleClosed = "➒";
-        public static string symbolArrowCircleRight = "↺";
-        public static string symbolArrowCircleLeft = "↻";
+        public static string symbolArrowCircleLeft = "↺";
+        public static string symbolArrowCircleRight = "↻";
         public static string symbolPlusCircle = "⊕";
         public static string symbolMinusCircle = "⊖";
         public static string symbolMultiplyCircle = "⊗";
@@ -63,6 +63,19 @@ namespace InfinityPBR
         public static string symbolRecycle = "♻";
         public static string symbolWww = "🌎";
         public static string symbolCircleOpen = "○";
+        public static string symbolArrowOpenRight = "⇨";
+        public static string symbolArrowOpenLeft = "⇦";
+        public static string symbolArrowOpenUp = "⇧";
+        public static string symbolArrowOpenDown = "⇩";
+        public static string symbolArrowHeavyRight = "➡";
+        public static string symbolArrowHeavyLeft = "⬅";
+        public static string symbolArrowHeavyUp = "⬆";
+        public static string symbolArrowHeavyDown = "⬇";
+        public static string symbolArrowLightRight = "→";
+        public static string symbolArrowLightLeft = "←";
+        public static string symbolArrowLightUp = "↑";
+        public static string symbolArrowLightDown = "↓";
+        public static string symbolArrowLightLeftRight = "↔";
 
         /*
         * ----------------------------------------------------------------------------------------------

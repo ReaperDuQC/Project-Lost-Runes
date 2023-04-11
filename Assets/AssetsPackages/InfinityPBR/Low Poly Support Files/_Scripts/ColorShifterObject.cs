@@ -62,15 +62,15 @@ namespace InfinityPBR
             
             for (int i = 0; i < colorSets[index].colorShifterItems.Count; i++)
             {
-                ColorShifterColorItem colorItem = colorSets[index].colorShifterItems[i];
-                bool testView = colorSets[index].colorShifterItems[i].testView;
+                var colorItem = colorSets[index].colorShifterItems[i];
+                var testView = colorSets[index].colorShifterItems[i].testView;
                 #if !UNITY_EDITOR
                 testView = false;
                 #endif
 
-                ColorShifterColorItem parent = colorItem.isChild ? colorSets[index].colorShifterItems.FirstOrDefault(x => x.name == colorItem.parentName) : null;
+                var parent = colorItem.isChild ? colorSets[index].colorShifterItems.FirstOrDefault(x => x.name == colorItem.parentName) : null;
                 
-                if (colorItem.skipped) continue;
+                if (colorItem.skipped || colorItem.hidden) continue;
                 if (parent != null && colorItem.isChild && parent.skipped) continue;
                 
                 float testH;
@@ -93,7 +93,7 @@ namespace InfinityPBR
 
         public void SetColorSet(string searchName, bool updateActiveIndex = true)
         {
-            for (int i = 0; i < colorSets.Count; i++)
+            for (var i = 0; i < colorSets.Count; i++)
             {
                 if (colorSets[i].name != searchName) continue;
                 

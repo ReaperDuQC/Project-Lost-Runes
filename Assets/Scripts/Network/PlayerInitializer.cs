@@ -15,24 +15,35 @@ namespace LostRunes.Multiplayer
         
         CameraHandler _cameraHandler;
 
+        HealthBar _healthBar;
+        ManaBar _manaBar;
+        StaminaBar _staminaBar;
+
         string _player = "Player ";
         public override void OnNetworkSpawn()
         {
             base.OnNetworkSpawn();
         }
 
-        public void Initialize()
+        public void Initialize(CharacterStats stats)
         {
-            bool isOwner = IsOwner;
+            bool isOwner = true;// IsOwner;
             gameObject.name = _player + GetComponent<NetworkObject>().OwnerClientId.ToString();
 
             _inputHandler = GetComponent<InputHandler>();
-            _characterStats = GetComponent<CharacterStats>();
+            _characterStats = stats;
             _playerLocomotion = GetComponent<PlayerLocomotion>();
             _animator = GetComponentInChildren<Animator>();
             _playerManager = GetComponent<PlayerManager>();
 
             _cameraHandler = FindObjectOfType<CameraHandler>();
+
+            GameManager gm = GameManager.Instance;
+            gm?.HealthBar?.Initialize(stats);
+            gm?.ManaBar?.Initialize(stats);
+            gm?.StaminaBar?.Initialize(stats);
+
+            gm?.CharacterStatUI?.Initialize(stats);
 
             if (isOwner)
             {

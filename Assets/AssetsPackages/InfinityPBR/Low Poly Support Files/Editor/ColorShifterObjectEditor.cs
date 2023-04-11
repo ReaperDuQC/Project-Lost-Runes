@@ -34,6 +34,7 @@ namespace InfinityPBR
             EditorGUILayout.HelpBox("Please do not edit this object directly unless you know what you're doing :)",
                 MessageType.Warning);
             GUI.contentColor = Color.white;
+            
             DrawDefaultInspector();
         }
     }

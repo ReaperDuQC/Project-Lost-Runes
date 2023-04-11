@@ -194,9 +194,9 @@ namespace LostRunes.Menu
         }
         public void GenerateNewPlayer(TMP_InputField inputField)
         {
-            CharacterStatsData statsData = _statRoller.SaveStats();
             PlayerData playerData = _characterCreator.GetPlayerData();
-            playerData._stats = statsData;
+            playerData._statData.SetRolledStats( _statRoller.SaveStats());
+
             SaveSystem.SaveSystem.SavePlayerData(playerData);
             _playerAtlas.Players.Insert(0, inputField.text);
             CreateButtons();

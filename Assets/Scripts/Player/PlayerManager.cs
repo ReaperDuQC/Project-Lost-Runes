@@ -11,7 +11,8 @@ namespace LostRunes
         CameraHandler _cameraHandler;
         PlayerLocomotion _playerLocomotion;
         Animator _animator;
-        CharacterStats _characterStats;
+        [SerializeField] CharacterStats _characterStats;
+        public CharacterStats CharacterStats { get { return _characterStats; } }
         
         [Header("Interacting")]
         InteractableUI _interactableUI;

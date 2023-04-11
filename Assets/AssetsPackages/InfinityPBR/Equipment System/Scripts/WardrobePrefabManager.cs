@@ -155,8 +155,9 @@ namespace InfinityPBR
                 {
                     prefabGroup = group
                 };
-                blendShapeGroups.Add(newGroup); ;
+                blendShapeGroups.Add(newGroup);
             }
+            
             
             // Remove orphan groups
             for (int i = blendShapeGroups.Count - 1; i >= 0; i--)

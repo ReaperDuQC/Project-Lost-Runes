@@ -1,0 +1,117 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fdb201e2e221fc4785d76c9d692849e, type: 3}
+  m_Name: CharacterData
+  m_EditorClassIdentifier: 
+  _characterName: 
+  _isMale: 0
+  _characterLevel:
+    _currentLevel: 0
+    _remainingAttributePoints: 0
+    _currentExp: 0
+    _expThreshold: 0
+    _expReceivedModifier: []
+  _health:
+    _baseRemaining: 0
+    _baseMax: 0
+    _bonusMaxAmount: []
+    _ratePerCharacterLevel: 0
+    _ratePerStatLevel1To20: 0
+    _ratePerStatLevel21To40: 0
+    _ratePerStatLevel41To60: 0
+    _ratePerStatLevel61To80: 0
+    _ratePerStatLevel81To100: 0
+    _ratePerStatLevel101ToPlus: 0
+    _baseRegenAmount: 0
+    _baseRegenInterval: 0
+    _baseRegenDelay: 0
+    _hasRegen: 0
+    _bonusRegenAmount: 0
+    _bonusRegenInterval: 0
+    _bonusRegenDelay: 0
+    _maxHealth: 0
+    _remainingHealth: 0
+  _mana:
+    _baseRemaining: 0
+    _baseMax: 0
+    _bonusMaxAmount: []
+    _ratePerCharacterLevel: 0
+    _ratePerStatLevel1To20: 0
+    _ratePerStatLevel21To40: 0
+    _ratePerStatLevel41To60: 0
+    _ratePerStatLevel61To80: 0
+    _ratePerStatLevel81To100: 0
+    _ratePerStatLevel101ToPlus: 0
+    _baseRegenAmount: 0
+    _baseRegenInterval: 0
+    _baseRegenDelay: 0
+    _hasRegen: 0
+    _bonusRegenAmount: 0
+    _bonusRegenInterval: 0
+    _bonusRegenDelay: 0
+    _maxMana: 0
+    _remainingMana: 0
+  _stamina:
+    _baseRemaining: 0
+    _baseMax: 0
+    _bonusMaxAmount: []
+    _ratePerCharacterLevel: 0
+    _ratePerStatLevel1To20: 0
+    _ratePerStatLevel21To40: 0
+    _ratePerStatLevel41To60: 0
+    _ratePerStatLevel61To80: 0
+    _ratePerStatLevel81To100: 0
+    _ratePerStatLevel101ToPlus: 0
+    _baseRegenAmount: 0
+    _baseRegenInterval: 0
+    _baseRegenDelay: 0
+    _hasRegen: 0
+    _bonusRegenAmount: 0
+    _bonusRegenInterval: 0
+    _bonusRegenDelay: 0
+    _maxStamina: 0
+    _remainingStamina: 0
+  _vitalityStat:
+    _baseLevel: 0
+    _bonusLevel: []
+  _enduranceStat:
+    _baseLevel: 0
+    _bonusLevel: []
+  _constitutionStat:
+    _baseLevel: 0
+    _bonusLevel: []
+  _strengthStat:
+    _baseLevel: 0
+    _bonusLevel: []
+  _dexterityStat:
+    _baseLevel: 0
+    _bonusLevel: []
+  _intelligenceStat:
+    _baseLevel: 0
+    _bonusLevel: []
+  _faithStat:
+    _baseLevel: 0
+    _bonusLevel: []
+  _luckStat:
+    _baseLevel: 0
+    _bonusLevel: []
+  _characterDefense:
+    _basePhysicalDefense: 0
+    _baseFireDefense: 0
+    _baseThunderDefense: 0
+    _baseIceDefense: 0
+    _baseMagicDefense: 0
+    _baseBleedDefense: 0
+    _basePoisonDefense: 0
+  _skillIds: 
+  _skills:
+  - {fileID: 0}

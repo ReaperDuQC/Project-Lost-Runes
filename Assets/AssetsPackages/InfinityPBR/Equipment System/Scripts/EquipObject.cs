@@ -5,6 +5,7 @@ using UnityEditor;
 
 namespace InfinityPBR
 {
+    [System.Serializable]
     public static class EquipObject
     {
         // rootBoneName needs to be the name of the Bone Root for this character! It may be different for each
@@ -12,9 +13,9 @@ namespace InfinityPBR
         public static string rootBoneName = "BoneRoot"; // Not used if Transform rootBoneTransform is provided to EquipCharacter()
         
         //private static GameObject _target; // The target to match
-        private static readonly SkinnedMeshRenderer _targetRenderer; // Renderer we are targetting
-        private static readonly string _subRootBoneName; // Bone name
-        private static readonly GameObject _thisBoneRoot; // Current bone root
+        private static SkinnedMeshRenderer _targetRenderer; // Renderer we are targetting
+        private static string _subRootBoneName; // Bone name
+        private static GameObject _thisBoneRoot; // Current bone root
         
         public static void Equip(GameObject targetGameObject, 
             Transform rootBoneTransform = null, 
@@ -35,7 +36,8 @@ namespace InfinityPBR
             // If rootBoneTransform is null, then we must abort.
             if (rootBoneTransform == null)
             {
-                Debug.LogError($"Error: A rootBoneTransform was not provided, and we did not find a transform called {rootBoneName} when searching for the root bone transform.");
+                Debug.LogWarning($"[Warning] A rootBoneTransform was not provided, and we did not find a transform called {rootBoneName} when searching for the root bone transform. " +
+                                 $"This is not a problem if the objects do not need to be rigged.");
                 return;
             }
             
@@ -104,7 +106,10 @@ namespace InfinityPBR
             MigrateBoneLinks(equipmentObject, targetSkinnedMeshRenderer); // Fit the equipment bones to the parent
 
             DeleteOldBonesAndRemoveComponent(equipmentObject); // Delete the bone objects from the equipment
-            _ = equipmentObject.skinnedMeshRenderer.bones;
+
+            
+            
+            Transform[] childBoneArray = equipmentObject.skinnedMeshRenderer.bones;
             //Debug.Log($"END: childBoneArray has {childBoneArray.Length} bones");
             //Debug.Log($"And the first one is {childBoneArray[0].name}");
         }
@@ -144,11 +149,11 @@ namespace InfinityPBR
             
             Transform[] equipmentObjectBoneArray = equipmentObject.skinnedMeshRenderer.bones;
             //Debug.Log($"equipmentObjectBoneArray has {equipmentObjectBoneArray.Length} bones");
-
-            _ = GetBoneMap(equipmentObject.skinnedMeshRenderer);
+            
+            var equipmentObjectBoneMap = GetBoneMap(equipmentObject.skinnedMeshRenderer);
             //Debug.Log($"equipmentObjectBoneMap has {equipmentObjectBoneMap.Count} bones");
-
-
+            
+            
             var parentBoneMap = GetBoneMap(targetSkinnedMeshRenderer); // Populate a Dictionary<string, Transform> holding all the current bones in the SkinnedMeshRenderer
             //Debug.Log($"Parentmap has {parentBoneMap.Count} bones -- Target SMR has {targetSkinnedMeshRenderer.bones.Length} bones");
 
@@ -197,7 +202,8 @@ namespace InfinityPBR
                 // Create the new bone on the parent, and set the transform values to match the child bone
                 var newBone = new GameObject(child.name);
                 newBone.transform.parent = parentBoneTransform;
-                newBone.transform.SetLocalPositionAndRotation(child.localPosition, child.localRotation);
+                newBone.transform.localPosition = child.localPosition;
+                newBone.transform.localRotation = child.localRotation;
                 newBone.transform.localScale = child.localScale;
                 parentBones = rootBoneTransform.GetComponentsInChildren<Transform>(); // Recompute the list of bones
 
@@ -278,12 +284,12 @@ namespace InfinityPBR
             // by the object I guess. Not ALL the bones. So the code above gets them all.
             
             // Add each bone from the SkinnedMeshRenderer to the dictionary.
-            //foreach (Transform bone in skinnedMeshRenderer.bones)
-            //{
-            //    newBoneMap.Add(bone.name, bone);
-            //}
+            foreach (Transform bone in skinnedMeshRenderer.bones)
+            {
+                newBoneMap.Add(bone.name, bone);
+            }
 
-            //return newBoneMap;
+            return newBoneMap;
         }
 
         /// <summary>

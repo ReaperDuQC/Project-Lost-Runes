@@ -46,6 +46,11 @@ namespace InfinityPBR
             }
         }
 
+        private void SetDoubleSided()
+        {
+            //colorShifterObject.material.
+        }
+
         void OnGUI()
         {
             CheckListSize();
@@ -61,6 +66,8 @@ namespace InfinityPBR
                 EditorGUILayout.EndScrollView();
                 return;
             }
+
+            
 
             if (colorShifterObject)
             {
@@ -115,6 +122,7 @@ namespace InfinityPBR
             }
             
             _shader = colorShifterObject.material.shader;
+            
 
             if (_shader.name != _shaderName && _shader.name != _shaderNameURP && _shader.name != _shaderNameHDRP)
             {
@@ -130,6 +138,7 @@ namespace InfinityPBR
                 return;
             }
             
+            SetDoubleSided();
             colorShifterObject.activeColors = Mathf.Clamp(EditorGUILayout.IntField("Active Colors", colorShifterObject.activeColors), 0, 49);
 
             

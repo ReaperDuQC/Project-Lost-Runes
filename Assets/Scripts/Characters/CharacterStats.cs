@@ -9,7 +9,17 @@ namespace LostRunes
     [System.Serializable]
     public class CharacterStatsData 
     {
+        public string _characterName = "";
+
+        public bool _isMale = true;
+
         public int _characterLevel = 1;
+        public int _remainingAttributePoints = 0;
+        public float _currentExp = 0f;
+
+        public float _remainingHealth = 0f;
+        public float _remainingMana = 0f;
+        public float _remainingStamina = 0f;
 
         public int _healthBaseLevel = 10;
         public int _enduranceBaseLevel = 10;
@@ -19,9 +29,10 @@ namespace LostRunes
         public int _intelligenceBaseLevel = 10;
         public int _faithBaseLevel = 10;
         public int _luckBaseLevel = 100;
-        public CharacterStatsData(List<int> stats)
-        {
 
+        public CharacterStatsData() { }
+        public void SetRolledStats(List<int> stats)
+        {
             _characterLevel = 1;
 
             _healthBaseLevel = stats[0];
@@ -35,52 +46,78 @@ namespace LostRunes
         }
         public CharacterStatsData(CharacterStats stats)
         {
-            _characterLevel = stats._characterLevel;
-
-            _healthBaseLevel = stats._health.BaseLevel;
-            _enduranceBaseLevel = stats._endurance.BaseLevel;
-            _constitutionBaseLevel = stats._constitution.BaseLevel;
-            _strengthBaseLevel = stats._strength.BaseLevel;
-            _dexterityBaseLevel = stats._dexterity.BaseLevel;
-            _intelligenceBaseLevel = stats._intelligence.BaseLevel;
-            _faithBaseLevel = stats._faith.BaseLevel;
-            _luckBaseLevel = stats._luck.BaseLevel;
+            _healthBaseLevel = stats._vitalityStat.BaseLevel;
+            _enduranceBaseLevel = stats._enduranceStat.BaseLevel;
+            _constitutionBaseLevel = stats._constitutionStat.BaseLevel;
+            _strengthBaseLevel = stats._strengthStat.BaseLevel;
+            _dexterityBaseLevel = stats._dexterityStat.BaseLevel;
+            _intelligenceBaseLevel = stats._intelligenceStat.BaseLevel;
+            _faithBaseLevel = stats._faithStat.BaseLevel;
+            _luckBaseLevel = stats._luckStat.BaseLevel;
         }
     }
+
+    [CreateAssetMenu(fileName = "CharacterData", menuName = "LostRunes/Character/CharacterData")]
     public class CharacterStats : ScriptableObject
     {
-        public string _characterName;
-        public bool _isMale;
+        public string _characterName = "";
+        public bool _isMale = true;
 
-        public int _characterLevel = 1;
+        [Header("Level")]
+        public CharacterLevel _characterLevel;
 
-        public int _currentExp = 0;
-        public int _expThreshold = 10;
-        public int _remainingAttributePoints = 0;
+        [Header("Attributes")]
+        public Health _health;
+        public Mana _mana;
+        public Stamina _stamina;
 
-        public HealthAttribute _health;
-        public EnduranceAttribute _endurance;
-        public ConstitutionAttribute _constitution;
-        public StrengthAttribute _strength;
-        public DexterityAttribute _dexterity;
-        public IntelligenceAttribute _intelligence;
-        public FaithAttribute _faith;
-        public LuckAttribute _luck;
+        [Header("Stats")]
+        public VitalityStat _vitalityStat;
+        public EnduranceStat _enduranceStat;
+        public ConstitutionStat _constitutionStat;
+        public StrengthStat _strengthStat;
+        public DexterityStat _dexterityStat;
+        public IntelligenceStat _intelligenceStat;
+        public FaithStat _faithStat;
+        public LuckStat _luckStat;
+
+        [Header("Defenses")]
+        public CharacterDefense _characterDefense = new();
+
+        [Header("Skills")]
+        public List<int> _skillIds = new();
+        public List<Skill> _skills = new(); // need to apply skills on initialize
 
         public void InitializeCharacter(PlayerData data, Transform transform)
         {
-            _characterName = data._name;
-            _isMale = data._gender == 0;
-            _characterLevel = data._stats._characterLevel;
+            _characterName = data._statData._characterName;
+            _isMale = data._statData._isMale;
 
-            _health = new HealthAttribute(data._stats._healthBaseLevel);
-            _endurance =  new EnduranceAttribute( data._stats._enduranceBaseLevel);
-            _constitution = new ConstitutionAttribute( data._stats._constitutionBaseLevel);
-            _strength = new StrengthAttribute( data._stats._strengthBaseLevel);
-            _dexterity = new DexterityAttribute( data._stats._dexterityBaseLevel);
-            _intelligence = new IntelligenceAttribute( data._stats._intelligenceBaseLevel);
-            _faith = new FaithAttribute( data._stats._faithBaseLevel);
-            _luck = new LuckAttribute( data._stats._luckBaseLevel);
+            _characterLevel = new CharacterLevel(data._statData._characterLevel, data._statData._remainingAttributePoints, data._statData._currentExp);
+
+            _vitalityStat = new VitalityStat(data._statData._healthBaseLevel);
+            _enduranceStat =  new EnduranceStat( data._statData._enduranceBaseLevel);
+            _constitutionStat = new ConstitutionStat( data._statData._constitutionBaseLevel);
+            _strengthStat = new StrengthStat( data._statData._strengthBaseLevel);
+            _dexterityStat = new DexterityStat( data._statData._dexterityBaseLevel);
+            _intelligenceStat = new IntelligenceStat( data._statData._intelligenceBaseLevel);
+            _faithStat = new FaithStat( data._statData._faithBaseLevel);
+            _luckStat = new LuckStat( data._statData._luckBaseLevel);
+
+            _characterDefense.Initialize(this);
+
+            // Apply Skills Effects
+
+            // Initialize health, mana, and stamina
+            _health = new Health();
+            _health.Initialize(this);
+            _mana = new Mana();
+            _mana.Initialize(this); 
+            _stamina = new Stamina();
+            _stamina.Initialize(this);
+
+            
+
 
             transform.position = data.GetPosition();
             transform.rotation = data.GetRotation();

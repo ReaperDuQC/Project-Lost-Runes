@@ -22,7 +22,8 @@ namespace InfinityPBR
     {
         public PrefabChildEvent _event;
         
-        public List<PrefabGroup> prefabGroups = new();
+        public List<PrefabGroup> prefabGroups = new List<PrefabGroup>();
+        public List<PrefabObjectVariable> variables = new List<PrefabObjectVariable>();
         public bool onlyOneGroupActivePerType = true;
         public bool unpackPrefabs = true;
         public bool revertToDefaultGroupByType = true;
@@ -50,21 +51,23 @@ namespace InfinityPBR
             return _wardrobePrefabManager;
         }
         
-        public Transform ThisTransform => transform;
+        public Transform thisTransform => transform;
         [HideInInspector] public bool showHelpBoxes = true;
         [HideInInspector] public bool showSetup = true;
         [HideInInspector] public bool showFullInspector = false;
         [HideInInspector] public bool showPrefabGroups = true;
         [HideInInspector] public bool instantiatePrefabsAsAdded = true;
-        [HideInInspector] public List<GameObject> equipmentObjects = new();
+        [HideInInspector] public List<GameObject> equipmentObjects = new List<GameObject>();
 
         public List<string> GroupTypeNames => GetGroupTypeNames();
-        private List<string> _groupTypeNames = new();
+        private List<string> _groupTypeNames = new List<string>();
         public bool cacheTypes = true;
+
 
         private void Start()
         {
-            _event ??= new PrefabChildEvent();
+            if (_event == null)
+                _event = new PrefabChildEvent();
 
             cacheTypes = true; // Set true on start, so this will trigger the first time it's called.
         }
@@ -98,9 +101,34 @@ namespace InfinityPBR
             return false;
         }
 
+        public void ToggleGroup(string groupName)
+        {
+            var prefabGroup = prefabGroups.FirstOrDefault(x => x.name == groupName);
+            if (prefabGroup == null)
+            {
+                Debug.LogWarning("Warning: No prefab group found with the name " + groupName);
+                return;
+            }
+            
+            ToggleGroup(prefabGroup);
+        }
+        
+        /// <summary>
+        /// Will toggle a group on or off, the opposite of whatever it is right now
+        /// </summary>
+        /// <param name="group"></param>
+        public void ToggleGroup(PrefabGroup group)
+        {
+            if (group.isActive) 
+                DeactivateGroup(group);
+            else 
+                ActivateGroup(group);
+        }
+
+
+        // Will activate a random group
         public void ActivateRandomGroupType()
         {
-            Debug.Log($"Count: {GroupTypeNames.Count}");
             var groupType = GroupTypeNames[UnityEngine.Random.Range(0, GroupTypeNames.Count)];
             ActivateRandomGroup(groupType);
         }
@@ -163,6 +191,34 @@ namespace InfinityPBR
             ActivateGroup(prefabGroups[groupIndex]);
         }
 
+        public void ActivateNextOfType(string type)
+        {
+            Debug.Log($"Activate next of type {type}");
+            var groups = GetGroupsOfType(type, false);
+            Debug.Log($"Ther eare {groups.Count} groups");
+            int activeIndex = -1;
+            int i = -1;
+            foreach (var group in groups)
+            {
+                i++;
+                if (group.isActive)
+                {
+                    activeIndex = i;
+                    break;
+                }
+            }
+            Debug.Log($"Active index is {activeIndex}");
+
+            if (groups.Count <= activeIndex + 1)
+                activeIndex = -1;
+            
+            Debug.Log($"Active index is now {activeIndex}");
+
+            ActivateGroup(groups[activeIndex + 1]);
+        }
+
+        
+        
         /// <summary>
         /// Will activate a group which is passed into this. Will also deactivate others of the same type, if any and
         /// onlyOneGroupActivePerType = true.
@@ -183,7 +239,15 @@ namespace InfinityPBR
                 if (groupObject.isPrefab && groupObject.inGameObject == groupObject.objectToHandle)
                     groupObject.inGameObject = null;
 
-                if (!groupObject.render) continue; // Do not render this!
+                // Do not render if render is false, or the variable conditions are not met. If it isn't a prefab,
+                // then also turn the object off.
+                if (!groupObject.render || !VariableConditionsMet(groupObject))
+                {
+                    if (!groupObject.isPrefab)
+                        groupObject.objectToHandle.SetActive(false);
+                    
+                    continue;
+                }
 
                 // This is where we instantiate the prefab
                 if (groupObject.isPrefab 
@@ -223,6 +287,49 @@ namespace InfinityPBR
             TryWardrobePrefabManagerOnActivate(group);
 
             TryBlendShapesManager();
+        }
+
+        private bool VariableConditionsMet(GroupObject groupObject)
+        {
+            if (groupObject.variable == null) return true;
+            if (String.IsNullOrEmpty(groupObject.variable.name)) return true;
+
+            var mainVariable = variables.FirstOrDefault(x => x.name == groupObject.variable.name);
+            if (mainVariable == null) return true;
+
+            var variable = groupObject.variable;
+
+            // bool
+            if (variable.valueIndex == 0)
+                return mainVariable.valueBool == variable.valueBool;
+
+            // float
+            if (variable.valueIndex == 1)
+            {
+                if (variable.valueFloatOptionIndex == 0)
+                    return variable.valueFloat < mainVariable.valueFloat;
+                if (variable.valueFloatOptionIndex == 1)
+                    return variable.valueFloat <= mainVariable.valueFloat;
+                if (variable.valueFloatOptionIndex == 2)
+                    return variable.valueFloat == mainVariable.valueFloat;
+                if (variable.valueFloatOptionIndex == 3)
+                    return variable.valueFloat >= mainVariable.valueFloat;
+                if (variable.valueFloatOptionIndex == 4)
+                    return variable.valueFloat > mainVariable.valueFloat;
+                if (variable.valueFloatOptionIndex == 5)
+                    return variable.valueFloat != mainVariable.valueFloat;
+            }
+            
+            // string
+            if (variable.valueIndex == 2)
+            {
+                if (variable.valueStringOptionIndex == 0)
+                    return variable.valueString == mainVariable.valueString;
+                if (variable.valueStringOptionIndex == 1)
+                    return variable.valueString != mainVariable.valueString;
+            }
+
+            return true;
         }
 
         private void TryWardrobePrefabManagerOnActivate(PrefabGroup group)
@@ -339,7 +446,7 @@ namespace InfinityPBR
         /// <param name="type"></param>
         private void CheckForDefaultGroup(string type)
         {
-            //int defaultGroupIndex = -1;
+            int defaultGroupIndex = -1;
             for (int g = 0; g < prefabGroups.Count; g++)
             {
                 if (prefabGroups[g].groupType != type) continue; // Continue if the type is wrong
@@ -357,10 +464,10 @@ namespace InfinityPBR
             {
 #if UNITY_EDITOR
                 // July 9, 2022 - Can't do this, as it unpacks the prefab...need to fix the issue another way
-                //bool wasPrefab = false;
+                bool wasPrefab = false;
                 if (PrefabUtility.IsPartOfAnyPrefab(inGameObject))
                 {
-                    //wasPrefab = true;
+                    wasPrefab = true;
                     inGameObject.SetActive(false);
                 }
                 else
@@ -381,41 +488,53 @@ namespace InfinityPBR
 
         public int GroupIsActive(PrefabGroup group)
         {
-            var renderableObjects = group.groupObjects.Count(x => x.render);
-            var livePrefabObjects = group.groupObjects.Count(x => x.isPrefab && x.inGameObject != null);
-            var liveObjectObjects = group.groupObjects.Count(x => !x.isPrefab && x.objectToHandle.activeSelf);
-            var liveObjects = liveObjectObjects + livePrefabObjects;
+            // Count the number of renderable objects that meet variable conditions
+            var renderableObjects = group.groupObjects.Count(x => x.render && VariableConditionsMet(x));
 
             if (renderableObjects == 0) return 0;
+            
+            // Count the number of live objects that meet variable conditions
+            var liveObjects = group.groupObjects
+                .Count(x => x.render 
+                            && VariableConditionsMet(x) 
+                            && ((x.isPrefab && x.inGameObject != null) 
+                                || (!x.isPrefab && x.objectToHandle.activeSelf)));
+
+            Debug.Log($"Group {group.name} - Renderable is {renderableObjects} and live is {liveObjects}");
+
+            // Return 2 if all renderable objects are live, 1 if some are live, 0 otherwise
+            return renderableObjects == liveObjects ? 2 : (liveObjects > 0 ? 1 : 0);
+            
+            /*
+            
+            
+            // Compute the number of renderable objects where any variable conditions are met
+            var renderableObjects = group.groupObjects
+                .Count(x => x.render && VariableConditionsMet(x));
+
+            // If there are none, return 0 (i.e. "Off")
+            if (renderableObjects == 0) return 0;
+            
+            
+            
+            
+            
+            // Get the total live object, for both prefabs & in game objects
+            var livePrefabObjects = group.groupObjects.Count(x => x.render && VariableConditionsMet(x) && x.isPrefab && x.inGameObject != null);
+            var liveObjectObjects = group.groupObjects.Count(x => x.render && VariableConditionsMet(x) && !x.isPrefab && x.objectToHandle.activeSelf);
+            var liveObjects = liveObjectObjects + livePrefabObjects;;
+
+            Debug.Log($"Group {group.name} - Renderable is {renderableObjects} and live is {liveObjects}");
+            
+            // If all renderable objects are live, then return 2 (i.e. this is "on")
             if (renderableObjects == liveObjects) return 2;
+            
+            // Otherwise, return 1 if the only some of the renderable objects are on
             if (renderableObjects > liveObjects && liveObjects > 0) return 1;
+            
+            // Default to "off"
             return 0;
-            
-            
-            
-            //int prefabs = 0;
-            //int inGameObjects = 0;
-            
-            //for (int i = 0; i < group.groupObjects.Count; i++)
-            //{
-            //    if (!group.groupObjects[i].objectToHandle)
-            //        continue;
-                
-            //    // If render is true, then increase the count of prefabs for this group                
-            //    if (group.groupObjects[i].render)
-            //        prefabs++;
-            //    else if (group.groupObjects[i].isPrefab && group.groupObjects[i].inGameObject)
-            //        inGameObjects++;
-            //    else if (!group.groupObjects[i].isPrefab && group.groupObjects[i].objectToHandle.activeSelf)
-            //        inGameObjects++;
-            //}
-
-            //if (prefabs == inGameObjects && (prefabs > 0 || group.isActive))
-            //    return 2;
-            //if (prefabs > inGameObjects && inGameObjects > 0)
-            //    return 1;
-
-            //return 0;
+            */
         }
 
         public int GroupIsActive(int groupIndex) => GroupIsActive(prefabGroups[groupIndex]);
@@ -425,7 +544,7 @@ namespace InfinityPBR
         {
             var newGroupObject = new GroupObject
             {
-                objectToHandle = prefab == null ? group.newPrefab : prefab, parentTransform = ThisTransform, isPrefab = true
+                objectToHandle = prefab == null ? group.newPrefab : prefab, parentTransform = thisTransform, isPrefab = true
             };
             group.groupObjects.Add(newGroupObject);
         }
@@ -542,17 +661,76 @@ namespace InfinityPBR
 
             return true;
         }
-
-        /*
-        public void RandomGroup(string typeName, bool excludeActive = true)
+        
+        /// <summary>
+        /// Reload all active groups
+        /// </summary>
+        public void ReloadActiveGroups()
         {
-            List<PrefabGroup> groups = prefabGroups.Where(x => x.groupType == typeName).ToList();
-            if (excludeActive) groups = groups.Where(x => !x.isActive).ToList();
-            groups = groups.ToList();
-
-            ActivateGroup(groups[UnityEngine.Random.Range(0, groups.Count)]);
+            foreach (var group in prefabGroups)
+            {
+                if (!group.isActive) continue;
+                ActivateGroup(group);
+            }
         }
-        */
+        
+        public int IndexOfVariableNamed(string lookupName) => variables.FindIndex(x => x.name == lookupName);
+
+        public float GetVariableValueFloat(string variableName) => GetVariableValueFloat(IndexOfVariableNamed(variableName));
+        public string GetVariableValueString(string variableName) => GetVariableValueString(IndexOfVariableNamed(variableName));
+        public bool GetVariableValueBool(string variableName) => GetVariableValueBool(IndexOfVariableNamed(variableName));
+
+        public void ToggleVariableAndReload(string variableName) => ToggleVariable(IndexOfVariableNamed(variableName), true);
+        public void ToggleVariableNoReload(string variableName) => ToggleVariable(IndexOfVariableNamed(variableName), false);
+        public void ToggleVariable(string variableName, bool reloadGroups = true) => ToggleVariable(IndexOfVariableNamed(variableName), reloadGroups);
+        public void ToggleVariable(int index, bool reloadGroups = true) => SetVariable(index, !GetVariableValueBool(index), reloadGroups);
+        
+        public void SetVariable(string variableName, bool newValue, bool reloadGroups = true) => SetVariable(IndexOfVariableNamed(variableName), newValue, reloadGroups);
+        public void SetVariable(string variableName, float newValue, bool reloadGroups = true) => SetVariable(IndexOfVariableNamed(variableName), newValue, reloadGroups);
+        public void SetVariable(string variableName, string newValue, bool reloadGroups = true) => SetVariable(IndexOfVariableNamed(variableName), newValue, reloadGroups);
+
+        public void SetVariable(int index, bool newvalue, bool reloadGroups = true)
+        {
+            variables[index].valueBool = newvalue;
+            if (reloadGroups) ReloadActiveGroups();
+        }
+
+        public void SetVariable(int index, float newvalue, bool reloadGroups = true)
+        {
+            variables[index].valueFloat = newvalue;
+            if (reloadGroups) ReloadActiveGroups();
+        }
+
+        public void SetVariable(int index, string newvalue, bool reloadGroups = true)
+        {
+            variables[index].valueString = newvalue;
+            if (reloadGroups) ReloadActiveGroups();
+        }
+        
+        public float GetVariableValueFloat(int index) => variables[index].valueFloat;
+        public string GetVariableValueString(int index) => variables[index].valueString;
+        public bool GetVariableValueBool(int index) => variables[index].valueBool;
+    }
+    
+    [System.Serializable]
+    public class PrefabObjectVariable
+    {
+        public string name;
+        public float valueFloat;
+        public string valueString;
+        public bool valueBool;
+
+        public PrefabObjectVariable(string newVariableName)
+        {
+            name = newVariableName;
+        }
+
+        [HideInInspector] public String[] variableValueTypes = new[] {"bool", "float", "string"};
+        [HideInInspector] public int valueIndex = 0; // 0 = bool, 1 = float, 2 = string
+        [HideInInspector] public String[] valueFloatOptions = new[] {"<", "<=", "==", ">=", ">", "!"};
+        [HideInInspector] public int valueFloatOptionIndex = 0;
+        [HideInInspector] public String[] valueStringOptions = new[] {"==", "!="};
+        [HideInInspector] public int valueStringOptionIndex = 0;
     }
 
     [System.Serializable]
@@ -568,16 +746,16 @@ namespace InfinityPBR
         public string groupType;
         public bool isActive;
 
-        [FormerlySerializedAs("prefabObjects")] public List<GroupObject> groupObjects = new();
+        [FormerlySerializedAs("prefabObjects")] public List<GroupObject> groupObjects = new List<GroupObject>();
 
         [HideInInspector] public GameObject newPrefab;
         [HideInInspector] public GameObject newGameObject;
         
         // EDITOR SCRIPT FOR SELECTING NEW EQUIPMENT OBJECTS
-        [HideInInspector] public List<GameObject> equipmentObjectObjects = new();
-        [HideInInspector] public List<string> equipmentObjectObjectNames = new();
+        [HideInInspector] public List<GameObject> equipmentObjectObjects = new List<GameObject>();
+        [HideInInspector] public List<string> equipmentObjectObjectNames = new List<string>();
         [HideInInspector] public int equipmentObjectIndex;
-        [HideInInspector] public List<string> equipmentObjectTypes = new();
+        [HideInInspector] public List<string> equipmentObjectTypes = new List<string>();
         [HideInInspector] public int equipmentObjectTypeIndex;
         [FormerlySerializedAs("excludeFromRandom")] [HideInInspector] public bool canRandomize = true;
 
@@ -611,6 +789,8 @@ namespace InfinityPBR
         public SkinnedMeshRenderer skinnedMeshRenderer;
 
         public bool isPrefab = false;
+
+        public PrefabObjectVariable variable;
     }
     
     [System.Serializable]
