@@ -91,7 +91,7 @@ namespace LostRunes.Menu
             WorldData data = SaveSystem.SaveSystem.LoadWorldData(worldName);
             if(_sceneLoaderManager != null)
             {
-                //_sceneLoaderManager.LoadScene();
+                _sceneLoaderManager.LoadScene();
             }
         }
         void CreateNewButton(string worldName)

@@ -35,12 +35,20 @@ namespace LostRunes
         SerializedProperty _voronoiMaxHeight;
         SerializedProperty _voronoiType;
 
+        SerializedProperty _midPointDisplacementMinHeight;
+        SerializedProperty _midPointDisplacementMaxHeight;
+        SerializedProperty _midPointDisplacemenRoughness;
+        SerializedProperty _midPointDisplacemenHeightDampenerPower;
+
+        SerializedProperty _smoothAmount;
 
         bool _showRandom = false;
         bool _showLoadHeights = false;
         bool _showPerlin = false;
         bool _showMultiplePerlin = false;
         bool _showVoronoi = false;
+        bool _showMidpointDisplacement = false;
+        bool _showSmooth = false;
         private void OnEnable()
         {
             _randomHeightRange = serializedObject.FindProperty("_randomHeightRange");
@@ -66,6 +74,13 @@ namespace LostRunes
             _voronoiMinHeight = serializedObject.FindProperty("_voronoiMinHeight");
             _voronoiMaxHeight = serializedObject.FindProperty("_voronoiMaxHeight");
             _voronoiType = serializedObject.FindProperty("_voronoiType");
+
+            _midPointDisplacementMinHeight = serializedObject.FindProperty("_midPointDisplacementMinHeight");
+            _midPointDisplacementMaxHeight = serializedObject.FindProperty("_midPointDisplacementMaxHeight");
+            _midPointDisplacemenRoughness = serializedObject.FindProperty("_midPointDisplacemenRoughness");
+            _midPointDisplacemenHeightDampenerPower = serializedObject.FindProperty("_midPointDisplacemenHeightDampenerPower");
+
+            _smoothAmount = serializedObject.FindProperty("_smoothAmount");
         }
         public override void OnInspectorGUI()
         {
@@ -166,7 +181,29 @@ namespace LostRunes
                     terrain.Voronoi();
                 }
             }
+            _showMidpointDisplacement = EditorGUILayout.Foldout(_showMidpointDisplacement, "Midpoint Displacement");
+            if (_showMidpointDisplacement)
+            {
+                EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+                EditorGUILayout.PropertyField(_midPointDisplacementMinHeight);
+                EditorGUILayout.PropertyField(_midPointDisplacementMaxHeight);
+                EditorGUILayout.PropertyField(_midPointDisplacemenRoughness);
+                EditorGUILayout.PropertyField(_midPointDisplacemenHeightDampenerPower);
 
+                if (GUILayout.Button("Midpoint Displacement"))
+                {
+                    terrain.MidpointDisplacement();
+                }
+            }
+            _showSmooth = EditorGUILayout.Foldout(_showSmooth, "Smooth");
+            if (_showSmooth)
+            {
+                EditorGUILayout.IntSlider(_smoothAmount, 1, 25, new GUIContent("Smooth Step"));
+                if (GUILayout.Button("Smooth Terrain"))
+                {
+                    terrain.SmoothTerrain();
+                }
+            }
             serializedObject.ApplyModifiedProperties();
         }
     }

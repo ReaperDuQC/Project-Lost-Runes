@@ -4,6 +4,7 @@ using Steamworks.Data;
 using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace LostRunes
 {
@@ -45,9 +46,12 @@ namespace LostRunes
 
             if (NetworkManager.Singleton == null) { return; }
 
-            NetworkManager.Singleton.OnClientConnectedCallback += ClientConnectedCallback;
-            NetworkManager.Singleton.OnClientDisconnectCallback += ClientDisconnectCallback;
-            NetworkManager.Singleton.OnServerStarted += ServerStarted;
+            if (NetworkManager.Singleton.IsServer)
+            {
+                NetworkManager.Singleton.OnClientConnectedCallback += ClientConnectedCallback;
+                NetworkManager.Singleton.OnClientDisconnectCallback += ClientDisconnectCallback;
+                NetworkManager.Singleton.OnServerStarted += ServerStarted;
+            }
         }
         private void OnDisable()
         {
@@ -62,9 +66,12 @@ namespace LostRunes
 
             if (NetworkManager.Singleton == null) { return; }
 
-            NetworkManager.Singleton.OnClientConnectedCallback -= ClientConnectedCallback;
-            NetworkManager.Singleton.OnClientDisconnectCallback -= ClientDisconnectCallback;
-            NetworkManager.Singleton.OnServerStarted -= ServerStarted;
+            if (NetworkManager.Singleton.IsServer)
+            {
+                NetworkManager.Singleton.OnClientConnectedCallback -= ClientConnectedCallback;
+                NetworkManager.Singleton.OnClientDisconnectCallback -= ClientDisconnectCallback;
+                NetworkManager.Singleton.OnServerStarted -= ServerStarted;
+            }
         }
         private void OnApplicationQuit() => Disconnect();
 
@@ -99,6 +106,7 @@ namespace LostRunes
         private void ClientConnectedCallback(ulong clientId)
         {
             Debug.Log($"Client connected, clientId={clientId}");
+            SceneLoaderManager.Instance.LoadScene();
         }
         private void ClientDisconnectCallback(ulong clientId)
         {

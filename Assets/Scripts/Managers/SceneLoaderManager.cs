@@ -31,8 +31,20 @@ namespace LostRunes
         // Need to be set to true in order to go to the next scene  ReadyToLoad();
         bool _readyToLoad = false;
 
+        public static SceneLoaderManager Instance { get; private set; }
+
         private void Awake()
         {
+            if(Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Destroy(this);
+                return;
+            }
+
             _readyToLoad = !_requireReadyToLoad;
         }
         private void Start()

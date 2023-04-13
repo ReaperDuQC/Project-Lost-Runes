@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 
 public class DebugMenu : MonoBehaviour
@@ -16,6 +17,8 @@ public class DebugMenu : MonoBehaviour
     [SerializeField] bool _diplayControlScheme;
     [SerializeField] TextMeshProUGUI _controlSchemeText;
 
+    [SerializeField] bool _diplayConnectedPlayers;
+    [SerializeField] TextMeshProUGUI _connectedPLayersText;
     [Header("External References")]
 
     [SerializeField] string _version;
@@ -62,8 +65,44 @@ public class DebugMenu : MonoBehaviour
             _fpsDisplay.enabled = _diplayFPS;
         }
 
+        if (_diplayConnectedPlayers)
+        {
+            if (_connectedPLayersText != null)
+            {
+                _connectedPLayersText.gameObject.SetActive(_diplayConnectedPlayers);
+            }
+        }
+
         UpdateFPSText(0);
         UpdateVersionText();
+        UpdateConnectedPlayersText(0);
+    }
+    private void OnEnable()
+    {
+        if(NetworkManager.Singleton != null)
+        {
+            NetworkManager.Singleton.OnClientConnectedCallback += UpdateConnectedPlayersText;
+            NetworkManager.Singleton.OnClientDisconnectCallback += UpdateConnectedPlayersText;
+        }
+    }
+    private void OnDisable()
+    {
+        if (NetworkManager.Singleton != null)
+        {
+            NetworkManager.Singleton.OnClientConnectedCallback -= UpdateConnectedPlayersText;
+            NetworkManager.Singleton.OnClientDisconnectCallback -= UpdateConnectedPlayersText;
+        }
+    }
+    void UpdateConnectedPlayersText(ulong id)
+    {
+        if (_connectedPLayersText != null)
+        {
+            if (NetworkManager.Singleton != null)
+            {
+                int numberOfPlayers = NetworkManager.Singleton.ConnectedClients.Count;
+                _connectedPLayersText.text = "Connected : " + numberOfPlayers.ToString()/* +  "/" + maxNumberOfPlayers.ToString()*/;
+            }
+        }
     }
 
     void UpdateVersionText()

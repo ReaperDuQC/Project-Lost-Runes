@@ -54,6 +54,13 @@ namespace LostRunes
         [SerializeField] float _voronoiMaxHeight = 1f;
         public enum VoronoiType { Linear = 0, Power, Combined , CombinedSine}
         [SerializeField] VoronoiType _voronoiType = VoronoiType.Linear;
+        // Midpoint Displacement ------------------------
+        [SerializeField] float _midPointDisplacementMinHeight = -10f;
+        [SerializeField] float _midPointDisplacementMaxHeight = 10f;
+        [SerializeField] float _midPointDisplacemenRoughness = 2f;
+        [SerializeField] float _midPointDisplacemenHeightDampenerPower = 2f;
+
+        [SerializeField] int _smoothAmount = 1;
 
         [SerializeField] Terrain _terrain;
         [SerializeField] TerrainData _terrainData;
@@ -95,6 +102,92 @@ namespace LostRunes
                                                                         p._perlinPersistence) * p._perlinHeightScale;
                     }
                 }
+            }
+            _terrainData.SetHeights(0, 0, heightMap);
+        }
+        public void MidpointDisplacement()
+        {
+            float[,] heightMap = GetHeightMap();
+            int width = _terrainData.heightmapResolution - 1;
+            int squareSize = width;
+            float minHeight = _midPointDisplacementMinHeight;
+            float maxHeight = _midPointDisplacementMaxHeight;
+            float heightDampener = (float)MathF.Pow(_midPointDisplacemenHeightDampenerPower, -1 * _midPointDisplacemenRoughness);
+
+            int cornerX, cornerY;
+            int midX, midY;
+            int pmidXL, pmidXR, pmidYU, pmidYD;
+
+            //heightMap[0, 0] = UnityEngine.Random.Range(0, 0.2f);
+            //heightMap[0, _terrainData.heightmapResolution - 2] = UnityEngine.Random.Range(0, 0.2f);
+            //heightMap[_terrainData.heightmapResolution - 2, 0] = UnityEngine.Random.Range(0, 0.2f);
+            //heightMap[_terrainData.heightmapResolution - 2, _terrainData.heightmapResolution - 2] = UnityEngine.Random.Range(0, 0.2f);
+            
+            while (squareSize > 0)
+            {
+                for (int x = 0; x < width; x += squareSize)
+                {
+                    for (int y = 0; y < width; y += squareSize)
+                    {
+                        cornerX = (x + squareSize);
+                        cornerY = (y + squareSize);
+
+                        midX = (int)(x + squareSize / 2f);
+                        midY = (int)(y + squareSize / 2f);
+
+                        heightMap[midX, midY] = (float)((heightMap[x, y] 
+                                                        + heightMap[cornerX, y] 
+                                                        + heightMap[x, cornerY] 
+                                                        + heightMap[cornerX, cornerY]) / 4f) 
+                                                        + UnityEngine.Random.Range(minHeight, maxHeight);
+                    }
+                }
+
+                for (int x = 0; x < width; x += squareSize)
+                {
+                    for (int y = 0; y < width; y += squareSize)
+                    {
+                        cornerX = (x + squareSize);
+                        cornerY = (y + squareSize);
+
+                        midX = (int)(x + squareSize / 2f);
+                        midY = (int)(y + squareSize / 2f);
+
+                        pmidXR = (int)(midX + squareSize);
+                        pmidYU = (int)(midY + squareSize);
+                        pmidXL = (int)(midX - squareSize);
+                        pmidYD = (int)(midY - squareSize);
+
+                        if (pmidXL <= 0 || pmidYD <= 0 || pmidXR >= width - 1 | pmidYU >= width - 1) continue;
+
+                        heightMap[midX, y] = (float)(((heightMap[midX, pmidYD]
+                                                        + heightMap[midX, midY]
+                                                        + heightMap[x, y]
+                                                        + heightMap[cornerX, y]) / 4f)
+                                                        + UnityEngine.Random.Range(minHeight, maxHeight));
+
+                        heightMap[midX, cornerY] = (float)(((heightMap[midX, pmidYU]
+                                                        + heightMap[x, cornerY]
+                                                        + heightMap[midX, midY]
+                                                        + heightMap[cornerX, cornerY]) / 4f)
+                                                        + UnityEngine.Random.Range(minHeight, maxHeight));
+
+                        heightMap[x, midY] = (float)(((heightMap[pmidXL, midY]
+                                                        + heightMap[midX, midY]
+                                                        + heightMap[x, y]
+                                                        + heightMap[x, cornerY]) / 4f)
+                                                        + UnityEngine.Random.Range(minHeight, maxHeight));
+
+                        heightMap[cornerX, midY] = (float)(((heightMap[pmidXR, midY]
+                                                        + heightMap[midX, midY]
+                                                        + heightMap[cornerX, cornerY]
+                                                        + heightMap[cornerX, y]) / 4f)
+                                                         + UnityEngine.Random.Range(minHeight, maxHeight));
+                    }
+                }
+                squareSize = (int)(squareSize / 2f);
+                minHeight *= heightDampener;
+                maxHeight *= heightDampener;
             }
             _terrainData.SetHeights(0, 0, heightMap);
         }
@@ -144,6 +237,37 @@ namespace LostRunes
                 }
             }
             _terrainData.SetHeights(0, 0, heightMap);
+        }
+        public void SmoothTerrain()
+        {
+            float[,] heightMap = _terrainData.GetHeights(0,0,_terrainData.heightmapResolution, _terrainData.heightmapResolution);
+            float smoothProgress = 0f;
+            EditorUtility.DisplayProgressBar("Smoothing Terrain", "Progress", smoothProgress);
+            for (int k = 0; k < _smoothAmount; k++)
+            {
+                for (int y = 0; y < _terrainData.heightmapResolution; y++)
+                {
+                    for (int x = 0; x < _terrainData.heightmapResolution; x++)
+                    {
+                        float height = 0;
+                        int amount = 0;
+                        for (int i = -1; i <= 1; i++)
+                        {
+                            for (int j = -1; j <= 1; j++)
+                            {
+                                if (x + i < 0 || x + i > _terrainData.heightmapResolution - 1 || y + j < 0 || y + j > _terrainData.heightmapResolution - 1) continue;
+                                amount++;
+                                height += heightMap[x + i, y + j];
+                            }
+                        }
+                        heightMap[x, y] = height / (float)amount;
+                    }
+                }
+                smoothProgress++;
+                EditorUtility.DisplayProgressBar("Smoothing Terrain", "Progress", smoothProgress / _smoothAmount);
+            }
+            _terrainData.SetHeights(0, 0, heightMap);
+            EditorUtility.ClearProgressBar();
         }
         public void AddPerlinParameter()
         {
