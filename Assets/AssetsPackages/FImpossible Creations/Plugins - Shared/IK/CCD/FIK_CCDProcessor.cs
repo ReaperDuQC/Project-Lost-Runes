@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace FIMSpace.FTools
 {
@@ -23,7 +24,7 @@ namespace FIMSpace.FTools
         [Range(0f, 1f)]
         public float Smoothing = 0f;
         [Range(0f, 1.5f)]
-        public float MaxStretching = 0f;
+        public float StretchToTarget = 0f;
         public AnimationCurve StretchCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
 
         public bool Use2D = false;
@@ -56,10 +57,11 @@ namespace FIMSpace.FTools
                 CCDIKBone b = IKBones[i];
                 CCDIKBone child = null, parent = null;
 
-                if (i > 0)
-                    parent = IKBones[i - 1];
-                else if (i < Bones.Length - 1)
+                if (i > 0) parent = IKBones[i - 1];
+                if (i < Bones.Length - 1)
+                {
                     child = IKBones[i + 1];
+                }
 
 
                 if (i < Bones.Length - 1)
@@ -171,22 +173,49 @@ namespace FIMSpace.FTools
             LastLocalDirection = RefreshLocalDirection();
 
             // Support for stretching
-            if (MaxStretching > 0f)
+            if (StretchToTarget > 0f)
             {
-                ActiveLength = Mathf.Epsilon;
+                float remainingDist = (IKTargetPosition - EndIKBone.transform.position).magnitude;
 
+                ActiveLength = Mathf.Epsilon;
                 wb = IKBones[0];
+                int ind = 0;
+                float boneMul = Mathf.Max(1f, StretchToTarget);
+
                 while (wb.IKChild != null)
                 {
-                    wb.FrameWorldLength = (wb.transform.position - wb.IKChild.transform.position).magnitude;
-                    ActiveLength += wb.FrameWorldLength;
+                    if (remainingDist <= 0f)
+                    {
+                        break;
+                    }
+
+                    Vector3 toTarget = (IKTargetPosition - wb.transform.position);
+                    Vector3 toTargetN = toTarget.normalized;
+
+                    Vector3 prePos = wb.transform.position;
+                    Vector3 preChildPos = wb.IKChild.transform.position;
+                    Vector3 toNext = preChildPos - prePos;
+                    Vector3 norm = toNext.normalized;
+
+                    float dot = Vector3.Dot(norm, toTargetN);
+
+                    if (dot > 0f)
+                    {
+                        float moveBy = wb.BoneLength * boneMul * dot;
+                        if (moveBy > remainingDist) moveBy = remainingDist;
+
+                        Vector3 newChildPos = preChildPos + norm * (moveBy);
+                        wb.IKChild.transform.position = Vector3.Lerp(preChildPos, newChildPos, StretchToTarget);
+                        wb.transform.rotation = wb.transform.rotation * Quaternion.FromToRotation(preChildPos - prePos, wb.Child.transform.position - wb.transform.position);
+
+                        remainingDist -= Vector3.Distance(preChildPos, newChildPos);
+                    }
+
                     wb = wb.IKChild;
+                    ind += 1;
                 }
 
-                Vector3 toGoal = IKTargetPosition - StartBone.transform.position;
-                float stretch = toGoal.magnitude / ActiveLength;
-
-                if (stretch > 1f) for (int i = 1; i < IKBones.Length; ++i) IKBones[i].transform.position += toGoal.normalized * (IKBones[i - 1].BoneLength * MaxStretching) * StretchCurve.Evaluate(-(1f - stretch));
+                //if (stretch > 1f) for (int i = 1; i < IKBones.Length; ++i) IKBones[i].transform.position += (toGoal.normalized) * ((IKBones[i - 1].BoneLength ) * StretchCurve.Evaluate(-(1f - stretch)));
             }
 
 
@@ -302,7 +331,6 @@ namespace FIMSpace.FTools
 
             [Range(0f, 180f)] public float AngleLimit = 45f;
             [Range(0f, 180f)] public float TwistAngleLimit = 5f;
-
 
             /// <summary> Defined at Init() of CCD IK processor </summary>
             public Vector3 ForwardOrientation;

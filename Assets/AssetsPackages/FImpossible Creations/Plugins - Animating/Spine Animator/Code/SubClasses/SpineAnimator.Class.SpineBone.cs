@@ -157,10 +157,18 @@ namespace FIMSpace.FSpine
                 // Prepare two directional distances (bone length)
                 Vector3 nextPos;
 
-                if (index == bones.Count - 1) nextPos = bones[index - 1].transform.position; else nextPos = bones[index + 1].transform.position;
-                if (index == 0) nextPos = bones[index + 1].transform.position; else nextPos = bones[index - 1].transform.position;
+                if (index == bones.Count - 1)
+                {
+                    if (bones[index].transform.childCount > 0) nextPos = bones[index].transform.GetChild(0).position;
+                    else nextPos = bones[index - 1].transform.position;
+                }
+                else nextPos = bones[index + 1].transform.position;
+
+                if (index == 0) nextPos = bones[index + 1].transform.position;// else nextPos = bones[index - 1].transform.position;
                
+                //float dist = Vector3.Distance(baseTransform.InverseTransformPoint(bones[index].transform.position), baseTransform.InverseTransformPoint(bones[index].transform.parent.position));
                 float dist = Vector3.Distance(baseTransform.InverseTransformPoint(nextPos), baseTransform.InverseTransformPoint(bones[index].transform.position));
+                
                 if (dist < 0.01f)
                 {
                     int nInd = index + 2;

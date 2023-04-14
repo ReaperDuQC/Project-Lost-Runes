@@ -182,7 +182,7 @@ namespace FIMSpace.FTail
             {
                 return child.ParentBone.transform.rotation * // Parent bone rotation
                     MultiplyQ(child.Curving, child.Index * 2f)   // Curving multiplier
-                    ;       
+                    ;
             }
             else // No Curving
             {

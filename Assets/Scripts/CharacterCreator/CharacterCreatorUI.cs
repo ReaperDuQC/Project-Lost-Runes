@@ -239,7 +239,7 @@ namespace LostRunes.Menu
         {
             PlayerData playerData = SaveSystem.SaveSystem.LoadPlayerData(playerName);
 
-            _characterCreator.CreateCharacter(playerData);
+            _characterCreator.CreateCharacterFromData(playerData);
         }
         void CreateNewButton(string playerName)
         {

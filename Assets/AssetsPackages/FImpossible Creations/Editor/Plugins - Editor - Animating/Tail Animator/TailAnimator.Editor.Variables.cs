@@ -122,6 +122,7 @@ namespace FIMSpace.FTail
         private SerializedProperty sp_IKBaseReactionWeight;
         private SerializedProperty sp_IKContinous;
         private SerializedProperty sp_IKLimitSettings;
+        private SerializedProperty sp_IKMaxStretching;
         private SerializedProperty sp_UseIK;
         private SerializedProperty sp_usePartialBlend;
         private SerializedProperty sp_Detach;
@@ -263,6 +264,7 @@ namespace FIMSpace.FTail
             sp_IKAutoAngleLimits = serializedObject.FindProperty("IKAutoAngleLimits");
             sp_IKReactionQuality = serializedObject.FindProperty("IKReactionQuality");
             sp_IKSmoothing = serializedObject.FindProperty("IKSmoothing");
+            sp_IKMaxStretching = serializedObject.FindProperty("IKStretchToTarget");
             sp_IKBaseReactionWeight = serializedObject.FindProperty("IKBaseReactionWeight");
             sp_IKContinous = serializedObject.FindProperty("IKContinousSolve");
             //sp_IKMaxStretching = serializedObject.FindProperty("IKMaxStretching");

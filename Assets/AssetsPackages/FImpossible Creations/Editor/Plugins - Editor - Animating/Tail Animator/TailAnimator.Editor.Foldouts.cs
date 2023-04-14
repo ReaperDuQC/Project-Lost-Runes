@@ -676,7 +676,7 @@ namespace FIMSpace.FTail
                 else if (sum == 0f) EditorGUILayout.LabelField("(No tail animator motion)", FGUI_Resources.HeaderStyle);
                 else EditorGUILayout.LabelField("(White rects - animated with keyframe animation)", FGUI_Resources.HeaderStyle);
                 GUILayout.Space(4f);
-                
+
                 EditorGUIUtility.labelWidth = 130;
                 EditorGUILayout.BeginHorizontal();
                 EditorGUI.BeginChangeCheck();
@@ -737,6 +737,11 @@ namespace FIMSpace.FTail
                 EditorGUILayout.PropertyField(sp_IKReactionQuality);
                 EditorGUILayout.PropertyField(sp_IKSmoothing);
                 EditorGUILayout.PropertyField(sp_IKContinous);
+
+                if (sp_IKMaxStretching.floatValue > 1f)
+                    sp_IKMaxStretching.floatValue = EditorGUILayout.FloatField(new GUIContent(sp_IKMaxStretching.displayName, sp_IKMaxStretching.tooltip), sp_IKMaxStretching.floatValue);
+                else
+                    EditorGUILayout.PropertyField(sp_IKMaxStretching);
 
                 if (Get._TransformsGhostChain.Count > 9)
                 {

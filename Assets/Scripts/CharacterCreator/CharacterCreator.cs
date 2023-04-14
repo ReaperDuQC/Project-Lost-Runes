@@ -250,8 +250,11 @@ namespace LostRunes.Menu
         {
             return _playerData;
         }
-        public void CreateCharacter(PlayerData data)
+        public void CreateCharacterFromData(PlayerData data)
         {
+
+            // need to instantiate a character on the server
+
             for (int i = 0; i < _maxParts; i++)
             {
                 _equipped[i] = -1;

@@ -32,7 +32,13 @@ namespace FIMSpace.FSpine
             for (int i = 0; i < SpineBones.Count; i++)
             {
                 Vector3 childPos;
-                if (i == SpineBones.Count - 1) childPos = SpineBones[i - 1].transform.position + (SpineBones[i - 1].transform.position - SpineBones[i].transform.position);
+                if (i == SpineBones.Count - 1)
+                {
+                    if (SpineBones[i].transform.childCount > 0)
+                        childPos = SpineBones[i].transform.GetChild(0).position;
+                    else
+                        childPos = SpineBones[i - 1].transform.position + (SpineBones[i - 1].transform.position - SpineBones[i].transform.position);
+                }
                 else childPos = SpineBones[i + 1].transform.position;
 
                 float dist = Vector3.Distance(SpineBones[i].transform.position, childPos);

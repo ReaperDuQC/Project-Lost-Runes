@@ -42,7 +42,7 @@ namespace FIMSpace.FTail
         [Tooltip("Smoothing reactions in CCD IK algorithm")]
         public float IKSmoothing = .0f;
         [Range(0f, 1.5f)]
-        public float IKMaxStretching = 0f;
+        public float IKStretchToTarget = 0f;
         [FPD_FixedCurveWindow(0, 0, 1f, 1f, 0.9f, .4f, 0.5f)]
         public AnimationCurve IKStretchCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
 
@@ -105,9 +105,10 @@ namespace FIMSpace.FTail
             IK.SyncWithAnimator = IKAnimatorBlend; //else IK.SyncWithAnimator = 0f;
             IK.ReactionQuality = IKReactionQuality;
             IK.Smoothing = IKSmoothing;
-            IK.MaxStretching = IKMaxStretching;
+            IK.StretchToTarget = IKStretchToTarget;
             IK.StretchCurve = IKStretchCurve;
             IK.ContinousSolving = IKContinousSolve;
+            if (IK.StretchToTarget > 0f) IK.ContinousSolving = false;
             if (Axis2D == 3) IK.Use2D = true; else IK.Use2D = false;
 
             IK.Update();
