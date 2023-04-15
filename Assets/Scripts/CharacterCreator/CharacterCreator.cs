@@ -104,6 +104,7 @@ namespace LostRunes.Menu
     {
         [Header("Character")]
         [SerializeField] GameObject _playerPrefab;
+        [SerializeField] GameObject _instanceForPreview;
         [SerializeField] Transform _characterCreatorPosition;
         [SerializeField] Transform _spawnPlayPosition;
         Transform _transform;
@@ -182,7 +183,7 @@ namespace LostRunes.Menu
 
         private void Awake()
         {
-            Initialize();
+            Initialize(_instanceForPreview.transform);
         }
 
         private void SetPositionAtCharacterCreatorView()
@@ -194,7 +195,7 @@ namespace LostRunes.Menu
             _transform.rotation = rotation;
         }
 
-        private void Initialize()
+        private void Initialize(Transform t)
         {
             _maxParts = Enum.GetValues(typeof(BodyParts)).Length;
 
@@ -204,7 +205,7 @@ namespace LostRunes.Menu
                 _equipped[i] = -1;
             }
 
-            _transform = _playerPrefab.transform;
+            _transform = t;
 
             _allObjects = new List<GameObject>[2, _maxParts];
 
@@ -252,8 +253,9 @@ namespace LostRunes.Menu
         }
         public void CreateCharacterFromData(PlayerData data)
         {
-
+          
             // need to instantiate a character on the server
+            Initialize(Instantiate(_playerPrefab).transform);
 
             for (int i = 0; i < _maxParts; i++)
             {
