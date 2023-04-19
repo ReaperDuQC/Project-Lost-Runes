@@ -33276,6 +33276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerPrefab: {fileID: 0}
+  _instanceForPreview: {fileID: 0}
   _characterCreatorPosition: {fileID: 0}
   _spawnPlayPosition: {fileID: 0}
   _mat: {fileID: 0}
@@ -51955,6 +51956,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8288369513203095375, guid: d8c8252150c513744b00d3a3a81222a5,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 951099334
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8c8252150c513744b00d3a3a81222a5, type: 3}
 --- !u!224 &7041638465602968350 stripped
@@ -52812,7 +52818,8 @@ PrefabInstance:
       propertyPath: _cursorVisible
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7989983212412957593, guid: 98675c596a5d08f4baf6622b0be5c897, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 98675c596a5d08f4baf6622b0be5c897, type: 3}
 --- !u!224 &1106464416550139214 stripped
 RectTransform:

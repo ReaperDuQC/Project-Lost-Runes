@@ -30,7 +30,7 @@ namespace LostRunes
             if(_input == null)
             {
                 _input = new PlayerControls();
-                _input.MainMenu.ToggleChat.performed += i => ToggleChatBox();
+         //       _input.MainMenu.ToggleChat.performed += i => ToggleChatBox();
             }
             _input.Enable();
         }

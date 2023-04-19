@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using LostRunes.Multiplayer;
+using Unity.Netcode;
 
 namespace LostRunes.Menu
 {
@@ -253,9 +254,10 @@ namespace LostRunes.Menu
         }
         public void CreateCharacterFromData(PlayerData data)
         {
-          
             // need to instantiate a character on the server
-            Initialize(Instantiate(_playerPrefab).transform);
+            GameObject player = Instantiate(_playerPrefab);
+            player.GetComponent<NetworkObject>().Spawn();
+            Initialize(player.transform);
 
             for (int i = 0; i < _maxParts; i++)
             {

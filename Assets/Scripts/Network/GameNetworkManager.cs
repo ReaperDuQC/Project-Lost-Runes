@@ -31,7 +31,7 @@ namespace LostRunes
         }
         private void OnDestroy()
         {
-            //Steamworks.SteamClient.Shutdown();
+            Steamworks.SteamClient.Shutdown();
         }
         private void OnEnable()
         {
@@ -74,7 +74,6 @@ namespace LostRunes
             }
         }
         private void OnApplicationQuit() => Disconnect();
-
         public async void StartHost()
         {
             NetworkManager.Singleton.StartHost();

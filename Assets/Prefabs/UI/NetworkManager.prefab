@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 7640231941907215728}
   - component: {fileID: 7640231941907215729}
   - component: {fileID: 4977269132656611269}
-  - component: {fileID: 7640231942258205742}
-  - component: {fileID: 7640231942258205741}
+  - component: {fileID: 954644110}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -52,7 +51,8 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 4977269132656611269}
-    PlayerPrefab: {fileID: 0}
+    PlayerPrefab: {fileID: 486301289810406764, guid: 612744cdf526b264493e09320b097ba3,
+      type: 3}
     NetworkPrefabs:
     - Override: 0
       Prefab: {fileID: 486301289810406764, guid: 612744cdf526b264493e09320b097ba3,
@@ -90,7 +90,7 @@ MonoBehaviour:
   steamAppId: 480
   targetSteamId: 0
   userSteamId: 0
---- !u!114 &7640231942258205742
+--- !u!114 &954644110
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -99,18 +99,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7640231941907215743}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f6ba7d4f1a4b4a42a3117d9dc634033, type: 3}
+  m_Script: {fileID: 11500000, guid: 9be440eaa56217d4e91bd3c767319f90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7640231942258205741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7640231941907215743}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afeb72af408d6d84f9be08a235856223, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  _playerAmount: 4
