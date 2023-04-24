@@ -68,6 +68,7 @@ namespace LostRunes
 
             UpdateFPSText(0);
             UpdateVersionText();
+            UpdateConnectedPlayersTextToNotConnected();
         }
         private void OnEnable()
         {
@@ -114,7 +115,6 @@ namespace LostRunes
 
             // Call the UpdateConnectedPlayersTextRpc() function on all clients
             UpdateConnectedPlayersTextClientRPC(numberOfPlayers);
-            UpdateConnectedPlayersTextClientRPC(numberOfPlayers);
         }
 
         [ClientRpc]
@@ -123,6 +123,13 @@ namespace LostRunes
             if (_connectedPLayersText != null)
             {
                 _connectedPLayersText.text = "Connected : " + numberOfPlayers.ToString()/* +  "/" + maxNumberOfPlayers.ToString()*/;
+            }
+        }
+        private void UpdateConnectedPlayersTextToNotConnected()
+        {
+            if (_connectedPLayersText != null)
+            {
+                _connectedPLayersText.text = "Connected : Not Connected";
             }
         }
 

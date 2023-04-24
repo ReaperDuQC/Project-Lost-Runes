@@ -256,7 +256,11 @@ namespace LostRunes.Menu
         {
             // need to instantiate a character on the server
             GameObject player = Instantiate(_playerPrefab);
-            player.GetComponent<NetworkObject>().Spawn();
+
+            if(NetworkManager.Singleton != null)
+            {
+                player.GetComponent<NetworkObject>().Spawn();
+            }
             Initialize(player.transform);
 
             for (int i = 0; i < _maxParts; i++)
